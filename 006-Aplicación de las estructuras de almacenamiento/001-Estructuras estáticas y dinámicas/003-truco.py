@@ -1,0 +1,5 @@
+coordenada = (5,4,3)
+temporal = list(coordenada)
+temporal.append(5)
+coordenada = tuple(temporal)
+print(coordenada)
