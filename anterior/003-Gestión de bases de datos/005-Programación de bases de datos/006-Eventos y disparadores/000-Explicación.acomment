@@ -1,0 +1,117 @@
+### 005-Programación de bases de datos\006-Eventos y disparadores
+
+#### Introducción
+
+En el contexto de la programación de bases de datos, los eventos y disparadores (triggers) son herramientas poderosas que permiten automatizar tareas y mantener la integridad de los datos. Los eventos y disparadores son mecanismos que se utilizan para ejecutar automáticamente código SQL en respuesta a ciertos cambios o condiciones en la base de datos. Este apartado abordará sus características, usos y cómo implementarlos en MySQL.
+
+#### Definición y Conceptos Básicos
+
+**Eventos**: Los eventos en MySQL son tareas programadas que se ejecutan automáticamente en un horario específico. Los eventos pueden ser únicos o recurrentes y se utilizan para realizar tareas como la actualización de datos, la generación de informes, la limpieza de registros antiguos, entre otros.
+
+**Disparadores** (Triggers): Los disparadores son procedimientos almacenados que se ejecutan automáticamente antes o después de una operación de inserción, actualización o eliminación en una tabla. Los disparadores se utilizan para asegurar la integridad de los datos, auditar cambios y automatizar procesos.
+
+#### Eventos en MySQL
+
+1. **Creación de Eventos**: Los eventos se crean utilizando la instrucción `CREATE EVENT`. Se debe especificar el horario en el que se ejecutará el evento y el código SQL que debe ejecutarse.
+
+    ```sql
+    CREATE EVENT nombre_evento
+    ON SCHEDULE AT CURRENT_TIMESTAMP + INTERVAL 1 DAY
+    DO
+    BEGIN
+        -- Código SQL a ejecutar
+    END;
+    ```
+
+2. **Programación de Eventos**: Los eventos se pueden programar para ejecutarse en un momento específico o de manera recurrente.
+
+    - Ejecución única:
+
+        ```sql
+        CREATE EVENT evento_unico
+        ON SCHEDULE AT '2023-12-31 23:59:59'
+        DO
+        BEGIN
+            -- Código SQL a ejecutar
+        END;
+        ```
+
+    - Ejecución recurrente:
+
+        ```sql
+        CREATE EVENT evento_recurrente
+        ON SCHEDULE EVERY 1 DAY
+        DO
+        BEGIN
+            -- Código SQL a ejecutar
+        END;
+        ```
+
+3. **Gestión de Eventos**: Los eventos se pueden habilitar, deshabilitar, modificar o eliminar utilizando las siguientes instrucciones SQL:
+
+    - Habilitar un evento:
+
+        ```sql
+        ALTER EVENT nombre_evento ENABLE;
+        ```
+
+    - Deshabilitar un evento:
+
+        ```sql
+        ALTER EVENT nombre_evento DISABLE;
+        ```
+
+    - Eliminar un evento:
+
+        ```sql
+        DROP EVENT nombre_evento;
+        ```
+
+#### Disparadores en MySQL
+
+1. **Creación de Disparadores**: Los disparadores se crean utilizando la instrucción `CREATE TRIGGER`. Se debe especificar la tabla y el momento en el que se ejecutará el disparador (antes o después de una operación de inserción, actualización o eliminación).
+
+    ```sql
+    CREATE TRIGGER nombre_disparador
+    BEFORE INSERT ON nombre_tabla
+    FOR EACH ROW
+    BEGIN
+        -- Código SQL a ejecutar
+    END;
+    ```
+
+2. **Tipos de Disparadores**:
+    - `BEFORE INSERT`: Se ejecuta antes de insertar un nuevo registro.
+    - `AFTER INSERT`: Se ejecuta después de insertar un nuevo registro.
+    - `BEFORE UPDATE`: Se ejecuta antes de actualizar un registro existente.
+    - `AFTER UPDATE`: Se ejecuta después de actualizar un registro existente.
+    - `BEFORE DELETE`: Se ejecuta antes de eliminar un registro existente.
+    - `AFTER DELETE`: Se ejecuta después de eliminar un registro existente.
+
+3. **Ejemplo de Disparador**: A continuación, se muestra un ejemplo de un disparador que audita los cambios en una tabla de usuarios.
+
+    ```sql
+    CREATE TRIGGER audit_user_update
+    AFTER UPDATE ON usuarios
+    FOR EACH ROW
+    BEGIN
+        INSERT INTO auditoria_usuarios (user_id, old_value, new_value, cambio_fecha)
+        VALUES (OLD.id, OLD.nombre, NEW.nombre, NOW());
+    END;
+    ```
+
+4. **Gestión de Disparadores**: Los disparadores se pueden eliminar utilizando la instrucción `DROP TRIGGER`.
+
+    ```sql
+    DROP TRIGGER nombre_disparador;
+    ```
+
+#### Buenas Prácticas
+
+- **Evitar la Recursión**: Los disparadores pueden causar recursión si no se implementan correctamente. Es importante diseñar disparadores que no se invoquen a sí mismos indirectamente.
+- **Minimizar la Complejidad**: Mantener el código de los disparadores y eventos lo más simple posible para facilitar el mantenimiento y la depuración.
+- **Auditoría y Monitoreo**: Utilizar disparadores para auditar cambios críticos en la base de datos y mantener un registro de las operaciones realizadas.
+
+#### Conclusión
+
+Los eventos y disparadores son herramientas esenciales para la programación de bases de datos en MySQL. Permiten automatizar tareas y garantizar la integridad de los datos de manera eficiente. La correcta implementación y gestión de estos mecanismos puede mejorar significativamente el rendimiento y la fiabilidad de una base de datos.

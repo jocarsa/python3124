@@ -1,0 +1,31 @@
+-Entradas y salidas
+	-Entradas
+	-Salidas
+-Comentarios
+	-De una única línea
+	-Multilínea (doctrings)
+-Variables 
+	- Tipos de datos
+-Operadores 
+	- Asignación 
+	- Encadenamiento 
+	- Aritméticos 
+	- Comparación 
+	- Booleanos
+-Estructuras de control
+	-Bucle - for, while 
+	-Decisión - if elif else
+	-Salto - go_to
+	-Control de fallos - try except
+-Clases 
+	-Propiedades - variables
+	-Métodos - Funciones
+	-Constructores
+	-Destructores
+	-Herencia
+-Desarrollo de Interfaces de usuario
+-Estructuras de datos
+	-Listas (mutables)
+	-Tuplas (inmutables)
+	-Conjuntos (sets)
+	-Diccionarios (JSON)

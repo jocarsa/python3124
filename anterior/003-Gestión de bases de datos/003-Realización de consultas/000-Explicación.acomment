@@ -1,0 +1,119 @@
+### 003 - Realización de Consultas
+
+En el mundo de las bases de datos, la capacidad de realizar consultas eficaces y eficientes es fundamental para extraer, manipular y analizar la información almacenada. Este apartado se centra en las técnicas y herramientas necesarias para realizar consultas en MySQL, permitiendo a los usuarios interactuar con los datos de manera precisa y optimizada.
+
+#### 3.1 - Proyección, Selección y Ordenación de Registros
+
+**Proyección:** Se refiere a la operación de seleccionar columnas específicas de una tabla. Es útil cuando solo se necesitan ciertos campos de una tabla, lo que puede reducir el volumen de datos procesados y mejorar el rendimiento.
+
+```sql
+SELECT columna1, columna2, columna3 FROM tabla;
+```
+
+**Selección:** Implica la elección de filas específicas basadas en una condición dada. Ayuda a filtrar los datos para obtener solo aquellos registros que cumplen ciertos criterios.
+
+```sql
+SELECT * FROM tabla WHERE condición;
+```
+
+**Ordenación:** Permite organizar los resultados de una consulta en un orden particular, ya sea ascendente o descendente.
+
+```sql
+SELECT * FROM tabla ORDER BY columna ASC|DESC;
+```
+
+#### 3.2 - Operadores. Operadores de Comparación. Operadores Lógicos
+
+**Operadores de Comparación:** Se utilizan para comparar valores en una consulta.
+
+- `=` : Igual a
+- `!=` o `<>` : Diferente de
+- `>` : Mayor que
+- `<` : Menor que
+- `>=` : Mayor o igual que
+- `<=` : Menor o igual que
+
+**Operadores Lógicos:** Se utilizan para combinar múltiples condiciones en una consulta.
+
+- `AND` : Todas las condiciones deben ser verdaderas
+- `OR` : Al menos una de las condiciones debe ser verdadera
+- `NOT` : Invierte el valor lógico de una condición
+
+```sql
+SELECT * FROM tabla WHERE columna1 = valor AND columna2 > valor;
+```
+
+#### 3.3 - Consultas de Resumen
+
+Las consultas de resumen permiten agregar datos para obtener información condensada, como sumas, promedios, conteos, etc. Utilizan funciones de agregado como `SUM`, `AVG`, `COUNT`, `MIN`, y `MAX`.
+
+```sql
+SELECT AVG(columna) FROM tabla;
+```
+
+#### 3.4 - Agrupamiento de Registros
+
+El agrupamiento se utiliza para combinar filas que tienen valores comunes en columnas específicas y luego aplicar funciones de agregado sobre los grupos resultantes.
+
+```sql
+SELECT columna1, COUNT(*) FROM tabla GROUP BY columna1;
+```
+
+#### 3.5 - Composiciones Internas
+
+Las composiciones internas (`INNER JOIN`) combinan filas de dos o más tablas basadas en una condición de coincidencia. Devuelven solo las filas que cumplen con la condición.
+
+```sql
+SELECT t1.columna1, t2.columna2
+FROM tabla1 t1
+INNER JOIN tabla2 t2 ON t1.columna_comun = t2.columna_comun;
+```
+
+#### 3.6 - Composiciones Externas
+
+Las composiciones externas (`LEFT JOIN`, `RIGHT JOIN`, `FULL JOIN`) combinan filas de dos o más tablas y devuelven todas las filas de una tabla y las filas coincidentes de la otra. Si no hay coincidencia, las filas de la tabla que no tiene coincidencias mostrarán `NULL`.
+
+```sql
+SELECT t1.columna1, t2.columna2
+FROM tabla1 t1
+LEFT JOIN tabla2 t2 ON t1.columna_comun = t2.columna_comun;
+```
+
+#### 3.7 - Subconsultas
+
+Las subconsultas son consultas anidadas dentro de otra consulta. Pueden ser utilizadas en cláusulas como `SELECT`, `FROM`, `WHERE`, etc.
+
+```sql
+SELECT columna1 FROM tabla1
+WHERE columna2 IN (SELECT columna2 FROM tabla2 WHERE condición);
+```
+
+#### 3.8 - Combinación de Múltiples Selecciones
+
+Utiliza operadores de conjunto como `UNION`, `UNION ALL`, `INTERSECT` y `EXCEPT` para combinar resultados de múltiples consultas. `UNION` combina resultados y elimina duplicados, mientras que `UNION ALL` incluye duplicados.
+
+```sql
+SELECT columna1 FROM tabla1
+UNION
+SELECT columna1 FROM tabla2;
+```
+
+#### 3.9 - Optimización de Consultas
+
+La optimización de consultas es crucial para mejorar el rendimiento de las bases de datos. Esto puede implicar el uso de índices, la reestructuración de consultas, y el análisis del plan de ejecución.
+
+**Uso de índices:**
+
+```sql
+CREATE INDEX idx_columna ON tabla(columna);
+```
+
+**Análisis del plan de ejecución:**
+
+```sql
+EXPLAIN SELECT * FROM tabla WHERE condición;
+```
+
+---
+
+Este apartado proporciona una visión integral sobre cómo realizar consultas en MySQL, abarcando desde las operaciones básicas hasta las técnicas avanzadas de optimización. Con estas herramientas y técnicas, los usuarios pueden extraer y manipular datos de manera eficiente y eficaz.

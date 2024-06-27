@@ -1,0 +1,87 @@
+### 005-Programación de bases de datos\008-Cursores
+
+#### Introducción a los Cursores
+
+En el contexto de las bases de datos, un cursor es una estructura que permite a las aplicaciones interactuar de manera controlada y secuencial con los resultados de una consulta. Los cursores son particularmente útiles cuando se necesita procesar fila por fila los resultados de una consulta, en lugar de operar sobre todo el conjunto de resultados de una sola vez.
+
+#### Tipos de Cursores
+
+Existen varios tipos de cursores en bases de datos, y su comportamiento puede variar dependiendo del sistema gestor de bases de datos (DBMS) utilizado. En MySQL, los cursores se pueden categorizar principalmente en dos tipos:
+
+1. **Cursores Implícitos**: Estos son gestionados automáticamente por el DBMS. No necesitan ser declarados explícitamente por el programador.
+2. **Cursores Explícitos**: Deben ser declarados y gestionados explícitamente por el programador. Estos son los cursores más comunes y permiten un control más preciso sobre el procesamiento de los resultados de la consulta.
+
+#### Declaración y Uso de Cursores en MySQL
+
+El uso de cursores en MySQL sigue una serie de pasos que incluyen la declaración, apertura, recuperación de datos y cierre del cursor. A continuación se describe un flujo típico de uso de cursores:
+
+1. **Declaración del Cursor**: Un cursor se declara en el bloque `DECLARE` de un procedimiento almacenado.
+    ```sql
+    DECLARE cursor_name CURSOR FOR
+    SELECT column1, column2 FROM table_name WHERE condition;
+    ```
+
+2. **Apertura del Cursor**: Antes de poder usar un cursor, debe ser abierto.
+    ```sql
+    OPEN cursor_name;
+    ```
+
+3. **Recuperación de Datos**: Los datos se recuperan fila por fila usando la instrucción `FETCH`.
+    ```sql
+    FETCH cursor_name INTO variable1, variable2;
+    ```
+
+4. **Cierre del Cursor**: Una vez que se ha terminado de procesar los datos, el cursor debe ser cerrado.
+    ```sql
+    CLOSE cursor_name;
+    ```
+
+#### Ejemplo Práctico
+
+A continuación se presenta un ejemplo completo de cómo usar un cursor en un procedimiento almacenado en MySQL:
+
+```sql
+DELIMITER //
+CREATE PROCEDURE process_data()
+BEGIN
+    DECLARE done INT DEFAULT FALSE;
+    DECLARE var1 INT;
+    DECLARE var2 VARCHAR(255);
+
+    -- Declarar el cursor
+    DECLARE cur CURSOR FOR
+    SELECT column1, column2 FROM table_name WHERE condition;
+
+    -- Declarar un handler para el final del cursor
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = TRUE;
+
+    -- Abrir el cursor
+    OPEN cur;
+
+    -- Bucle para recorrer los resultados del cursor
+    read_loop: LOOP
+        FETCH cur INTO var1, var2;
+        IF done THEN
+            LEAVE read_loop;
+        END IF;
+
+        -- Procesar los datos aquí
+        -- Por ejemplo, insertar en otra tabla
+        INSERT INTO another_table (column1, column2) VALUES (var1, var2);
+    END LOOP;
+
+    -- Cerrar el cursor
+    CLOSE cur;
+END //
+DELIMITER ;
+```
+
+#### Consideraciones Importantes
+
+1. **Rendimiento**: El uso de cursores puede impactar el rendimiento de la base de datos, especialmente si se utilizan para procesar un gran número de filas. Es recomendable evaluar si existen alternativas más eficientes.
+2. **Manejo de Errores**: Es importante incluir mecanismos de manejo de errores cuando se trabaja con cursores, para asegurar que se cierren adecuadamente y liberar recursos.
+3. **Transacciones**: Los cursores pueden ser usados dentro de transacciones, pero se debe tener cuidado con el alcance y la duración de las transacciones para evitar bloqueos y otros problemas de concurrencia.
+
+#### Conclusión
+
+Los cursores son una poderosa herramienta en la programación de bases de datos que permiten un control preciso sobre el procesamiento de los resultados de una consulta. Sin embargo, su uso debe ser cuidadosamente gestionado para evitar problemas de rendimiento y asegurar una gestión adecuada de los recursos. Con una comprensión clara de cómo declarar, abrir, usar y cerrar cursores, es posible aprovechar al máximo esta funcionalidad en MySQL.

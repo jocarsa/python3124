@@ -1,0 +1,4 @@
+class Cliente:
+    # Propiedades
+
+    # Métodos

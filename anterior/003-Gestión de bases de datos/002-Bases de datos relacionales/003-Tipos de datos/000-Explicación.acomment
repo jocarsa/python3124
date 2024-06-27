@@ -1,0 +1,61 @@
+### 2.2.3 Tipos de Datos en Bases de Datos Relacionales
+
+En una base de datos relacional, los tipos de datos definen la clase de datos que se puede almacenar en una columna de una tabla. Cada columna en una tabla de base de datos está diseñada para almacenar un tipo específico de datos, y MySQL proporciona una variedad de tipos de datos que se pueden utilizar según las necesidades particulares de la aplicación. A continuación, se describen los tipos de datos más comunes en MySQL:
+
+#### 1. Tipos de Datos Numéricos
+##### 1.1. Enteros
+- **TINYINT**: Almacena enteros pequeños. Rango: -128 a 127 o 0 a 255 (sin signo).
+- **SMALLINT**: Almacena enteros pequeños. Rango: -32,768 a 32,767 o 0 a 65,535 (sin signo).
+- **MEDIUMINT**: Enteros de tamaño medio. Rango: -8,388,608 a 8,388,607 o 0 a 16,777,215 (sin signo).
+- **INT**: Enteros estándar. Rango: -2,147,483,648 a 2,147,483,647 o 0 a 4,294,967,295 (sin signo).
+- **BIGINT**: Enteros grandes. Rango: -9,223,372,036,854,775,808 a 9,223,372,036,854,775,807 o 0 a 18,446,744,073,709,551,615 (sin signo).
+
+##### 1.2. Flotantes y Decimales
+- **FLOAT**: Número de coma flotante de precisión simple.
+- **DOUBLE**: Número de coma flotante de precisión doble.
+- **DECIMAL**: Números decimales con precisión exacta. Se utiliza habitualmente en aplicaciones financieras.
+
+#### 2. Tipos de Datos de Fecha y Hora
+- **DATE**: Almacena una fecha en formato 'YYYY-MM-DD'.
+- **DATETIME**: Almacena una fecha y hora en formato 'YYYY-MM-DD HH:MM:SS'.
+- **TIMESTAMP**: Similar a DATETIME, pero se utiliza para almacenar la hora actual del servidor cuando se inserta o actualiza una fila.
+- **TIME**: Almacena solo la hora en formato 'HH:MM:SS'.
+- **YEAR**: Almacena un año en formato de 4 dígitos.
+
+#### 3. Tipos de Datos de Cadena
+##### 3.1. Cadenas de Caracteres
+- **CHAR**: Almacena cadenas de longitud fija. Longitud máxima de 255 caracteres.
+- **VARCHAR**: Almacena cadenas de longitud variable. Longitud máxima de 65,535 caracteres.
+
+##### 3.2. Cadenas de Texto
+- **TEXT**: Almacena grandes cantidades de texto. Longitud máxima de 65,535 caracteres.
+- **MEDIUMTEXT**: Almacena texto de tamaño medio. Longitud máxima de 16,777,215 caracteres.
+- **LONGTEXT**: Almacena grandes cantidades de texto. Longitud máxima de 4,294,967,295 caracteres.
+
+##### 3.3. Cadenas de Binarios
+- **BINARY**: Similar a CHAR pero para datos binarios.
+- **VARBINARY**: Similar a VARCHAR pero para datos binarios.
+
+##### 3.4. Cadenas de Texto Binario
+- **TINYBLOB**: Almacena datos binarios pequeños. Longitud máxima de 255 bytes.
+- **BLOB**: Almacena datos binarios medianos. Longitud máxima de 65,535 bytes.
+- **MEDIUMBLOB**: Almacena datos binarios de tamaño medio. Longitud máxima de 16,777,215 bytes.
+- **LONGBLOB**: Almacena grandes cantidades de datos binarios. Longitud máxima de 4,294,967,295 bytes.
+
+#### 4. Tipos de Datos Espaciales (Spatial Data Types)
+- **GEOMETRY**: Representa cualquier valor geométrico.
+- **POINT**: Representa una sola coordenada en un espacio 2D.
+- **LINESTRING**: Representa una línea compuesta por varias coordenadas.
+- **POLYGON**: Representa un polígono.
+
+#### 5. Tipos de Datos JSON
+- **JSON**: Se utiliza para almacenar datos en formato JSON. Ideal para estructuras de datos jerárquicas y complejas.
+
+### Selección del Tipo de Datos Adecuado
+La elección del tipo de datos adecuado es crucial para la eficiencia de la base de datos y la integridad de los datos. Algunos factores a considerar incluyen:
+- **Rango de valores posibles**: Seleccionar un tipo de datos que pueda contener todos los valores posibles sin desperdiciar espacio.
+- **Precisión y exactitud**: Especialmente importante para datos numéricos y financieros.
+- **Requisitos de almacenamiento**: Los diferentes tipos de datos tienen diferentes requisitos de almacenamiento.
+
+### Conclusión
+Los tipos de datos en MySQL son fundamentales para definir la estructura de la información almacenada en una base de datos relacional. Entender y seleccionar el tipo de datos adecuado para cada columna en una tabla es esencial para mantener la integridad de los datos, mejorar el rendimiento de la base de datos y optimizar el uso del espacio de almacenamiento.

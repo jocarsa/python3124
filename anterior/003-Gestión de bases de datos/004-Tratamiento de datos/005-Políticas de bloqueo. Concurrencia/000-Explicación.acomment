@@ -1,0 +1,46 @@
+### 004-Tratamiento de datos\005-Políticas de bloqueo. Concurrencia
+
+#### Introducción
+
+En cualquier sistema de gestión de bases de datos (SGBD), la concurrencia y las políticas de bloqueo son fundamentales para asegurar la integridad y consistencia de los datos cuando múltiples usuarios acceden y manipulan la base de datos simultáneamente. Este apartado abarca los conceptos clave, técnicas y buenas prácticas relacionadas con las políticas de bloqueo y la concurrencia en MySQL.
+
+#### 1. Conceptos Básicos
+
+- **Concurrencia**: Se refiere a la capacidad de un SGBD para gestionar múltiples transacciones de manera simultánea sin que se produzcan conflictos que comprometan la integridad de los datos.
+- **Bloqueo**: Es una técnica utilizada para controlar el acceso concurrente a los datos en una base de datos. Los bloqueos aseguran que una transacción no interfiera con otra transacción que está accediendo a los mismos datos.
+
+#### 2. Tipos de Bloqueos
+
+- **Bloqueo Compartido (Shared Lock)**: Permite que múltiples transacciones lean el mismo recurso de manera concurrente, pero impide que cualquier transacción modifique ese recurso mientras el bloqueo compartido esté activo.
+- **Bloqueo Exclusivo (Exclusive Lock)**: Permite que solo una transacción acceda y modifique un recurso. Ninguna otra transacción puede leer ni modificar el recurso hasta que el bloqueo exclusivo se libere.
+- **Bloqueo Intencional (Intent Lock)**: Es un mecanismo que permite a una transacción indicar qué tipo de bloqueo pretende aplicar en una jerarquía de objetos (por ejemplo, tablas y filas).
+
+#### 3. Niveles de Aislamiento
+
+Los niveles de aislamiento definen el grado de visibilidad de las operaciones de una transacción a otras transacciones concurrentes. MySQL soporta los siguientes niveles de aislamiento:
+
+- **Read Uncommitted**: Las transacciones pueden leer cambios no confirmados realizados por otras transacciones. Esto puede provocar problemas como lecturas sucias.
+- **Read Committed**: Las transacciones solo pueden leer cambios que han sido confirmados por otras transacciones. Esto evita lecturas sucias pero no evita lecturas no repetibles.
+- **Repeatable Read**: Garantiza que si una transacción lee un dato, ese dato no cambiará mientras la transacción esté activa. Esto evita lecturas sucias y lecturas no repetibles, pero puede provocar problemas de phantom reads.
+- **Serializable**: Es el nivel de aislamiento más estricto. Las transacciones se ejecutan de manera secuencial y no concurrente, lo que evita todos los problemas de concurrencia pero a costa de un rendimiento más bajo.
+
+#### 4. Estrategias de Bloqueo en MySQL
+
+- **Bloqueo a Nivel de Fila**: Este tipo de bloqueo afecta solo a las filas específicas que están siendo modificadas. Es muy eficiente para concurrencia alta, pero puede ser más complejo de gestionar.
+- **Bloqueo a Nivel de Tabla**: Este tipo de bloqueo afecta a tablas enteras. Es más sencillo de gestionar pero puede ser menos eficiente en términos de concurrencia, ya que una transacción puede bloquear el acceso a una tabla completa hasta que se complete.
+
+#### 5. Gestión de la Concurrencia
+
+- **Control Optimista**: Asume que las colisiones de datos son raras y no bloquea los datos al principio. Verifica la integridad de los datos solo al final de una transacción, y en caso de conflicto, la transacción se reintenta.
+- **Control Pesimista**: Asume que las colisiones de datos son comunes y aplica bloqueos desde el principio para evitar conflictos. Es más seguro pero puede ser menos eficiente.
+
+#### 6. Buenas Prácticas
+
+- **Minimizar el Alcance del Bloqueo**: Siempre que sea posible, utilizar bloqueos a nivel de fila en lugar de bloqueos a nivel de tabla.
+- **Mantener las Transacciones Cortas**: Cuanto más corta sea una transacción, menor será la probabilidad de conflicto con otras transacciones.
+- **Escoger el Nivel de Aislamiento Adecuado**: Seleccionar el nivel de aislamiento en función de los requisitos específicos de la aplicación y el equilibrio entre consistencia y rendimiento.
+- **Monitoreo y Ajuste**: Utilizar las herramientas de monitoreo de MySQL para identificar y resolver problemas de concurrencia y bloqueo.
+
+#### Conclusión
+
+La gestión adecuada de las políticas de bloqueo y la concurrencia es crucial para el rendimiento y la integridad de las bases de datos en entornos con alta concurrencia. Comprender y aplicar los conceptos y técnicas descritos en este apartado permitirá a los administradores de bases de datos y desarrolladores asegurar que sus sistemas operen de manera eficiente y confiable.

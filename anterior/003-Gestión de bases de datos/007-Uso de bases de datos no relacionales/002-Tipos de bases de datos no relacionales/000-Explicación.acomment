@@ -1,0 +1,62 @@
+### 007-Uso de bases de datos no relacionales
+#### 007.2-Tipos de bases de datos no relacionales
+
+Las bases de datos no relacionales, también conocidas como bases de datos NoSQL, han ganado popularidad en los últimos años debido a su capacidad de manejar grandes volúmenes de datos y su flexibilidad en el almacenamiento de datos no estructurados. A continuación, se describen los principales tipos de bases de datos no relacionales:
+
+#### 1. **Bases de datos de documentos**
+Las bases de datos de documentos almacenan datos en formatos como JSON, BSON o XML. Cada entrada en la base de datos se considera un "documento" que puede contener datos anidados y estructuras complejas. Este tipo de base de datos es ideal para aplicaciones que requieren un esquema flexible, como aplicaciones web y móviles.
+
+- **Ejemplos:** MongoDB, CouchDB
+- **Características:**
+  - Almacenamiento de datos en documentos semi-estructurados
+  - Flexibilidad en el esquema
+  - Indexación y consultas eficientes
+
+#### 2. **Bases de datos de clave-valor**
+En este tipo de bases de datos, los datos se almacenan como pares de clave-valor. Esta estructura es extremadamente simple y eficiente para operaciones rápidas de lectura y escritura. Las bases de datos de clave-valor son ideales para cachés y almacenamiento de sesiones.
+
+- **Ejemplos:** Redis, Riak, DynamoDB
+- **Características:**
+  - Almacenamiento basado en pares de clave-valor
+  - Alta velocidad en operaciones de lectura y escritura
+  - Sencillez y escalabilidad
+
+#### 3. **Bases de datos de grafos**
+Las bases de datos de grafos están diseñadas para almacenar relaciones entre datos. Utilizan nodos, aristas y propiedades para representar y almacenar datos. Son particularmente útiles para aplicaciones que requieren análisis de relaciones complejas, como redes sociales, sistemas de recomendación y motores de búsqueda.
+
+- **Ejemplos:** Neo4j, ArangoDB, Amazon Neptune
+- **Características:**
+  - Almacenamiento de datos basado en grafos
+  - Eficiencia en la consulta de relaciones entre datos
+  - Buena performance en análisis de redes
+
+#### 4. **Bases de datos en columna**
+Las bases de datos en columna almacenan datos en columnas en lugar de filas, lo que permite una compresión de datos más eficiente y una rápida consulta de grandes volúmenes de datos. Son ideales para aplicaciones de análisis de datos y big data.
+
+- **Ejemplos:** Apache Cassandra, HBase, Amazon Redshift
+- **Características:**
+  - Almacenamiento basado en columnas
+  - Alta eficiencia en consultas analíticas
+  - Escalabilidad horizontal
+
+#### 5. **Bases de datos orientadas a objetos**
+Estas bases de datos almacenan datos en forma de objetos, como se haría en la programación orientada a objetos. Cada objeto contiene tanto los datos como los métodos para procesarlos. Son útiles para aplicaciones que manejan datos complejos y requieren una representación directa de la lógica de negocio.
+
+- **Ejemplos:** db4o, ObjectDB
+- **Características:**
+  - Almacenamiento de datos en forma de objetos
+  - Integración directa con lenguajes de programación orientados a objetos
+  - Manejo eficiente de datos complejos
+
+#### 6. **Bases de datos orientadas a series temporales**
+Diseñadas específicamente para manejar datos que varían con el tiempo, como registros de eventos, métricas y series temporales. Estas bases de datos son ideales para aplicaciones de monitoreo, IoT, y análisis de datos en tiempo real.
+
+- **Ejemplos:** InfluxDB, TimescaleDB, OpenTSDB
+- **Características:**
+  - Optimización para la ingestión y consulta de series temporales
+  - Almacenamiento eficiente de datos secuenciales
+  - Capacidades avanzadas de análisis temporal
+
+### Conclusión
+
+Cada tipo de base de datos no relacional ofrece ventajas específicas dependiendo del caso de uso, el volumen de datos y los requisitos de la aplicación. La elección del tipo adecuado de base de datos no relacional puede mejorar significativamente el rendimiento, la escalabilidad y la flexibilidad de una aplicación.

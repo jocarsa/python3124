@@ -1,0 +1,119 @@
+### 004-Tratamiento de datos\001-Inserción, borrado y modificación de registros
+
+#### Introducción
+
+El tratamiento de datos es una de las funciones más esenciales en la gestión de bases de datos. Esta sección se enfoca en las operaciones básicas de inserción, borrado y modificación de registros en una base de datos relacional. Estas operaciones son fundamentales para mantener la integridad y consistencia de los datos almacenados.
+
+#### Inserción de Registros
+
+La operación de inserción permite agregar nuevos registros a una tabla. En SQL, esto se realiza mediante el comando `INSERT`. Existen varias formas de usar este comando, dependiendo de si se insertan valores individuales, múltiples registros, o registros derivados de otra consulta.
+
+**Sintaxis básica:**
+```sql
+INSERT INTO nombre_tabla (columna1, columna2, columna3, ...)
+VALUES (valor1, valor2, valor3, ...);
+```
+
+**Ejemplo:**
+```sql
+INSERT INTO empleados (nombre, edad, puesto)
+VALUES ('Juan Pérez', 30, 'Desarrollador');
+```
+
+**Inserción múltiple:**
+```sql
+INSERT INTO empleados (nombre, edad, puesto)
+VALUES 
+  ('Ana Gómez', 25, 'Diseñadora'),
+  ('Luis Martínez', 28, 'Analista');
+```
+
+**Inserción desde otra tabla:**
+```sql
+INSERT INTO empleados_backup (nombre, edad, puesto)
+SELECT nombre, edad, puesto
+FROM empleados
+WHERE puesto = 'Desarrollador';
+```
+
+#### Borrado de Registros
+
+La operación de borrado se utiliza para eliminar uno o más registros de una tabla. El comando `DELETE` se emplea para esta operación. Es importante tener cuidado al usar `DELETE` para evitar eliminar registros de manera accidental.
+
+**Sintaxis básica:**
+```sql
+DELETE FROM nombre_tabla
+WHERE condicion;
+```
+
+**Ejemplo:**
+```sql
+DELETE FROM empleados
+WHERE nombre = 'Juan Pérez';
+```
+
+**Eliminar todos los registros:**
+```sql
+DELETE FROM empleados;
+```
+*Nota: Al usar el comando sin una cláusula `WHERE`, se eliminarán todos los registros de la tabla.*
+
+#### Modificación de Registros
+
+La operación de modificación permite actualizar uno o más registros en una tabla. El comando `UPDATE` se utiliza para esta operación. Al igual que con `DELETE`, se debe tener cuidado al usar `UPDATE` para no modificar registros incorrectos.
+
+**Sintaxis básica:**
+```sql
+UPDATE nombre_tabla
+SET columna1 = valor1, columna2 = valor2, ...
+WHERE condicion;
+```
+
+**Ejemplo:**
+```sql
+UPDATE empleados
+SET edad = 31
+WHERE nombre = 'Juan Pérez';
+```
+
+**Modificación múltiple:**
+```sql
+UPDATE empleados
+SET puesto = 'Senior Developer'
+WHERE puesto = 'Desarrollador';
+```
+
+#### Consideraciones Importantes
+
+1. **Integridad referencial:** Antes de realizar operaciones de inserción, borrado o modificación, es crucial considerar las restricciones de claves foráneas para mantener la integridad referencial.
+   
+2. **Transacciones:** Para operaciones que afectan múltiples tablas o que deben ser atómicas, se recomienda el uso de transacciones para asegurar que todas las modificaciones se realicen de manera coherente.
+   
+3. **Triggers y Procedimientos Almacenados:** En muchos casos, se pueden definir triggers o procedimientos almacenados para automatizar ciertas acciones en respuesta a operaciones de inserción, borrado o modificación.
+
+**Ejemplo de Transacción:**
+```sql
+START TRANSACTION;
+
+INSERT INTO empleados (nombre, edad, puesto) VALUES ('Carlos Ruiz', 29, 'Tester');
+
+UPDATE departamentos SET numero_empleados = numero_empleados + 1 WHERE departamento = 'QA';
+
+COMMIT;
+```
+
+**Ejemplo de Trigger:**
+```sql
+CREATE TRIGGER actualizar_numero_empleados
+AFTER INSERT ON empleados
+FOR EACH ROW
+BEGIN
+  UPDATE departamentos
+  SET numero_empleados = numero_empleados + 1
+  WHERE departamento = NEW.puesto;
+END;
+```
+
+#### Conclusión
+
+La inserción, borrado y modificación de registros son operaciones fundamentales en la gestión de bases de datos. Comprender cómo utilizar correctamente los comandos `INSERT`, `DELETE` y `UPDATE`, junto con las consideraciones de integridad y transacciones, es esencial para mantener una base de datos consistente y confiable.

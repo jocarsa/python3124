@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interfaz>
+    <label>Introduce el nombre</label>
+    <entry></entry>
+    <label>Introduce tu primer apellido</label>
+    <entry></entry>
+    <label>Introduce tu segundo apellido</label>
+    <entry></entry>
+    <label>Introduce tu correo electronico</label>
+    <entry></entry>
+    <label>Introduce tu telefono</label>
+    <entry></entry>
+    <label>Introduce direccion</label>
+    <entry></entry>
+    <button>Ejecuta</button>
+</interfaz>

@@ -1,0 +1,85 @@
+### 005-Programación de bases de datos
+#### 005-Programación de bases de datos\001-Introducción. Lenguaje de programación
+
+#### Introducción
+
+En el mundo de las bases de datos, la programación juega un papel fundamental para la manipulación, gestión y explotación de la información almacenada. La programación de bases de datos permite automatizar tareas, implementar lógica de negocio, y crear aplicaciones robustas que interactúen eficientemente con los datos. En este apartado, nos enfocaremos en la introducción a la programación de bases de datos, específicamente en el contexto de MySQL, uno de los sistemas de gestión de bases de datos relacionales (RDBMS) más populares.
+
+#### Lenguaje de Programación en MySQL
+
+El lenguaje de programación utilizado en MySQL se basa en SQL (Structured Query Language), un lenguaje estándar para administrar y manipular bases de datos relacionales. Además de SQL, MySQL permite la utilización de procedimientos almacenados, funciones, disparadores y eventos, que son componentes esenciales para la programación avanzada en bases de datos.
+
+##### 1. **SQL (Structured Query Language)**
+
+SQL es un lenguaje declarativo que se utiliza para definir, manipular y controlar los datos en una base de datos relacional. Las principales categorías de comandos SQL son:
+
+- **DDL (Data Definition Language):** Utilizado para definir la estructura de la base de datos. Incluye comandos como `CREATE`, `ALTER`, y `DROP`.
+- **DML (Data Manipulation Language):** Utilizado para manipular los datos dentro de la base de datos. Incluye comandos como `SELECT`, `INSERT`, `UPDATE`, y `DELETE`.
+- **DCL (Data Control Language):** Utilizado para controlar el acceso a los datos. Incluye comandos como `GRANT` y `REVOKE`.
+- **TCL (Transaction Control Language):** Utilizado para gestionar las transacciones en la base de datos. Incluye comandos como `COMMIT`, `ROLLBACK`, y `SAVEPOINT`.
+
+##### 2. **Procedimientos Almacenados (Stored Procedures)**
+
+Los procedimientos almacenados son conjuntos de comandos SQL que se almacenan en la base de datos y pueden ser ejecutados como una unidad. Estos procedimientos permiten la reutilización del código y mejoran el rendimiento al reducir el tráfico entre la aplicación y la base de datos.
+
+- **Creación de un procedimiento almacenado:**
+
+```sql
+DELIMITER //
+CREATE PROCEDURE nombre_procedimiento (parámetros)
+BEGIN
+    -- Cuerpo del procedimiento
+END //
+DELIMITER ;
+```
+
+##### 3. **Funciones (Functions)**
+
+Las funciones son similares a los procedimientos almacenados, pero están diseñadas para retornar un valor único. Son útiles para encapsular lógica que se utiliza frecuentemente en consultas.
+
+- **Creación de una función:**
+
+```sql
+DELIMITER //
+CREATE FUNCTION nombre_funcion (parámetros)
+RETURNS tipo_de_dato
+BEGIN
+    -- Cuerpo de la función
+    RETURN valor;
+END //
+DELIMITER ;
+```
+
+##### 4. **Disparadores (Triggers)**
+
+Los disparadores son procedimientos que se ejecutan automáticamente en respuesta a ciertos eventos en una tabla, como `INSERT`, `UPDATE`, o `DELETE`. Son útiles para la validación de datos y la implementación de reglas de negocio.
+
+- **Creación de un disparador:**
+
+```sql
+DELIMITER //
+CREATE TRIGGER nombre_disparador
+AFTER INSERT ON nombre_tabla
+FOR EACH ROW
+BEGIN
+    -- Cuerpo del disparador
+END //
+DELIMITER ;
+```
+
+##### 5. **Eventos (Events)**
+
+Los eventos son tareas programadas que se ejecutan en determinados intervalos de tiempo o en momentos específicos. Son útiles para tareas de mantenimiento y automatización.
+
+- **Creación de un evento:**
+
+```sql
+CREATE EVENT nombre_evento
+ON SCHEDULE EVERY intervalo
+DO
+    -- Cuerpo del evento
+```
+
+#### Conclusión
+
+La programación de bases de datos en MySQL es una habilidad esencial para cualquier desarrollador o administrador de bases de datos. Comprender y utilizar adecuadamente SQL, procedimientos almacenados, funciones, disparadores y eventos permite crear aplicaciones más eficientes y robustas, optimizando la gestión y manipulación de los datos. Este apartado ha proporcionado una introducción al lenguaje de programación en MySQL, estableciendo las bases para explorar más a fondo cada uno de los componentes mencionados en los siguientes apartados.

@@ -1,0 +1,8 @@
+print("Programa de gestión v0.1")
+print("(c) 2024 Jose Vicente Carratalá")
+print("Escoge una opción:")
+print("1.-Listar registros")
+print("2.-Insertar un registro")
+print("3.-Actualizar un registro")
+print("4.-Eliminar un registro")
+opcion = input("Tu opción: ")

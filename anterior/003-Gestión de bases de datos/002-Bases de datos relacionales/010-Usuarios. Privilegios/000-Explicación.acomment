@@ -1,0 +1,94 @@
+### 002-Bases de datos relacionales\010-Usuarios. Privilegios
+
+#### Introducción
+En una base de datos relacional, la gestión de usuarios y privilegios es crucial para garantizar la seguridad, integridad y eficiencia del sistema. Los usuarios son las entidades que interactúan con la base de datos, mientras que los privilegios son los permisos que determinan qué acciones pueden realizar estos usuarios. Este apartado se centra en cómo se gestionan los usuarios y los privilegios en MySQL, uno de los sistemas de gestión de bases de datos relacionales más populares.
+
+#### Gestión de Usuarios
+
+##### Creación de Usuarios
+Para crear un nuevo usuario en MySQL, se utiliza el comando `CREATE USER`. La sintaxis básica es:
+```sql
+CREATE USER 'nombre_usuario'@'host' IDENTIFIED BY 'contraseña';
+```
+Ejemplo:
+```sql
+CREATE USER 'juan'@'localhost' IDENTIFIED BY 'contraseña_segura';
+```
+En este ejemplo, se crea un usuario llamado 'juan' que solo puede conectarse desde el host 'localhost' utilizando la contraseña 'contraseña_segura'.
+
+##### Modificación de Usuarios
+Para modificar las propiedades de un usuario existente, como su contraseña, se utiliza el comando `ALTER USER`. La sintaxis básica es:
+```sql
+ALTER USER 'nombre_usuario'@'host' IDENTIFIED BY 'nueva_contraseña';
+```
+Ejemplo:
+```sql
+ALTER USER 'juan'@'localhost' IDENTIFIED BY 'nueva_contraseña_segura';
+```
+
+##### Eliminación de Usuarios
+Para eliminar un usuario de la base de datos, se utiliza el comando `DROP USER`. La sintaxis básica es:
+```sql
+DROP USER 'nombre_usuario'@'host';
+```
+Ejemplo:
+```sql
+DROP USER 'juan'@'localhost';
+```
+
+#### Gestión de Privilegios
+
+##### Tipos de Privilegios
+MySQL ofrece una variedad de privilegios que pueden asignarse a los usuarios. Algunos de los más comunes son:
+
+- **ALL PRIVILEGES**: Otorga todos los privilegios disponibles.
+- **SELECT**: Permite seleccionar datos de una tabla.
+- **INSERT**: Permite insertar datos en una tabla.
+- **UPDATE**: Permite actualizar datos en una tabla.
+- **DELETE**: Permite eliminar datos de una tabla.
+- **CREATE**: Permite crear nuevas bases de datos y tablas.
+- **DROP**: Permite eliminar bases de datos y tablas.
+- **GRANT OPTION**: Permite otorgar privilegios a otros usuarios.
+
+##### Otorgar Privilegios
+Para otorgar privilegios a un usuario, se utiliza el comando `GRANT`. La sintaxis básica es:
+```sql
+GRANT privilegios ON base_de_datos.tabla TO 'nombre_usuario'@'host';
+```
+Ejemplo:
+```sql
+GRANT SELECT, INSERT ON mi_base_de_datos.mi_tabla TO 'juan'@'localhost';
+```
+En este ejemplo, el usuario 'juan' puede seleccionar e insertar datos en la tabla 'mi_tabla' de la base de datos 'mi_base_de_datos'.
+
+##### Revocar Privilegios
+Para revocar privilegios otorgados previamente, se utiliza el comando `REVOKE`. La sintaxis básica es:
+```sql
+REVOKE privilegios ON base_de_datos.tabla FROM 'nombre_usuario'@'host';
+```
+Ejemplo:
+```sql
+REVOKE INSERT ON mi_base_de_datos.mi_tabla FROM 'juan'@'localhost';
+```
+En este ejemplo, se revoca el privilegio de insertar datos en la tabla 'mi_tabla' de la base de datos 'mi_base_de_datos' para el usuario 'juan'.
+
+#### Visualización de Privilegios
+Para ver los privilegios que tiene un usuario, se utiliza el comando `SHOW GRANTS`. La sintaxis básica es:
+```sql
+SHOW GRANTS FOR 'nombre_usuario'@'host';
+```
+Ejemplo:
+```sql
+SHOW GRANTS FOR 'juan'@'localhost';
+```
+Este comando muestra una lista de todos los privilegios otorgados al usuario 'juan' en el host 'localhost'.
+
+#### Buenas Prácticas en la Gestión de Usuarios y Privilegios
+
+1. **Principio de Menor Privilegio**: Asignar solo los privilegios necesarios para que los usuarios realicen sus tareas específicas.
+2. **Contraseñas Seguras**: Asegurarse de que todas las contraseñas sean robustas y se cambien regularmente.
+3. **Auditoría Regular**: Realizar auditorías periódicas para revisar los privilegios y asegurarse de que no se hayan otorgado permisos innecesarios.
+4. **Seguridad en Red**: Limitar los hosts desde los cuales los usuarios pueden conectarse a la base de datos.
+
+#### Conclusión
+La gestión eficaz de usuarios y privilegios es esencial para mantener la seguridad y eficiencia de una base de datos relacional en MySQL. Al comprender y aplicar correctamente estos conceptos, se puede garantizar que solo los usuarios autorizados tengan acceso a la información y las funcionalidades necesarias.

@@ -1,0 +1,72 @@
+### 003-Realización de Consultas
+
+#### 003.1 Proyección, Selección y Ordenación de Registros
+
+En el contexto de bases de datos relacionales, la realización de consultas es una habilidad fundamental que permite acceder y manipular los datos almacenados. Tres operaciones fundamentales en este ámbito son la proyección, la selección y la ordenación de registros. A continuación, se explican estos conceptos en detalle:
+
+##### Proyección
+
+La proyección se refiere a la operación de seleccionar columnas específicas de una tabla. Esta operación es útil cuando no se necesita toda la información de una tabla, sino solo un subconjunto de los datos. En SQL, la proyección se realiza mediante la cláusula `SELECT`.
+
+**Ejemplo de Proyección:**
+Supongamos que tenemos una tabla `empleados` con las siguientes columnas: `id`, `nombre`, `apellido`, `salario`, `departamento`.
+
+```sql
+SELECT nombre, apellido FROM empleados;
+```
+Esta consulta proyecta solo las columnas `nombre` y `apellido` de la tabla `empleados`.
+
+##### Selección
+
+La selección implica extraer filas que cumplan con ciertos criterios especificados mediante una condición. Esta operación se lleva a cabo usando la cláusula `WHERE` en SQL.
+
+**Ejemplo de Selección:**
+Continuando con la tabla `empleados`, si queremos seleccionar los empleados que pertenecen al departamento de "Ventas":
+
+```sql
+SELECT * FROM empleados WHERE departamento = 'Ventas';
+```
+Esta consulta selecciona todas las columnas (`*`) de la tabla `empleados`, pero solo las filas donde el valor de `departamento` sea "Ventas".
+
+##### Ordenación
+
+La ordenación permite organizar las filas de una tabla de acuerdo con uno o más criterios, lo que facilita la visualización y análisis de los datos. En SQL, la ordenación se realiza utilizando la cláusula `ORDER BY`.
+
+**Ejemplo de Ordenación:**
+Si queremos ordenar a los empleados por `apellido` en orden ascendente:
+
+```sql
+SELECT * FROM empleados ORDER BY apellido ASC;
+```
+Para ordenar en orden descendente, se usaría `DESC` en lugar de `ASC`.
+
+**Combinación de Proyección, Selección y Ordenación:**
+A menudo, estas operaciones se combinan en una sola consulta para obtener resultados más específicos y útiles. Por ejemplo, para obtener los nombres y apellidos de los empleados del departamento de "Ventas", ordenados por `apellido`:
+
+```sql
+SELECT nombre, apellido FROM empleados 
+WHERE departamento = 'Ventas' 
+ORDER BY apellido ASC;
+```
+
+##### Consideraciones Adicionales
+
+- **Filtrado de Duplicados:** En algunos casos, es posible que deseemos eliminar duplicados en los resultados de una proyección. Esto se puede lograr mediante la cláusula `DISTINCT`.
+  
+  ```sql
+  SELECT DISTINCT departamento FROM empleados;
+  ```
+  Esta consulta devuelve una lista de todos los departamentos, sin duplicados.
+
+- **Ordenación Múltiple:** Es posible ordenar los resultados por múltiples columnas.
+  
+  ```sql
+  SELECT nombre, apellido FROM empleados 
+  WHERE departamento = 'Ventas' 
+  ORDER BY apellido ASC, nombre DESC;
+  ```
+  Esta consulta ordena primero por `apellido` en orden ascendente y luego por `nombre` en orden descendente.
+
+##### Conclusión
+
+La proyección, selección y ordenación son operaciones básicas pero poderosas en el manejo de bases de datos relacionales. Comprender cómo y cuándo utilizar estas operaciones es crucial para la manipulación eficiente y efectiva de la información almacenada en bases de datos. Mediante la combinación adecuada de estas operaciones, se pueden realizar consultas complejas que satisfagan las necesidades específicas de cualquier análisis o aplicación.

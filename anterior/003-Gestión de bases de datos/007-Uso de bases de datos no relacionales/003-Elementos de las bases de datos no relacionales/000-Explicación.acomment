@@ -1,0 +1,47 @@
+### 007-Uso de bases de datos no relacionales
+#### 007-003 Elementos de las bases de datos no relacionales
+
+Las bases de datos no relacionales, también conocidas como NoSQL, se caracterizan por su flexibilidad y capacidad para manejar grandes volúmenes de datos no estructurados o semi-estructurados. A diferencia de las bases de datos relacionales, que utilizan tablas y esquemas rígidos, las bases de datos no relacionales permiten una estructura más dinámica y adaptable. A continuación, se presenta una descripción detallada de los elementos clave que constituyen las bases de datos no relacionales:
+
+#### 1. **Documentos**
+   - **Definición:** Un documento en una base de datos NoSQL es una unidad de almacenamiento de datos que puede contener datos anidados en formato JSON, BSON o XML. Estos documentos son auto-descriptivos y contienen pares clave-valor.
+   - **Características:** Los documentos pueden variar en estructura, lo que permite almacenar datos complejos y heterogéneos.
+   - **Ejemplo:** MongoDB es una base de datos de documentos que utiliza JSON para almacenar datos.
+
+#### 2. **Colecciones**
+   - **Definición:** Una colección es un grupo de documentos en una base de datos NoSQL. Es equivalente a una tabla en una base de datos relacional, pero sin un esquema fijo.
+   - **Características:** Las colecciones no requieren que los documentos tengan la misma estructura, lo que permite una gran flexibilidad.
+   - **Ejemplo:** En MongoDB, una colección puede contener documentos con diferentes campos y estructuras.
+
+#### 3. **Columnas**
+   - **Definición:** En las bases de datos orientadas a columnas, los datos se organizan en columnas en lugar de filas. Cada columna almacena valores de un solo tipo y se almacena de forma contigua.
+   - **Características:** Este enfoque es eficiente para realizar operaciones de lectura y agregación, ya que permite escanear solo las columnas necesarias.
+   - **Ejemplo:** Apache Cassandra y HBase son ejemplos de bases de datos orientadas a columnas.
+
+#### 4. **Familias de Columnas**
+   - **Definición:** Una familia de columnas es un conjunto de columnas que se agrupan juntas y se almacenan como una unidad.
+   - **Características:** Las familias de columnas permiten una organización más flexible y eficiente de los datos, especialmente para consultas que solo requieren una parte del conjunto de datos.
+   - **Ejemplo:** En Apache Cassandra, una familia de columnas puede contener columnas definidas dinámicamente, lo que permite una estructura flexible.
+
+#### 5. **Claves**
+   - **Definición:** Las bases de datos NoSQL utilizan varias formas de claves para identificar y acceder a los datos. Estas pueden ser claves primarias, claves compuestas o claves de partición.
+   - **Características:** Las claves se utilizan para indexar y buscar datos de manera eficiente.
+   - **Ejemplo:** En Redis, una clave puede ser cualquier cadena de caracteres y se utiliza para acceder a valores almacenados en estructuras de datos como listas, conjuntos o hashes.
+
+#### 6. **Grafos**
+   - **Definición:** Una base de datos de grafos utiliza nodos, aristas y propiedades para representar y almacenar datos.
+   - **Características:** Los nodos representan entidades, las aristas representan relaciones y las propiedades almacenan información adicional sobre los nodos y las aristas.
+   - **Ejemplo:** Neo4j es una base de datos de grafos que permite modelar y consultar relaciones complejas entre datos.
+
+#### 7. **Buckets**
+   - **Definición:** En bases de datos orientadas a objetos y key-value, un bucket es un contenedor lógico para almacenar datos.
+   - **Características:** Los buckets permiten la agrupación y organización de datos, y pueden contener objetos o pares clave-valor.
+   - **Ejemplo:** En Amazon S3, un bucket es un contenedor para almacenar objetos de datos.
+
+#### 8. **Índices Secundarios**
+   - **Definición:** Los índices secundarios son estructuras adicionales que permiten búsquedas rápidas basadas en campos que no son claves primarias.
+   - **Características:** Los índices secundarios mejoran el rendimiento de las consultas, pero pueden aumentar el costo de almacenamiento y tiempo de escritura.
+   - **Ejemplo:** En Elasticsearch, se pueden crear índices secundarios para realizar búsquedas eficientes en grandes volúmenes de datos.
+
+#### Conclusión
+Comprender los elementos básicos de las bases de datos no relacionales es fundamental para aprovechar al máximo su flexibilidad y escalabilidad. Cada tipo de base de datos NoSQL tiene su propio conjunto de elementos y características que la hacen adecuada para diferentes casos de uso, desde el almacenamiento de documentos y datos en columnas hasta la gestión de grafos y pares clave-valor.
