@@ -1,0 +1,53 @@
+### 001-Almacenamiento de la información\004-Bases de datos centralizadas y bases de datos distribuidas. Técnicas de fragmentación
+
+#### Introducción
+
+En la gestión de datos, las bases de datos pueden ser implementadas de diversas maneras para satisfacer diferentes necesidades organizacionales. Este apartado aborda dos enfoques fundamentales: las bases de datos centralizadas y las bases de datos distribuidas, así como las técnicas de fragmentación utilizadas en la implementación de bases de datos distribuidas.
+
+#### Bases de Datos Centralizadas
+
+Una base de datos centralizada es aquella en la que los datos se almacenan y se mantienen en una única ubicación, usualmente un servidor central. Este enfoque tiene varios beneficios y desventajas:
+
+**Ventajas:**
+1. **Simplicidad de Administración:** La administración de la base de datos es más sencilla ya que todos los datos están en un solo lugar.
+2. **Seguridad:** Es más fácil implementar y gestionar las políticas de seguridad y protección de datos.
+3. **Integridad de Datos:** La consistencia y la integridad de los datos son más fáciles de mantener debido a la naturaleza centralizada del almacenamiento.
+
+**Desventajas:**
+1. **Escalabilidad:** Escalar una base de datos centralizada puede ser complicado y costoso.
+2. **Riesgo de Punto Único de Falla:** Si el servidor central falla, toda la base de datos se vuelve inaccesible.
+3. **Latencia:** El acceso a la base de datos desde ubicaciones geográficamente lejanas puede resultar en una alta latencia.
+
+#### Bases de Datos Distribuidas
+
+Una base de datos distribuida es aquella en la que los datos se almacenan en múltiples ubicaciones, que pueden ser servidores o nodos distribuidos geográficamente. Este enfoque ofrece varias ventajas y desafíos:
+
+**Ventajas:**
+1. **Escalabilidad:** Es más fácil escalar horizontalmente añadiendo más nodos.
+2. **Redundancia y Disponibilidad:** La redundancia de datos en múltiples nodos aumenta la disponibilidad y la tolerancia a fallos.
+3. **Optimización de Rendimiento:** La distribución de datos cerca de los usuarios puede reducir la latencia y mejorar el rendimiento.
+
+**Desventajas:**
+1. **Complejidad de Administración:** La administración y coordinación de múltiples nodos es más compleja.
+2. **Consistencia:** Mantener la consistencia de datos en un entorno distribuido puede ser un desafío.
+3. **Seguridad:** Implementar políticas de seguridad eficaces en múltiples ubicaciones puede ser más difícil.
+
+#### Técnicas de Fragmentación
+
+La fragmentación es una técnica utilizada en bases de datos distribuidas para dividir una base de datos en fragmentos más pequeños que pueden ser almacenados en diferentes nodos. Existen varias técnicas de fragmentación:
+
+1. **Fragmentación Horizontal:**
+   - Consiste en dividir las tablas en filas. Cada fragmento contiene un subconjunto de las filas de la tabla.
+   - Ejemplo: Una tabla de clientes puede ser dividida en fragmentos según la ubicación geográfica de los clientes.
+
+2. **Fragmentación Vertical:**
+   - Consiste en dividir las tablas en columnas. Cada fragmento contiene un subconjunto de las columnas de la tabla.
+   - Ejemplo: Una tabla de empleados puede ser dividida en fragmentos donde uno contiene la información personal y otro contiene la información laboral.
+
+3. **Fragmentación Mixta (Híbrida):**
+   - Combina la fragmentación horizontal y vertical. Los datos son primero divididos horizontalmente y luego cada fragmento horizontal es dividido verticalmente, o viceversa.
+   - Ejemplo: Una tabla de ventas puede ser inicialmente fragmentada horizontalmente por región y luego cada fragmento regional puede ser dividido verticalmente por tipo de producto.
+
+#### Conclusión
+
+La elección entre una base de datos centralizada y una distribuida depende de los requisitos específicos de la organización, tales como la necesidad de escalabilidad, disponibilidad y rendimiento. Las técnicas de fragmentación son esenciales en bases de datos distribuidas para optimizar el almacenamiento, mejorar el rendimiento y garantizar la disponibilidad de los datos. Comprender estas técnicas y sus implicaciones es crucial para diseñar sistemas de bases de datos eficientes y robustos.

@@ -1,0 +1,100 @@
+### 006-Interpretación de Diagramas Entidad-Relación
+
+#### 006-Interpretación de Diagramas Entidad-Relación\004-Restricciones semánticas del modelo relacional
+
+Las restricciones semánticas en el modelo relacional son reglas y condiciones que aseguran la integridad y validez de los datos dentro de una base de datos. Estas restricciones permiten modelar de manera más precisa las realidades del mundo real y evitar inconsistencias en la información almacenada. A continuación, detallamos los tipos más importantes de restricciones semánticas en el modelo relacional:
+
+##### 1. **Restricciones de Dominio**
+Las restricciones de dominio definen los valores permitidos que pueden ser almacenados en una columna. Estas restricciones aseguran que los datos ingresados sean válidos según el tipo de datos definido para cada atributo. Por ejemplo, una columna que almacena edades puede tener una restricción de dominio que solo permita números enteros positivos menores que 120.
+
+**Ejemplo en SQL:**
+```sql
+CREATE TABLE Personas (
+    ID INT PRIMARY KEY,
+    Nombre VARCHAR(50),
+    Edad INT CHECK (Edad >= 0 AND Edad < 120)
+);
+```
+
+##### 2. **Restricciones de Integridad de Entidad**
+La integridad de entidad asegura que cada tupla en una tabla sea única y no nula cuando se refiere a una clave primaria. Esto garantiza que cada entidad tenga una identificación única dentro de la tabla.
+
+**Ejemplo en SQL:**
+```sql
+CREATE TABLE Productos (
+    ProductoID INT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL
+);
+```
+
+##### 3. **Restricciones de Integridad Referencial**
+Estas restricciones aseguran que las relaciones entre tablas se mantengan consistentes. Una clave foránea en una tabla debe tener un valor que coincida con un valor de clave primaria en la tabla a la que se hace referencia, o debe ser nulo si se permite.
+
+**Ejemplo en SQL:**
+```sql
+CREATE TABLE Ordenes (
+    OrdenID INT PRIMARY KEY,
+    ClienteID INT,
+    FOREIGN KEY (ClienteID) REFERENCES Clientes(ClienteID)
+);
+```
+
+##### 4. **Restricciones de Unicidad**
+Las restricciones de unicidad aseguran que los valores en una columna o en un grupo de columnas sean únicos en toda la tabla. Esto es útil, por ejemplo, para garantizar que los correos electrónicos de los usuarios no se repitan.
+
+**Ejemplo en SQL:**
+```sql
+CREATE TABLE Usuarios (
+    UsuarioID INT PRIMARY KEY,
+    Email VARCHAR(100) UNIQUE
+);
+```
+
+##### 5. **Restricciones de Claves Alternativas**
+Las claves alternativas son restricciones que identifican de manera única una fila en una tabla, aparte de la clave primaria. Estas claves también deben ser únicas y no nulas.
+
+**Ejemplo en SQL:**
+```sql
+CREATE TABLE Empleados (
+    EmpleadoID INT PRIMARY KEY,
+    NumeroSeguroSocial VARCHAR(20) UNIQUE
+);
+```
+
+##### 6. **Restricciones de Valores por Defecto**
+Estas restricciones permiten definir un valor predeterminado que se asignará a una columna cuando no se proporcione un valor explícito durante la inserción de datos.
+
+**Ejemplo en SQL:**
+```sql
+CREATE TABLE Productos (
+    ProductoID INT PRIMARY KEY,
+    Nombre VARCHAR(100),
+    Estado VARCHAR(20) DEFAULT 'Disponible'
+);
+```
+
+##### 7. **Restricciones de Verificación (CHECK)**
+Las restricciones de verificación permiten definir condiciones que los datos deben cumplir para ser aceptados en la base de datos. Estas restricciones pueden involucrar una o más columnas.
+
+**Ejemplo en SQL:**
+```sql
+CREATE TABLE Transacciones (
+    TransaccionID INT PRIMARY KEY,
+    Monto DECIMAL(10, 2),
+    Tipo VARCHAR(10),
+    CHECK (Tipo IN ('Credito', 'Debito'))
+);
+```
+
+### Importancia de las Restricciones Semánticas
+
+Implementar restricciones semánticas en un modelo relacional es crucial por varias razones:
+
+1. **Integridad de Datos:** Aseguran que los datos almacenados en la base de datos sean coherentes y válidos.
+2. **Calidad de Datos:** Mejoran la calidad de los datos al evitar la entrada de valores incorrectos y mantener la exactitud y precisión.
+3. **Reducción de Errores:** Disminuyen la posibilidad de errores en las aplicaciones que interactúan con la base de datos.
+4. **Consistencia:** Mantienen la consistencia de los datos a lo largo del tiempo, lo que es esencial para el análisis y la toma de decisiones.
+
+### Conclusión
+
+Las restricciones semánticas son fundamentales para el diseño y la gestión efectiva de bases de datos relacionales. Permiten representar de manera precisa las reglas y condiciones del mundo real dentro de la base de datos, asegurando así la integridad y validez de los datos almacenados. Implementarlas adecuadamente no solo mejora la calidad de los datos sino que también facilita el mantenimiento y la evolución del sistema de base de datos.

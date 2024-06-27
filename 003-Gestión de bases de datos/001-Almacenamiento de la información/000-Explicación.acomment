@@ -1,0 +1,46 @@
+### 001-Almacenamiento de la información
+
+El almacenamiento de la información es un aspecto fundamental en el ámbito de la tecnología y la informática. Se refiere a la manera en que los datos se guardan, organizan y gestionan para su posterior acceso y utilización. Este apartado abarca una variedad de temas que van desde los métodos más básicos de almacenamiento hasta las técnicas más avanzadas y los aspectos legales relacionados con la protección de datos. A continuación, se describen los subapartados que componen esta sección:
+
+#### 1.1. 001-Almacenamiento de la información\001-Ficheros (planos, indexados, acceso directo, entre otros)
+En este subapartado, se exploran los diferentes tipos de ficheros utilizados para almacenar información:
+
+- **Ficheros planos**: Son archivos de texto simple donde los datos se almacenan en líneas consecutivas, sin un índice o estructura jerárquica.
+- **Ficheros indexados**: Estos archivos incorporan índices que permiten un acceso más rápido a los datos contenidos.
+- **Acceso directo**: Este método permite acceder a los datos de manera no secuencial, lo que facilita la lectura y escritura en ubicaciones específicas del archivo.
+
+#### 1.2. 001-Almacenamiento de la información\002-Bases de datos. Conceptos, usos y tipos según el modelo de datos, la ubicación de la información
+Este subapartado introduce los conceptos básicos de las bases de datos, incluyendo sus usos y los diferentes tipos según:
+
+- **Modelo de datos**: Relacional, NoSQL, jerárquico, en red, entre otros.
+- **Ubicación de la información**: Bases de datos locales, distribuidas, en la nube, etc.
+
+#### 1.3. 001-Almacenamiento de la información\003-Sistemas gestores de base de datos. Funciones, componentes y tipos
+Aquí se detallan los sistemas gestores de bases de datos (SGBD), que son software diseñados para gestionar y manipular bases de datos. Se destacan:
+
+- **Funciones**: Creación, actualización, administración y consulta de bases de datos.
+- **Componentes**: Motor de base de datos, interfaz de usuario, herramientas de administración.
+- **Tipos**: SGBD relacionales, NoSQL, orientados a objetos, etc.
+
+#### 1.4. 001-Almacenamiento de la información\004-Bases de datos centralizadas y bases de datos distribuidas. Técnicas de fragmentación
+Este subapartado se enfoca en la arquitectura de las bases de datos:
+
+- **Bases de datos centralizadas**: Toda la información se almacena en un solo lugar.
+- **Bases de datos distribuidas**: Los datos se distribuyen en múltiples ubicaciones. 
+- **Técnicas de fragmentación**: Métodos para dividir y distribuir datos, como fragmentación horizontal y vertical.
+
+#### 1.5. 001-Almacenamiento de la información\005-Legislación sobre protección de datos
+Este apartado cubre la importancia de la legislación en la protección de datos personales y corporativos. Se discuten:
+
+- **Regulaciones**: GDPR, CCPA, y otras leyes de protección de datos.
+- **Cumplimiento**: Medidas y procedimientos necesarios para cumplir con estas regulaciones.
+
+#### 1.6. 001-Almacenamiento de la información\006-Big Data. Introducción, análisis de datos, inteligencia de negocios
+En este subapartado se aborda el concepto de Big Data y su relevancia actual:
+
+- **Introducción**: Definición y características del Big Data (volumen, velocidad, variedad, veracidad y valor).
+- **Análisis de datos**: Técnicas y herramientas utilizadas para analizar grandes volúmenes de datos.
+- **Inteligencia de negocios**: Uso de datos analizados para tomar decisiones estratégicas en las empresas.
+
+### Resumen
+El almacenamiento de la información es una disciplina compleja y multifacética que abarca desde métodos básicos de almacenamiento como los ficheros planos hasta técnicas avanzadas como las bases de datos distribuidas y el Big Data. Además, la protección de datos y el cumplimiento de las leyes son aspectos críticos en esta área. Con una buena comprensión de estos temas, se puede gestionar y utilizar la información de manera eficiente y segura.

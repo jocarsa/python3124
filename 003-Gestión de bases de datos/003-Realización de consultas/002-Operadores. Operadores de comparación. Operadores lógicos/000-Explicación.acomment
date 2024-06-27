@@ -1,0 +1,98 @@
+### 003-Realización de consultas\002-Operadores. Operadores de comparación. Operadores lógicos
+
+En el ámbito de las bases de datos relacionales, la realización de consultas es una actividad fundamental para la obtención y manipulación de datos. Para llevar a cabo estas consultas, se utilizan diversos operadores que permiten realizar comparaciones y operaciones lógicas. A continuación, se detallan los operadores más comunes y su uso en consultas SQL.
+
+#### Operadores de Comparación
+
+Los operadores de comparación se utilizan para comparar dos valores. Estos operadores son esenciales para filtrar registros en una consulta. Los más comunes son:
+
+- **Igual (=)**: Compara si dos valores son iguales.
+  ```sql
+  SELECT * FROM empleados WHERE salario = 50000;
+  ```
+
+- **No igual (<> o !=)**: Compara si dos valores no son iguales.
+  ```sql
+  SELECT * FROM empleados WHERE salario <> 50000;
+  ```
+
+- **Mayor que (>)**: Compara si el valor de la izquierda es mayor que el valor de la derecha.
+  ```sql
+  SELECT * FROM empleados WHERE salario > 50000;
+  ```
+
+- **Menor que (<)**: Compara si el valor de la izquierda es menor que el valor de la derecha.
+  ```sql
+  SELECT * FROM empleados WHERE salario < 50000;
+  ```
+
+- **Mayor o igual que (>=)**: Compara si el valor de la izquierda es mayor o igual que el valor de la derecha.
+  ```sql
+  SELECT * FROM empleados WHERE salario >= 50000;
+  ```
+
+- **Menor o igual que (<=)**: Compara si el valor de la izquierda es menor o igual que el valor de la derecha.
+  ```sql
+  SELECT * FROM empleados WHERE salario <= 50000;
+  ```
+
+- **BETWEEN**: Selecciona valores dentro de un rango.
+  ```sql
+  SELECT * FROM empleados WHERE salario BETWEEN 40000 AND 60000;
+  ```
+
+- **IN**: Selecciona valores que coinciden con cualquiera de los valores de una lista.
+  ```sql
+  SELECT * FROM empleados WHERE departamento IN ('Ventas', 'Marketing', 'IT');
+  ```
+
+- **LIKE**: Utilizado para buscar un patrón en una columna de texto.
+  ```sql
+  SELECT * FROM empleados WHERE nombre LIKE 'J%';
+  ```
+
+- **IS NULL**: Verifica si el valor es NULL.
+  ```sql
+  SELECT * FROM empleados WHERE fecha_nacimiento IS NULL;
+  ```
+
+#### Operadores Lógicos
+
+Los operadores lógicos se utilizan para combinar dos o más condiciones en una consulta SQL. Los operadores lógicos más comunes son:
+
+- **AND**: Combina dos condiciones y devuelve true si ambas condiciones son verdaderas.
+  ```sql
+  SELECT * FROM empleados WHERE salario > 50000 AND departamento = 'IT';
+  ```
+
+- **OR**: Combina dos condiciones y devuelve true si alguna de las condiciones es verdadera.
+  ```sql
+  SELECT * FROM empleados WHERE salario > 50000 OR departamento = 'IT';
+  ```
+
+- **NOT**: Invierte el resultado de una condición.
+  ```sql
+  SELECT * FROM empleados WHERE NOT departamento = 'IT';
+  ```
+
+#### Uso Combinado de Operadores
+
+Es común utilizar operadores de comparación y lógicos en combinación para realizar consultas más complejas. Por ejemplo:
+
+```sql
+SELECT * FROM empleados 
+WHERE (salario > 50000 AND departamento = 'IT') 
+OR (salario < 30000 AND departamento = 'Ventas');
+```
+
+En esta consulta, se seleccionan empleados que o bien tienen un salario superior a 50,000 y pertenecen al departamento de IT, o bien tienen un salario inferior a 30,000 y pertenecen al departamento de Ventas.
+
+#### Consideraciones de Rendimiento
+
+El uso eficiente de operadores en las consultas puede mejorar significativamente el rendimiento de las bases de datos. Es importante:
+
+- **Utilizar índices**: Los índices en columnas usadas en condiciones de comparación pueden acelerar las consultas.
+- **Evitar el uso excesivo de operadores lógicos**: Las combinaciones complejas de condiciones pueden ralentizar las consultas.
+- **Optimizar patrones de búsqueda con LIKE**: Evitar el uso de comodines al principio de los patrones.
+
+Con un buen entendimiento de estos operadores, es posible realizar consultas efectivas y eficientes en bases de datos relacionales, obteniendo la información necesaria de manera rápida y precisa.

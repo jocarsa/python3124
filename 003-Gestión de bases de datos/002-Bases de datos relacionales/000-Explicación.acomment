@@ -1,0 +1,89 @@
+Claro, a continuación se presenta el contenido desarrollado para el apartado "002-Bases de datos relacionales":
+
+---
+
+### 002-Bases de datos relacionales
+
+Las bases de datos relacionales son un tipo de bases de datos que utilizan un modelo basado en la teoría relacional propuesta por Edgar F. Codd en 1970. Este modelo organiza los datos en tablas compuestas por filas y columnas. A continuación se describen los conceptos y componentes fundamentales de las bases de datos relacionales:
+
+#### 2.1. Modelo de datos
+
+El modelo de datos relacional se basa en el uso de relaciones (o tablas) para almacenar la información. Cada tabla está compuesta por:
+
+- **Filas (tuplas)**: Representan registros individuales dentro de la tabla.
+- **Columnas (atributos)**: Representan las propiedades de los datos, definidas por un nombre y un tipo de dato.
+
+Cada tabla en la base de datos tiene una estructura definida que permite organizar y acceder a los datos de manera eficiente.
+
+#### 2.2. Terminología del modelo relacional
+
+Algunos términos clave en el modelo relacional incluyen:
+
+- **Relación (Tabla)**: Una colección de tuplas que tienen los mismos atributos.
+- **Atributo (Columna)**: Una propiedad de la relación.
+- **Tupla (Fila)**: Un conjunto de valores que describe una entidad en la relación.
+- **Esquema**: La estructura de la base de datos, definida por tablas, atributos y las relaciones entre ellos.
+
+#### 2.3. Tipos de datos
+
+Los tipos de datos especifican el tipo de información que puede almacenarse en cada columna de una tabla. Algunos tipos de datos comunes en MySQL incluyen:
+
+- **INT**: Números enteros.
+- **VARCHAR**: Cadenas de texto de longitud variable.
+- **DATE**: Fechas.
+- **BOOLEAN**: Valores booleanos (verdadero/falso).
+- **FLOAT**: Números de punto flotante.
+
+#### 2.4. Claves primarias
+
+Una clave primaria es un atributo o un conjunto de atributos que identifica de manera única cada tupla en una tabla. Las claves primarias deben ser únicas y no nulas.
+
+#### 2.5. Restricciones de validación
+
+Las restricciones de validación aseguran la integridad de los datos en la base de datos. Algunos tipos comunes de restricciones incluyen:
+
+- **NOT NULL**: Garantiza que una columna no pueda tener valores nulos.
+- **UNIQUE**: Asegura que todos los valores en una columna sean únicos.
+- **CHECK**: Impone una condición que los valores en una columna deben cumplir.
+
+#### 2.6. Índices. Características
+
+Los índices mejoran la velocidad de las consultas en una base de datos. Un índice es una estructura de datos adicional que almacena una pequeña parte de los datos de una tabla y permite búsquedas más rápidas. Los índices pueden ser:
+
+- **Índices primarios**: Basados en la clave primaria de la tabla.
+- **Índices secundarios**: Basados en otras columnas de la tabla.
+
+#### 2.7. El valor NULL
+
+El valor NULL representa la ausencia de un valor o un valor desconocido en una columna. NULL no es lo mismo que cero o una cadena vacía, y se debe tratar de manera especial en las consultas y operaciones.
+
+#### 2.8. Claves ajenas
+
+Una clave ajena es un atributo o un conjunto de atributos en una tabla que se refiere a la clave primaria de otra tabla. Las claves ajenas se utilizan para establecer y reforzar relaciones entre tablas, asegurando la integridad referencial.
+
+#### 2.9. Vistas
+
+Una vista es una consulta almacenada que se puede tratar como una tabla virtual. Las vistas permiten simplificar consultas complejas y restringir el acceso a los datos sensibles.
+
+#### 2.10. Usuarios. Privilegios
+
+La gestión de usuarios y privilegios es esencial para la seguridad de la base de datos. MySQL permite definir diferentes niveles de acceso y permisos para cada usuario, controlando quién puede leer, escribir, modificar o borrar datos.
+
+#### 2.11. Lenguaje de descripción de datos (DDL)
+
+El DDL (Data Definition Language) se utiliza para definir y modificar la estructura de la base de datos. Las operaciones DDL incluyen:
+
+- **CREATE**: Crear nuevas tablas, vistas, índices, etc.
+- **ALTER**: Modificar la estructura de tablas existentes.
+- **DROP**: Eliminar tablas, vistas, índices, etc.
+
+#### 2.12. Lenguaje de control de datos (DCL)
+
+El DCL (Data Control Language) se utiliza para controlar el acceso a los datos en la base de datos. Las operaciones DCL incluyen:
+
+- **GRANT**: Otorgar permisos a los usuarios.
+- **REVOKE**: Revocar permisos previamente otorgados.
+
+---
+
+Este contenido proporciona una visión completa y detallada de los componentes y conceptos clave de las bases de datos relacionales, específicamente en el contexto de MySQL.

@@ -1,0 +1,104 @@
+Claro, aquí tienes un desarrollo detallado del contenido para el apartado 005-Programación de bases de datos:
+
+---
+
+### 005-Programación de bases de datos
+
+La programación de bases de datos es una disciplina que combina los principios de la programación y la gestión de bases de datos para manipular y gestionar datos de manera eficiente. A través de diversas técnicas y herramientas, los desarrolladores pueden automatizar tareas, implementar lógica de negocio y asegurar la integridad de los datos.
+
+#### 5.1. Introducción. Lenguaje de programación
+
+La programación de bases de datos implica el uso de lenguajes específicos que permiten interactuar directamente con el sistema gestor de bases de datos (SGBD). Uno de los lenguajes más utilizados es SQL (Structured Query Language), que se emplea para consultar, actualizar, y gestionar bases de datos relacionales.
+
+- **Lenguajes comunes**: SQL, PL/SQL (Oracle), T-SQL (SQL Server), PL/pgSQL (PostgreSQL).
+- **Funciones básicas de SQL**: DDL (Data Definition Language) para definir estructuras de datos, DML (Data Manipulation Language) para manipular datos, y DCL (Data Control Language) para controlar el acceso a los datos.
+
+#### 5.2. Variables del sistema y variables de usuario
+
+En la programación de bases de datos, se utilizan variables para almacenar y manipular datos temporalmente durante la ejecución de un script o procedimiento.
+
+- **Variables del sistema**: Son variables predefinidas por el SGBD que proporcionan información sobre el entorno de la base de datos y su estado.
+  - Ejemplos: `@@VERSION` en SQL Server, `@@GLOBAL` en MySQL.
+- **Variables de usuario**: Son definidas por el usuario y pueden ser utilizadas para almacenar valores temporales y gestionar la lógica de la programación.
+  - Ejemplos: `DECLARE @variable INT` en T-SQL, `SET @variable = value` en MySQL.
+
+#### 5.3. Funciones
+
+Las funciones son bloques de código reutilizables que realizan una tarea específica y devuelven un valor.
+
+- **Funciones integradas**: Proporcionadas por el SGBD para realizar operaciones comunes como matemáticas, cadenas de texto, y manipulación de fechas.
+  - Ejemplos: `SUM()`, `AVG()`, `CONCAT()`, `NOW()`.
+- **Funciones definidas por el usuario (UDF)**: Creadas por el usuario para tareas específicas que no están cubiertas por las funciones integradas.
+  - Ejemplos: `CREATE FUNCTION function_name(parameters) RETURNS type`.
+
+#### 5.4. Estructuras de control de flujo
+
+Las estructuras de control de flujo permiten dirigir el flujo de ejecución de los scripts en función de condiciones específicas.
+
+- **Condicionales**: `IF...ELSE`, `CASE`.
+  - Ejemplos:
+    ```sql
+    IF condition THEN
+        -- statements
+    ELSE
+        -- statements
+    END IF;
+    ```
+- **Bucles**: `WHILE`, `FOR`, `LOOP`.
+  - Ejemplos:
+    ```sql
+    WHILE condition DO
+        -- statements
+    END WHILE;
+    ```
+
+#### 5.5. Procedimientos almacenados. Funciones de usuario
+
+Los procedimientos almacenados son conjuntos de declaraciones SQL que se almacenan en el SGBD y se pueden ejecutar como una unidad.
+
+- **Procedimientos almacenados**: Permiten encapsular lógica de negocio y reutilizar código.
+  - Ejemplos: `CREATE PROCEDURE procedure_name(parameters) BEGIN ... END;`
+- **Funciones de usuario**: Similar a las funciones definidas por el usuario, pero pueden ser más complejas y realizar múltiples operaciones.
+  - Ejemplos: `CREATE FUNCTION function_name(parameters) RETURNS type BEGIN ... END;`
+
+#### 5.6. Eventos y disparadores
+
+Los eventos y disparadores permiten automatizar la ejecución de código en respuesta a ciertos cambios o acciones en la base de datos.
+
+- **Eventos**: Programas que se ejecutan en un momento específico.
+  - Ejemplos: `CREATE EVENT event_name ON SCHEDULE ... DO ...;`
+- **Disparadores**: Código que se ejecuta automáticamente en respuesta a eventos como `INSERT`, `UPDATE`, o `DELETE`.
+  - Ejemplos: `CREATE TRIGGER trigger_name BEFORE/AFTER INSERT/UPDATE/DELETE ON table_name FOR EACH ROW BEGIN ... END;`
+
+#### 5.7. Excepciones
+
+El manejo de excepciones permite gestionar errores y condiciones inesperadas durante la ejecución de los scripts.
+
+- **Captura de excepciones**: Utiliza bloques de código para capturar y manejar errores.
+  - Ejemplos:
+    ```sql
+    BEGIN
+        -- statements
+    EXCEPTION
+        WHEN exception_name THEN
+            -- exception handling statements
+    END;
+    ```
+
+#### 5.8. Cursores
+
+Los cursores permiten recorrer y manipular los resultados de una consulta fila por fila.
+
+- **Declaración de cursores**: `DECLARE cursor_name CURSOR FOR select_statement;`
+- **Operaciones con cursores**: `OPEN`, `FETCH`, `CLOSE`.
+  - Ejemplos:
+    ```sql
+    DECLARE cursor_name CURSOR FOR SELECT column1, column2 FROM table_name;
+    OPEN cursor_name;
+    FETCH cursor_name INTO variable1, variable2;
+    CLOSE cursor_name;
+    ```
+
+---
+
+Este contenido proporciona una visión integral de los conceptos y técnicas fundamentales en la programación de bases de datos, cubriendo desde las estructuras básicas hasta las herramientas avanzadas para la gestión eficiente de datos en un entorno relacional.

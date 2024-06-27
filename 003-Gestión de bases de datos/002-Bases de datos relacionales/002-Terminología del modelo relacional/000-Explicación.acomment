@@ -1,0 +1,50 @@
+### 002-Bases de datos relacionales\002-Terminología del modelo relacional
+
+El modelo relacional es una metodología para la gestión y operación de bases de datos que se basa en la teoría matemática de conjuntos y en el álgebra relacional. A continuación, se detallan los términos más relevantes del modelo relacional:
+
+#### 1. **Relación**
+Una **relación** es una tabla con filas y columnas. Cada relación tiene un nombre único y está compuesta por un conjunto de atributos (columnas) y tuplas (filas).
+
+#### 2. **Atributo**
+Un **atributo** es una columna en una relación. Cada atributo tiene un nombre y un dominio (tipo de datos que puede almacenar). Por ejemplo, en una relación de empleados, los atributos podrían ser `ID`, `Nombre`, `Apellido`, `Fecha de Nacimiento`, etc.
+
+#### 3. **Tupla**
+Una **tupla** es una fila en una relación. Representa un registro único en la tabla. Cada tupla es una colección de valores de atributos, y el conjunto de todas las tuplas forma la relación.
+
+#### 4. **Clave primaria**
+Una **clave primaria** es un atributo o un conjunto de atributos que identifica de manera única a cada tupla en una relación. No puede haber dos tuplas con el mismo valor en la clave primaria. Ejemplo: `ID` en una tabla de empleados.
+
+#### 5. **Clave foránea (o externa)**
+Una **clave foránea** es un atributo o conjunto de atributos en una relación que se refiere a la clave primaria de otra relación. Es utilizada para establecer y reforzar un enlace entre los datos de dos relaciones. Ejemplo: `DepartamentoID` en una tabla de empleados que referencia `ID` en una tabla de departamentos.
+
+#### 6. **Dominio**
+El **dominio** es el conjunto de valores permitidos que un atributo puede tomar. Define el tipo de datos de un atributo, como `INTEGER`, `VARCHAR`, `DATE`, etc.
+
+#### 7. **Esquema**
+El **esquema de una base de datos** es la estructura que define la organización de la base de datos, incluyendo sus relaciones, atributos y las restricciones asociadas. Un esquema puede ser visto como un "mapa" de la base de datos.
+
+#### 8. **Cardinalidad**
+La **cardinalidad** de una relación es el número de tuplas que contiene. En términos de relaciones entre tablas, la cardinalidad describe la naturaleza de las relaciones entre dos entidades, como uno a uno (1:1), uno a muchos (1:N), y muchos a muchos (M:N).
+
+#### 9. **Grado**
+El **grado** de una relación es el número de atributos que contiene. Por ejemplo, una tabla con cinco columnas tiene un grado de cinco.
+
+#### 10. **Integridad referencial**
+La **integridad referencial** es una propiedad que asegura que las claves foráneas en una relación siempre se refieran a tuplas válidas en la relación objetivo. Esto mantiene la consistencia de los datos entre las relaciones.
+
+#### 11. **Restricción de unicidad**
+Una **restricción de unicidad** asegura que los valores de un atributo o un conjunto de atributos sean únicos en una relación. Las claves primarias son un ejemplo de restricción de unicidad.
+
+#### 12. **Valor NULL**
+El **valor NULL** representa la ausencia de un valor o un dato desconocido en un atributo. Es importante diferenciar entre NULL y valores como cero o cadena vacía.
+
+#### 13. **Vista**
+Una **vista** es una tabla virtual resultante de una consulta sobre una o más tablas. Las vistas permiten a los usuarios ver y trabajar con un subconjunto específico de los datos sin alterar las tablas subyacentes.
+
+#### 14. **Consulta**
+Una **consulta** es una operación que permite extraer y manipular datos de una o más relaciones. Las consultas se escriben en SQL (Structured Query Language) y pueden incluir operaciones como selección, proyección, unión, entre otras.
+
+#### 15. **Transacción**
+Una **transacción** es una unidad de trabajo que se ejecuta en la base de datos. Las transacciones deben cumplir con las propiedades ACID (Atomicidad, Consistencia, Aislamiento, Durabilidad) para garantizar la integridad de los datos.
+
+Conocer y entender esta terminología es fundamental para trabajar eficazmente con bases de datos relacionales y aprovechar al máximo las capacidades que ofrecen para la gestión y análisis de datos.

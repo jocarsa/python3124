@@ -1,0 +1,83 @@
+### 004-Tratamiento de datos\004-Transacciones
+
+#### Introducción a las Transacciones
+
+En el contexto de bases de datos, una transacción es una secuencia de operaciones realizadas como una sola unidad lógica de trabajo. Una transacción debe cumplir con ciertas propiedades para garantizar la coherencia y la integridad de los datos, conocidas como las propiedades ACID (Atomicidad, Consistencia, Aislamiento y Durabilidad).
+
+#### Propiedades ACID
+
+1. **Atomicidad**: Esta propiedad garantiza que todas las operaciones dentro de una transacción se completen con éxito. Si alguna operación falla, toda la transacción se deshace, asegurando que la base de datos no quede en un estado inconsistente.
+
+2. **Consistencia**: La propiedad de consistencia asegura que una transacción lleve la base de datos de un estado válido a otro estado válido, manteniendo las reglas de integridad impuestas por el sistema.
+
+3. **Aislamiento**: El aislamiento asegura que las operaciones de una transacción no sean visibles para otras transacciones hasta que la transacción haya sido completada. Esto previene problemas como lecturas sucias, lecturas no repetibles y fantasmas.
+
+4. **Durabilidad**: Una vez que una transacción ha sido confirmada (commit), sus cambios son permanentes y se mantendrán incluso en caso de un fallo del sistema.
+
+#### Operaciones Básicas en Transacciones
+
+- **BEGIN TRANSACTION**: Inicia una nueva transacción.
+- **COMMIT**: Finaliza la transacción y guarda todos los cambios realizados.
+- **ROLLBACK**: Deshace todas las operaciones realizadas desde el comienzo de la transacción.
+
+#### Uso de Transacciones en MySQL
+
+En MySQL, las transacciones son gestionadas a través de comandos específicos que permiten controlar su comportamiento. A continuación, se presenta un ejemplo práctico de cómo se utilizan las transacciones en MySQL:
+
+```sql
+-- Iniciar una transacción
+START TRANSACTION;
+
+-- Realizar una serie de operaciones
+INSERT INTO cuentas (nombre, saldo) VALUES ('Juan Perez', 1000);
+UPDATE cuentas SET saldo = saldo - 100 WHERE nombre = 'Juan Perez';
+INSERT INTO transacciones (tipo, monto, fecha) VALUES ('Retiro', 100, NOW());
+
+-- Confirmar la transacción
+COMMIT;
+
+-- En caso de error, deshacer la transacción
+ROLLBACK;
+```
+
+#### Control de Transacciones
+
+1. **START TRANSACTION**: Comienza una nueva transacción.
+2. **SAVEPOINT nombre_del_punto**: Crea un punto de guardado dentro de una transacción para permitir un rollback parcial.
+3. **ROLLBACK TO nombre_del_punto**: Revierte las operaciones hasta el punto de guardado especificado.
+4. **SET AUTOCOMMIT = 0**: Desactiva el autocommit, lo que obliga a que todas las operaciones se realicen dentro de transacciones explícitas.
+5. **SET AUTOCOMMIT = 1**: Activa el autocommit, lo que hace que cada operación se confirme automáticamente.
+
+#### Ejemplo de Uso Avanzado
+
+A continuación, se muestra un ejemplo más avanzado utilizando puntos de guardado (savepoints) y rollback parcial:
+
+```sql
+-- Iniciar una transacción
+START TRANSACTION;
+
+-- Crear un punto de guardado
+SAVEPOINT inicio;
+
+-- Realizar una serie de operaciones
+INSERT INTO cuentas (nombre, saldo) VALUES ('Maria Gomez', 2000);
+UPDATE cuentas SET saldo = saldo - 500 WHERE nombre = 'Maria Gomez';
+
+-- Crear otro punto de guardado
+SAVEPOINT mitad;
+
+-- Realizar más operaciones
+INSERT INTO transacciones (tipo, monto, fecha) VALUES ('Deposito', 500, NOW());
+
+-- Deshacer hasta el punto de guardado "mitad"
+ROLLBACK TO mitad;
+
+-- Confirmar la transacción
+COMMIT;
+```
+
+En este ejemplo, las operaciones después del segundo `SAVEPOINT` se deshacen, pero las anteriores se mantienen y se confirman.
+
+#### Conclusión
+
+Las transacciones son fundamentales para asegurar la integridad y consistencia de los datos en una base de datos. Entender y utilizar adecuadamente las propiedades ACID y los comandos de control de transacciones en MySQL es crucial para cualquier administrador o desarrollador de bases de datos que desee construir sistemas fiables y robustos.

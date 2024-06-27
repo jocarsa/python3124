@@ -1,0 +1,88 @@
+## 005-Programación de bases de datos
+### 005-Programación de bases de datos\002-Variables del sistema y variables de usuario
+
+En el ámbito de la programación de bases de datos, las variables juegan un papel crucial tanto para almacenar como para manipular datos temporales durante la ejecución de procedimientos almacenados, funciones y triggers. En MySQL, las variables se dividen principalmente en dos categorías: variables del sistema y variables de usuario.
+
+#### Variables del Sistema
+
+Las variables del sistema en MySQL son variables predefinidas que proporcionan información sobre el estado actual del servidor y su funcionamiento. Estas variables son esenciales para la configuración y administración del servidor MySQL. Se pueden clasificar en dos tipos principales: variables globales y variables de sesión.
+
+- **Variables Globales**: Afectan a todo el servidor MySQL y son comunes a todas las conexiones. Por ejemplo, `max_connections` define el número máximo de conexiones simultáneas permitidas.
+  - Ejemplo:
+    ```sql
+    SHOW GLOBAL VARIABLES LIKE 'max_connections';
+    SET GLOBAL max_connections = 200;
+    ```
+
+- **Variables de Sesión**: Afectan solo a la conexión actual. Por ejemplo, `sql_mode` se puede establecer para una sesión específica para controlar el comportamiento SQL.
+  - Ejemplo:
+    ```sql
+    SHOW SESSION VARIABLES LIKE 'sql_mode';
+    SET SESSION sql_mode = 'STRICT_TRANS_TABLES';
+    ```
+
+Las variables del sistema se pueden consultar y modificar usando los comandos `SHOW VARIABLES`, `SET GLOBAL` y `SET SESSION`.
+
+#### Variables de Usuario
+
+Las variables de usuario son creadas y utilizadas dentro de la sesión de usuario para almacenar datos temporales. Se utilizan principalmente en procedimientos almacenados, funciones y scripts SQL. Las variables de usuario se distinguen por un prefijo `@` y no tienen un tipo predefinido; el tipo de dato es determinado automáticamente por el valor asignado.
+
+- **Declaración y Asignación**:
+  - Se pueden declarar e inicializar en una sola instrucción.
+  - Ejemplo:
+    ```sql
+    SET @miVariable = 10;
+    ```
+
+- **Uso en Consultas**:
+  - Pueden ser usadas en consultas SQL para operaciones temporales.
+  - Ejemplo:
+    ```sql
+    SET @suma = 0;
+    SELECT @suma := @suma + columna FROM miTabla;
+    ```
+
+- **Persistencia en la Sesión**:
+  - Las variables de usuario persisten solo durante la sesión actual. Una vez que la sesión se cierra, las variables se eliminan.
+  - Ejemplo:
+    ```sql
+    SELECT @miVariable;
+    ```
+
+#### Ejemplos Prácticos
+
+1. **Contador de Registros**: Utilizando una variable de usuario para contar registros que cumplen una condición específica.
+    ```sql
+    SET @contador = 0;
+    SELECT @contador := @contador + 1 AS fila, columna
+    FROM miTabla
+    WHERE condicion;
+    ```
+
+2. **Uso en Procedimientos Almacenados**: Utilización de variables para controlar el flujo dentro de un procedimiento almacenado.
+    ```sql
+    DELIMITER //
+    CREATE PROCEDURE procedimientoEjemplo()
+    BEGIN
+        DECLARE variableLocal INT DEFAULT 0;
+        SET @variableUsuario = 5;
+        WHILE variableLocal < @variableUsuario DO
+            SET variableLocal = variableLocal + 1;
+            -- Más operaciones aquí
+        END WHILE;
+    END //
+    DELIMITER ;
+    ```
+
+3. **Modificación de Variables de Sistema**: Ajuste de una variable de sistema para cambiar el comportamiento de una sesión.
+    ```sql
+    SET SESSION sql_mode = 'TRADITIONAL';
+    ```
+
+#### Buenas Prácticas
+
+- **Nombres Claros y Descriptivos**: Utilizar nombres descriptivos para las variables de usuario y sistema para mejorar la legibilidad del código.
+- **Control de Entorno**: Modificar variables de sistema con precaución, especialmente las variables globales, ya que pueden afectar el comportamiento de todo el servidor.
+- **Documentación**: Documentar el propósito de cada variable y su uso dentro del código para facilitar el mantenimiento y la comprensión por otros desarrolladores.
+
+En resumen, el uso adecuado de las variables del sistema y de usuario en MySQL es fundamental para escribir código eficiente y manejable. Comprender las diferencias entre estos tipos de variables y sus aplicaciones prácticas permite a los desarrolladores aprovechar al máximo las capacidades de MySQL en la gestión y manipulación de datos.

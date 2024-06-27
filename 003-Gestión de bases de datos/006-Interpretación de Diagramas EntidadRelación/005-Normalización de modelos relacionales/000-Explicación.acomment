@@ -1,0 +1,100 @@
+### 006-Interpretación de Diagramas Entidad-Relación
+#### 006.5-Normalización de Modelos Relacionales
+
+La normalización es un proceso fundamental en la creación y mantenimiento de bases de datos relacionales. El objetivo principal de la normalización es reducir la redundancia de datos y mejorar la integridad de los datos. Este proceso se lleva a cabo mediante la organización de las columnas (atributos) y las tablas (entidades) de una base de datos relacional para asegurar que las dependencias sean apropiadas.
+
+##### 1. Concepto de Normalización
+
+La normalización es un proceso de diseño de bases de datos que organiza las tablas de manera que se minimice la redundancia y se eviten problemas de inconsistencia. Este proceso implica dividir una base de datos en dos o más tablas y definir relaciones entre ellas para evitar los problemas de actualización, inserción y eliminación.
+
+##### 2. Formas Normales
+
+Las formas normales son niveles de normalización que definen criterios específicos para organizar los datos en una base de datos. Cada forma normal tiene sus propias reglas y cada nivel se basa en los criterios del nivel anterior.
+
+###### 2.1. Primera Forma Normal (1NF)
+
+Para que una tabla esté en la Primera Forma Normal (1NF), debe cumplir con las siguientes condiciones:
+- Todos los atributos deben contener valores atómicos (indivisibles).
+- No debe haber conjuntos repetitivos o grupos de datos multivalorados en una sola columna.
+
+**Ejemplo:**
+Una tabla con información de pedidos que tenga una columna para productos con múltiples valores (Producto1, Producto2, ...) no estaría en 1NF.
+
+###### 2.2. Segunda Forma Normal (2NF)
+
+Una tabla está en la Segunda Forma Normal (2NF) si cumple con las siguientes condiciones:
+- Está en 1NF.
+- Todos los atributos no clave dependen completamente de la clave primaria (no hay dependencias parciales).
+
+**Ejemplo:**
+Una tabla de empleados con atributos de departamento (nombre del departamento) podría no estar en 2NF si el nombre del departamento depende solo del identificador del departamento, no del empleado.
+
+###### 2.3. Tercera Forma Normal (3NF)
+
+Una tabla está en la Tercera Forma Normal (3NF) si cumple con las siguientes condiciones:
+- Está en 2NF.
+- No hay dependencias transitivas entre los atributos no clave.
+
+**Ejemplo:**
+Si en una tabla de empleados con información de departamento y gerente de departamento, el nombre del gerente depende del nombre del departamento, esto viola la 3NF. Se debería separar en una tabla distinta.
+
+###### 2.4. Forma Normal de Boyce-Codd (BCNF)
+
+La Forma Normal de Boyce-Codd es una versión más estricta de la 3NF. Una tabla está en BCNF si cumple con las siguientes condiciones:
+- Está en 3NF.
+- Para cada dependencia funcional A → B, A debe ser una superclave.
+
+**Ejemplo:**
+Si una tabla de asignaciones de proyectos tiene una dependencia funcional donde el nombre del proyecto determina el nombre del departamento, se necesitaría reestructurar la tabla para cumplir con BCNF.
+
+##### 3. Beneficios de la Normalización
+
+- **Eliminación de redundancia:** Reduce la duplicación de datos y, por lo tanto, el espacio de almacenamiento necesario.
+- **Mejora de la integridad de los datos:** Asegura que las dependencias de datos se mantengan y que las relaciones entre tablas sean consistentes.
+- **Facilita el mantenimiento:** Simplifica las operaciones de inserción, actualización y eliminación, minimizando las anomalías.
+
+##### 4. Desventajas de la Normalización
+
+- **Complejidad de las consultas:** Puede aumentar la complejidad de las consultas SQL debido a la necesidad de unir múltiples tablas.
+- **Rendimiento:** En algunos casos, la normalización puede afectar el rendimiento de las consultas debido a la necesidad de realizar múltiples uniones.
+
+##### 5. Desnormalización
+
+En ciertos casos, para mejorar el rendimiento de las consultas, se puede optar por desnormalizar la base de datos. La desnormalización es el proceso de combinar tablas para reducir el número de uniones necesarias en las consultas. Aunque aumenta la redundancia, puede ser útil para optimizar el rendimiento en sistemas de alta demanda.
+
+##### 6. Ejemplo de Normalización
+
+**Ejemplo de No Normalizado:**
+
+| PedidoID | ClienteID | ClienteNombre | ProductoID | ProductoNombre | Cantidad |
+|----------|-----------|---------------|------------|----------------|----------|
+| 1        | 100       | Juan Pérez    | 200        | Laptop         | 1        |
+| 2        | 101       | Ana Gómez     | 201        | Teclado        | 2        |
+| 3        | 100       | Juan Pérez    | 202        | Ratón          | 1        |
+
+**Ejemplo de Normalizado en 3NF:**
+
+**Tabla Clientes:**
+
+| ClienteID | ClienteNombre |
+|-----------|---------------|
+| 100       | Juan Pérez    |
+| 101       | Ana Gómez     |
+
+**Tabla Productos:**
+
+| ProductoID | ProductoNombre |
+|------------|----------------|
+| 200        | Laptop         |
+| 201        | Teclado        |
+| 202        | Ratón          |
+
+**Tabla Pedidos:**
+
+| PedidoID | ClienteID | ProductoID | Cantidad |
+|----------|-----------|------------|----------|
+| 1        | 100       | 200        | 1        |
+| 2        | 101       | 201        | 2        |
+| 3        | 100       | 202        | 1        |
+
+La normalización es una herramienta vital para diseñar bases de datos eficientes y mantener la integridad de los datos. Sin embargo, es importante balancear entre la normalización y el rendimiento de la base de datos, dependiendo de los requisitos específicos del sistema.

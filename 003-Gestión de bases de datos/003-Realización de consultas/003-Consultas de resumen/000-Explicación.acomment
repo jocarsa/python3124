@@ -1,0 +1,105 @@
+### 003-Realización de consultas\003-Consultas de resumen
+
+#### Introducción a las Consultas de Resumen
+Las consultas de resumen son una herramienta poderosa en SQL que permite la agregación y síntesis de grandes volúmenes de datos. Estas consultas son esenciales para obtener estadísticas, análisis y reportes que resumen la información contenida en una base de datos. A través del uso de funciones de agregación como `SUM`, `AVG`, `COUNT`, `MAX`, y `MIN`, las consultas de resumen pueden proporcionar una visión general y comprensible de los datos almacenados.
+
+#### Funciones de Agregación
+
+1. **SUM**
+   - La función `SUM` se utiliza para calcular la suma de un conjunto de valores.
+   ```sql
+   SELECT SUM(precio) AS TotalPrecio
+   FROM Productos;
+   ```
+
+2. **AVG**
+   - La función `AVG` calcula el promedio de un conjunto de valores.
+   ```sql
+   SELECT AVG(precio) AS PrecioPromedio
+   FROM Productos;
+   ```
+
+3. **COUNT**
+   - La función `COUNT` cuenta el número de filas en una tabla o el número de valores no nulos en una columna.
+   ```sql
+   SELECT COUNT(*) AS TotalProductos
+   FROM Productos;
+   ```
+
+4. **MAX**
+   - La función `MAX` devuelve el valor máximo de un conjunto de valores.
+   ```sql
+   SELECT MAX(precio) AS PrecioMaximo
+   FROM Productos;
+   ```
+
+5. **MIN**
+   - La función `MIN` devuelve el valor mínimo de un conjunto de valores.
+   ```sql
+   SELECT MIN(precio) AS PrecioMinimo
+   FROM Productos;
+   ```
+
+#### Uso de la cláusula GROUP BY
+La cláusula `GROUP BY` es esencial para las consultas de resumen, ya que permite agrupar filas que tienen los mismos valores en columnas especificadas y aplicar funciones de agregación a cada grupo.
+
+##### Ejemplo Básico
+```sql
+SELECT categoria, SUM(precio) AS TotalPrecio
+FROM Productos
+GROUP BY categoria;
+```
+Este ejemplo agrupa los productos por categoría y calcula la suma de los precios para cada categoría.
+
+#### Uso de la cláusula HAVING
+La cláusula `HAVING` se utiliza para filtrar grupos de resultados creados por la cláusula `GROUP BY` basándose en una condición especificada. Es similar a la cláusula `WHERE`, pero se aplica a grupos en lugar de a filas individuales.
+
+##### Ejemplo de `HAVING`
+```sql
+SELECT categoria, SUM(precio) AS TotalPrecio
+FROM Productos
+GROUP BY categoria
+HAVING SUM(precio) > 1000;
+```
+Este ejemplo agrupa los productos por categoría y luego filtra aquellas categorías donde la suma de los precios es mayor que 1000.
+
+#### Consultas de Resumen Anidadas
+Las consultas de resumen anidadas implican el uso de subconsultas para obtener resultados más complejos y detallados.
+
+##### Ejemplo de Consulta Anidada
+```sql
+SELECT categoria, AVG(precio) AS PrecioPromedio
+FROM Productos
+WHERE precio > (SELECT AVG(precio) FROM Productos)
+GROUP BY categoria;
+```
+Este ejemplo selecciona las categorías y calcula el precio promedio para los productos cuyo precio es mayor que el precio promedio de todos los productos.
+
+#### Aplicaciones Prácticas de Consultas de Resumen
+
+1. **Análisis Financiero**
+   - Calcular el total de ventas por mes o año.
+   ```sql
+   SELECT YEAR(fecha_venta) AS Año, SUM(monto_venta) AS TotalVentas
+   FROM Ventas
+   GROUP BY YEAR(fecha_venta);
+   ```
+
+2. **Inventario**
+   - Determinar la cantidad total de productos en cada categoría.
+   ```sql
+   SELECT categoria, COUNT(*) AS TotalProductos
+   FROM Productos
+   GROUP BY categoria;
+   ```
+
+3. **Rendimiento del Empleado**
+   - Calcular el total de ventas realizadas por cada empleado.
+   ```sql
+   SELECT empleado_id, SUM(monto_venta) AS TotalVentas
+   FROM Ventas
+   GROUP BY empleado_id;
+   ```
+
+#### Conclusión
+Las consultas de resumen son fundamentales para el análisis de datos en SQL. Permiten a los usuarios sintetizar grandes conjuntos de datos en información útil y manejable, facilitando la toma de decisiones informadas. La comprensión y el uso adecuado de las funciones de agregación, junto con las cláusulas `GROUP BY` y `HAVING`, son habilidades esenciales para cualquier profesional que trabaje con bases de datos relacionales.

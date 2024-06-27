@@ -1,0 +1,60 @@
+### 002-Bases de datos relacionales\006-Índices. Características
+
+#### Introducción a los Índices
+
+Los índices son estructuras de datos que mejoran la velocidad de recuperación de registros en una base de datos. Similar a un índice en un libro, los índices en bases de datos permiten acceder rápidamente a la información sin necesidad de examinar cada fila de una tabla.
+
+#### Tipos de Índices
+
+1. **Índice Primario**: Es un índice especial que se define sobre la clave primaria de una tabla. Este índice garantiza la unicidad de cada valor en la clave primaria.
+2. **Índice Único**: Similar a un índice primario, garantiza que todos los valores en el índice son únicos, pero a diferencia del índice primario, puede haber más de un índice único en una tabla.
+3. **Índice Compuesto**: Un índice que se construye sobre más de una columna de una tabla. Es útil en consultas que filtran o ordenan por múltiples columnas.
+4. **Índice No Único**: Permite valores duplicados y se utiliza principalmente para mejorar el rendimiento de las consultas que no requieren unicidad.
+5. **Índice de Texto Completo**: Utilizado para realizar búsquedas de texto en columnas de texto grandes, como CHAR, VARCHAR o TEXT.
+6. **Índice Espacial**: Utilizado para almacenar y consultar datos espaciales como puntos, líneas y polígonos.
+
+#### Características de los Índices
+
+1. **Mejora del Rendimiento**: Los índices pueden acelerar significativamente las consultas SELECT, especialmente cuando se utilizan en columnas que aparecen en las cláusulas WHERE, JOIN y ORDER BY.
+2. **Coste de Almacenamiento**: Los índices ocupan espacio adicional en el disco, pues son estructuras de datos adicionales a las tablas.
+3. **Coste de Mantenimiento**: Las operaciones de inserción, actualización y eliminación pueden ser más lentas en tablas con índices porque los índices también deben ser actualizados.
+4. **Transparencia para el Usuario**: Una vez creado, el uso de un índice es automático y transparente para el usuario o la aplicación.
+5. **Selección de Índices**: La elección de qué columnas indexar es crucial y depende del uso de la base de datos. Indexar demasiadas columnas puede llevar a un espacio de almacenamiento excesivo y a una disminución del rendimiento de las operaciones de escritura.
+
+#### Creación y Gestión de Índices en MySQL
+
+Para crear un índice en MySQL, se utiliza la sentencia `CREATE INDEX`. A continuación, se presentan ejemplos de cómo crear diferentes tipos de índices:
+
+1. **Índice Simple**:
+    ```sql
+    CREATE INDEX idx_column_name ON table_name(column_name);
+    ```
+
+2. **Índice Compuesto**:
+    ```sql
+    CREATE INDEX idx_column1_column2 ON table_name(column1, column2);
+    ```
+
+3. **Índice Único**:
+    ```sql
+    CREATE UNIQUE INDEX idx_unique_column ON table_name(column_name);
+    ```
+
+4. **Índice de Texto Completo**:
+    ```sql
+    CREATE FULLTEXT INDEX idx_fulltext_column ON table_name(column_name);
+    ```
+
+Para eliminar un índice, se utiliza la sentencia `DROP INDEX`:
+```sql
+DROP INDEX idx_column_name ON table_name;
+```
+
+#### Buenas Prácticas para el Uso de Índices
+
+1. **Índices en Claves Primarias y Foráneas**: Siempre se debe indexar las claves primarias y foráneas para asegurar la integridad referencial y mejorar el rendimiento de las consultas.
+2. **Índices en Columnas Consultadas Frecuentemente**: Las columnas que se utilizan frecuentemente en las cláusulas WHERE, JOIN, y ORDER BY deben ser indexadas.
+3. **Evitar Índices en Columnas con Pocos Valores Únicos**: Columnas con pocos valores únicos (por ejemplo, booleanos) no se benefician significativamente de los índices.
+4. **Monitorear y Analizar el Rendimiento**: Utilizar herramientas como el `EXPLAIN` statement en MySQL para analizar y mejorar el rendimiento de las consultas.
+
+En resumen, los índices son una herramienta poderosa para aumentar el rendimiento de una base de datos relacional, pero deben ser utilizados con cuidado y planificación para evitar sobrecargar el sistema con mantenimiento y almacenamiento innecesarios.

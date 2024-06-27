@@ -1,0 +1,66 @@
+### 005-Programación de bases de datos\003-Funciones
+
+#### Introducción a las Funciones en Bases de Datos
+Las funciones en bases de datos son bloques de código que realizan tareas específicas y pueden ser reutilizadas en múltiples lugares dentro de la base de datos. En el contexto de MySQL, las funciones permiten encapsular lógica de negocio, realizar cálculos y manipular datos de una manera eficiente y organizada. Existen dos tipos principales de funciones en MySQL: las funciones predefinidas (o integradas) y las funciones definidas por el usuario (UDF, por sus siglas en inglés).
+
+#### Funciones Predefinidas
+MySQL proporciona una amplia gama de funciones predefinidas que cubren diversas necesidades, desde manipulación de cadenas y números hasta funciones de fecha y hora, y funciones de agregación. Algunas de las categorías y ejemplos de estas funciones son:
+
+1. **Funciones de Cadenas:**
+   - `CONCAT()`: Concatena dos o más cadenas.
+   - `SUBSTRING()`: Extrae una subcadena de una cadena dada.
+   - `LENGTH()`: Devuelve la longitud de una cadena.
+
+2. **Funciones Numéricas:**
+   - `ABS()`: Devuelve el valor absoluto de un número.
+   - `ROUND()`: Redondea un número a un número especificado de decimales.
+   - `FLOOR()`: Redondea un número hacia abajo al entero más cercano.
+
+3. **Funciones de Fecha y Hora:**
+   - `NOW()`: Devuelve la fecha y hora actual.
+   - `DATE_ADD()`: Suma un intervalo a una fecha.
+   - `DATEDIFF()`: Devuelve la diferencia entre dos fechas.
+
+4. **Funciones de Agregación:**
+   - `SUM()`: Calcula la suma de una columna de valores numéricos.
+   - `AVG()`: Calcula el promedio de una columna de valores numéricos.
+   - `COUNT()`: Cuenta el número de filas en un conjunto de resultados.
+
+#### Funciones Definidas por el Usuario (UDF)
+Además de las funciones predefinidas, MySQL permite a los usuarios crear sus propias funciones para realizar tareas específicas no cubiertas por las funciones integradas. Las UDF se crean utilizando el comando `CREATE FUNCTION` y deben especificar un conjunto de parámetros de entrada, el tipo de dato de retorno y el cuerpo de la función que contiene la lógica de la operación.
+
+##### Sintaxis para Crear una Función Definida por el Usuario
+```sql
+CREATE FUNCTION nombre_funcion(param1 tipo_dato, param2 tipo_dato, ...)
+RETURNS tipo_dato_de_retorno
+DETERMINISTIC
+BEGIN
+    -- Cuerpo de la función
+    DECLARE variable_local tipo_dato;
+    -- Lógica de la función
+    RETURN valor;
+END;
+```
+
+##### Ejemplo de una Función Definida por el Usuario
+Supongamos que necesitamos una función que calcule el área de un círculo dado su radio:
+
+```sql
+CREATE FUNCTION calcular_area_circulo(radio DOUBLE)
+RETURNS DOUBLE
+DETERMINISTIC
+BEGIN
+    DECLARE area DOUBLE;
+    SET area = PI() * radio * radio;
+    RETURN area;
+END;
+```
+
+#### Consideraciones y Buenas Prácticas
+- **Determinismo:** Indicar si una función es determinística (`DETERMINISTIC`) o no determinística (`NOT DETERMINISTIC`). Una función es determinística si siempre devuelve el mismo resultado dado el mismo conjunto de parámetros de entrada.
+- **Manejo de Errores:** Implementar mecanismos de manejo de errores dentro de las funciones para gestionar situaciones inesperadas.
+- **Optimización:** Escribir funciones eficientes y optimizadas para minimizar el impacto en el rendimiento de la base de datos.
+- **Documentación:** Documentar adecuadamente las funciones definiendo claramente su propósito, parámetros de entrada, y valor de retorno.
+
+#### Conclusión
+Las funciones en MySQL son herramientas poderosas que permiten a los desarrolladores encapsular y reutilizar lógica dentro de la base de datos. Con una comprensión sólida de las funciones predefinidas y la capacidad de crear funciones definidas por el usuario, es posible mejorar significativamente la eficiencia y organización del código SQL en proyectos de bases de datos.

@@ -1,0 +1,109 @@
+### 003-Realización de consultas
+#### 003-Realización de consultas\007-Subconsultas
+
+#### Introducción
+
+En el contexto de las bases de datos relacionales, las subconsultas son una herramienta poderosa que permite realizar consultas anidadas dentro de otras consultas. Estas subconsultas pueden ser utilizadas para seleccionar datos que se utilizarán en una consulta principal, proporcionando una forma eficiente de realizar tareas complejas en una sola operación. 
+
+#### Definición de Subconsulta
+
+Una **subconsulta** es una consulta SQL que se incluye dentro de una consulta principal (también llamada consulta externa). Las subconsultas pueden ser ubicadas en varias partes de una sentencia SQL, como en la cláusula `SELECT`, `FROM`, `WHERE` o `HAVING`.
+
+#### Tipos de Subconsultas
+
+1. **Subconsultas Escalares**:
+   - Devuelven un solo valor (una sola columna y una sola fila).
+   - Ejemplo:
+     ```sql
+     SELECT first_name, 
+            last_name 
+     FROM employees 
+     WHERE salary > (SELECT AVG(salary) FROM employees);
+     ```
+     En este ejemplo, la subconsulta `(SELECT AVG(salary) FROM employees)` calcula el salario promedio de todos los empleados y la consulta externa selecciona los empleados cuyo salario es mayor que el promedio.
+
+2. **Subconsultas de Filas**:
+   - Devuelven una sola fila (una o más columnas).
+   - Ejemplo:
+     ```sql
+     SELECT first_name, 
+            last_name 
+     FROM employees 
+     WHERE (first_name, last_name) = (SELECT first_name, 
+                                             last_name 
+                                      FROM employees 
+                                      WHERE employee_id = 101);
+     ```
+     Aquí, la subconsulta devuelve una fila con dos columnas (`first_name` y `last_name`) de un empleado específico y la consulta externa busca empleados que coincidan con esos valores.
+
+3. **Subconsultas de Tabla**:
+   - Devuelven una tabla completa (una o más columnas y varias filas).
+   - Ejemplo:
+     ```sql
+     SELECT department_id, 
+            department_name 
+     FROM departments 
+     WHERE department_id IN (SELECT department_id 
+                             FROM employees 
+                             WHERE salary > 10000);
+     ```
+     En este caso, la subconsulta devuelve una lista de `department_id` donde los empleados tienen un salario superior a 10,000, y la consulta externa selecciona los departamentos correspondientes.
+
+4. **Subconsultas Correlacionadas**:
+   - Se ejecutan una vez por cada fila procesada por la consulta externa.
+   - Ejemplo:
+     ```sql
+     SELECT e1.first_name, 
+            e1.last_name, 
+            e1.salary 
+     FROM employees e1 
+     WHERE e1.salary > (SELECT AVG(e2.salary) 
+                        FROM employees e2 
+                        WHERE e2.department_id = e1.department_id);
+     ```
+     En este ejemplo, la subconsulta se correlaciona con la consulta externa a través del alias `e1.department_id` y `e2.department_id`, calculando el salario promedio para cada departamento.
+
+#### Usos de Subconsultas
+
+1. **Filtrado de Datos**:
+   - Utilizar subconsultas en la cláusula `WHERE` para filtrar filas basadas en criterios complejos.
+   
+2. **Cálculos de Agregación**:
+   - Realizar cálculos agregados en subconsultas para luego usar esos resultados en la consulta externa.
+   
+3. **Validaciones y Comparaciones**:
+   - Comparar resultados de una subconsulta con datos en la consulta externa para realizar validaciones.
+
+4. **Anidación de Consultas**:
+   - Combinar múltiples consultas en una sola, facilitando la lectura y mantenimiento del código SQL.
+
+#### Ejemplos Prácticos de Subconsultas
+
+1. **Subconsulta en la Cláusula `SELECT`**:
+   ```sql
+   SELECT first_name, 
+          last_name, 
+          (SELECT department_name 
+           FROM departments 
+           WHERE departments.department_id = employees.department_id) AS department_name 
+   FROM employees;
+   ```
+   La subconsulta aquí obtiene el nombre del departamento correspondiente a cada empleado.
+
+2. **Subconsulta en la Cláusula `FROM`**:
+   ```sql
+   SELECT avg_salary 
+   FROM (SELECT AVG(salary) AS avg_salary 
+         FROM employees) AS avg_salaries;
+   ```
+   Esta subconsulta calcula el salario promedio y lo utiliza en la consulta externa para mostrar el resultado.
+
+#### Consideraciones y Buenas Prácticas
+
+- **Performance**: Las subconsultas pueden impactar el rendimiento de la consulta. Es recomendable usar subconsultas solo cuando realmente son necesarias y considerar alternativas como las uniones (`JOIN`) o vistas.
+- **Legibilidad**: Mantener las subconsultas claras y bien documentadas para facilitar el mantenimiento y la comprensión del código.
+- **Optimización**: Utilizar índices apropiados en las columnas involucradas en subconsultas para mejorar el rendimiento.
+
+#### Conclusión
+
+Las subconsultas son una característica esencial en SQL que permiten realizar operaciones complejas de manera eficiente. Entender cómo y cuándo utilizarlas correctamente es fundamental para cualquier desarrollador o administrador de bases de datos. Al dominar el uso de subconsultas, se pueden construir consultas más precisas y optimizadas, mejorando tanto el rendimiento como la mantenibilidad de la base de datos.

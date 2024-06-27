@@ -1,0 +1,3 @@
+INT - Tipo numérico entero
+VARCHAR - Tipo de datos de cadena corta
+TEXR - Tipo de dato de cadena larga

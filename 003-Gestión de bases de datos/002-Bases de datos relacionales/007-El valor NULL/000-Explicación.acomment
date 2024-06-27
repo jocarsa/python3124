@@ -1,0 +1,92 @@
+### 002-Bases de datos relacionales\007-El valor NULL
+
+#### Introducción al valor NULL
+
+En las bases de datos relacionales, el valor NULL es un concepto fundamental que representa la ausencia de un valor o dato desconocido en una columna de una tabla. A diferencia de otros valores que pueden estar presentes en una columna, NULL no se considera ni cero, ni una cadena vacía, ni ningún otro valor específico; es simplemente "nada" o "desconocido".
+
+#### Concepto y Significado de NULL
+
+El valor NULL se utiliza en varias situaciones, tales como:
+- Cuando un valor no está disponible o no se conoce.
+- Cuando un valor no es aplicable en un contexto específico.
+- Cuando se desea dejar un campo vacío, pero no se tiene un valor predeterminado.
+
+Por ejemplo, en una tabla de empleados, una columna llamada `fecha_de_despido` podría contener NULL para los empleados que aún están trabajando en la empresa.
+
+#### Características del valor NULL
+
+1. **Implicación de Desconocido**: El valor NULL implica que el dato es desconocido o no aplicable, lo que tiene implicaciones importantes en el comportamiento de consultas y operaciones lógicas.
+
+2. **Comparación**: NULL no es igual a ningún otro valor, ni siquiera a otro NULL. Comparaciones directas con NULL usando operadores tradicionales como `=` o `!=` no funcionan como se esperaría. En su lugar, se utilizan operadores específicos como `IS NULL` y `IS NOT NULL`.
+
+3. **Operaciones Aritméticas y Funciones**: Cualquier operación aritmética o función que involucre NULL dará como resultado NULL. Por ejemplo, `5 + NULL` produce NULL.
+
+4. **Afectación en Funciones Agregadas**: Las funciones agregadas como `SUM`, `AVG`, `COUNT`, `MIN`, y `MAX` tratan NULL de manera especial. Por ejemplo, `COUNT(*)` cuenta todos los registros, mientras que `COUNT(column)` cuenta solo los registros donde `column` no es NULL.
+
+#### Ejemplos de Uso de NULL
+
+**Creación de Tablas con NULL:**
+```sql
+CREATE TABLE empleados (
+    id INT PRIMARY KEY,
+    nombre VARCHAR(100),
+    fecha_de_contratacion DATE,
+    fecha_de_despido DATE DEFAULT NULL
+);
+```
+
+**Inserción de Registros con NULL:**
+```sql
+INSERT INTO empleados (id, nombre, fecha_de_contratacion) VALUES
+(1, 'Juan Perez', '2023-01-15'),
+(2, 'Maria Lopez', '2022-11-10');
+```
+
+**Consultas con NULL:**
+```sql
+-- Selecciona todos los empleados que no han sido despedidos
+SELECT * FROM empleados WHERE fecha_de_despido IS NULL;
+
+-- Selecciona todos los empleados que han sido despedidos
+SELECT * FROM empleados WHERE fecha_de_despido IS NOT NULL;
+```
+
+**Operaciones con NULL:**
+```sql
+-- Sumar valores ignorando NULL
+SELECT SUM(salario) FROM empleados;
+
+-- Contar registros que no son NULL
+SELECT COUNT(fecha_de_despido) FROM empleados;
+```
+
+#### Manejo de NULL en MySQL
+
+En MySQL, el valor NULL se maneja con varias funciones y operadores:
+
+- **IFNULL**: Devuelve un valor alternativo si el valor es NULL.
+    ```sql
+    SELECT IFNULL(fecha_de_despido, 'N/A') FROM empleados;
+    ```
+
+- **COALESCE**: Devuelve la primera expresión no NULL de una lista de expresiones.
+    ```sql
+    SELECT COALESCE(fecha_de_despido, 'N/A') FROM empleados;
+    ```
+
+- **NULLIF**: Devuelve NULL si dos expresiones son iguales.
+    ```sql
+    SELECT NULLIF(columna1, columna2) FROM tabla;
+    ```
+
+#### Consideraciones y Buenas Prácticas
+
+1. **Comprender el Significado**: Antes de permitir NULL en una columna, asegúrate de que realmente representa la ausencia de un valor válido y no solo un valor predeterminado.
+
+2. **Uso Adecuado en Consultas**: Utiliza correctamente `IS NULL` y `IS NOT NULL` en tus consultas para manejar valores desconocidos adecuadamente.
+
+3. **Funciones y Operaciones**: Ten en cuenta cómo las funciones y operaciones manejan NULL para evitar resultados inesperados.
+
+4. **Documentación y Comentarios**: Documenta claramente el uso de NULL en la base de datos para evitar confusiones futuras y mejorar la mantenibilidad del sistema.
+
+El manejo adecuado del valor NULL es crucial para la integridad y precisión de los datos en una base de datos relacional. Al entender y aplicar correctamente los conceptos relacionados con NULL, puedes diseñar sistemas de bases de datos más robustos y eficientes.
