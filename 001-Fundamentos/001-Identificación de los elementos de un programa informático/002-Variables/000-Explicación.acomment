@@ -1,0 +1,131 @@
+### Variables
+
+#### Variables
+
+Las variables en Python son nombres simbólicos que se utilizan para almacenar información. Esta información puede ser de diferentes tipos, como números, cadenas de texto, listas, etc. Las variables permiten manejar y manipular datos a lo largo del programa. A continuación, se detallan los aspectos más importantes sobre las variables en Python.
+
+#### 1. Declaración y asignación de variables
+
+En Python, las variables se declaran y se les asigna un valor en una sola operación usando el operador `=`. No es necesario declarar el tipo de la variable explícitamente, ya que Python es un lenguaje de tipado dinámico.
+
+**Ejemplo de declaración y asignación:**
+```python
+# Asignación de variables
+nombre = "Juan"
+edad = 25
+pi = 3.14159
+es_estudiante = True
+
+print(nombre)  # Imprime: Juan
+print(edad)    # Imprime: 25
+print(pi)      # Imprime: 3.14159
+print(es_estudiante)  # Imprime: True
+```
+
+#### 2. Reglas de nomenclatura
+
+Al nombrar variables en Python, se deben seguir ciertas reglas:
+
+- Los nombres de las variables deben comenzar con una letra (a-z, A-Z) o un guion bajo `_`.
+- El resto del nombre de la variable puede incluir letras, números (0-9) y guiones bajos.
+- Los nombres de las variables distinguen entre mayúsculas y minúsculas (`nombre` y `Nombre` son diferentes).
+- No se pueden utilizar palabras reservadas de Python como nombres de variables (por ejemplo, `if`, `for`, `while`, etc.).
+
+**Ejemplos válidos y no válidos:**
+```python
+valido = 10
+_valido = 20
+valido2 = 30
+
+# Inválidos
+2invalido = 40  # Error: no puede empezar con un número
+invalido-2 = 50 # Error: no puede contener guion
+```
+
+#### 3. Tipos de variables
+
+Las variables en Python pueden almacenar diferentes tipos de datos. Los tipos más comunes incluyen:
+
+- **Números enteros (`int`)**: Números sin decimales.
+- **Números de punto flotante (`float`)**: Números con decimales.
+- **Cadenas de texto (`str`)**: Secuencias de caracteres.
+- **Booleanos (`bool`)**: Valores de verdad (`True` o `False`).
+
+**Ejemplo de diferentes tipos de variables:**
+```python
+entero = 42           # int
+flotante = 3.14159    # float
+cadena = "Hola"       # str
+booleano = True       # bool
+
+print(type(entero))    # Imprime: <class 'int'>
+print(type(flotante))  # Imprime: <class 'float'>
+print(type(cadena))    # Imprime: <class 'str'>
+print(type(booleano))  # Imprime: <class 'bool'>
+```
+
+#### 4. Asignación múltiple
+
+Python permite asignar múltiples variables en una sola línea. Esto puede hacerse utilizando una lista de variables y una lista de valores correspondientes.
+
+**Ejemplo de asignación múltiple:**
+```python
+a, b, c = 1, 2, 3
+print(a)  # Imprime: 1
+print(b)  # Imprime: 2
+print(c)  # Imprime: 3
+
+# Intercambio de valores
+a, b = b, a
+print(a)  # Imprime: 2
+print(b)  # Imprime: 1
+```
+
+#### 5. Variables globales y locales
+
+Las variables pueden ser definidas dentro de una función (locales) o fuera de cualquier función (globales). Las variables locales solo están disponibles dentro de la función en la que se definen, mientras que las variables globales están disponibles en todo el programa.
+
+**Ejemplo de variables locales y globales:**
+```python
+global_var = "Soy global"
+
+def mi_funcion():
+    local_var = "Soy local"
+    print(global_var)  # Imprime: Soy global
+    print(local_var)   # Imprime: Soy local
+
+mi_funcion()
+print(global_var)  # Imprime: Soy global
+# print(local_var)  # Error: local_var no está definida fuera de la función
+```
+
+#### 6. Uso de `global` y `nonlocal`
+
+Para modificar una variable global dentro de una función, se usa la palabra clave `global`. Para modificar una variable en el contexto de una función anidada, se usa `nonlocal`.
+
+**Ejemplo de `global` y `nonlocal`:**
+```python
+contador = 0
+
+def incrementar():
+    global contador
+    contador += 1
+
+incrementar()
+print(contador)  # Imprime: 1
+
+def exterior():
+    x = 10
+    def interior():
+        nonlocal x
+        x += 1
+        print(x)  # Imprime: 11
+    interior()
+    print(x)  # Imprime: 11
+
+exterior()
+```
+
+Estas son las bases para entender y trabajar con variables en Python. Las variables permiten almacenar y manipular datos, haciendo posible la creación de programas dinámicos y funcionales.
+
+¿Te gustaría que continuemos con el siguiente apartado? Si es así, indícame cuál es.

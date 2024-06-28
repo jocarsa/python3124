@@ -1,4 +1,0 @@
-INT - Tipo numérico entero
-VARCHAR - Tipo de datos de cadena corta
-TEXT - Tipo de dato de cadena larga
-DATE - Tipo de dato de fecha

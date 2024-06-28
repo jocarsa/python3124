@@ -1,0 +1,275 @@
+### Creación de controladores de eventos
+
+#### Creación de controladores de eventos
+
+Los controladores de eventos son funciones o métodos que responden a eventos específicos en una aplicación GUI. Cuando un evento ocurre, como un clic de botón, una pulsación de tecla, o el movimiento del ratón, el controlador de eventos correspondiente se ejecuta para manejar la acción del usuario.
+
+A continuación se muestra cómo crear controladores de eventos en tres bibliotecas populares de Python para interfaces gráficas: `tkinter`, `PyQt`, y `wxPython`.
+
+#### 1. Tkinter
+
+En `tkinter`, los eventos se manejan utilizando el método `bind()` o configurando el parámetro `command` para widgets específicos como botones.
+
+**Ejemplo básico de manejo de eventos con tkinter:**
+
+**Eventos de botones:**
+```python
+import tkinter as tk
+
+def al_hacer_click():
+    print("¡Botón clicado!")
+
+# Crear la ventana principal
+ventana = tk.Tk()
+ventana.title("Manejo de eventos en tkinter")
+
+# Crear un botón
+boton = tk.Button(ventana, text="Haz clic aquí", command=al_hacer_click)
+boton.pack()
+
+# Ejecutar el bucle principal
+ventana.mainloop()
+```
+
+**Eventos de ratón y teclado:**
+```python
+import tkinter as tk
+
+def al_hacer_click(evento):
+    print(f"Has hecho clic en la posición ({evento.x}, {evento.y})")
+
+def al_mover_mouse(evento):
+    print(f"El ratón está en la posición ({evento.x}, {evento.y})")
+
+def al_presionar_tecla(evento):
+    print(f"Has presionado la tecla: {evento.char}")
+
+# Crear la ventana principal
+ventana = tk.Tk()
+ventana.title("Manejo de eventos en tkinter")
+
+# Asociar eventos con sus controladores
+ventana.bind("<Button-1>", al_hacer_click)
+ventana.bind("<Motion>", al_mover_mouse)
+ventana.bind("<Key>", al_presionar_tecla)
+
+# Crear un campo de entrada para capturar eventos de teclado
+entrada = tk.Entry(ventana)
+entrada.pack()
+
+# Ejecutar el bucle principal
+ventana.mainloop()
+```
+
+#### 2. PyQt
+
+En `PyQt`, los eventos se manejan mediante la conexión de señales a slots (funciones o métodos) o sobrescribiendo métodos de eventos en las clases de widgets.
+
+**Ejemplo básico de manejo de eventos con PyQt:**
+
+**Eventos de botones:**
+```python
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QPushButton, QVBoxLayout
+
+def al_hacer_click():
+    print("¡Botón clicado!")
+
+# Crear la aplicación
+app = QApplication(sys.argv)
+
+# Crear la ventana principal
+ventana = QWidget()
+ventana.setWindowTitle("Manejo de eventos en PyQt")
+
+# Crear un layout y agregar widgets
+layout = QVBoxLayout()
+
+boton = QPushButton("Haz clic aquí")
+boton.clicked.connect(al_hacer_click)
+layout.addWidget(boton)
+
+ventana.setLayout(layout)
+
+# Mostrar la ventana
+ventana.show()
+
+# Ejecutar el bucle principal
+sys.exit(app.exec_())
+```
+
+**Eventos de ratón y teclado:**
+```python
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout
+
+class MiVentana(QWidget):
+    def __init__(self):
+        super().__init__()
+
+        self.initUI()
+
+    def initUI(self):
+        self.setWindowTitle('Manejo de eventos en PyQt')
+
+        self.label = QLabel('Haz clic en la ventana o presiona una tecla', self)
+        layout = QVBoxLayout()
+        layout.addWidget(self.label)
+        self.setLayout(layout)
+
+        self.show()
+
+    def mousePressEvent(self, event):
+        x = event.x()
+        y = event.y()
+        self.label.setText(f'Has hecho clic en la posición ({x}, {y})')
+
+    def keyPressEvent(self, event):
+        tecla = event.text()
+        self.label.setText(f'Has presionado la tecla: {tecla}')
+
+# Crear la aplicación
+app = QApplication(sys.argv)
+ventana = MiVentana()
+sys.exit(app.exec_())
+```
+
+#### 3. wxPython
+
+En `wxPython`, los eventos se manejan mediante el sistema de eventos de wxWidgets, que utiliza métodos de eventos y el método `Bind()`.
+
+**Ejemplo básico de manejo de eventos con wxPython:**
+
+**Eventos de botones:**
+```python
+import wx
+
+class MiAplicacion(wx.Frame):
+    def __init__(self, *args, **kw):
+        super(MiAplicacion, self).__init__(*args, **kw)
+
+        self.InitUI()
+
+    def InitUI(self):
+        pnl = wx.Panel(self)
+        vbox = wx.BoxSizer(wx.VERTICAL)
+
+        boton = wx.Button(pnl, label='Haz clic aquí')
+        vbox.Add(boton, flag=wx.ALIGN_CENTER | wx.TOP, border=10)
+        boton.Bind(wx.EVT_BUTTON, self.OnClick)
+
+        pnl.SetSizer(vbox)
+
+        self.SetTitle('Manejo de eventos en wxPython')
+        self.Centre()
+
+    def OnClick(self, event):
+        print("¡Botón clicado!")
+
+# Ejecutar la aplicación
+def main():
+    app = wx.App()
+    ventana = MiAplicacion(None)
+    ventana.Show()
+    app.MainLoop()
+
+if __name__ == '__main__':
+    main()
+```
+
+**Eventos de ratón y teclado:**
+```python
+import wx
+
+class MiAplicacion(wx.Frame):
+    def __init__(self, *args, **kw):
+        super(MiAplicacion, self).__init__(*args, **kw)
+
+        self.InitUI()
+
+    def InitUI(self):
+        pnl = wx.Panel(self)
+        vbox = wx.BoxSizer(wx.VERTICAL)
+
+        self.etiqueta = wx.StaticText(pnl, label='Haz clic o mueve el ratón en el panel')
+        vbox.Add(self.etiqueta, flag=wx.ALIGN_CENTER | wx.TOP, border=10)
+
+        pnl.SetSizer(vbox)
+
+        pnl.Bind(wx.EVT_LEFT_DOWN, self.OnClick)
+        pnl.Bind(wx.EVT_MOTION, self.OnMouseMove)
+
+        self.SetTitle('Manejo de eventos en wxPython')
+        self.Centre()
+
+    def OnClick(self, event):
+        x, y = event.GetPosition()
+        self.etiqueta.SetLabel(f'Has hecho clic en la posición ({x}, {y})')
+
+    def OnMouseMove(self, event):
+        x, y = event.GetPosition()
+        self.etiqueta.SetLabel(f'El ratón está en la posición ({x}, {y})')
+
+# Ejecutar la aplicación
+def main():
+    app = wx.App()
+    ventana = MiAplicacion(None)
+    ventana.Show()
+    app.MainLoop()
+
+if __name__ == '__main__':
+    main()
+```
+
+### Ejemplo completo con manejo de eventos
+
+A continuación se presenta un ejemplo completo que combina varios tipos de eventos utilizando `tkinter`.
+
+**Ejemplo completo:**
+```python
+import tkinter as tk
+
+def al_hacer_click(evento):
+    label.config(text=f"Has hecho clic en la posición ({evento.x}, {evento.y})")
+
+def al_mover_mouse(evento):
+    label.config(text=f"El ratón está en la posición ({evento.x}, {evento.y})")
+
+def al_presionar_tecla(evento):
+    label.config(text=f"Has presionado la tecla: {evento.char}")
+
+# Crear la ventana principal
+ventana = tk.Tk()
+ventana.title("Manejo de eventos en tkinter")
+
+# Crear un label
+label = tk.Label(ventana, text="Realiza alguna acción")
+label.pack()
+
+# Asociar eventos con sus controladores
+ventana.bind("<Button-1>", al_hacer_click)
+ventana.bind("<Motion>", al_mover_mouse)
+ventana.bind("<Key>", al_presionar_tecla)
+
+# Crear un campo de entrada para capturar eventos de teclado
+entrada = tk.Entry(ventana)
+entrada.pack()
+
+# Ejecutar el bucle principal
+ventana.mainloop()
+```
+
+En este ejemplo, se manejan varios eventos:
+- Un clic del ratón que muestra las coordenadas del clic.
+- El movimiento del ratón que muestra las coordenadas actuales del ratón.
+- La presión de una tecla que muestra la tecla presionada.
+
+### Resumen
+
+- **Evento**: Una acción o suceso que ocurre en la aplicación, como clics, movimientos del ratón, o pulsaciones de teclas.
+- **Controlador de eventos**: Una función o método que responde a un evento específico.
+- **tkinter**: Utiliza el método `bind()` para asociar eventos con widgets y definir controladores de eventos.
+- **PyQt**: Utiliza la sobrescritura de métodos de eventos y la conexión de señales a slots.
+- **wxPython**: Utiliza métodos de eventos y el método `Bind()`.
+
+El manejo adecuado de eventos es crucial para crear aplicaciones interactivas y responsivas, permitiendo a la aplicación responder a las acciones del usuario de manera efectiva y oportuna.

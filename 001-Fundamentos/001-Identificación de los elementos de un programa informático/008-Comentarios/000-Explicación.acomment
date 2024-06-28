@@ -1,0 +1,93 @@
+### Comentarios
+
+#### Comentarios
+
+Los comentarios en Python son líneas de texto que se incluyen en el código pero que no son ejecutadas por el intérprete. Los comentarios son útiles para documentar el código, explicar su funcionamiento, indicar secciones específicas o dejar recordatorios para el futuro. El uso adecuado de comentarios puede mejorar significativamente la legibilidad y mantenibilidad del código.
+
+#### 1. Comentarios de una sola línea
+
+Los comentarios de una sola línea comienzan con el símbolo `#`. Todo el texto que sigue a este símbolo en la misma línea es considerado un comentario y es ignorado por el intérprete.
+
+**Ejemplo:**
+```python
+# Este es un comentario de una sola línea
+x = 42  # Esto es otro comentario de una sola línea
+```
+
+#### 2. Comentarios de varias líneas
+
+En Python, no existe un símbolo específico para los comentarios de varias líneas como en otros lenguajes (por ejemplo, `/* ... */` en C o Java). Sin embargo, se puede utilizar una secuencia de comillas triples (`'''` o `"""`) para crear comentarios de varias líneas. Aunque originalmente están diseñadas para cadenas de documentación (docstrings), también pueden servir para comentarios largos.
+
+**Ejemplo:**
+```python
+'''
+Este es un comentario
+de varias líneas.
+Se puede utilizar para
+explicar secciones complejas
+del código.
+'''
+
+"""
+Este es otro ejemplo
+de un comentario
+de varias líneas.
+"""
+```
+
+#### 3. Docstrings
+
+Las cadenas de documentación, o docstrings, son un tipo especial de comentario utilizado para documentar módulos, clases y funciones. Se colocan inmediatamente después de la definición del módulo, clase o función y se delimitan con comillas triples. Los docstrings son accesibles a través del atributo `__doc__`.
+
+**Ejemplo:**
+```python
+def sumar(a, b):
+    """
+    Esta función suma dos números y devuelve el resultado.
+    
+    Parámetros:
+    a (int, float): El primer número.
+    b (int, float): El segundo número.
+    
+    Devuelve:
+    int, float: La suma de a y b.
+    """
+    return a + b
+
+print(sumar.__doc__)
+```
+
+#### 4. Buenas prácticas para el uso de comentarios
+
+- **Claridad y concisión**: Los comentarios deben ser claros y concisos, proporcionando suficiente información sin ser redundantes.
+- **Actualización**: Mantén los comentarios actualizados. Comentarios desactualizados pueden ser confusos y engañosos.
+- **Evitar comentarios obvios**: No es necesario comentar lo que es evidente en el código. Los comentarios deben proporcionar información adicional que no sea obvia a simple vista.
+- **Usar docstrings para funciones y clases**: Utiliza docstrings para describir el propósito y el uso de funciones y clases, incluyendo información sobre parámetros y valores de retorno.
+
+**Ejemplo de buenas prácticas:**
+```python
+# Mala práctica: comentario obvio y redundante
+x = 10  # Asigna 10 a x
+
+# Buena práctica: comentario explicativo
+x = 10  # Valor inicial para el contador
+
+def factorial(n):
+    """
+    Calcula el factorial de un número.
+    
+    Parámetros:
+    n (int): El número del cual se quiere calcular el factorial.
+    
+    Devuelve:
+    int: El factorial de n.
+    """
+    if n == 0:
+        return 1
+    else:
+        return n * factorial(n - 1)
+```
+
+Los comentarios son una herramienta poderosa para la documentación y la claridad del código. Usarlos adecuadamente facilita la comprensión y el mantenimiento del código, tanto para el autor original como para otros programadores que puedan trabajar en el mismo proyecto en el futuro.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

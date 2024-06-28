@@ -1,0 +1,149 @@
+### Funciones
+
+#### Funciones
+
+Las funciones en Python son bloques de código reutilizables que realizan una tarea específica. Ayudan a dividir un programa grande en partes más pequeñas y manejables, facilitando así la escritura, comprensión y mantenimiento del código. A continuación se describen los conceptos clave relacionados con las funciones en Python.
+
+#### 1. Definición de funciones
+
+Las funciones se definen utilizando la palabra clave `def` seguida del nombre de la función y paréntesis `()`. El bloque de código que constituye la función se indenta debajo de la línea de definición.
+
+**Ejemplo:**
+```python
+def saludar():
+    print("Hola, mundo")
+
+# Llamada a la función
+saludar()
+```
+
+#### 2. Parámetros y argumentos
+
+Las funciones pueden aceptar parámetros, que son valores que se pasan a la función cuando se llama. Los valores reales que se pasan se llaman argumentos.
+
+**Ejemplo:**
+```python
+def saludar(nombre):
+    print(f"Hola, {nombre}")
+
+# Llamada a la función con un argumento
+saludar("Ana")
+```
+
+#### 3. Valores de retorno
+
+Las funciones pueden devolver valores usando la palabra clave `return`. Si no se especifica un valor de retorno, la función devuelve `None` de manera predeterminada.
+
+**Ejemplo:**
+```python
+def sumar(a, b):
+    return a + b
+
+# Llamada a la función y uso del valor de retorno
+resultado = sumar(3, 5)
+print(resultado)  # Imprime: 8
+```
+
+#### 4. Parámetros con valores predeterminados
+
+Las funciones pueden tener parámetros con valores predeterminados. Si no se proporciona un argumento para un parámetro con valor predeterminado, se utilizará el valor especificado en la definición de la función.
+
+**Ejemplo:**
+```python
+def saludar(nombre="mundo"):
+    print(f"Hola, {nombre}")
+
+# Llamada a la función sin argumentos
+saludar()  # Imprime: Hola, mundo
+
+# Llamada a la función con un argumento
+saludar("Carlos")  # Imprime: Hola, Carlos
+```
+
+#### 5. Argumentos arbitrarios
+
+A veces es necesario que una función acepte un número indefinido de argumentos. Esto se puede hacer usando un asterisco `*` antes del nombre del parámetro.
+
+**Ejemplo:**
+```python
+def sumar(*numeros):
+    total = 0
+    for numero in numeros:
+        total += numero
+    return total
+
+# Llamada a la función con múltiples argumentos
+print(sumar(1, 2, 3))  # Imprime: 6
+print(sumar(4, 5, 6, 7, 8))  # Imprime: 30
+```
+
+#### 6. Argumentos de palabras clave arbitrarias
+
+Similar a los argumentos arbitrarios, una función puede aceptar un número indefinido de argumentos de palabras clave usando dos asteriscos `**` antes del nombre del parámetro.
+
+**Ejemplo:**
+```python
+def imprimir_info(**info):
+    for clave, valor en info.items():
+        print(f"{clave}: {valor}")
+
+# Llamada a la función con múltiples argumentos de palabras clave
+imprimir_info(nombre="Ana", edad=25, ciudad="Madrid")
+# Imprime:
+# nombre: Ana
+# edad: 25
+# ciudad: Madrid
+```
+
+#### 7. Funciones lambda
+
+Las funciones lambda son funciones anónimas y pequeñas definidas con la palabra clave `lambda`. Se utilizan para funciones simples y cortas.
+
+**Ejemplo:**
+```python
+# Definición de una función lambda
+sumar = lambda a, b: a + b
+
+# Llamada a la función lambda
+print(sumar(3, 5))  # Imprime: 8
+```
+
+#### 8. Alcance de las variables
+
+El alcance de una variable define la región del programa en la cual esa variable es reconocida. Las variables definidas dentro de una función tienen un alcance local y no son accesibles fuera de la función.
+
+**Ejemplo:**
+```python
+def mi_funcion():
+    x = 10  # Variable local
+    print(x)
+
+mi_funcion()  # Imprime: 10
+# print(x)  # Esto dará un error porque x no está definida fuera de la función
+```
+
+#### 9. Documentación de funciones
+
+Es una buena práctica documentar las funciones usando docstrings. Las docstrings son cadenas que describen el propósito y el comportamiento de la función y se colocan inmediatamente después de la definición de la función.
+
+**Ejemplo:**
+```python
+def sumar(a, b):
+    """
+    Suma dos números y devuelve el resultado.
+
+    Parámetros:
+    a (int, float): El primer número.
+    b (int, float): El segundo número.
+
+    Devuelve:
+    int, float: La suma de a y b.
+    """
+    return a + b
+
+print(sumar.__doc__)
+```
+
+Las funciones son una herramienta esencial en Python que facilita la organización y reutilización del código. Comprender cómo definir y utilizar funciones correctamente es crucial para escribir programas eficientes y mantenibles.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

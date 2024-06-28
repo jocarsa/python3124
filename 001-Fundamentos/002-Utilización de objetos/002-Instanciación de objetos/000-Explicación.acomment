@@ -1,0 +1,147 @@
+### Instanciación de objetos
+
+#### Instanciación de objetos
+
+La instanciación de objetos en Python es el proceso mediante el cual se crean instancias (o ejemplares) de una clase. Una instancia es un objeto concreto creado a partir de una clase, que contiene atributos y métodos definidos en esa clase. La instanciación es fundamental en la programación orientada a objetos, ya que permite utilizar las funcionalidades y comportamientos definidos en una clase. A continuación, se explica en detalle cómo se realiza la instanciación de objetos y se presentan ejemplos prácticos.
+
+#### 1. Definición de una clase
+
+Antes de instanciar un objeto, primero se debe definir una clase. Una clase es una plantilla o un molde para crear objetos, y define los atributos (estado) y métodos (comportamientos) que los objetos de esa clase tendrán.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        print(f"Hola, me llamo {self.nombre} y tengo {self.edad} años")
+```
+
+En este ejemplo, se define una clase `Persona` con un método especial `__init__`, que es el constructor de la clase. El constructor se utiliza para inicializar los atributos del objeto cuando se crea. La clase también tiene un método `saludar` que imprime un saludo.
+
+#### 2. Creación de una instancia de la clase
+
+Para crear una instancia de una clase, se llama al nombre de la clase como si fuera una función, pasando los argumentos necesarios al constructor.
+
+**Ejemplo:**
+```python
+# Instanciar un objeto de la clase Persona
+persona1 = Persona("Ana", 30)
+
+# Acceder a los atributos del objeto
+print(persona1.nombre)  # Imprime: Ana
+print(persona1.edad)    # Imprime: 30
+
+# Llamar a un método del objeto
+persona1.saludar()  # Imprime: Hola, me llamo Ana y tengo 30 años
+```
+
+En este ejemplo, `persona1` es una instancia de la clase `Persona`. Los argumentos `"Ana"` y `30` se pasan al constructor `__init__` para inicializar los atributos `nombre` y `edad` del objeto.
+
+#### 3. Múltiples instancias de la misma clase
+
+Se pueden crear múltiples instancias de la misma clase. Cada instancia es independiente y tiene su propio conjunto de atributos.
+
+**Ejemplo:**
+```python
+# Instanciar múltiples objetos de la clase Persona
+persona1 = Persona("Ana", 30)
+persona2 = Persona("Carlos", 25)
+
+# Acceder a los atributos de los objetos
+print(persona1.nombre)  # Imprime: Ana
+print(persona2.nombre)  # Imprime: Carlos
+
+# Llamar a los métodos de los objetos
+persona1.saludar()  # Imprime: Hola, me llamo Ana y tengo 30 años
+persona2.saludar()  # Imprime: Hola, me llamo Carlos y tengo 25 años
+```
+
+En este ejemplo, `persona1` y `persona2` son dos instancias diferentes de la clase `Persona`, cada una con sus propios valores de atributos.
+
+#### 4. Atributos y métodos de instancia
+
+Los atributos y métodos definidos dentro de una clase son accesibles para cada instancia de esa clase. Los atributos de instancia se definen dentro del constructor `__init__`, mientras que los métodos se definen como funciones dentro de la clase.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+
+# Crear una instancia de la clase Coche
+mi_coche = Coche("Toyota", "Corolla")
+
+# Acceder a los atributos de la instancia
+print(mi_coche.marca)  # Imprime: Toyota
+print(mi_coche.modelo) # Imprime: Corolla
+
+# Llamar a un método de la instancia
+mi_coche.arrancar()  # Imprime: El Toyota Corolla está arrancando...
+```
+
+#### 5. Modificación de atributos
+
+Los atributos de una instancia pueden ser modificados después de que la instancia ha sido creada.
+
+**Ejemplo:**
+```python
+class Libro:
+    def __init__(self, titulo, autor):
+        self.titulo = titulo
+        self.autor = autor
+
+# Crear una instancia de la clase Libro
+mi_libro = Libro("1984", "George Orwell")
+
+# Modificar un atributo de la instancia
+mi_libro.titulo = "Rebelión en la granja"
+
+# Acceder a los atributos modificados
+print(mi_libro.titulo)  # Imprime: Rebelión en la granja
+print(mi_libro.autor)   # Imprime: George Orwell
+```
+
+En este ejemplo, se modifica el atributo `titulo` de la instancia `mi_libro` después de que ha sido creada.
+
+#### 6. Uso de métodos para modificar atributos
+
+Es una buena práctica utilizar métodos para modificar los atributos de una instancia, ya que esto permite un mejor control sobre cómo se cambian los datos.
+
+**Ejemplo:**
+```python
+class CuentaBancaria:
+    def __init__(self, titular, saldo):
+        self.titular = titular
+        self.saldo = saldo
+
+    def depositar(self, cantidad):
+        self.saldo += cantidad
+        print(f"Depósito de {cantidad} realizado. Saldo actual: {self.saldo}")
+
+    def retirar(self, cantidad):
+        if cantidad <= self.saldo:
+            self.saldo -= cantidad
+            print(f"Retiro de {cantidad} realizado. Saldo actual: {self.saldo}")
+        else:
+            print("Fondos insuficientes")
+
+# Crear una instancia de la clase CuentaBancaria
+mi_cuenta = CuentaBancaria("Ana", 1000)
+
+# Usar métodos para modificar el saldo
+mi_cuenta.depositar(500)  # Imprime: Depósito de 500 realizado. Saldo actual: 1500
+mi_cuenta.retirar(300)    # Imprime: Retiro de 300 realizado. Saldo actual: 1200
+```
+
+En este ejemplo, se utilizan los métodos `depositar` y `retirar` para modificar el atributo `saldo` de la instancia `mi_cuenta` de manera controlada.
+
+La instanciación de objetos es un concepto fundamental en la programación orientada a objetos. Permite crear y manipular objetos que encapsulan datos y comportamientos, haciendo que el código sea más modular y reutilizable.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

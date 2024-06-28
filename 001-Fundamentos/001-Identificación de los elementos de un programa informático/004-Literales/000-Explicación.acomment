@@ -1,0 +1,121 @@
+### Literales
+
+#### Literales
+
+Los literales en Python son valores constantes escritos directamente en el código fuente. Representan valores fijos y no necesitan ninguna evaluación para determinar su valor. A continuación, se describen los diferentes tipos de literales disponibles en Python:
+
+#### 1. Literales numéricos
+
+##### a. Enteros (`int`)
+Los literales enteros son números sin decimales. Pueden ser positivos, negativos o cero.
+
+**Ejemplo:**
+```python
+entero_positivo = 123
+entero_negativo = -456
+cero = 0
+```
+
+##### b. Flotantes (`float`)
+Los literales flotantes son números con una parte decimal. Pueden escribirse en notación decimal o científica.
+
+**Ejemplo:**
+```python
+flotante_positivo = 3.14
+flotante_negativo = -0.001
+notacion_cientifica = 1.2e3  # Equivalente a 1.2 * 10^3, que es 1200.0
+```
+
+##### c. Complejos (`complex`)
+Los literales complejos tienen una parte real y una parte imaginaria, y se representan con la notación `a + bj`, donde `a` es la parte real y `b` es la parte imaginaria.
+
+**Ejemplo:**
+```python
+numero_complejo = 2 + 3j
+```
+
+#### 2. Literales de cadena (`str`)
+
+Las cadenas de caracteres son secuencias de texto delimitadas por comillas simples (`'`), comillas dobles (`"`), comillas triples simples (`'''`) o comillas triples dobles (`"""`). Las comillas triples permiten cadenas de múltiples líneas.
+
+**Ejemplo:**
+```python
+cadena_simple = 'Hola, mundo'
+cadena_doble = "Python es genial"
+cadena_multilinea = """Esta es una cadena
+de varias líneas"""
+```
+
+Las cadenas también pueden contener caracteres especiales como saltos de línea (`\n`), tabulaciones (`\t`) y barras invertidas (`\\`).
+
+**Ejemplo:**
+```python
+cadena_con_escapes = "Hola,\nmundo!\tPython\\es\\genial"
+```
+
+#### 3. Literales booleanos (`bool`)
+
+Los literales booleanos representan valores de verdad y solo pueden ser `True` o `False`. Estos valores se utilizan principalmente en condiciones y expresiones lógicas.
+
+**Ejemplo:**
+```python
+verdadero = True
+falso = False
+```
+
+#### 4. Literal `None`
+
+El literal `None` representa la ausencia de valor o un valor nulo. Se utiliza para indicar que una variable no tiene ningún valor asignado o que no se ha inicializado.
+
+**Ejemplo:**
+```python
+sin_valor = None
+```
+
+#### 5. Literales de colección
+
+##### a. Listas (`list`)
+Las listas son colecciones ordenadas y mutables de elementos, delimitadas por corchetes (`[]`). Pueden contener elementos de diferentes tipos.
+
+**Ejemplo:**
+```python
+lista_vacia = []
+lista_numeros = [1, 2, 3, 4, 5]
+lista_mixta = [1, "dos", 3.0, True]
+```
+
+##### b. Tuplas (`tuple`)
+Las tuplas son colecciones ordenadas e inmutables de elementos, delimitadas por paréntesis (`()`). Una vez creadas, no pueden ser modificadas.
+
+**Ejemplo:**
+```python
+tupla_vacia = ()
+tupla_numeros = (1, 2, 3, 4, 5)
+tupla_mixta = (1, "dos", 3.0, True)
+```
+
+##### c. Conjuntos (`set`)
+Los conjuntos son colecciones desordenadas de elementos únicos, delimitadas por llaves (`{}`). Se utilizan para operaciones de conjuntos como unión, intersección y diferencia.
+
+**Ejemplo:**
+```python
+conjunto_vacio = set()
+conjunto_numeros = {1, 2, 3, 4, 5}
+```
+
+##### d. Diccionarios (`dict`)
+Los diccionarios son colecciones desordenadas de pares clave-valor, delimitadas por llaves (`{}`). Las claves deben ser únicas e inmutables.
+
+**Ejemplo:**
+```python
+diccionario_vacio = {}
+diccionario_estudiante = {
+    "nombre": "Ana",
+    "edad": 25,
+    "curso": "Ingeniería"
+}
+```
+
+Estos son los diferentes tipos de literales que se pueden utilizar en Python para representar valores constantes y datos fijos en el código fuente. Entender los literales y cómo utilizarlos es fundamental para escribir programas claros y eficientes.
+
+¿Te gustaría continuar con otro apartado? Si es así, indícame cuál es el siguiente.

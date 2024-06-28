@@ -1,0 +1,110 @@
+### Estructura y bloques fundamentales
+
+#### Estructura y bloques fundamentales
+
+La estructura y los bloques fundamentales en un programa de Python son esenciales para organizar y gestionar el flujo de ejecución y las funcionalidades del código. A continuación, se detalla cada uno de estos componentes:
+
+#### 1. Módulos
+
+Los módulos en Python son archivos con la extensión `.py` que contienen definiciones y declaraciones. Los módulos permiten organizar el código en partes reutilizables. Pueden importar otros módulos y ser importados por otros programas.
+
+**Ejemplo de módulo:**
+```python
+# archivo mi_modulo.py
+def saludar():
+    print("Hola, mundo")
+
+PI = 3.14159
+```
+
+**Cómo importar un módulo:**
+```python
+import mi_modulo
+
+mi_modulo.saludar()  # Imprime: Hola, mundo
+print(mi_modulo.PI)  # Imprime: 3.14159
+```
+
+#### 2. Funciones
+
+Las funciones son bloques de código que realizan una tarea específica y pueden ser reutilizadas. Se definen usando la palabra clave `def` seguida del nombre de la función y paréntesis.
+
+**Ejemplo de función:**
+```python
+def sumar(a, b):
+    return a + b
+
+resultado = sumar(3, 5)  # resultado es 8
+```
+
+#### 3. Clases
+
+Las clases son plantillas para crear objetos que encapsulan datos y funciones. Una clase se define con la palabra clave `class` y puede tener propiedades (atributos) y métodos (funciones).
+
+**Ejemplo de clase:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        print(f"Hola, me llamo {self.nombre} y tengo {self.edad} años")
+
+# Creación de un objeto
+juan = Persona("Juan", 30)
+juan.saludar()  # Imprime: Hola, me llamo Juan y tengo 30 años
+```
+
+#### 4. Bloques de control
+
+Los bloques de control permiten dirigir el flujo de ejecución del programa. Incluyen estructuras condicionales, bucles y gestión de excepciones.
+
+**Condicionales (if, elif, else):**
+```python
+x = 10
+if x > 0:
+    print("x es positivo")
+elif x == 0:
+    print("x es cero")
+else:
+    print("x es negativo")
+```
+
+**Bucles (for, while):**
+```python
+# Bucle for
+for i in range(5):
+    print(i)  # Imprime del 0 al 4
+
+# Bucle while
+contador = 0
+while contador < 5:
+    print(contador)
+    contador += 1  # Incrementa contador en 1
+```
+
+**Gestión de excepciones (try, except, finally):**
+```python
+try:
+    resultado = 10 / 0
+except ZeroDivisionError:
+    print("Error: División por cero")
+finally:
+    print("Esto se ejecuta siempre")
+```
+
+#### 5. Bloque principal
+
+El bloque principal es el punto de entrada del programa, comúnmente utilizado para ejecutar el código principal. Se define utilizando la condición `if __name__ == "__main__":`.
+
+**Ejemplo de bloque principal:**
+```python
+def main():
+    print("Este es el bloque principal")
+
+if __name__ == "__main__":
+    main()
+```
+
+Estos bloques fundamentales permiten crear programas bien estructurados y mantenibles en Python, organizando el código en módulos, funciones y clases, y controlando el flujo de ejecución de manera eficiente. ¿Cuál es el siguiente apartado que te gustaría que desarrolle?

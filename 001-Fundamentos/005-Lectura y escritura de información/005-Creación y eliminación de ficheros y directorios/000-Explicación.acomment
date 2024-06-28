@@ -1,0 +1,224 @@
+### Creación y eliminación de ficheros y directorios
+
+#### Creación y eliminación de ficheros y directorios
+
+La creación y eliminación de ficheros y directorios son operaciones básicas pero esenciales en el manejo del sistema de archivos. Python proporciona varios módulos, como `os`, `shutil`, y `pathlib`, que facilitan estas operaciones de manera eficiente.
+
+#### 1. Creación de ficheros
+
+**Creación de un archivo de texto:**
+Para crear un archivo de texto, se puede utilizar la función `open()` con el modo de acceso `'w'` (escritura).
+
+**Ejemplo:**
+```python
+# Crear un archivo de texto y escribir datos en él
+with open('mi_archivo.txt', 'w', encoding='utf-8') as archivo:
+    archivo.write('Este es un archivo de texto.\nPrimera línea.\nSegunda línea.')
+print("Archivo 'mi_archivo.txt' creado")
+```
+
+#### 2. Eliminación de ficheros
+
+**Eliminación de un archivo:**
+Para eliminar un archivo, se utiliza la función `os.remove()`.
+
+**Ejemplo:**
+```python
+import os
+
+# Crear un archivo para eliminar
+with open('archivo_para_eliminar.txt', 'w', encoding='utf-8') as archivo:
+    archivo.write('Este archivo será eliminado.')
+
+# Eliminar el archivo
+os.remove('archivo_para_eliminar.txt')
+print("Archivo 'archivo_para_eliminar.txt' eliminado")
+```
+
+#### 3. Creación de directorios
+
+**Creación de un directorio:**
+Para crear un directorio, se utiliza la función `os.mkdir()`.
+
+**Ejemplo:**
+```python
+# Crear un directorio
+os.mkdir('nuevo_directorio')
+print("Directorio 'nuevo_directorio' creado")
+```
+
+**Creación de directorios anidados:**
+Para crear un árbol de directorios, se utiliza la función `os.makedirs()`.
+
+**Ejemplo:**
+```python
+# Crear directorios anidados
+os.makedirs('directorio/padre/hijo')
+print("Directorios 'directorio/padre/hijo' creados")
+```
+
+#### 4. Eliminación de directorios
+
+**Eliminación de un directorio vacío:**
+Para eliminar un directorio vacío, se utiliza la función `os.rmdir()`.
+
+**Ejemplo:**
+```python
+# Crear un directorio para eliminar
+os.mkdir('directorio_para_eliminar')
+print("Directorio 'directorio_para_eliminar' creado")
+
+# Eliminar el directorio
+os.rmdir('directorio_para_eliminar')
+print("Directorio 'directorio_para_eliminar' eliminado")
+```
+
+**Eliminación de un directorio y su contenido:**
+Para eliminar un directorio junto con todo su contenido, se utiliza la función `shutil.rmtree()`.
+
+**Ejemplo:**
+```python
+import shutil
+
+# Crear un directorio con archivos para eliminar
+os.makedirs('directorio_completo_para_eliminar')
+with open('directorio_completo_para_eliminar/archivo.txt', 'w', encoding='utf-8') as archivo:
+    archivo.write('Contenido del archivo.')
+
+# Eliminar el directorio y su contenido
+shutil.rmtree('directorio_completo_para_eliminar')
+print("Directorio 'directorio_completo_para_eliminar' y su contenido eliminados")
+```
+
+#### 5. Uso del módulo `pathlib`
+
+El módulo `pathlib` proporciona una interfaz orientada a objetos para manejar rutas de archivos y directorios, y es una alternativa moderna a los módulos `os` y `shutil`.
+
+**Ejemplo de creación y eliminación de archivos y directorios con `pathlib`:**
+
+**Creación de un archivo:**
+```python
+from pathlib import Path
+
+# Crear un archivo de texto
+ruta_archivo = Path('mi_archivo_pathlib.txt')
+ruta_archivo.write_text('Este es un archivo de texto creado con pathlib.')
+print(f"Archivo '{ruta_archivo}' creado")
+```
+
+**Eliminación de un archivo:**
+```python
+# Eliminar el archivo
+ruta_archivo.unlink()
+print(f"Archivo '{ruta_archivo}' eliminado")
+```
+
+**Creación de un directorio:**
+```python
+# Crear un directorio
+ruta_directorio = Path('nuevo_directorio_pathlib')
+ruta_directorio.mkdir()
+print(f"Directorio '{ruta_directorio}' creado")
+```
+
+**Creación de directorios anidados:**
+```python
+# Crear directorios anidados
+ruta_directorios = Path('directorio_pathlib/padre/hijo')
+ruta_directorios.mkdir(parents=True)
+print(f"Directorios '{ruta_directorios}' creados")
+```
+
+**Eliminación de un directorio vacío:**
+```python
+# Eliminar un directorio vacío
+ruta_directorio.rmdir()
+print(f"Directorio '{ruta_directorio}' eliminado")
+```
+
+**Eliminación de un directorio y su contenido:**
+```python
+# Crear un directorio con archivos para eliminar
+ruta_directorio_completo = Path('directorio_completo_pathlib')
+ruta_directorio_completo.mkdir()
+(ruta_directorio_completo / 'archivo.txt').write_text('Contenido del archivo.')
+
+# Eliminar el directorio y su contenido
+shutil.rmtree(ruta_directorio_completo)
+print(f"Directorio '{ruta_directorio_completo}' y su contenido eliminados")
+```
+
+### Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra cómo crear y eliminar archivos y directorios utilizando `os`, `shutil`, y `pathlib`.
+
+**Ejemplo completo:**
+```python
+import os
+import shutil
+from pathlib import Path
+
+# Crear un archivo de texto
+with open('mi_archivo.txt', 'w', encoding='utf-8') as archivo:
+    archivo.write('Este es un archivo de texto.\nPrimera línea.\nSegunda línea.')
+print("Archivo 'mi_archivo.txt' creado")
+
+# Leer y mostrar el contenido del archivo
+with open('mi_archivo.txt', 'r', encoding='utf-8') as archivo:
+    contenido = archivo.read()
+    print(f"Contenido de 'mi_archivo.txt':\n{contenido}")
+
+# Eliminar el archivo
+os.remove('mi_archivo.txt')
+print("Archivo 'mi_archivo.txt' eliminado")
+
+# Crear un directorio
+os.mkdir('nuevo_directorio')
+print("Directorio 'nuevo_directorio' creado")
+
+# Crear un directorio anidado
+os.makedirs('nuevo_directorio/padre/hijo')
+print("Directorios 'nuevo_directorio/padre/hijo' creados")
+
+# Listar el contenido del directorio
+print(f"Contenido de 'nuevo_directorio': {os.listdir('nuevo_directorio')}")
+
+# Eliminar un directorio vacío
+os.rmdir('nuevo_directorio/padre/hijo')
+print("Directorio 'nuevo_directorio/padre/hijo' eliminado")
+
+# Crear un archivo dentro del directorio
+with open('nuevo_directorio/archivo.txt', 'w', encoding='utf-8') as archivo:
+    archivo.write('Contenido del archivo.')
+print("Archivo 'nuevo_directorio/archivo.txt' creado")
+
+# Eliminar el directorio y su contenido
+shutil.rmtree('nuevo_directorio')
+print("Directorio 'nuevo_directorio' y su contenido eliminados")
+
+# Crear un archivo y un directorio utilizando pathlib
+ruta_archivo = Path('mi_archivo_pathlib.txt')
+ruta_archivo.write_text('Este es un archivo de texto creado con pathlib.')
+print(f"Archivo '{ruta_archivo}' creado con pathlib")
+
+ruta_directorio = Path('nuevo_directorio_pathlib')
+ruta_directorio.mkdir()
+print(f"Directorio '{ruta_directorio}' creado con pathlib")
+
+# Crear directorios anidados con pathlib
+ruta_directorios = Path('directorio_pathlib/padre/hijo')
+ruta_directorios.mkdir(parents=True)
+print(f"Directorios '{ruta_directorios}' creados con pathlib")
+
+# Eliminar el archivo y los directorios creados con pathlib
+ruta_archivo.unlink()
+print(f"Archivo '{ruta_archivo}' eliminado con pathlib")
+shutil.rmtree('directorio_pathlib')
+print(f"Directorios 'directorio_pathlib' eliminados con pathlib")
+```
+
+En este ejemplo:
+- Se crean y manipulan archivos y directorios utilizando `os`, `shutil` y `pathlib`.
+- Se muestran diferentes operaciones, como creación, eliminación y listado de contenidos de directorios.
+
+El manejo adecuado de la creación y eliminación de ficheros y directorios es crucial para la gestión eficiente del sistema de archivos en cualquier aplicación. Python proporciona herramientas poderosas y flexibles para realizar estas tareas de manera efectiva y segura.

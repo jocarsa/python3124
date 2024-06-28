@@ -1,0 +1,265 @@
+### Utilización avanzada de clases
+
+La programación orientada a objetos (OOP) en Python permite una mayor modularidad y reutilización del código. Utilizar clases de manera avanzada implica comprender conceptos como composición, herencia, polimorfismo, clases abstractas, métodos estáticos, y más. A continuación se describen estos conceptos y se proporcionan ejemplos prácticos.
+
+#### 1. Composición de clases
+
+La composición es un concepto de diseño en el que una clase se compone de una o más instancias de otras clases, permitiendo así construir clases complejas a partir de clases más simples.
+
+**Ejemplo de composición:**
+```python
+class Motor:
+    def __init__(self, tipo):
+        self.tipo = tipo
+
+    def arrancar(self):
+        print(f"El motor {self.tipo} está arrancando...")
+
+class Coche:
+    def __init__(self, marca, motor):
+        self.marca = marca
+        self.motor = motor  # Composición: Coche tiene un Motor
+
+    def encender(self):
+        print(f"Encendiendo el coche {self.marca}")
+        self.motor.arrancar()
+
+# Crear un motor y un coche que lo use
+motor = Motor("V8")
+coche = Coche("Ford", motor)
+coche.encender()
+```
+
+#### 2. Herencia y polimorfismo
+
+La herencia permite que una clase derive de otra, heredando sus atributos y métodos. El polimorfismo permite usar una clase derivada como si fuera de la clase base, lo que facilita el uso de métodos de forma intercambiable.
+
+**Ejemplo de herencia y polimorfismo:**
+```python
+class Animal:
+    def hablar(self):
+        pass
+
+class Perro(Animal):
+    def hablar(self):
+        return "Guau!"
+
+class Gato(Animal):
+    def hablar(self):
+        return "Miau!"
+
+def hacer_hablar(animal):
+    print(animal.hablar())
+
+# Usar polimorfismo
+perro = Perro()
+gato = Gato()
+hacer_hablar(perro)  # Imprime: Guau!
+hacer_hablar(gato)   # Imprime: Miau!
+```
+
+#### 3. Jerarquía de clases: Superclases y subclases
+
+En una jerarquía de clases, una subclase hereda de una superclase, y puede sobrescribir o extender sus métodos y atributos.
+
+**Ejemplo de jerarquía de clases:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def presentar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."
+
+class Estudiante(Persona):
+    def __init__(self, nombre, edad, carrera):
+        super().__init__(nombre, edad)
+        self.carrera = carrera
+
+    def presentar(self):
+        return f"Hola, me llamo {self.nombre}, tengo {self.edad} años y estudio {self.carrera}."
+
+# Crear una instancia de Estudiante
+estudiante = Estudiante("Ana", 20, "Ingeniería")
+print(estudiante.presentar())
+```
+
+#### 4. Clases y métodos abstractos
+
+Las clases abstractas no se pueden instanciar y están diseñadas para ser heredadas. Los métodos abstractos son métodos declarados pero no implementados en la clase abstracta.
+
+**Ejemplo de clases y métodos abstractos:**
+```python
+from abc import ABC, abstractmethod
+
+class Figura(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+class Circulo(Figura):
+    def __init__(self, radio):
+        self.radio = radio
+
+    def area(self):
+        return 3.14 * (self.radio ** 2)
+
+class Rectangulo(Figura):
+    def __init__(self, ancho, alto):
+        self.ancho = ancho
+        self.alto = alto
+
+    def area(self):
+        return self.ancho * self.alto
+
+# Crear instancias de Circulo y Rectangulo
+circulo = Circulo(5)
+rectangulo = Rectangulo(4, 6)
+
+print(f"Área del círculo: {circulo.area()}")      # Imprime: Área del círculo: 78.5
+print(f"Área del rectángulo: {rectangulo.area()}") # Imprime: Área del rectángulo: 24
+```
+
+#### 5. Métodos estáticos y de clase
+
+Los métodos estáticos (`@staticmethod`) no dependen de la instancia de la clase, mientras que los métodos de clase (`@classmethod`) reciben la clase como primer argumento.
+
+**Ejemplo de métodos estáticos y de clase:**
+```python
+class Matematica:
+    @staticmethod
+    def sumar(a, b):
+        return a + b
+
+    @classmethod
+    def pi(cls):
+        return 3.14
+
+# Uso de métodos estáticos y de clase
+print(Matematica.sumar(3, 5))  # Imprime: 8
+print(Matematica.pi())         # Imprime: 3.14
+```
+
+#### 6. Sobrescritura de métodos
+
+La sobrescritura permite redefinir métodos en una subclase que ya están definidos en su superclase.
+
+**Ejemplo de sobrescritura de métodos:**
+```python
+class Empleado:
+    def trabajar(self):
+        return "Trabajando..."
+
+class Gerente(Empleado):
+    def trabajar(self):
+        return "Supervisando..."
+
+# Crear instancias de Empleado y Gerente
+empleado = Empleado()
+gerente = Gerente()
+
+print(empleado.trabajar())  # Imprime: Trabajando...
+print(gerente.trabajar())   # Imprime: Supervisando...
+```
+
+#### 7. Constructores y herencia
+
+Los constructores (`__init__`) se utilizan para inicializar los atributos de una clase. En la herencia, se puede llamar al constructor de la superclase utilizando `super()`.
+
+**Ejemplo de constructores y herencia:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+class Empleado(Persona):
+    def __init__(self, nombre, edad, salario):
+        super().__init__(nombre, edad)
+        self.salario = salario
+
+# Crear una instancia de Empleado
+empleado = Empleado("Carlos", 30, 50000)
+print(f"Nombre: {empleado.nombre}, Edad: {empleado.edad}, Salario: {empleado.salario}")
+# Imprime: Nombre: Carlos, Edad: 30, Salario: 50000
+```
+
+### Ejemplo completo combinando conceptos avanzados
+
+A continuación se presenta un ejemplo completo que combina varios conceptos avanzados de clases.
+
+**Ejemplo completo:**
+```python
+from abc import ABC, abstractmethod
+
+class Persona(ABC):
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    @abstractmethod
+    def trabajar(self):
+        pass
+
+    def presentar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."
+
+class Empleado(Persona):
+    def __init__(self, nombre, edad, salario):
+        super().__init__(nombre, edad)
+        self.salario = salario
+
+    def trabajar(self):
+        return "Trabajando..."
+
+class Gerente(Empleado):
+    def trabajar(self):
+        return "Supervisando..."
+
+# Usar composición para asociar un Gerente con un equipo de empleados
+class Equipo:
+    def __init__(self, gerente):
+        self.gerente = gerente
+        self.empleados = []
+
+    def añadir_empleado(self, empleado):
+        self.empleados.append(empleado)
+
+    def trabajar(self):
+        print(self.gerente.trabajar())
+        for empleado in self.empleados:
+            print(empleado.trabajar())
+
+# Crear instancias de Gerente y Empleado
+gerente = Gerente("Luis", 45, 80000)
+empleado1 = Empleado("Ana", 30, 50000)
+empleado2 = Empleado("Carlos", 25, 45000)
+
+# Crear un equipo y añadir empleados
+equipo = Equipo(gerente)
+equipo.añadir_empleado(empleado1)
+equipo.añadir_empleado(empleado2)
+
+# Ejecutar el trabajo del equipo
+equipo.trabajar()
+# Imprime:
+# Supervisando...
+# Trabajando...
+# Trabajando...
+```
+
+En este ejemplo:
+- Se utilizan clases abstractas y métodos abstractos.
+- Se demuestra la herencia y sobrescritura de métodos.
+- Se utiliza la composición para crear una relación entre un `Gerente` y un `Equipo` de `Empleados`.
+
+### Resumen
+
+- **Composición**: Construir clases complejas a partir de instancias de otras clases.
+- **Herencia y Polimorfismo**: Permiten la reutilización del código y el uso intercambiable de clases derivadas.
+- **Jerarquía de Clases**: Relación entre superclases y subclases.
+- **Clases y Métodos Abstractos**: Definen interfaces que deben ser implementadas por las subclases.
+- **Métodos Estáticos y de Clase**: Métodos que no dependen de la instancia o que operan a nivel de clase.
+- **Sobrescritura de Métodos**: Permite redefinir métodos en subclases.
+- **Constructores y Herencia**: Inicialización de atributos en clases derivadas

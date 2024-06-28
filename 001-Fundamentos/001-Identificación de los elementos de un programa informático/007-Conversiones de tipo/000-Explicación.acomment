@@ -1,0 +1,161 @@
+### Conversiones de tipo
+
+#### Conversiones de tipo
+
+En Python, las conversiones de tipo (o "casting") permiten cambiar el tipo de dato de una variable a otro tipo de dato. Esto es útil cuando se necesita realizar operaciones entre tipos de datos diferentes o cuando se necesita manipular datos en un formato específico. Python proporciona varias funciones integradas para realizar estas conversiones.
+
+#### 1. Conversión implícita
+
+Python realiza conversiones implícitas automáticamente cuando es necesario. Esto generalmente ocurre en operaciones mixtas que involucran diferentes tipos de datos.
+
+**Ejemplo:**
+```python
+# Conversión implícita de int a float
+num_int = 10
+num_float = 2.5
+resultado = num_int + num_float  # num_int se convierte implícitamente a float
+print(resultado)  # Imprime: 12.5
+print(type(resultado))  # Imprime: <class 'float'>
+```
+
+#### 2. Conversión explícita
+
+La conversión explícita es realizada por el programador usando funciones integradas. Las funciones más comunes para la conversión de tipos en Python son `int()`, `float()`, `str()`, `list()`, `tuple()`, `set()`, `dict()`, entre otras.
+
+##### a. Conversión a entero (`int()`)
+
+Convierte un valor a un número entero. Se pueden convertir valores flotantes (truncando la parte decimal) y cadenas que representan enteros.
+
+**Ejemplo:**
+```python
+num_float = 3.14
+num_int = int(num_float)  # 3
+print(num_int)
+
+cadena = "123"
+num_int = int(cadena)  # 123
+print(num_int)
+```
+
+##### b. Conversión a flotante (`float()`)
+
+Convierte un valor a un número flotante. Se pueden convertir enteros y cadenas que representan números flotantes.
+
+**Ejemplo:**
+```python
+num_int = 10
+num_float = float(num_int)  # 10.0
+print(num_float)
+
+cadena = "3.14"
+num_float = float(cadena)  # 3.14
+print(num_float)
+```
+
+##### c. Conversión a cadena (`str()`)
+
+Convierte un valor a una cadena de caracteres.
+
+**Ejemplo:**
+```python
+num_int = 10
+cadena = str(num_int)  # "10"
+print(cadena)
+
+num_float = 3.14
+cadena = str(num_float)  # "3.14"
+print(cadena)
+```
+
+##### d. Conversión a lista (`list()`)
+
+Convierte una secuencia (como una cadena, tupla o conjunto) a una lista.
+
+**Ejemplo:**
+```python
+tupla = (1, 2, 3)
+lista = list(tupla)  # [1, 2, 3]
+print(lista)
+
+cadena = "hola"
+lista = list(cadena)  # ['h', 'o', 'l', 'a']
+print(lista)
+```
+
+##### e. Conversión a tupla (`tuple()`)
+
+Convierte una secuencia (como una lista, cadena o conjunto) a una tupla.
+
+**Ejemplo:**
+```python
+lista = [1, 2, 3]
+tupla = tuple(lista)  # (1, 2, 3)
+print(tupla)
+
+cadena = "hola"
+tupla = tuple(cadena)  # ('h', 'o', 'l', 'a')
+print(tupla)
+```
+
+##### f. Conversión a conjunto (`set()`)
+
+Convierte una secuencia (como una lista, cadena o tupla) a un conjunto, eliminando elementos duplicados.
+
+**Ejemplo:**
+```python
+lista = [1, 2, 3, 1, 2, 3]
+conjunto = set(lista)  # {1, 2, 3}
+print(conjunto)
+
+cadena = "hola"
+conjunto = set(cadena)  # {'h', 'o', 'l', 'a'}
+print(conjunto)
+```
+
+##### g. Conversión a diccionario (`dict()`)
+
+Convierte una secuencia de pares clave-valor a un diccionario. Esta conversión generalmente se realiza a partir de una lista de tuplas.
+
+**Ejemplo:**
+```python
+lista_tuplas = [("nombre", "Ana"), ("edad", 25)]
+diccionario = dict(lista_tuplas)  # {'nombre': 'Ana', 'edad': 25}
+print(diccionario)
+```
+
+#### 3. Conversión mediante funciones personalizadas
+
+Además de las funciones integradas, es posible definir funciones personalizadas para realizar conversiones específicas.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+def persona_a_diccionario(persona):
+    return {"nombre": persona.nombre, "edad": persona.edad}
+
+persona = Persona("Ana", 25)
+diccionario = persona_a_diccionario(persona)  # {'nombre': 'Ana', 'edad': 25}
+print(diccionario)
+```
+
+#### 4. Precauciones al convertir tipos
+
+Es importante tener en cuenta que no todas las conversiones son posibles. Intentar convertir un valor inapropiado puede resultar en un error.
+
+**Ejemplo:**
+```python
+cadena = "abc"
+# Esto dará un error porque "abc" no se puede convertir a entero
+try:
+    num_int = int(cadena)
+except ValueError as e:
+    print(e)  # Imprime el mensaje de error
+```
+
+Las conversiones de tipo son fundamentales para la flexibilidad y funcionalidad de un programa en Python. Usarlas adecuadamente permite manipular datos de manera efectiva y evita errores en tiempo de ejecución.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

@@ -1,0 +1,175 @@
+### Utilización de métodos. Parámetros.
+
+#### Utilización de métodos
+
+Los métodos en Python son funciones definidas dentro de una clase que describen los comportamientos que los objetos de esa clase pueden realizar. Los métodos permiten que los objetos interactúen con sus propios atributos y con otros objetos. A continuación, se explica cómo utilizar métodos en Python y cómo manejar parámetros en estos métodos.
+
+#### 1. Definición de métodos
+
+Un método se define dentro de una clase utilizando la palabra clave `def`, seguida del nombre del método y paréntesis `()`. El primer parámetro de cualquier método en una clase es siempre `self`, que se refiere a la instancia del objeto que está llamando al método.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+
+# Crear una instancia de la clase Coche
+mi_coche = Coche("Toyota", "Corolla")
+
+# Llamar al método arrancar
+mi_coche.arrancar()  # Imprime: El Toyota Corolla está arrancando...
+```
+
+#### 2. Parámetros en métodos
+
+Los métodos pueden aceptar uno o más parámetros adicionales además de `self`. Estos parámetros permiten pasar información al método para que realice su tarea.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+
+    def acelerar(self, velocidad):
+        print(f"El {self.marca} {self.modelo} está acelerando a {velocidad} km/h")
+
+# Crear una instancia de la clase Coche
+mi_coche = Coche("Toyota", "Corolla")
+
+# Llamar a los métodos con y sin parámetros
+mi_coche.arrancar()       # Imprime: El Toyota Corolla está arrancando...
+mi_coche.acelerar(120)    # Imprime: El Toyota Corolla está acelerando a 120 km/h
+```
+
+#### 3. Métodos con valores predeterminados
+
+Los métodos pueden tener parámetros con valores predeterminados, lo que permite llamar al método sin necesidad de proporcionar todos los argumentos.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+
+    def acelerar(self, velocidad=60):
+        print(f"El {self.marca} {self.modelo} está acelerando a {velocidad} km/h")
+
+# Crear una instancia de la clase Coche
+mi_coche = Coche("Toyota", "Corolla")
+
+# Llamar al método con y sin proporcionar el parámetro
+mi_coche.arrancar()        # Imprime: El Toyota Corolla está arrancando...
+mi_coche.acelerar()        # Imprime: El Toyota Corolla está acelerando a 60 km/h
+mi_coche.acelerar(120)     # Imprime: El Toyota Corolla está acelerando a 120 km/h
+```
+
+#### 4. Métodos que devuelven valores
+
+Los métodos pueden devolver valores utilizando la palabra clave `return`. Esto permite que el método produzca un resultado que pueda ser utilizado por el código que llamó al método.
+
+**Ejemplo:**
+```python
+class Calculadora:
+    def sumar(self, a, b):
+        return a + b
+
+    def restar(self, a, b):
+        return a - b
+
+# Crear una instancia de la clase Calculadora
+calc = Calculadora()
+
+# Llamar a los métodos y utilizar los valores de retorno
+resultado_suma = calc.sumar(5, 3)  # resultado_suma es 8
+resultado_resta = calc.restar(5, 3)  # resultado_resta es 2
+
+print(resultado_suma)  # Imprime: 8
+print(resultado_resta)  # Imprime: 2
+```
+
+#### 5. Métodos de clase y métodos estáticos
+
+Los métodos de clase y los métodos estáticos son tipos especiales de métodos que se definen usando los decoradores `@classmethod` y `@staticmethod`, respectivamente.
+
+- **Métodos de clase (`@classmethod`)**: Operan sobre la clase en sí y no sobre instancias individuales. El primer parámetro es `cls`, que hace referencia a la clase.
+- **Métodos estáticos (`@staticmethod`)**: No operan sobre instancias ni sobre la clase. No tienen acceso a `self` ni a `cls`.
+
+**Ejemplo:**
+```python
+class Matematica:
+    PI = 3.14159
+
+    @classmethod
+    def mostrar_pi(cls):
+        print(f"El valor de PI es {cls.PI}")
+
+    @staticmethod
+    def sumar(a, b):
+        return a + b
+
+# Llamar a los métodos de clase y estáticos
+Matematica.mostrar_pi()  # Imprime: El valor de PI es 3.14159
+resultado = Matematica.sumar(5, 7)
+print(resultado)  # Imprime: 12
+```
+
+#### 6. Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra la utilización de métodos, incluyendo parámetros, valores predeterminados, y métodos de clase y estáticos.
+
+**Ejemplo:**
+```python
+class Coche:
+    ruedas = 4
+
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+
+    def acelerar(self, velocidad=60):
+        print(f"El {self.marca} {self.modelo} está acelerando a {velocidad} km/h")
+
+    @classmethod
+    def cambiar_ruedas(cls, nuevas_ruedas):
+        cls.ruedas = nuevas_ruedas
+        print(f"El número de ruedas ahora es {cls.ruedas}")
+
+    @staticmethod
+    def es_coche(vehiculo):
+        return vehiculo == "coche"
+
+# Crear una instancia de la clase Coche
+mi_coche = Coche("Toyota", "Corolla")
+
+# Utilizar métodos de instancia
+mi_coche.arrancar()
+mi_coche.acelerar()
+mi_coche.acelerar(120)
+
+# Utilizar métodos de clase
+Coche.cambiar_ruedas(6)
+
+# Utilizar métodos estáticos
+print(Coche.es_coche("coche"))  # Imprime: True
+print(Coche.es_coche("bicicleta"))  # Imprime: False
+```
+
+Este ejemplo muestra cómo definir y utilizar diferentes tipos de métodos en una clase, manejando parámetros, valores predeterminados, métodos de clase y métodos estáticos.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

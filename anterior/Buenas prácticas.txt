@@ -1,6 +1,0 @@
-Buenas prácticas
--variables
--mi_edad
--CONSTANTES
--hazAlgo
--Objetos

@@ -1,9 +1,0 @@
-0.-Opcionalmente, comentarios acerca de lo que hace el programa, copyright, autor, versión, changelog
-1.-Importaciones (o bien librerías, o bien otros archivos metidos dentro del archivo actual)
-2.-Declaración de variables globales
-3.-Funciones
-4.-Lógica principal - estructuras de control de la ejecución
-	4.1.-Se toman los datos
-	4.2.-Se realizan operaciones con los datos
-	4.3.-Se obtienen resultados
-5.-Presentación de resultados en pantalla

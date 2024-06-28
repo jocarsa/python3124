@@ -1,0 +1,164 @@
+### Constructores y Herencia
+
+#### Concepto de Constructores
+
+Los constructores son métodos especiales que se utilizan para inicializar objetos cuando se crean. En Python, el constructor se define utilizando el método `__init__`. Este método es llamado automáticamente cuando se crea una instancia de la clase.
+
+### Constructores en Clases Base y Derivadas
+
+Cuando se trabaja con herencia, es importante entender cómo los constructores de las superclases y subclases interactúan. Las subclases pueden extender o modificar el comportamiento del constructor de la superclase.
+
+**Ejemplo Básico de Constructores en Superclases y Subclases:**
+
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."
+
+class Empleado(Persona):
+    def __init__(self, nombre, edad, salario):
+        super().__init__(nombre, edad)  # Llamada al constructor de la superclase
+        self.salario = salario
+
+    def saludar(self):
+        saludo_base = super().saludar()  # Llamada al método saludar de la superclase
+        return f"{saludo_base} y gano {self.salario} dólares al año."
+
+# Crear una instancia de Empleado
+empleado = Empleado("Luis", 30, 50000)
+print(empleado.saludar())
+```
+
+En este ejemplo:
+- `Persona` es la superclase con un constructor que inicializa `nombre` y `edad`.
+- `Empleado` es la subclase que extiende `Persona` y añade `salario`.
+- `super().__init__(nombre, edad)` llama al constructor de `Persona` para inicializar `nombre` y `edad`.
+
+### Sobrescritura y Extensión de Constructores
+
+Las subclases pueden sobrescribir el constructor de la superclase para agregar nuevos atributos, pero siempre deben asegurarse de que los atributos de la superclase se inicialicen correctamente mediante la llamada a `super()`.
+
+**Ejemplo de Sobrescritura y Extensión de Constructores:**
+
+```python
+class Vehiculo:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def descripcion(self):
+        return f"Vehículo de marca {self.marca}, modelo {self.modelo}"
+
+class Coche(Vehiculo):
+    def __init__(self, marca, modelo, tipo_motor):
+        super().__init__(marca, modelo)
+        self.tipo_motor = tipo_motor
+
+    def descripcion(self):
+        descripcion_base = super().descripcion()
+        return f"{descripcion_base} con un motor {self.tipo_motor}"
+
+# Crear una instancia de Coche
+coche = Coche("Toyota", "Corolla", "V6")
+print(coche.descripcion())
+```
+
+En este ejemplo:
+- `Vehiculo` tiene un constructor que inicializa `marca` y `modelo`.
+- `Coche` extiende `Vehiculo` y añade `tipo_motor`.
+- `super().__init__(marca, modelo)` asegura que `marca` y `modelo` se inicialicen correctamente en la superclase `Vehiculo`.
+
+### Herencia Múltiple y Constructores
+
+En el caso de herencia múltiple, es crucial llamar a los constructores de todas las superclases adecuadamente.
+
+**Ejemplo de Herencia Múltiple:**
+
+```python
+class Volador:
+    def __init__(self, velocidad):
+        self.velocidad = velocidad
+
+    def volar(self):
+        return f"Volando a {self.velocidad} km/h"
+
+class Nadador:
+    def __init__(self, profundidad):
+        self.profundidad = profundidad
+
+    def nadar(self):
+        return f"Nadando a una profundidad de {self.profundidad} metros"
+
+class Pato(Volador, Nadador):
+    def __init__(self, velocidad, profundidad, nombre):
+        Volador.__init__(self, velocidad)
+        Nadador.__init__(self, profundidad)
+        self.nombre = nombre
+
+    def descripcion(self):
+        return f"{self.nombre}: {self.volar()} y {self.nadar()}"
+
+# Crear una instancia de Pato
+pato = Pato(20, 5, "Donald")
+print(pato.descripcion())
+```
+
+En este ejemplo:
+- `Volador` y `Nadador` son superclases con sus propios constructores.
+- `Pato` hereda de ambas y llama a los constructores de `Volador` y `Nadador` para inicializar los atributos `velocidad` y `profundidad`.
+
+### Ejemplo Completo Combinando Constructores y Herencia
+
+A continuación se presenta un ejemplo más completo que muestra cómo se pueden combinar constructores y herencia para crear jerarquías de clases complejas.
+
+**Ejemplo Completo:**
+
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."
+
+class Empleado(Persona):
+    def __init__(self, nombre, edad, salario):
+        super().__init__(nombre, edad)
+        self.salario = salario
+
+    def saludar(self):
+        saludo_base = super().saludar()
+        return f"{saludo_base} y gano {self.salario} dólares al año."
+
+class Gerente(Empleado):
+    def __init__(self, nombre, edad, salario, departamento):
+        super().__init__(nombre, edad, salario)
+        self.departamento = departamento
+
+    def saludar(self):
+        saludo_base = super().saludar()
+        return f"{saludo_base} y soy el gerente del departamento de {self.departamento}."
+
+# Crear una instancia de Gerente
+gerente = Gerente("Carlos", 40, 80000, "Ventas")
+print(gerente.saludar())
+```
+
+En este ejemplo:
+- `Gerente` es una subclase que hereda de `Empleado`, que a su vez hereda de `Persona`.
+- `Gerente` extiende el constructor para añadir el atributo `departamento`.
+- `super()` se utiliza en cada nivel de la jerarquía para asegurar la correcta inicialización de los atributos heredados.
+
+### Resumen
+
+- **Constructores**: Inicializan los objetos cuando se crean.
+- **Herencia**: Permite que las subclases hereden y extiendan el comportamiento de las superclases.
+- **Uso de `super()`**: Asegura que los constructores de las superclases se llamen correctamente para inicializar los atributos heredados.
+- **Herencia Múltiple**: Requiere llamar a los constructores de todas las superclases para asegurar una correcta inicialización.
+
+La comprensión de los constructores y su interacción con la herencia es fundamental para aprovechar al máximo la programación orientada a objetos, permitiendo la creación de jerarquías de clases complejas y coherentes.

@@ -1,0 +1,118 @@
+### Operaciones agregadas: Filtrado, Reducción y Recolección
+
+Las operaciones agregadas permiten realizar cálculos complejos y transformaciones en colecciones de datos de manera eficiente y concisa. En Python, estas operaciones se pueden llevar a cabo utilizando funciones de orden superior como `filter()`, `reduce()`, y `map()`, así como comprehensions y otros métodos integrados.
+
+#### Filtrado
+
+El filtrado es el proceso de seleccionar elementos de una colección que cumplen con un criterio específico. En Python, esto se puede hacer usando la función `filter()` o las comprehensions.
+
+**Ejemplo de filtrado usando `filter()`:**
+```python
+# Lista de números
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Función que determina si un número es par
+def es_par(n):
+    return n % 2 == 0
+
+# Filtrar números pares usando filter()
+numeros_pares = list(filter(es_par, numeros))
+print("Números pares:", numeros_pares)  # Imprime: Números pares: [2, 4, 6, 8, 10]
+```
+
+**Ejemplo de filtrado usando comprehensions:**
+```python
+# Filtrar números pares usando una comprehension
+numeros_pares = [n for n in numeros if n % 2 == 0]
+print("Números pares:", numeros_pares)  # Imprime: Números pares: [2, 4, 6, 8, 10]
+```
+
+#### Reducción
+
+La reducción es el proceso de aplicar una función de forma acumulativa a los elementos de una colección para reducirla a un solo valor. En Python, esto se puede hacer usando la función `reduce()` del módulo `functools`.
+
+**Ejemplo de reducción usando `reduce()`:**
+```python
+from functools import reduce
+
+# Lista de números
+numeros = [1, 2, 3, 4, 5]
+
+# Función que multiplica dos números
+def multiplicar(x, y):
+    return x * y
+
+# Calcular el producto de todos los números usando reduce()
+producto = reduce(multiplicar, numeros)
+print("Producto de los números:", producto)  # Imprime: Producto de los números: 120
+```
+
+#### Recolección (map)
+
+La recolección es el proceso de transformar cada elemento de una colección aplicando una función a cada uno de ellos. En Python, esto se puede hacer usando la función `map()` o las comprehensions.
+
+**Ejemplo de recolección usando `map()`:**
+```python
+# Lista de números
+numeros = [1, 2, 3, 4, 5]
+
+# Función que cuadrado de un número
+def cuadrado(n):
+    return n ** 2
+
+# Aplicar la función a cada elemento usando map()
+numeros_cuadrados = list(map(cuadrado, numeros))
+print("Números al cuadrado:", numeros_cuadrados)  # Imprime: Números al cuadrado: [1, 4, 9, 16, 25]
+```
+
+**Ejemplo de recolección usando comprehensions:**
+```python
+# Aplicar la función a cada elemento usando una comprehension
+numeros_cuadrados = [n ** 2 for n in numeros]
+print("Números al cuadrado:", numeros_cuadrados)  # Imprime: Números al cuadrado: [1, 4, 9, 16, 25]
+```
+
+### Ejemplo completo usando filtrado, reducción y recolección
+
+A continuación se presenta un ejemplo completo que combina filtrado, reducción y recolección en un contexto práctico.
+
+**Ejemplo completo:**
+```python
+from functools import reduce
+
+# Lista de estudiantes con sus calificaciones
+estudiantes = [
+    {"nombre": "Ana", "calificaciones": [85, 92, 78]},
+    {"nombre": "Luis", "calificaciones": [79, 95, 88]},
+    {"nombre": "Carlos", "calificaciones": [92, 88, 84]},
+    {"nombre": "Maria", "calificaciones": [70, 80, 85]},
+]
+
+# 1. Filtrar estudiantes con un promedio mayor a 80
+def promedio(calificaciones):
+    return sum(calificaciones) / len(calificaciones)
+
+estudiantes_destacados = list(filter(lambda est: promedio(est["calificaciones"]) > 80, estudiantes))
+print("Estudiantes destacados:", estudiantes_destacados)
+
+# 2. Calcular el promedio de todas las calificaciones de los estudiantes destacados
+promedios_destacados = list(map(lambda est: promedio(est["calificaciones"]), estudiantes_destacados))
+print("Promedios de estudiantes destacados:", promedios_destacados)
+
+# 3. Calcular la media de los promedios usando reduce()
+media_promedios = reduce(lambda x, y: x + y, promedios_destacados) / len(promedios_destacados)
+print("Media de los promedios destacados:", media_promedios)
+```
+
+En este ejemplo:
+- Se filtran los estudiantes cuyo promedio de calificaciones es mayor a 80.
+- Se calculan los promedios de calificaciones de los estudiantes destacados.
+- Se calcula la media de estos promedios usando `reduce()`.
+
+### Resumen
+
+- **Filtrado**: Seleccionar elementos de una colección que cumplen con un criterio específico. Se puede hacer usando `filter()` o comprehensions.
+- **Reducción**: Aplicar una función de forma acumulativa a los elementos de una colección para reducirla a un solo valor. Se puede hacer usando `reduce()`.
+- **Recolección**: Transformar cada elemento de una colección aplicando una función a cada uno de ellos. Se puede hacer usando `map()` o comprehensions.
+
+Estas operaciones agregadas permiten realizar cálculos y transformaciones complejas en colecciones de datos de manera eficiente y concisa, mejorando la legibilidad y mantenibilidad del código.

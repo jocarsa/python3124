@@ -1,0 +1,165 @@
+### Herencia y Polimorfismo
+
+#### Herencia
+
+La herencia es un principio fundamental de la programación orientada a objetos (OOP) que permite crear nuevas clases basadas en clases existentes. La clase derivada (o subclase) hereda atributos y métodos de la clase base (o superclase), lo que facilita la reutilización del código y la creación de jerarquías de clases.
+
+**Ejemplo de herencia:**
+```python
+# Clase base
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."
+
+# Clase derivada
+class Estudiante(Persona):
+    def __init__(self, nombre, edad, carrera):
+        super().__init__(nombre, edad)
+        self.carrera = carrera
+
+    def estudiar(self):
+        return f"Estoy estudiando {self.carrera}."
+
+# Crear una instancia de Estudiante
+estudiante = Estudiante("Ana", 20, "Ingeniería")
+print(estudiante.saludar())  # Imprime: Hola, me llamo Ana y tengo 20 años.
+print(estudiante.estudiar())  # Imprime: Estoy estudiando Ingeniería.
+```
+
+En este ejemplo:
+- `Estudiante` hereda de `Persona`.
+- `Estudiante` tiene acceso a los métodos y atributos de `Persona`, como `saludar`.
+- `Estudiante` agrega su propio método `estudiar` y atributo `carrera`.
+
+#### Polimorfismo
+
+El polimorfismo permite que objetos de diferentes clases se traten de la misma manera. Esto se logra mediante la herencia y la sobrescritura de métodos. El polimorfismo permite que una función acepte objetos de diferentes tipos, siempre y cuando compartan una interfaz común.
+
+**Ejemplo de polimorfismo:**
+```python
+# Clase base
+class Animal:
+    def hablar(self):
+        pass
+
+# Clases derivadas
+class Perro(Animal):
+    def hablar(self):
+        return "Guau!"
+
+class Gato(Animal):
+    def hablar(self):
+        return "Miau!"
+
+# Función que utiliza polimorfismo
+def hacer_hablar(animal):
+    print(animal.hablar())
+
+# Crear instancias de Perro y Gato
+perro = Perro()
+gato = Gato()
+
+# Usar polimorfismo
+hacer_hablar(perro)  # Imprime: Guau!
+hacer_hablar(gato)   # Imprime: Miau!
+```
+
+En este ejemplo:
+- `Perro` y `Gato` heredan de `Animal` y sobrescriben el método `hablar`.
+- La función `hacer_hablar` acepta cualquier objeto que tenga el método `hablar`, demostrando polimorfismo.
+
+#### Herencia Múltiple
+
+Python permite la herencia múltiple, donde una clase puede heredar de más de una clase base. Esto puede ser útil pero también puede complicar el diseño y conducir a problemas como la ambigüedad en la resolución de métodos.
+
+**Ejemplo de herencia múltiple:**
+```python
+class Volador:
+    def volar(self):
+        return "Estoy volando"
+
+class Nadador:
+    def nadar(self):
+        return "Estoy nadando"
+
+class Pato(Volador, Nadador):
+    pass
+
+# Crear una instancia de Pato
+pato = Pato()
+print(pato.volar())  # Imprime: Estoy volando
+print(pato.nadar())  # Imprime: Estoy nadando
+```
+
+En este ejemplo:
+- `Pato` hereda de `Volador` y `Nadador`.
+- `Pato` tiene acceso a los métodos `volar` y `nadar`.
+
+### Ejemplo Completo Combinando Herencia y Polimorfismo
+
+A continuación se presenta un ejemplo completo que combina herencia, polimorfismo y herencia múltiple.
+
+**Ejemplo completo:**
+```python
+# Clase base
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."
+
+# Clase derivada de Persona
+class Estudiante(Persona):
+    def __init__(self, nombre, edad, carrera):
+        super().__init__(nombre, edad)
+        self.carrera = carrera
+
+    def estudiar(self):
+        return f"Estoy estudiando {self.carrera}."
+
+# Clases adicionales para herencia múltiple
+class Volador:
+    def volar(self):
+        return "Estoy volando"
+
+class Nadador:
+    def nadar(self):
+        return "Estoy nadando"
+
+# Clase que hereda de Estudiante, Volador y Nadador
+class SuperEstudiante(Estudiante, Volador, Nadador):
+    def __init__(self, nombre, edad, carrera):
+        Estudiante.__init__(self, nombre, edad, carrera)
+
+# Crear una instancia de SuperEstudiante
+super_estudiante = SuperEstudiante("Luis", 22, "Arquitectura")
+print(super_estudiante.saludar())  # Imprime: Hola, me llamo Luis y tengo 22 años.
+print(super_estudiante.estudiar())  # Imprime: Estoy estudiando Arquitectura.
+print(super_estudiante.volar())     # Imprime: Estoy volando
+print(super_estudiante.nadar())     # Imprime: Estoy nadando
+
+# Usar polimorfismo con la clase base Persona
+def presentar(persona):
+    print(persona.saludar())
+
+presentar(super_estudiante)  # Imprime: Hola, me llamo Luis y tengo 22 años.
+```
+
+En este ejemplo:
+- `SuperEstudiante` hereda de `Estudiante`, `Volador`, y `Nadador`, combinando sus comportamientos.
+- La función `presentar` demuestra el polimorfismo, aceptando cualquier objeto que tenga el método `saludar`.
+
+### Resumen
+
+- **Herencia**: Permite crear nuevas clases basadas en clases existentes, facilitando la reutilización y extensión del código.
+- **Polimorfismo**: Permite tratar objetos de diferentes clases de manera uniforme, siempre que compartan una interfaz común.
+- **Herencia Múltiple**: Permite que una clase herede de más de una clase base, combinando sus comportamientos.
+- **Aplicaciones prácticas**: Ejemplos incluyen la creación de jerarquías de clases para representar relaciones "es-un" y el uso de polimorfismo para diseñar funciones más generales y flexibles.
+
+La herencia y el polimorfismo son herramientas poderosas en la programación orientada a objetos, que permiten diseñar sistemas modulares, reutilizables y extensibles.

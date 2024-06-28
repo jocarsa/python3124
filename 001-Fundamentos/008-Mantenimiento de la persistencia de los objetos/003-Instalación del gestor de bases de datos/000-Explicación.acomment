@@ -1,0 +1,149 @@
+### Instalación del Gestor de Bases de Datos
+
+La instalación de un gestor de bases de datos orientado a objetos (OODBMS) varía dependiendo del sistema que se elija. Para esta guía, utilizaremos ZODB (Zope Object Database), un gestor de bases de datos orientado a objetos para Python que permite almacenar objetos de manera persistente. ZODB es conocido por su simplicidad y eficiencia en la gestión de objetos.
+
+#### Instalación de ZODB
+
+Para instalar ZODB, necesitas tener Python y `pip` (el gestor de paquetes de Python) instalados en tu sistema. Sigue estos pasos para instalar ZODB:
+
+1. **Abrir una Terminal o Símbolo del Sistema:**
+
+   En Windows, puedes abrir la terminal (cmd) o PowerShell. En macOS y Linux, puedes utilizar la aplicación Terminal.
+
+2. **Instalar ZODB Usando `pip`:**
+
+   Ejecuta el siguiente comando para instalar ZODB:
+
+   ```bash
+   pip install ZODB
+   ```
+
+   Esto descargará e instalará ZODB y sus dependencias.
+
+3. **Verificar la Instalación:**
+
+   Una vez completada la instalación, puedes verificar que ZODB se haya instalado correctamente ejecutando el siguiente comando en la terminal:
+
+   ```bash
+   pip show ZODB
+   ```
+
+   Este comando mostrará información sobre el paquete ZODB, confirmando que está instalado.
+
+### Creación y Uso de una Base de Datos con ZODB
+
+A continuación, te mostraré cómo crear y usar una base de datos con ZODB, incluyendo la creación de objetos, almacenamiento y recuperación.
+
+#### Crear una Base de Datos y Almacenar Objetos
+
+1. **Configurar el Almacenamiento y la Base de Datos:**
+
+   Primero, necesitas configurar el almacenamiento (donde se guardarán los datos) y abrir la base de datos.
+
+   ```python
+   import ZODB, ZODB.FileStorage
+   import transaction
+   from persistent import Persistent
+
+   # Crear el almacenamiento y la base de datos
+   storage = ZODB.FileStorage.FileStorage('mydata.fs')
+   db = ZODB.DB(storage)
+   connection = db.open()
+   root = connection.root()
+   ```
+
+2. **Definir Clases Persistentes:**
+
+   Define las clases que deseas almacenar en la base de datos. Estas clases deben heredar de `Persistent`.
+
+   ```python
+   class Persona(Persistent):
+       def __init__(self, nombre, edad):
+           self.nombre = nombre
+           self.edad = edad
+   ```
+
+3. **Crear y Almacenar Objetos:**
+
+   Crea instancias de tus clases y almacénalas en la base de datos.
+
+   ```python
+   # Crear y almacenar objetos
+   root['persona1'] = Persona('Ana', 30)
+   root['persona2'] = Persona('Luis', 25)
+
+   # Confirmar la transacción
+   transaction.commit()
+   ```
+
+4. **Recuperar Objetos:**
+
+   Recupera los objetos almacenados de la base de datos.
+
+   ```python
+   # Recuperar objetos
+   persona1 = root['persona1']
+   persona2 = root['persona2']
+   print(f"{persona1.nombre} tiene {persona1.edad} años.")  # Imprime: Ana tiene 30 años.
+   print(f"{persona2.nombre} tiene {persona2.edad} años.")  # Imprime: Luis tiene 25 años.
+   ```
+
+5. **Cerrar la Conexión y la Base de Datos:**
+
+   Finalmente, cierra la conexión y la base de datos para asegurar que todos los datos se guarden correctamente.
+
+   ```python
+   # Cerrar la conexión y la base de datos
+   connection.close()
+   db.close()
+   ```
+
+### Ejemplo Completo
+
+Aquí tienes un ejemplo completo que combina todos los pasos anteriores:
+
+```python
+import ZODB, ZODB.FileStorage
+import transaction
+from persistent import Persistent
+
+# Crear el almacenamiento y la base de datos
+storage = ZODB.FileStorage.FileStorage('mydata.fs')
+db = ZODB.DB(storage)
+connection = db.open()
+root = connection.root()
+
+# Definir una clase persistente
+class Persona(Persistent):
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+# Crear y almacenar objetos
+root['persona1'] = Persona('Ana', 30)
+root['persona2'] = Persona('Luis', 25)
+
+# Confirmar la transacción
+transaction.commit()
+
+# Recuperar objetos
+persona1 = root['persona1']
+persona2 = root['persona2']
+print(f"{persona1.nombre} tiene {persona1.edad} años.")  # Imprime: Ana tiene 30 años.
+print(f"{persona2.nombre} tiene {persona2.edad} años.")  # Imprime: Luis tiene 25 años.
+
+# Cerrar la conexión y la base de datos
+connection.close()
+db.close()
+```
+
+### Resumen
+
+- **Instalación de ZODB**: Utiliza `pip install ZODB` para instalar ZODB.
+- **Configuración del Almacenamiento y la Base de Datos**: Utiliza `ZODB.FileStorage` para configurar el almacenamiento y abrir la base de datos.
+- **Definición de Clases Persistentes**: Las clases que se almacenarán en la base de datos deben heredar de `Persistent`.
+- **Creación y Almacenamiento de Objetos**: Crea instancias de las clases y almacénalas en la base de datos.
+- **Recuperación de Objetos**: Recupera los objetos almacenados de la base de datos.
+- **Cierre de Conexión y Base de Datos**: Asegúrate de cerrar la conexión y la base de datos para guardar los datos correctamente.
+
+La instalación y uso de un gestor de bases de datos orientadas a objetos como ZODB permite almacenar y gestionar objetos de manera eficiente, proporcionando una integración fluida con la programación orientada a objetos en Python.

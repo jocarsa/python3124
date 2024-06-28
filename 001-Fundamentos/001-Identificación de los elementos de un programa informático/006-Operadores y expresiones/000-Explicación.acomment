@@ -1,0 +1,158 @@
+### Operadores y expresiones
+
+#### Operadores y expresiones
+
+Los operadores en Python son símbolos que se utilizan para realizar operaciones sobre uno o más operandos. Una expresión en Python es una combinación de operadores y operandos que se evalúa para producir un valor. A continuación, se describen los diferentes tipos de operadores y cómo se usan en las expresiones.
+
+#### 1. Operadores aritméticos
+
+Los operadores aritméticos se utilizan para realizar operaciones matemáticas básicas.
+
+- **Suma (`+`)**: Añade dos operandos.
+- **Resta (`-`)**: Resta el segundo operando del primero.
+- **Multiplicación (`*`)**: Multiplica dos operandos.
+- **División (`/`)**: Divide el primer operando por el segundo.
+- **División entera (`//`)**: Divide el primer operando por el segundo y devuelve el resultado entero.
+- **Módulo (`%`)**: Devuelve el resto de la división del primer operando por el segundo.
+- **Exponenciación (`**`)**: Eleva el primer operando a la potencia del segundo.
+
+**Ejemplo:**
+```python
+a = 10
+b = 3
+
+suma = a + b        # 13
+resta = a - b       # 7
+multiplicacion = a * b  # 30
+division = a / b    # 3.3333333333333335
+division_entera = a // b  # 3
+modulo = a % b      # 1
+exponenciacion = a ** b  # 1000
+```
+
+#### 2. Operadores relacionales
+
+Los operadores relacionales comparan dos operandos y devuelven un valor booleano (`True` o `False`).
+
+- **Igual a (`==`)**: Devuelve `True` si ambos operandos son iguales.
+- **Distinto de (`!=`)**: Devuelve `True` si los operandos no son iguales.
+- **Mayor que (`>`)**: Devuelve `True` si el primer operando es mayor que el segundo.
+- **Menor que (`<`)**: Devuelve `True` si el primer operando es menor que el segundo.
+- **Mayor o igual que (`>=`)**: Devuelve `True` si el primer operando es mayor o igual que el segundo.
+- **Menor o igual que (`<=`)**: Devuelve `True` si el primer operando es menor o igual que el segundo.
+
+**Ejemplo:**
+```python
+a = 10
+b = 5
+
+print(a == b)  # False
+print(a != b)  # True
+print(a > b)   # True
+print(a < b)   # False
+print(a >= b)  # True
+print(a <= b)  # False
+```
+
+#### 3. Operadores lógicos
+
+Los operadores lógicos se utilizan para combinar expresiones booleanas.
+
+- **Y lógico (`and`)**: Devuelve `True` si ambas expresiones son verdaderas.
+- **O lógico (`or`)**: Devuelve `True` si al menos una de las expresiones es verdadera.
+- **Negación lógica (`not`)**: Invierte el valor de verdad de la expresión.
+
+**Ejemplo:**
+```python
+a = True
+b = False
+
+print(a and b)  # False
+print(a or b)   # True
+print(not a)    # False
+```
+
+#### 4. Operadores de asignación
+
+Los operadores de asignación se utilizan para asignar valores a las variables.
+
+- **Asignación (`=`)**: Asigna el valor del operando derecho al operando izquierdo.
+- **Asignación de suma (`+=`)**: Añade el operando derecho al operando izquierdo y asigna el resultado al operando izquierdo.
+- **Asignación de resta (`-=`)**: Resta el operando derecho del operando izquierdo y asigna el resultado al operando izquierdo.
+- **Asignación de multiplicación (`*=`)**: Multiplica el operando izquierdo por el operando derecho y asigna el resultado al operando izquierdo.
+- **Asignación de división (`/=`)**: Divide el operando izquierdo por el operando derecho y asigna el resultado al operando izquierdo.
+- **Asignación de módulo (`%=`)**: Aplica el operador módulo al operando izquierdo con el operando derecho y asigna el resultado al operando izquierdo.
+- **Asignación de división entera (`//=`)**: Divide el operando izquierdo por el operando derecho y asigna el resultado entero al operando izquierdo.
+- **Asignación de exponenciación (`**=`)**: Eleva el operando izquierdo a la potencia del operando derecho y asigna el resultado al operando izquierdo.
+
+**Ejemplo:**
+```python
+a = 10
+a += 5  # 15
+a -= 3  # 12
+a *= 2  # 24
+a /= 4  # 6.0
+a %= 2  # 0.0
+a //= 3  # 0.0
+a **= 2  # 0.0
+```
+
+#### 5. Operadores bit a bit
+
+Los operadores bit a bit operan sobre los bits individuales de números enteros.
+
+- **AND bit a bit (`&`)**: Realiza la operación AND bit a bit.
+- **OR bit a bit (`|`)**: Realiza la operación OR bit a bit.
+- **XOR bit a bit (`^`)**: Realiza la operación XOR bit a bit.
+- **Negación bit a bit (`~`)**: Invierte los bits del operando.
+- **Desplazamiento a la izquierda (`<<`)**: Desplaza los bits del operando a la izquierda.
+- **Desplazamiento a la derecha (`>>`)**: Desplaza los bits del operando a la derecha.
+
+**Ejemplo:**
+```python
+a = 60    # 0011 1100
+b = 13    # 0000 1101
+
+print(a & b)  # 12  (0000 1100)
+print(a | b)  # 61  (0011 1101)
+print(a ^ b)  # 49  (0011 0001)
+print(~a)     # -61 (1100 0011)
+print(a << 2) # 240 (1111 0000)
+print(a >> 2) # 15  (0000 1111)
+```
+
+#### 6. Operadores de pertenencia
+
+Los operadores de pertenencia se utilizan para verificar si un valor o variable está presente en una secuencia (como una lista, tupla, conjunto o cadena).
+
+- **in**: Devuelve `True` si el valor se encuentra en la secuencia.
+- **not in**: Devuelve `True` si el valor no se encuentra en la secuencia.
+
+**Ejemplo:**
+```python
+lista = [1, 2, 3, 4, 5]
+
+print(3 in lista)      # True
+print(6 not in lista)  # True
+```
+
+#### 7. Operadores de identidad
+
+Los operadores de identidad se utilizan para comparar objetos y verificar si son el mismo objeto en memoria.
+
+- **is**: Devuelve `True` si ambos operandos refieren al mismo objeto.
+- **is not**: Devuelve `True` si ambos operandos no refieren al mismo objeto.
+
+**Ejemplo:**
+```python
+a = [1, 2, 3]
+b = a
+c = a[:]
+
+print(a is b)      # True
+print(a is not c)  # True
+```
+
+Estos operadores y expresiones permiten realizar una amplia variedad de operaciones y manipulaciones en Python, desde simples cálculos aritméticos hasta complejas operaciones lógicas y bit a bit. Entender cómo usarlos eficazmente es crucial para escribir programas eficientes y funcionales.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

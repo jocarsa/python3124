@@ -1,0 +1,229 @@
+### Prueba, depuración y documentación de la aplicación
+
+#### Prueba, depuración y documentación de la aplicación
+
+Desarrollar aplicaciones robustas y mantenibles requiere un enfoque cuidadoso en pruebas, depuración y documentación. Estas prácticas aseguran que el código funcione correctamente, los errores se identifiquen y solucionen de manera eficiente, y el código sea comprensible y utilizable por otros desarrolladores.
+
+#### 1. Pruebas
+
+Las pruebas permiten verificar que el código funciona según lo esperado. Python ofrece varias herramientas para realizar pruebas, siendo `unittest` y `pytest` dos de las más populares.
+
+##### 1.1. `unittest`
+
+`unittest` es un marco de pruebas integrado en Python que facilita la creación y ejecución de pruebas unitarias.
+
+**Ejemplo de `unittest`:**
+```python
+import unittest
+
+def sumar(a, b):
+    return a + b
+
+class TestSumar(unittest.TestCase):
+    def test_sumar(self):
+        self.assertEqual(sumar(1, 2), 3)
+        self.assertEqual(sumar(-1, 1), 0)
+        self.assertEqual(sumar(-1, -1), -2)
+
+if __name__ == '__main__':
+    unittest.main()
+```
+
+En este ejemplo, se define una función `sumar` y una clase `TestSumar` que hereda de `unittest.TestCase`. La clase contiene métodos que prueban diferentes casos de la función `sumar`.
+
+##### 1.2. `pytest`
+
+`pytest` es una herramienta de prueba más avanzada que proporciona funcionalidades adicionales y una sintaxis más simple.
+
+**Ejemplo de `pytest`:**
+```python
+def sumar(a, b):
+    return a + b
+
+def test_sumar():
+    assert sumar(1, 2) == 3
+    assert sumar(-1, 1) == 0
+    assert sumar(-1, -1) == -2
+```
+
+Para ejecutar las pruebas, simplemente use el comando `pytest` en la línea de comandos.
+
+```bash
+pytest nombre_del_archivo.py
+```
+
+#### 2. Depuración
+
+La depuración es el proceso de identificar y corregir errores en el código. Python proporciona varias herramientas para la depuración, siendo `pdb` una de las más utilizadas.
+
+##### 2.1. `pdb`
+
+`pdb` es el depurador de Python integrado que permite ejecutar el código paso a paso, inspeccionar variables y evaluar expresiones.
+
+**Ejemplo de `pdb`:**
+```python
+import pdb
+
+def dividir(a, b):
+    pdb.set_trace()
+    return a / b
+
+resultado = dividir(10, 2)
+print(resultado)
+```
+
+En este ejemplo, `pdb.set_trace()` inicia una sesión de depuración interactiva cuando se llama a la función `dividir`.
+
+##### 2.2. Uso de `print` para depuración
+
+A veces, simplemente agregar declaraciones `print` para mostrar el estado de las variables en diferentes puntos del programa puede ayudar a identificar problemas.
+
+**Ejemplo:**
+```python
+def dividir(a, b):
+    print(f"a = {a}, b = {b}")
+    return a / b
+
+resultado = dividir(10, 2)
+print(resultado)
+```
+
+#### 3. Documentación
+
+La documentación es crucial para asegurar que el código sea comprensible y mantenible. Python utiliza docstrings para documentar módulos, clases y funciones. Además, hay herramientas como Sphinx que pueden generar documentación HTML a partir de docstrings.
+
+##### 3.1. Docstrings
+
+Las docstrings son cadenas de texto que se colocan inmediatamente después de la definición de un módulo, clase o función para describir su propósito y uso.
+
+**Ejemplo:**
+```python
+def sumar(a, b):
+    """
+    Suma dos números y devuelve el resultado.
+
+    Parámetros:
+    a (int, float): El primer número.
+    b (int, float): El segundo número.
+
+    Devuelve:
+    int, float: La suma de a y b.
+    """
+    return a + b
+
+print(sumar.__doc__)
+```
+
+En este ejemplo, la función `sumar` tiene una docstring que describe qué hace la función, sus parámetros y el valor de retorno.
+
+##### 3.2. Generación de documentación con Sphinx
+
+Sphinx es una herramienta que convierte docstrings en documentación HTML.
+
+**Pasos básicos para usar Sphinx:**
+
+1. Instale Sphinx:
+   ```bash
+   pip install sphinx
+   ```
+
+2. Configure Sphinx en su proyecto:
+   ```bash
+   sphinx-quickstart
+   ```
+
+3. Añada su módulo al archivo `index.rst`:
+   ```rst
+   .. automodule:: mi_modulo
+      :members:
+   ```
+
+4. Genere la documentación:
+   ```bash
+   make html
+   ```
+
+Esto generará documentación HTML a partir de los docstrings de su proyecto.
+
+#### Ejemplo completo: Pruebas, depuración y documentación
+
+A continuación se presenta un ejemplo completo que incluye pruebas, depuración y documentación.
+
+**Código:**
+```python
+def dividir(a, b):
+    """
+    Divide dos números y devuelve el resultado.
+
+    Parámetros:
+    a (int, float): El numerador.
+    b (int, float): El denominador.
+
+    Devuelve:
+    float: El resultado de la división.
+
+    Lanza:
+    ZeroDivisionError: Si b es cero.
+    """
+    if b == 0:
+        raise ZeroDivisionError("El denominador no puede ser cero.")
+    return a / b
+
+if __name__ == "__main__":
+    import unittest
+
+    class TestDividir(unittest.TestCase):
+        def test_dividir(self):
+            self.assertEqual(dividir(10, 2), 5)
+            self.assertEqual(dividir(9, 3), 3)
+            with self.assertRaises(ZeroDivisionError):
+                dividir(10, 0)
+
+    unittest.main()
+```
+
+**Depuración:**
+```python
+import pdb
+
+def dividir(a, b):
+    pdb.set_trace()
+    if b == 0:
+        raise ZeroDivisionError("El denominador no puede ser cero.")
+    return a / b
+
+resultado = dividir(10, 2)
+print(resultado)
+```
+
+**Documentación:**
+```python
+def dividir(a, b):
+    """
+    Divide dos números y devuelve el resultado.
+
+    Parámetros:
+    a (int, float): El numerador.
+    b (int, float): El denominador.
+
+    Devuelve:
+    float: El resultado de la división.
+
+    Lanza:
+    ZeroDivisionError: Si b es cero.
+    """
+    if b == 0:
+        raise ZeroDivisionError("El denominador no puede ser cero.")
+    return a / b
+```
+
+**Ejecución de pruebas:**
+```bash
+python -m unittest mi_modulo.py
+```
+
+En este ejemplo, se muestra cómo escribir pruebas unitarias con `unittest`, cómo usar `pdb` para la depuración y cómo documentar la función `dividir` con docstrings.
+
+Implementar pruebas, depuración y documentación adecuadas es fundamental para desarrollar software de alta calidad que sea fácil de mantener y ampliar. Estas prácticas aseguran que el código funcione correctamente, facilite la identificación de errores y proporcione una referencia clara para otros desarrolladores.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

@@ -1,0 +1,94 @@
+### Constantes
+
+#### Constantes
+
+En Python, no existe una sintaxis específica para declarar constantes, como sí la hay en algunos otros lenguajes de programación. Sin embargo, es una convención utilizar nombres de variables en mayúsculas para indicar que esos valores no deben cambiar a lo largo de la ejecución del programa. Las constantes se utilizan para valores que son fijos y no deberían ser modificados una vez asignados.
+
+#### 1. Definición de constantes
+
+Aunque Python no tiene una palabra clave específica para definir constantes, se pueden definir como variables normales pero utilizando nombres en mayúsculas para seguir las convenciones de estilo.
+
+**Ejemplo:**
+```python
+PI = 3.14159
+GRAVEDAD = 9.81
+VELOCIDAD_DE_LA_LUZ = 299792458  # en metros por segundo
+```
+
+#### 2. Uso de constantes
+
+Las constantes se utilizan para almacenar valores que son universales y no deben cambiar. Por ejemplo, valores matemáticos como π (pi), constantes físicas como la velocidad de la luz, o configuraciones fijas que deben ser consistentes en todo el programa.
+
+**Ejemplo:**
+```python
+def calcular_area_circulo(radio):
+    return PI * radio * radio
+
+radio = 5
+area = calcular_area_circulo(radio)
+print(f"El área de un círculo con radio {radio} es {area}")
+```
+
+#### 3. Módulos de constantes
+
+En aplicaciones más grandes, es común agrupar todas las constantes en un módulo separado. Esto mejora la organización del código y facilita la gestión de las constantes.
+
+**Ejemplo:**
+```python
+# archivo constantes.py
+PI = 3.14159
+GRAVEDAD = 9.81
+VELOCIDAD_DE_LA_LUZ = 299792458  # en metros por segundo
+
+# archivo principal.py
+import constantes
+
+def calcular_energia(masa):
+    return masa * constantes.VELOCIDAD_DE_LA_LUZ ** 2
+
+masa = 0.1  # en kilogramos
+energia = calcular_energia(masa)
+print(f"La energía es {energia} joules")
+```
+
+#### 4. Bibliotecas estándar y constantes predefinidas
+
+Python incluye algunas constantes predefinidas en sus bibliotecas estándar. Un ejemplo es el módulo `math`, que define constantes matemáticas como `math.pi` y `math.e`.
+
+**Ejemplo:**
+```python
+import math
+
+print(math.pi)  # Imprime: 3.141592653589793
+print(math.e)   # Imprime: 2.718281828459045
+```
+
+#### 5. Inmutabilidad de las constantes
+
+Es importante recordar que aunque se sigue la convención de utilizar mayúsculas para indicar que una variable es una constante, Python no impide la modificación de estas variables. Por lo tanto, es responsabilidad del programador asegurar que estos valores no sean cambiados accidentalmente.
+
+**Ejemplo de intento de modificación:**
+```python
+PI = 3.14159
+PI = 3.14  # Aunque esto es posible, se considera una mala práctica
+```
+
+#### 6. Uso de `namedtuple` para constantes agrupadas
+
+Para agrupar un conjunto de constantes relacionadas, se puede utilizar `namedtuple` del módulo `collections`. Esto proporciona una estructura inmutable para las constantes.
+
+**Ejemplo:**
+```python
+from collections import namedtuple
+
+# Definir una estructura inmutable para las constantes físicas
+ConstantesFisicas = namedtuple('ConstantesFisicas', ['GRAVEDAD', 'VELOCIDAD_DE_LA_LUZ'])
+constantes = ConstantesFisicas(GRAVEDAD=9.81, VELOCIDAD_DE_LA_LUZ=299792458)
+
+print(constantes.GRAVEDAD)  # Imprime: 9.81
+print(constantes.VELOCIDAD_DE_LA_LUZ)  # Imprime: 299792458
+```
+
+Utilizar constantes adecuadamente mejora la legibilidad y mantenibilidad del código, ya que los valores fijos y universales se centralizan y se documentan claramente. Seguir las convenciones de nomenclatura es clave para que el propósito de estas constantes sea evidente para cualquier persona que lea el código.
+
+¿Te gustaría que continúe con el siguiente apartado? Si es así, indícame cuál es el siguiente.

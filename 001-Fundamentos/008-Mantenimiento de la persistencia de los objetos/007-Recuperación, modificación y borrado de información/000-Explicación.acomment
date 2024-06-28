@@ -1,0 +1,157 @@
+### Recuperación, Modificación y Borrado de Información en ZODB
+
+En esta sección, discutiremos cómo recuperar, modificar y borrar información en una base de datos orientada a objetos utilizando ZODB en Python.
+
+### Recuperación de Información
+
+La recuperación de información en ZODB se realiza mediante la navegación a través de los objetos almacenados en la base de datos.
+
+#### Ejemplo de Recuperación de Objetos
+
+**Configuración Inicial:**
+```python
+import ZODB, ZODB.FileStorage
+import transaction
+from persistent import Persistent
+
+# Definir una clase persistente
+class Persona(Persistent):
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+# Crear el almacenamiento y la base de datos
+storage = ZODB.FileStorage.FileStorage('mydata.fs')
+db = ZODB.DB(storage)
+connection = db.open()
+root = connection.root()
+
+# Crear y almacenar objetos
+if 'personas' not in root:
+    root['personas'] = [
+        Persona('Ana', 30),
+        Persona('Luis', 25),
+        Persona('Carlos', 35)
+    ]
+    transaction.commit()
+```
+
+#### Recuperar Objetos
+
+**Ejemplo de Recuperación:**
+```python
+# Recuperar todos los objetos
+for persona in root['personas']:
+    print(f"{persona.nombre} tiene {persona.edad} años.")
+```
+
+### Modificación de Información
+
+Modificar información en ZODB implica acceder a los objetos almacenados, cambiar sus atributos y confirmar la transacción para que los cambios se almacenen de manera persistente.
+
+#### Ejemplo de Modificación de Objetos
+
+**Modificar un Atributo:**
+```python
+# Modificar la edad de una persona
+persona_a_modificar = root['personas'][0]  # Ana
+persona_a_modificar.edad = 31
+transaction.commit()
+
+# Verificar la modificación
+for persona in root['personas']:
+    print(f"{persona.nombre} tiene {persona.edad} años.")  # Imprime: Ana tiene 31 años.
+```
+
+### Borrado de Información
+
+Para borrar información en ZODB, simplemente se eliminan las referencias a los objetos y se confirma la transacción.
+
+#### Ejemplo de Borrado de Objetos
+
+**Borrar un Objeto:**
+```python
+# Borrar una persona de la lista
+persona_a_borrar = root['personas'][1]  # Luis
+root['personas'].remove(persona_a_borrar)
+transaction.commit()
+
+# Verificar el borrado
+for persona in root['personas']:
+    print(f"{persona.nombre} tiene {persona.edad} años.")  # Imprime: Ana tiene 31 años, Carlos tiene 35 años.
+```
+
+### Ejemplo Completo: Recuperación, Modificación y Borrado
+
+A continuación, se presenta un ejemplo completo que combina recuperación, modificación y borrado de información en ZODB.
+
+**Ejemplo Completo:**
+```python
+import ZODB, ZODB.FileStorage
+import transaction
+from persistent import Persistent
+
+# Definir una clase persistente
+class Persona(Persistent):
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+# Crear el almacenamiento y la base de datos
+storage = ZODB.FileStorage.FileStorage('mydata.fs')
+db = ZODB.DB(storage)
+connection = db.open()
+root = connection.root()
+
+# Crear y almacenar objetos
+if 'personas' not in root:
+    root['personas'] = [
+        Persona('Ana', 30),
+        Persona('Luis', 25),
+        Persona('Carlos', 35)
+    ]
+    transaction.commit()
+
+# Recuperar objetos
+print("Antes de la modificación:")
+for persona in root['personas']:
+    print(f"{persona.nombre} tiene {persona.edad} años.")
+
+# Modificar un objeto
+persona_a_modificar = root['personas'][0]  # Ana
+persona_a_modificar.edad = 31
+transaction.commit()
+
+# Verificar la modificación
+print("\nDespués de la modificación:")
+for persona in root['personas']:
+    print(f"{persona.nombre} tiene {persona.edad} años.")
+
+# Borrar un objeto
+persona_a_borrar = root['personas'][1]  # Luis
+root['personas'].remove(persona_a_borrar)
+transaction.commit()
+
+# Verificar el borrado
+print("\nDespués del borrado:")
+for persona in root['personas']:
+    print(f"{persona.nombre} tiene {persona.edad} años.")
+
+# Cerrar la conexión y la base de datos
+connection.close()
+db.close()
+```
+
+En este ejemplo:
+- Se definen y almacenan objetos en la base de datos.
+- Se recuperan y muestran los objetos almacenados.
+- Se modifica la edad de un objeto y se confirma la transacción.
+- Se borra un objeto de la base de datos y se confirma la transacción.
+
+### Resumen
+
+- **Recuperación de Información**: Se realiza mediante la navegación a través de los objetos almacenados.
+- **Modificación de Información**: Implica acceder a los objetos, cambiar sus atributos y confirmar la transacción.
+- **Borrado de Información**: Se eliminan las referencias a los objetos y se confirma la transacción para que los cambios sean persistentes.
+
+La recuperación, modificación y borrado de información en ZODB son operaciones fundamentales que permiten gestionar los datos de manera eficiente, utilizando las capacidades del lenguaje Python y la persistencia proporcionada por ZODB.

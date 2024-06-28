@@ -1,0 +1,150 @@
+### Control de excepciones
+
+#### Control de excepciones
+
+El control de excepciones en Python permite manejar errores y condiciones excepcionales que pueden ocurrir durante la ejecución de un programa. Esto es esencial para crear programas robustos y que puedan manejar situaciones inesperadas sin fallar. Python proporciona un mecanismo de manejo de excepciones mediante las instrucciones `try`, `except`, `else`, y `finally`.
+
+#### 1. Uso de `try` y `except`
+
+La instrucción `try` se utiliza para definir un bloque de código que puede generar una excepción. La instrucción `except` define un bloque de código que se ejecutará si ocurre una excepción en el bloque `try`.
+
+**Ejemplo básico:**
+```python
+try:
+    resultado = 10 / 0
+except ZeroDivisionError:
+    print("Error: División por cero")
+```
+
+En este ejemplo, se intenta realizar una división por cero, lo que genera una excepción `ZeroDivisionError`. El bloque `except` captura la excepción y ejecuta el código correspondiente para manejar el error.
+
+#### 2. Manejo de múltiples excepciones
+
+Es posible manejar múltiples excepciones utilizando varios bloques `except` o capturando múltiples excepciones en un solo bloque `except`.
+
+**Ejemplo con múltiples bloques `except`:**
+```python
+try:
+    resultado = 10 / 0
+except ZeroDivisionError:
+    print("Error: División por cero")
+except ValueError:
+    print("Error: Valor no válido")
+```
+
+**Ejemplo con múltiples excepciones en un solo bloque `except`:**
+```python
+try:
+    resultado = int("abc")
+except (ZeroDivisionError, ValueError) as e:
+    print(f"Error: {e}")
+```
+
+En este ejemplo, el bloque `except` captura tanto `ZeroDivisionError` como `ValueError` y maneja ambas excepciones.
+
+#### 3. Uso de `else`
+
+La instrucción `else` se utiliza para definir un bloque de código que se ejecutará si no ocurre ninguna excepción en el bloque `try`.
+
+**Ejemplo:**
+```python
+try:
+    resultado = 10 / 2
+except ZeroDivisionError:
+    print("Error: División por cero")
+else:
+    print(f"El resultado es: {resultado}")
+```
+
+En este ejemplo, como no ocurre ninguna excepción, se ejecuta el bloque `else` que imprime el resultado de la división.
+
+#### 4. Uso de `finally`
+
+La instrucción `finally` se utiliza para definir un bloque de código que se ejecutará siempre, independientemente de si ocurre o no una excepción. Esto es útil para liberar recursos o realizar tareas de limpieza.
+
+**Ejemplo:**
+```python
+try:
+    archivo = open("mi_archivo.txt", "r")
+    contenido = archivo.read()
+except FileNotFoundError:
+    print("Error: El archivo no existe")
+finally:
+    archivo.close()
+    print("El archivo ha sido cerrado")
+```
+
+En este ejemplo, el bloque `finally` asegura que el archivo se cierre siempre, independientemente de si ocurrió una excepción.
+
+#### 5. Definición de excepciones personalizadas
+
+Es posible definir excepciones personalizadas creando clases que hereden de `Exception`. Esto permite crear excepciones específicas para diferentes situaciones en el programa.
+
+**Ejemplo:**
+```python
+class ErrorPersonalizado(Exception):
+    def __init__(self, mensaje):
+        self.mensaje = mensaje
+
+try:
+    raise ErrorPersonalizado("Este es un error personalizado")
+except ErrorPersonalizado as e:
+    print(f"Error: {e.mensaje}")
+```
+
+En este ejemplo, se define una excepción personalizada `ErrorPersonalizado` y se lanza utilizando `raise`. El bloque `except` captura y maneja la excepción personalizada.
+
+#### 6. Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra cómo utilizar `try`, `except`, `else`, `finally` y excepciones personalizadas en un programa.
+
+**Ejemplo:**
+```python
+class ErrorDeSaldoInsuficiente(Exception):
+    def __init__(self, saldo, cantidad):
+        super().__init__(f"Saldo insuficiente para retirar {cantidad}. Saldo disponible: {saldo}")
+        self.saldo = saldo
+        self.cantidad = cantidad
+
+class CuentaBancaria:
+    def __init__(self, titular, saldo=0):
+        self.titular = titular
+        self.saldo = saldo
+
+    def depositar(self, cantidad):
+        if cantidad <= 0:
+            raise ValueError("La cantidad a depositar debe ser positiva")
+        self.saldo += cantidad
+        print(f"Depósito de {cantidad} realizado. Saldo actual: {self.saldo}")
+
+    def retirar(self, cantidad):
+        if cantidad > self.saldo:
+            raise ErrorDeSaldoInsuficiente(self.saldo, cantidad)
+        self.saldo -= cantidad
+        print(f"Retiro de {cantidad} realizado. Saldo actual: {self.saldo}")
+
+    def mostrar_saldo(self):
+        print(f"Saldo actual: {self.saldo}")
+
+try:
+    cuenta = CuentaBancaria("Ana", 100)
+    cuenta.depositar(50)
+    cuenta.retirar(200)
+except ValueError as e:
+    print(f"Error: {e}")
+except ErrorDeSaldoInsuficiente as e:
+    print(f"Error: {e}")
+else:
+    cuenta.mostrar_saldo()
+finally:
+    print("Operación bancaria finalizada")
+```
+
+En este ejemplo:
+- Se define una excepción personalizada `ErrorDeSaldoInsuficiente`.
+- La clase `CuentaBancaria` tiene métodos para depositar y retirar dinero, que pueden lanzar excepciones.
+- Se utiliza `try`, `except`, `else` y `finally` para manejar las operaciones bancarias y las posibles excepciones de manera adecuada.
+
+El control de excepciones es esencial para manejar errores y condiciones excepcionales en los programas de manera robusta y elegante. Comprender cómo utilizar `try`, `except`, `else` y `finally`, así como definir excepciones personalizadas, es fundamental para escribir código Python confiable y mantenible.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

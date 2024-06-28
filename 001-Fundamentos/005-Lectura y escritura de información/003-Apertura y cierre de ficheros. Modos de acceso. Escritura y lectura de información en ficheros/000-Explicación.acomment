@@ -1,0 +1,153 @@
+### Apertura y cierre de ficheros. Modos de acceso. Escritura y lectura de información en ficheros.
+
+#### Apertura y cierre de ficheros
+
+Para trabajar con ficheros en Python, se utiliza la función `open()`, que permite abrir un archivo en diferentes modos de acceso. Una vez terminado el trabajo con el archivo, es importante cerrarlo para liberar los recursos del sistema utilizando el método `close()`. Sin embargo, la forma más segura y recomendada de manejar archivos en Python es utilizando la instrucción `with`, que asegura que el archivo se cierre automáticamente al final del bloque.
+
+**Ejemplo básico:**
+```python
+# Abrir un archivo en modo lectura
+archivo = open('archivo.txt', 'r')
+# Leer el contenido del archivo
+contenido = archivo.read()
+# Cerrar el archivo
+archivo.close()
+
+# Usando la instrucción 'with'
+with open('archivo.txt', 'r') as archivo:
+    contenido = archivo.read()
+# No es necesario cerrar el archivo explícitamente
+```
+
+#### Modos de acceso
+
+Python permite abrir ficheros en diferentes modos de acceso, dependiendo de la operación que se quiera realizar.
+
+**Modos de acceso comunes:**
+- `'r'`: Lectura. El archivo debe existir.
+- `'w'`: Escritura. Crea un archivo nuevo o sobrescribe uno existente.
+- `'a'`: Añadir. Escribe al final del archivo.
+- `'b'`: Modo binario. Se puede combinar con otros modos.
+- `'+'`: Lectura y escritura. Se puede combinar con otros modos.
+
+**Combinaciones comunes:**
+- `'rb'`: Lectura en modo binario.
+- `'wb'`: Escritura en modo binario.
+- `'r+'`: Lectura y escritura.
+- `'w+'`: Escritura y lectura. Crea un archivo nuevo o sobrescribe uno existente.
+- `'a+'`: Añadir y lectura. Escribe al final del archivo y permite leer.
+
+**Ejemplo:**
+```python
+# Lectura en modo texto
+with open('archivo.txt', 'r', encoding='utf-8') as archivo:
+    contenido = archivo.read()
+    print(contenido)
+
+# Escritura en modo texto
+with open('archivo.txt', 'w', encoding='utf-8') as archivo:
+    archivo.write('Hola, mundo')
+
+# Añadir en modo texto
+with open('archivo.txt', 'a', encoding='utf-8') as archivo:
+    archivo.write('\nNueva línea añadida')
+
+# Lectura en modo binario
+with open('imagen.png', 'rb') as archivo:
+    contenido = archivo.read()
+    print(contenido)
+
+# Escritura en modo binario
+with open('imagen_copia.png', 'wb') as archivo:
+    archivo.write(contenido)
+```
+
+#### Escritura y lectura de información en ficheros
+
+**Escritura de información:**
+Para escribir información en un fichero, se utilizan los métodos `write()` y `writelines()`.
+
+**Ejemplo:**
+```python
+# Escritura de una cadena
+with open('archivo.txt', 'w', encoding='utf-8') as archivo:
+    archivo.write('Hola, mundo')
+
+# Escritura de múltiples líneas
+lineas = ['Primera línea\n', 'Segunda línea\n', 'Tercera línea\n']
+with open('archivo.txt', 'w', encoding='utf-8') as archivo:
+    archivo.writelines(lineas)
+```
+
+**Lectura de información:**
+Para leer información de un fichero, se utilizan los métodos `read()`, `readline()`, y `readlines()`.
+
+**Ejemplo:**
+```python
+# Leer todo el contenido de un archivo
+with open('archivo.txt', 'r', encoding='utf-8') as archivo:
+    contenido = archivo.read()
+    print(contenido)
+
+# Leer línea por línea
+with open('archivo.txt', 'r', encoding='utf-8') as archivo:
+    for linea in archivo:
+        print(linea.strip())
+
+# Leer una sola línea
+with open('archivo.txt', 'r', encoding='utf-8') as archivo:
+    linea = archivo.readline()
+    print(linea)
+
+# Leer todas las líneas en una lista
+with open('archivo.txt', 'r', encoding='utf-8') as archivo:
+    lineas = archivo.readlines()
+    print(lineas)
+```
+
+#### Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra cómo abrir, leer, escribir y cerrar ficheros en diferentes modos de acceso.
+
+**Ejemplo:**
+```python
+# Escribir datos en un archivo de texto
+with open('ejemplo.txt', 'w', encoding='utf-8') as archivo:
+    archivo.write('Línea 1\n')
+    archivo.write('Línea 2\n')
+    archivo.write('Línea 3\n')
+
+# Leer datos de un archivo de texto
+with open('ejemplo.txt', 'r', encoding='utf-8') as archivo:
+    contenido = archivo.read()
+    print('Contenido del archivo:')
+    print(contenido)
+
+# Añadir datos a un archivo de texto
+with open('ejemplo.txt', 'a', encoding='utf-8') as archivo:
+    archivo.write('Línea 4\n')
+    archivo.write('Línea 5\n')
+
+# Leer el archivo línea por línea
+with open('ejemplo.txt', 'r', encoding='utf-8') as archivo:
+    print('Leyendo línea por línea:')
+    for linea in archivo:
+        print(linea.strip())
+
+# Escritura y lectura en modo binario
+datos_binarios = b'\x00\x01\x02\x03\x04\x05\x06\x07\x08\x09'
+with open('datos.bin', 'wb') as archivo:
+    archivo.write(datos_binarios)
+
+with open('datos.bin', 'rb') as archivo:
+    contenido_binario = archivo.read()
+    print('Contenido binario:')
+    print(contenido_binario)
+```
+
+En este ejemplo:
+- Se escribe y se lee un archivo de texto en varios modos (escritura, lectura, añadir).
+- Se demuestra la lectura línea por línea de un archivo de texto.
+- Se escribe y se lee un archivo en modo binario.
+
+La gestión adecuada de la apertura y el cierre de ficheros, junto con el uso de los modos de acceso correctos, es esencial para el manejo eficiente de datos en Python. Esto permite la creación de aplicaciones que pueden leer y escribir información en ficheros de manera segura y efectiva.

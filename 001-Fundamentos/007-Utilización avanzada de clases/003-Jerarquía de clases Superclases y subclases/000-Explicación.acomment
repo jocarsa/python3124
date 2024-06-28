@@ -1,0 +1,153 @@
+### Jerarquía de Clases: Superclases y Subclases
+
+#### Concepto de Superclases y Subclases
+
+En la programación orientada a objetos (OOP), la jerarquía de clases es una estructura que organiza las clases en niveles de herencia. Las superclases (o clases base) son aquellas de las que otras clases (subclases o clases derivadas) heredan atributos y métodos. Las subclases pueden sobrescribir o extender la funcionalidad de las superclases.
+
+### Creación de una Superclase y Subclase
+
+**Ejemplo Básico:**
+```python
+# Definir una superclase
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."
+
+# Definir una subclase que hereda de Persona
+class Estudiante(Persona):
+    def __init__(self, nombre, edad, carrera):
+        super().__init__(nombre, edad)  # Llamar al constructor de la superclase
+        self.carrera = carrera
+
+    def estudiar(self):
+        return f"Estoy estudiando {self.carrera}."
+
+# Crear una instancia de Estudiante
+estudiante = Estudiante("Ana", 20, "Ingeniería")
+print(estudiante.saludar())  # Imprime: Hola, me llamo Ana y tengo 20 años.
+print(estudiante.estudiar())  # Imprime: Estoy estudiando Ingeniería.
+```
+
+En este ejemplo:
+- `Persona` es la superclase que define los atributos `nombre` y `edad`, y el método `saludar`.
+- `Estudiante` es una subclase que hereda de `Persona` e introduce el nuevo atributo `carrera` y el método `estudiar`.
+
+### Herencia y Sobrescritura de Métodos
+
+Las subclases pueden sobrescribir los métodos de las superclases para proporcionar una implementación específica.
+
+**Ejemplo de Sobrescritura de Métodos:**
+```python
+class Empleado(Persona):
+    def __init__(self, nombre, edad, salario):
+        super().__init__(nombre, edad)
+        self.salario = salario
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre}, tengo {self.edad} años y gano {self.salario} dólares al año."
+
+# Crear una instancia de Empleado
+empleado = Empleado("Luis", 30, 50000)
+print(empleado.saludar())  # Imprime: Hola, me llamo Luis, tengo 30 años y gano 50000 dólares al año.
+```
+
+En este ejemplo:
+- `Empleado` sobrescribe el método `saludar` de `Persona` para incluir información adicional sobre el salario.
+
+### Jerarquía de Clases y Polimorfismo
+
+El polimorfismo permite tratar objetos de diferentes subclases de manera uniforme a través de su superclase.
+
+**Ejemplo de Polimorfismo:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."
+
+class Estudiante(Persona):
+    def __init__(self, nombre, edad, carrera):
+        super().__init__(nombre, edad)
+        self.carrera = carrera
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre}, tengo {self.edad} años y estudio {self.carrera}."
+
+class Empleado(Persona):
+    def __init__(self, nombre, edad, salario):
+        super().__init__(nombre, edad)
+        self.salario = salario
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre}, tengo {self.edad} años y gano {self.salario} dólares al año."
+
+def presentar(persona):
+    print(persona.saludar())
+
+# Crear instancias de Estudiante y Empleado
+estudiante = Estudiante("Ana", 20, "Ingeniería")
+empleado = Empleado("Luis", 30, 50000)
+
+# Usar polimorfismo
+presentar(estudiante)  # Imprime: Hola, me llamo Ana, tengo 20 años y estudio Ingeniería.
+presentar(empleado)    # Imprime: Hola, me llamo Luis, tengo 30 años y gano 50000 dólares al año.
+```
+
+En este ejemplo:
+- La función `presentar` acepta cualquier objeto de la clase `Persona` o sus subclases y llama al método `saludar` correspondiente, demostrando polimorfismo.
+
+### Jerarquía Compleja de Clases
+
+Las jerarquías de clases pueden ser más complejas, con múltiples niveles de herencia.
+
+**Ejemplo Complejo:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."
+
+class Estudiante(Persona):
+    def __init__(self, nombre, edad, carrera):
+        super().__init__(nombre, edad)
+        self.carrera = carrera
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre}, tengo {self.edad} años y estudio {self.carrera}."
+
+class EstudianteInternacional(Estudiante):
+    def __init__(self, nombre, edad, carrera, pais):
+        super().__init__(nombre, edad, carrera)
+        self.pais = pais
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre}, tengo {self.edad} años, estudio {self.carrera} y vengo de {self.pais}."
+
+# Crear una instancia de EstudianteInternacional
+estudiante_internacional = EstudianteInternacional("Carlos", 25, "Medicina", "España")
+print(estudiante_internacional.saludar())
+# Imprime: Hola, me llamo Carlos, tengo 25 años, estudio Medicina y vengo de España.
+```
+
+En este ejemplo:
+- `EstudianteInternacional` hereda de `Estudiante`, que a su vez hereda de `Persona`.
+- `EstudianteInternacional` sobrescribe el método `saludar` para incluir información adicional sobre el país de origen.
+
+### Resumen
+
+- **Superclases y Subclases**: Las superclases proporcionan atributos y métodos que las subclases heredan y pueden sobrescribir o extender.
+- **Sobrescritura de Métodos**: Permite a las subclases proporcionar implementaciones específicas de los métodos heredados.
+- **Polimorfismo**: Permite tratar objetos de diferentes subclases de manera uniforme a través de la interfaz de la superclase.
+- **Jerarquías Complejas**: Las clases pueden tener múltiples niveles de herencia, permitiendo estructuras más detalladas y específicas.
+
+La herencia y el polimorfismo son principios clave de la programación orientada a objetos, que permiten diseñar sistemas modulares, reutilizables y extensibles, facilitando la creación de jerarquías de clases complejas y flexibles.

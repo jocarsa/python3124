@@ -1,0 +1,222 @@
+### Desarrollo de clases
+
+#### Desarrollo de clases
+
+El desarrollo de clases es un aspecto fundamental de la programación orientada a objetos (OOP) en Python. Las clases permiten agrupar datos y comportamientos relacionados en una sola unidad. A continuación se describen los conceptos clave relacionados con el desarrollo de clases en Python.
+
+#### 1. Concepto de clase
+
+Una clase es un modelo o plantilla a partir de la cual se crean objetos. Define los atributos (datos) y métodos (comportamientos) que los objetos de esa clase tendrán.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+```
+
+En este ejemplo, `Coche` es una clase que define dos atributos (`marca` y `modelo`) y un método (`arrancar`).
+
+#### 2. Estructura y miembros de una clase. Visibilidad
+
+Una clase en Python tiene una estructura que incluye atributos y métodos. Los atributos pueden ser públicos o privados.
+
+**Ejemplo:**
+```python
+class Coche:
+    ruedas = 4  # Atributo de clase
+
+    def __init__(self, marca, modelo):
+        self.marca = marca  # Atributo de instancia
+        self.__modelo = modelo  # Atributo de instancia privado
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.__modelo} está arrancando...")
+
+    def __detener(self):  # Método privado
+        print(f"El {self.marca} {self.__modelo} se ha detenido")
+```
+
+En este ejemplo:
+- `ruedas` es un atributo de clase.
+- `marca` es un atributo de instancia público.
+- `__modelo` es un atributo de instancia privado.
+- `arrancar` es un método público.
+- `__detener` es un método privado.
+
+#### 3. Creación de propiedades
+
+Las propiedades permiten el acceso controlado a los atributos de una clase. Se pueden definir utilizando los decoradores `@property` y `@nombre.setter`.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self._marca = marca
+        self._modelo = modelo
+
+    @property
+    def marca(self):
+        return self._marca
+
+    @marca.setter
+    def marca(self, nueva_marca):
+        self._marca = nueva_marca
+
+    @property
+    def modelo(self):
+        return self._modelo
+
+    @modelo.setter
+    def modelo(self, nuevo_modelo):
+        self._modelo = nuevo_modelo
+
+# Uso de propiedades
+coche = Coche("Toyota", "Corolla")
+print(coche.marca)  # Imprime: Toyota
+coche.marca = "Honda"
+print(coche.marca)  # Imprime: Honda
+```
+
+En este ejemplo, las propiedades `marca` y `modelo` permiten acceder y modificar los atributos `_marca` y `_modelo` de manera controlada.
+
+#### 4. Creación de métodos
+
+Los métodos son funciones definidas dentro de una clase que describen los comportamientos de los objetos. Pueden operar sobre los atributos de la clase y las instancias.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+
+    def detener(self):
+        print(f"El {self.marca} {self.modelo} se ha detenido")
+
+# Uso de métodos
+coche = Coche("Toyota", "Corolla")
+coche.arrancar()  # Imprime: El Toyota Corolla está arrancando...
+coche.detener()   # Imprime: El Toyota Corolla se ha detenido
+```
+
+#### 5. Creación de constructores
+
+El constructor es un método especial que se llama automáticamente cuando se crea un objeto de una clase. En Python, el constructor se define con el método `__init__`.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+# Uso del constructor
+persona = Persona("Ana", 30)
+print(persona.nombre)  # Imprime: Ana
+print(persona.edad)    # Imprime: 30
+```
+
+En este ejemplo, el constructor `__init__` inicializa los atributos `nombre` y `edad` de la instancia `persona`.
+
+#### 6. Utilización de clases y objetos
+
+Una vez definidas las clases, se pueden crear instancias (objetos) de estas clases y utilizar sus atributos y métodos.
+
+**Ejemplo:**
+```python
+class Libro:
+    def __init__(self, titulo, autor):
+        self.titulo = titulo
+        self.autor = autor
+
+    def mostrar_info(self):
+        print(f"Título: {self.titulo}, Autor: {self.autor}")
+
+# Crear instancias de la clase Libro
+libro1 = Libro("1984", "George Orwell")
+libro2 = Libro("Rebelión en la granja", "George Orwell")
+
+# Usar métodos y atributos
+libro1.mostrar_info()  # Imprime: Título: 1984, Autor: George Orwell
+libro2.mostrar_info()  # Imprime: Título: Rebelión en la granja, Autor: George Orwell
+```
+
+#### 7. Utilización de clases heredadas
+
+La herencia permite crear nuevas clases basadas en clases existentes. La clase derivada hereda atributos y métodos de la clase base.
+
+**Ejemplo:**
+```python
+class Animal:
+    def __init__(self, nombre):
+        self.nombre = nombre
+
+    def hacer_sonido(self):
+        pass
+
+class Perro(Animal):
+    def hacer_sonido(self):
+        return "Guau"
+
+class Gato(Animal):
+    def hacer_sonido(self):
+        return "Miau"
+
+# Crear instancias de clases derivadas
+perro = Perro("Firulais")
+gato = Gato("Mish")
+
+print(perro.nombre)          # Imprime: Firulais
+print(perro.hacer_sonido())  # Imprime: Guau
+print(gato.nombre)           # Imprime: Mish
+print(gato.hacer_sonido())   # Imprime: Miau
+```
+
+En este ejemplo, `Perro` y `Gato` heredan de `Animal` y sobrescriben el método `hacer_sonido`.
+
+#### Ejemplo completo
+
+A continuación se presenta un ejemplo completo que combina varios conceptos mencionados anteriormente.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        print(f"Hola, me llamo {self.nombre} y tengo {self.edad} años")
+
+class Empleado(Persona):
+    def __init__(self, nombre, edad, salario):
+        super().__init__(nombre, edad)
+        self.salario = salario
+
+    def mostrar_info(self):
+        self.saludar()
+        print(f"Mi salario es {self.salario}")
+
+# Crear instancias de las clases
+persona = Persona("Ana", 30)
+empleado = Empleado("Carlos", 40, 50000)
+
+# Usar métodos y atributos
+persona.saludar()          # Imprime: Hola, me llamo Ana y tengo 30 años
+empleado.mostrar_info()    # Imprime: Hola, me llamo Carlos y tengo 40 años
+                           # Imprime: Mi salario es 50000
+```
+
+En este ejemplo, `Empleado` hereda de `Persona` y añade un nuevo atributo `salario` y un método `mostrar_info` que utiliza el método `saludar` de la clase base.
+
+El desarrollo de clases en Python permite crear estructuras de datos y comportamientos organizados y reutilizables. Entender cómo definir clases, crear instancias y utilizar herencia es esencial para aprovechar al máximo la programación orientada a objetos en Python.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

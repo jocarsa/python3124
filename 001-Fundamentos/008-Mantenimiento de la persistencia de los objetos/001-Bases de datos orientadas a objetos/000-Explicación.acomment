@@ -1,0 +1,125 @@
+### Bases de Datos Orientadas a Objetos
+
+Las bases de datos orientadas a objetos (OODB, por sus siglas en inglés) son bases de datos que representan información en forma de objetos, similar a cómo se define en la programación orientada a objetos. Esto permite que la estructura de los datos en la base de datos coincida con la estructura de los objetos en el código, proporcionando una integración más natural y coherente entre la lógica de la aplicación y el almacenamiento de datos.
+
+#### Características de las Bases de Datos Orientadas a Objetos
+
+1. **Encapsulación**: Los datos y los métodos que operan sobre esos datos se almacenan juntos en un objeto.
+2. **Herencia**: Permite que las subclases hereden propiedades y métodos de las superclases, facilitando la reutilización del código.
+3. **Polimorfismo**: Permite que diferentes clases sean tratadas de la misma manera a través de una interfaz común.
+4. **Persistencia de Objetos**: Los objetos pueden ser almacenados de manera persistente en la base de datos y recuperados más tarde en el mismo estado en que se guardaron.
+
+#### Ventajas de las Bases de Datos Orientadas a Objetos
+
+- **Compatibilidad con el paradigma orientado a objetos**: La OODB permite una integración más natural con lenguajes de programación orientados a objetos, como Python, Java y C#.
+- **Reducción del desajuste de impedancia**: Almacenar datos en forma de objetos elimina la necesidad de transformar datos entre modelos relacionales y objetos.
+- **Soporte para estructuras de datos complejas**: Las OODB pueden manejar estructuras de datos complejas y relaciones más fácilmente que las bases de datos relacionales.
+
+### Ejemplo con ZODB (Zope Object Database)
+
+ZODB es una base de datos orientada a objetos para Python que permite almacenar objetos de manera persistente.
+
+#### Instalación de ZODB
+
+Para utilizar ZODB, primero necesitas instalar la biblioteca:
+```bash
+pip install ZODB
+```
+
+#### Uso de ZODB para Almacenar y Recuperar Objetos
+
+**Ejemplo Básico:**
+
+```python
+import ZODB, ZODB.FileStorage
+import transaction
+from persistent import Persistent
+
+# Definir una clase persistente
+class Persona(Persistent):
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+# Crear el almacenamiento y la base de datos
+storage = ZODB.FileStorage.FileStorage('mydata.fs')
+db = ZODB.DB(storage)
+connection = db.open()
+root = connection.root()
+
+# Crear y almacenar objetos
+root['persona1'] = Persona('Ana', 30)
+root['persona2'] = Persona('Luis', 25)
+
+# Confirmar la transacción
+transaction.commit()
+
+# Recuperar objetos
+persona1 = root['persona1']
+persona2 = root['persona2']
+print(f"{persona1.nombre} tiene {persona1.edad} años.")  # Imprime: Ana tiene 30 años.
+print(f"{persona2.nombre} tiene {persona2.edad} años.")  # Imprime: Luis tiene 25 años.
+
+# Cerrar la conexión y la base de datos
+connection.close()
+db.close()
+```
+
+En este ejemplo:
+- Se define una clase `Persona` que es persistente.
+- Se crea un almacenamiento y una base de datos utilizando ZODB.
+- Se almacenan y recuperan objetos de la base de datos.
+
+#### Consultas en ZODB
+
+ZODB no tiene un lenguaje de consulta SQL como las bases de datos relacionales, pero puedes realizar consultas utilizando métodos de Python.
+
+**Ejemplo de Consulta:**
+
+```python
+import ZODB, ZODB.FileStorage
+import transaction
+from persistent import Persistent
+
+class Persona(Persistent):
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+# Crear el almacenamiento y la base de datos
+storage = ZODB.FileStorage.FileStorage('mydata.fs')
+db = ZODB.DB(storage)
+connection = db.open()
+root = connection.root()
+
+# Crear y almacenar objetos
+root['personas'] = [
+    Persona('Ana', 30),
+    Persona('Luis', 25),
+    Persona('Carlos', 35)
+]
+transaction.commit()
+
+# Realizar una consulta para recuperar personas mayores de 30 años
+personas_mayores = [p for p in root['personas'] if p.edad > 30]
+for persona in personas_mayores:
+    print(f"{persona.nombre} tiene {persona.edad} años.")  # Imprime: Carlos tiene 35 años.
+
+# Cerrar la conexión y la base de datos
+connection.close()
+db.close()
+```
+
+En este ejemplo:
+- Se almacenan múltiples objetos `Persona` en la base de datos.
+- Se realiza una consulta para recuperar las personas cuya edad es mayor a 30 años utilizando una comprensión de listas.
+
+### Resumen
+
+- **Bases de Datos Orientadas a Objetos (OODB)**: Permiten almacenar datos en forma de objetos, manteniendo la coherencia con el modelo de objetos en la programación.
+- **Características**: Encapsulación, herencia, polimorfismo y persistencia de objetos.
+- **Ventajas**: Integración natural con lenguajes orientados a objetos, reducción del desajuste de impedancia y soporte para estructuras de datos complejas.
+- **ZODB**: Una biblioteca en Python para trabajar con bases de datos orientadas a objetos, permitiendo almacenar y recuperar objetos de manera eficiente.
+- **Consultas**: Las consultas en ZODB se realizan utilizando métodos de Python y comprensiones de listas.
+
+Las bases de datos orientadas a objetos son una opción poderosa y flexible para aplicaciones que requieren almacenar y gestionar objetos complejos, proporcionando una integración fluida con los lenguajes de programación orientados a objetos y facilitando el desarrollo de aplicaciones modernas y robustas.

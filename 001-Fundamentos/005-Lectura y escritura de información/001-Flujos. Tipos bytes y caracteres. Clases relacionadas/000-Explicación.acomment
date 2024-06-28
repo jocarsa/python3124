@@ -1,0 +1,257 @@
+### Lectura y escritura de información
+
+#### Lectura y escritura de información
+
+La lectura y escritura de información son operaciones esenciales en la mayoría de las aplicaciones. En Python, estas operaciones pueden realizarse fácilmente utilizando diversas herramientas y técnicas. A continuación se describen diferentes métodos para leer y escribir datos, incluyendo flujos de bytes y caracteres, manejo de ficheros, y la utilización de sistemas de ficheros.
+
+#### 1. Flujos: bytes y caracteres
+
+En Python, los datos se pueden manejar como flujos de bytes o como flujos de caracteres.
+
+- **Flujos de bytes**: Son adecuados para datos binarios, como imágenes o archivos ejecutables.
+- **Flujos de caracteres**: Son adecuados para datos de texto.
+
+**Ejemplo de flujo de bytes:**
+```python
+# Escribir bytes en un archivo
+with open('archivo_bytes.bin', 'wb') as f:
+    f.write(b'\x00\x01\x02\x03')
+
+# Leer bytes de un archivo
+with open('archivo_bytes.bin', 'rb') as f:
+    datos = f.read()
+    print(datos)  # Imprime: b'\x00\x01\x02\x03'
+```
+
+**Ejemplo de flujo de caracteres:**
+```python
+# Escribir caracteres en un archivo
+with open('archivo_texto.txt', 'w', encoding='utf-8') as f:
+    f.write('Hola, mundo')
+
+# Leer caracteres de un archivo
+with open('archivo_texto.txt', 'r', encoding='utf-8') as f:
+    datos = f.read()
+    print(datos)  # Imprime: Hola, mundo
+```
+
+#### 2. Ficheros de datos y registros
+
+Los ficheros de datos son archivos que contienen registros, y cada registro es una colección de campos. Estos ficheros se pueden leer y escribir utilizando varias técnicas.
+
+**Ejemplo de escritura y lectura de registros en un archivo CSV:**
+```python
+import csv
+
+# Escribir registros en un archivo CSV
+with open('archivo.csv', 'w', newline='') as csvfile:
+    escritor = csv.writer(csvfile)
+    escritor.writerow(['Nombre', 'Edad', 'Ciudad'])
+    escritor.writerow(['Ana', 30, 'Madrid'])
+    escritor.writerow(['Luis', 25, 'Barcelona'])
+
+# Leer registros de un archivo CSV
+with open('archivo.csv', 'r') as csvfile:
+    lector = csv.reader(csvfile)
+    for fila in lector:
+        print(fila)
+# Imprime:
+# ['Nombre', 'Edad', 'Ciudad']
+# ['Ana', 30, 'Madrid']
+# ['Luis', 25, 'Barcelona']
+```
+
+#### 3. Apertura y cierre de ficheros. Modos de acceso
+
+Para trabajar con ficheros en Python, se utiliza la función `open()`, que permite especificar el modo de acceso al archivo.
+
+**Modos de acceso comunes:**
+- `'r'`: Lectura (el archivo debe existir).
+- `'w'`: Escritura (crea un archivo nuevo o sobrescribe uno existente).
+- `'a'`: Añadir (escribe al final del archivo).
+- `'b'`: Modo binario.
+- `'+'`: Lectura y escritura.
+
+**Ejemplo:**
+```python
+# Abrir un archivo en modo de lectura
+with open('archivo_texto.txt', 'r', encoding='utf-8') as f:
+    contenido = f.read()
+    print(contenido)
+
+# Abrir un archivo en modo de escritura
+with open('archivo_nuevo.txt', 'w', encoding='utf-8') as f:
+    f.write('Nuevo contenido')
+
+# Abrir un archivo en modo de añadir
+with open('archivo_texto.txt', 'a', encoding='utf-8') as f:
+    f.write('\nLínea añadida')
+```
+
+#### 4. Utilización de los sistemas de ficheros
+
+Python proporciona el módulo `os` para interactuar con el sistema de archivos, permitiendo crear, eliminar, y manipular archivos y directorios.
+
+**Ejemplo:**
+```python
+import os
+
+# Crear un directorio
+os.mkdir('nuevo_directorio')
+
+# Cambiar el nombre de un archivo o directorio
+os.rename('nuevo_directorio', 'directorio_renombrado')
+
+# Eliminar un archivo
+os.remove('archivo_nuevo.txt')
+
+# Eliminar un directorio
+os.rmdir('directorio_renombrado')
+```
+
+#### 5. Entrada desde teclado y salida a pantalla
+
+Python proporciona funciones integradas para manejar la entrada desde el teclado y la salida a la pantalla.
+
+**Ejemplo:**
+```python
+# Entrada desde el teclado
+nombre = input("Introduce tu nombre: ")
+print(f"Hola, {nombre}!")
+
+# Salida a la pantalla
+print("Este es un mensaje de salida.")
+```
+
+#### 6. Interfaces gráficas
+
+Las interfaces gráficas de usuario (GUI) permiten interactuar con los usuarios a través de ventanas y controles gráficos. Python ofrece varias bibliotecas para crear GUIs, como `tkinter`, `PyQt`, y `wxPython`.
+
+**Ejemplo básico con `tkinter`:**
+```python
+import tkinter as tk
+
+def saludar():
+    print("¡Hola, mundo!")
+
+# Crear la ventana principal
+ventana = tk.Tk()
+ventana.title("Mi primera GUI")
+
+# Crear un botón
+boton = tk.Button(ventana, text="Saludar", command=saludar)
+boton.pack()
+
+# Ejecutar el bucle principal
+ventana.mainloop()
+```
+
+En este ejemplo, se crea una ventana con un botón que imprime "¡Hola, mundo!" en la consola cuando se presiona.
+
+#### 7. Concepto de evento y creación de controladores de eventos
+
+Un evento es una acción o suceso, como un clic de botón, que puede ser detectado y manejado por el programa. Los controladores de eventos son funciones que responden a estos eventos.
+
+**Ejemplo con `tkinter`:**
+```python
+import tkinter as tk
+
+def al_hacer_click(evento):
+    print(f"Has hecho clic en la posición ({evento.x}, {evento.y})")
+
+# Crear la ventana principal
+ventana = tk.Tk()
+ventana.title("Manejo de eventos")
+
+# Crear un canvas
+canvas = tk.Canvas(ventana, width=400, height=300)
+canvas.pack()
+
+# Asociar el evento de clic con el controlador
+canvas.bind("<Button-1>", al_hacer_click)
+
+# Ejecutar el bucle principal
+ventana.mainloop()
+```
+
+En este ejemplo, se crea un `Canvas` que detecta y maneja los eventos de clic, imprimiendo las coordenadas del clic en la consola.
+
+### Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra cómo leer y escribir información en archivos, manejar sistemas de ficheros, y crear una interfaz gráfica simple con manejo de eventos.
+
+**Ejemplo completo:**
+```python
+import os
+import tkinter as tk
+import csv
+
+# Función para escribir datos en un archivo CSV
+def escribir_csv(archivo, datos):
+    with open(archivo, 'w', newline='') as csvfile:
+        escritor = csv.writer(csvfile)
+        for fila in datos:
+            escritor.writerow(fila)
+
+# Función para leer datos de un archivo CSV
+def leer_csv(archivo):
+    with open(archivo, 'r') as csvfile:
+        lector = csv.reader(csvfile)
+        return [fila for fila in lector]
+
+# Función para manejar el evento de clic en el botón
+def al_hacer_click():
+    nombre = entrada_nombre.get()
+    edad = entrada_edad.get()
+    ciudad = entrada_ciudad.get()
+    datos = [['Nombre', 'Edad', 'Ciudad'], [nombre, edad, ciudad]]
+    escribir_csv('datos.csv', datos)
+    etiqueta_resultado.config(text=f"Datos guardados: {nombre}, {edad}, {ciudad}")
+
+# Crear la ventana principal
+ventana = tk.Tk()
+ventana.title("Aplicación de ejemplo")
+
+# Crear widgets de entrada
+tk.Label(ventana, text="Nombre").pack()
+entrada_nombre = tk.Entry(ventana)
+entrada_nombre.pack()
+
+tk.Label(ventana, text="Edad").pack()
+entrada_edad = tk.Entry(ventana)
+entrada_edad.pack()
+
+tk.Label(ventana, text="Ciudad").pack()
+entrada_ciudad = tk.Entry(ventana)
+entrada_ciudad.pack()
+
+# Crear botón para guardar los datos
+boton_guardar = tk.Button(ventana, text="Guardar", command=al_hacer_click)
+boton_guardar.pack()
+
+# Crear etiqueta para mostrar el resultado
+etiqueta_resultado = tk.Label(ventana, text="")
+etiqueta_resultado.pack()
+
+# Ejecutar el bucle principal
+ventana.mainloop()
+
+# Leer los datos guardados
+datos_guardados = leer_csv('datos.csv')
+print("Datos guardados en el archivo CSV:")
+for fila in datos_guardados:
+    print(fila)
+
+# Manipular sistema de ficheros
+os.mkdir('directorio_ejemplo')
+os.rename('directorio_ejemplo', 'directorio_renombrado')
+os.rmdir('directorio_renombrado')
+```
+
+En este ejemplo:
+- Se crean funciones para leer y escribir datos en un archivo CSV.
+- Se crea una interfaz gráfica con `tkinter` que permite al usuario ingresar datos y guardarlos en un archivo CSV.
+- Se manejan eventos de clic en el botón para guardar los datos.
+- Se muestra cómo manipular el sistema de archivos creando, renombrando y eliminando directorios.
+
+El manejo de lectura y escritura de información es fundamental para muchas aplicaciones, y Python proporciona herramientas poderosas y flexibles para realizar estas tareas de manera eficiente.

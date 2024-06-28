@@ -1,0 +1,190 @@
+### Uso de estructuras de control
+
+#### Uso de estructuras de control
+
+Las estructuras de control en Python permiten dirigir el flujo de ejecución del programa. Estas estructuras incluyen instrucciones condicionales, bucles y manejo de excepciones, que son esenciales para crear programas robustos y eficientes. A continuación, se describen las diferentes estructuras de control disponibles en Python.
+
+#### 1. Estructuras de selección
+
+Las estructuras de selección permiten ejecutar diferentes bloques de código en función de condiciones específicas. Las principales estructuras de selección en Python son `if`, `elif` y `else`.
+
+**Ejemplo:**
+```python
+# Estructura if
+x = 10
+if x > 0:
+    print("x es positivo")
+
+# Estructura if-else
+y = -5
+if y > 0:
+    print("y es positivo")
+else:
+    print("y es negativo")
+
+# Estructura if-elif-else
+z = 0
+if z > 0:
+    print("z es positivo")
+elif z == 0:
+    print("z es cero")
+else:
+    print("z es negativo")
+```
+
+En este ejemplo, se utilizan estructuras de selección para verificar diferentes condiciones y ejecutar bloques de código correspondientes.
+
+#### 2. Estructuras de repetición
+
+Las estructuras de repetición permiten ejecutar un bloque de código múltiples veces. Las principales estructuras de repetición en Python son `for` y `while`.
+
+**Ejemplo de bucle for:**
+```python
+# Bucle for con range
+for i in range(5):
+    print(i)  # Imprime: 0, 1, 2, 3, 4
+
+# Bucle for con una lista
+lista = [1, 2, 3, 4, 5]
+for elemento in lista:
+    print(elemento)  # Imprime: 1, 2, 3, 4, 5
+```
+
+**Ejemplo de bucle while:**
+```python
+# Bucle while
+contador = 0
+while contador < 5:
+    print(contador)  # Imprime: 0, 1, 2, 3, 4
+    contador += 1
+```
+
+#### 3. Estructuras de salto
+
+Las estructuras de salto permiten alterar el flujo de control dentro de bucles y bloques condicionales. Las principales estructuras de salto en Python son `break`, `continue` y `pass`.
+
+**Ejemplo de break:**
+```python
+# Uso de break
+for i in range(10):
+    if i == 5:
+        break
+    print(i)  # Imprime: 0, 1, 2, 3, 4
+```
+
+**Ejemplo de continue:**
+```python
+# Uso de continue
+for i in range(10):
+    if i % 2 == 0:
+        continue
+    print(i)  # Imprime: 1, 3, 5, 7, 9
+```
+
+**Ejemplo de pass:**
+```python
+# Uso de pass
+for i in range(5):
+    if i == 3:
+        pass  # No hace nada, solo un marcador de posición
+    print(i)  # Imprime: 0, 1, 2, 3, 4
+```
+
+#### 4. Control de excepciones
+
+El control de excepciones permite manejar errores y condiciones excepcionales en el programa sin interrumpir su ejecución. Python utiliza las instrucciones `try`, `except`, `else` y `finally` para el manejo de excepciones.
+
+**Ejemplo:**
+```python
+try:
+    resultado = 10 / 0
+except ZeroDivisionError:
+    print("Error: División por cero")
+else:
+    print("La división se realizó correctamente")
+finally:
+    print("Bloque finally ejecutado")
+
+# Imprime:
+# Error: División por cero
+# Bloque finally ejecutado
+```
+
+En este ejemplo, el bloque `try` intenta realizar una división por cero, lo que genera una excepción `ZeroDivisionError`. El bloque `except` captura la excepción y ejecuta un código alternativo. El bloque `finally` se ejecuta siempre, independientemente de si hubo o no una excepción.
+
+#### 5. Aserciones
+
+Las aserciones son condiciones que se espera que sean verdaderas en un punto específico del programa. Si la condición no es verdadera, se genera una excepción `AssertionError`. Las aserciones se utilizan para depuración y pruebas.
+
+**Ejemplo:**
+```python
+x = 10
+assert x > 0, "x debe ser positivo"  # No genera error porque la condición es verdadera
+
+y = -5
+assert y > 0, "y debe ser positivo"  # Genera AssertionError con el mensaje "y debe ser positivo"
+```
+
+#### 6. Prueba, depuración y documentación de la aplicación
+
+La prueba y depuración son partes esenciales del desarrollo de software. Python ofrece varias herramientas y módulos para facilitar estas tareas.
+
+**Pruebas unitarias:**
+Las pruebas unitarias permiten verificar que las funciones y métodos individuales de una aplicación funcionan correctamente. Python incluye el módulo `unittest` para realizar pruebas unitarias.
+
+**Ejemplo de prueba unitaria:**
+```python
+import unittest
+
+def sumar(a, b):
+    return a + b
+
+class TestSumar(unittest.TestCase):
+    def test_sumar(self):
+        self.assertEqual(sumar(1, 2), 3)
+        self.assertEqual(sumar(-1, 1), 0)
+        self.assertEqual(sumar(-1, -1), -2)
+
+if __name__ == "__main__":
+    unittest.main()
+```
+
+**Depuración:**
+La depuración permite identificar y corregir errores en el código. Python proporciona el módulo `pdb` para depuración interactiva.
+
+**Ejemplo de depuración:**
+```python
+import pdb
+
+def dividir(a, b):
+    pdb.set_trace()
+    return a / b
+
+resultado = dividir(10, 2)  # Inicia la depuración interactiva en esta línea
+print(resultado)
+```
+
+**Documentación:**
+La documentación es crucial para la comprensión y mantenimiento del código. Python utiliza docstrings para documentar módulos, clases y funciones. Los docstrings se colocan inmediatamente después de la definición y están delimitados por comillas triples.
+
+**Ejemplo de docstrings:**
+```python
+def sumar(a, b):
+    """
+    Suma dos números y devuelve el resultado.
+    
+    Parámetros:
+    a (int, float): El primer número.
+    b (int, float): El segundo número.
+
+    Devuelve:
+    int, float: La suma de a y b.
+    """
+    return a + b
+
+print(sumar.__doc__)  # Imprime el docstring de la función sumar
+```
+
+Estas estructuras de control son fundamentales para crear programas robustos y eficientes en Python. Permiten dirigir el flujo de ejecución, manejar excepciones y errores, y asegurar que el código funcione correctamente a través de pruebas y depuración.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

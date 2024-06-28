@@ -1,0 +1,198 @@
+### Constructores
+
+#### Constructores
+
+En Python, el constructor de una clase es un método especial que se llama automáticamente cuando se crea una nueva instancia de la clase. El propósito del constructor es inicializar los atributos del objeto y realizar cualquier configuración necesaria. El constructor en Python se define mediante el método `__init__`.
+
+#### 1. Definición de un constructor
+
+El constructor se define dentro de una clase utilizando el método `__init__`. Este método toma al menos un parámetro, `self`, que hace referencia a la instancia que se está creando. Otros parámetros pueden ser definidos para pasar valores necesarios para inicializar el objeto.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+# Crear una instancia de la clase Persona
+persona1 = Persona("Ana", 30)
+
+# Acceder a los atributos de la instancia
+print(persona1.nombre)  # Imprime: Ana
+print(persona1.edad)    # Imprime: 30
+```
+
+En este ejemplo, el constructor `__init__` inicializa los atributos `nombre` y `edad` de la instancia `persona1`.
+
+#### 2. Constructores con valores predeterminados
+
+Los constructores pueden tener parámetros con valores predeterminados, lo que permite crear instancias de la clase con valores opcionales.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca="Toyota", modelo="Corolla"):
+        self.marca = marca
+        self.modelo = modelo
+
+# Crear instancias de la clase Coche con y sin argumentos
+coche1 = Coche()
+coche2 = Coche("Honda", "Civic")
+
+# Acceder a los atributos de las instancias
+print(coche1.marca, coche1.modelo)  # Imprime: Toyota Corolla
+print(coche2.marca, coche2.modelo)  # Imprime: Honda Civic
+```
+
+En este ejemplo, el constructor `__init__` tiene valores predeterminados para los parámetros `marca` y `modelo`. La instancia `coche1` se crea utilizando los valores predeterminados, mientras que `coche2` se crea con valores específicos.
+
+#### 3. Constructores con lógica adicional
+
+El constructor puede contener lógica adicional, como validación de datos o inicialización de recursos, además de la simple asignación de valores a los atributos.
+
+**Ejemplo:**
+```python
+class CuentaBancaria:
+    def __init__(self, titular, saldo=0):
+        self.titular = titular
+        if saldo < 0:
+            raise ValueError("El saldo inicial no puede ser negativo")
+        self.saldo = saldo
+
+    def depositar(self, cantidad):
+        self.saldo += cantidad
+
+    def retirar(self, cantidad):
+        if cantidad > self.saldo:
+            raise ValueError("Fondos insuficientes")
+        self.saldo -= cantidad
+
+# Crear una instancia de la clase CuentaBancaria
+cuenta = CuentaBancaria("Ana", 100)
+
+# Acceder a los atributos y métodos de la instancia
+print(cuenta.titular)  # Imprime: Ana
+print(cuenta.saldo)    # Imprime: 100
+
+cuenta.depositar(50)
+print(cuenta.saldo)    # Imprime: 150
+
+cuenta.retirar(30)
+print(cuenta.saldo)    # Imprime: 120
+```
+
+En este ejemplo, el constructor de `CuentaBancaria` realiza una validación adicional para asegurarse de que el saldo inicial no sea negativo.
+
+#### 4. Constructores en clases derivadas
+
+En la programación orientada a objetos, es común que una clase derive de otra clase (herencia). En estos casos, el constructor de la clase derivada puede llamar al constructor de la clase base utilizando la función `super()`.
+
+**Ejemplo:**
+```python
+class Animal:
+    def __init__(self, nombre):
+        self.nombre = nombre
+
+    def hacer_sonido(self):
+        pass
+
+class Perro(Animal):
+    def __init__(self, nombre, raza):
+        super().__init__(nombre)
+        self.raza = raza
+
+    def hacer_sonido(self):
+        return "Guau"
+
+# Crear una instancia de la clase Perro
+perro = Perro("Firulais", "Labrador")
+
+# Acceder a los atributos y métodos de la instancia
+print(perro.nombre)  # Imprime: Firulais
+print(perro.raza)    # Imprime: Labrador
+print(perro.hacer_sonido())  # Imprime: Guau
+```
+
+En este ejemplo, `Perro` es una clase derivada de `Animal`. El constructor de `Perro` llama al constructor de `Animal` utilizando `super()`, lo que permite inicializar el atributo `nombre` definido en la clase base.
+
+#### 5. Constructores y encapsulamiento
+
+El constructor puede trabajar con atributos privados para asegurar el encapsulamiento y la protección de los datos dentro de una clase.
+
+**Ejemplo:**
+```python
+class Empleado:
+    def __init__(self, nombre, salario):
+        self.nombre = nombre
+        self.__salario = salario  # Atributo privado
+
+    def obtener_salario(self):
+        return self.__salario
+
+    def establecer_salario(self, nuevo_salario):
+        if nuevo_salario > 0:
+            self.__salario = nuevo_salario
+        else:
+            raise ValueError("El salario debe ser positivo")
+
+# Crear una instancia de la clase Empleado
+empleado = Empleado("Carlos", 50000)
+
+# Acceder a los atributos y métodos de la instancia
+print(empleado.nombre)  # Imprime: Carlos
+print(empleado.obtener_salario())  # Imprime: 50000
+
+# Modificar el salario utilizando el método de la clase
+empleado.establecer_salario(55000)
+print(empleado.obtener_salario())  # Imprime: 55000
+```
+
+En este ejemplo, el atributo `__salario` es privado y no es accesible directamente desde fuera de la clase. Los métodos `obtener_salario` y `establecer_salario` se utilizan para acceder y modificar el atributo privado de manera controlada.
+
+#### 6. Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra cómo definir y utilizar constructores en una clase, incluyendo validación y lógica adicional.
+
+**Ejemplo:**
+```python
+class Producto:
+    def __init__(self, nombre, precio, stock=0):
+        self.nombre = nombre
+        self.precio = precio
+        if stock < 0:
+            raise ValueError("El stock no puede ser negativo")
+        self.stock = stock
+
+    def agregar_stock(self, cantidad):
+        if cantidad > 0:
+            self.stock += cantidad
+        else:
+            raise ValueError("La cantidad debe ser positiva")
+
+    def vender(self, cantidad):
+        if cantidad > self.stock:
+            raise ValueError("Stock insuficiente")
+        self.stock -= cantidad
+
+# Crear una instancia de la clase Producto
+producto = Producto("Laptop", 1500, 10)
+
+# Acceder a los atributos y métodos de la instancia
+print(producto.nombre)  # Imprime: Laptop
+print(producto.precio)  # Imprime: 1500
+print(producto.stock)   # Imprime: 10
+
+# Modificar el stock utilizando los métodos de la clase
+producto.agregar_stock(5)
+print(producto.stock)   # Imprime: 15
+
+producto.vender(3)
+print(producto.stock)   # Imprime: 12
+```
+
+En este ejemplo, el constructor de `Producto` inicializa los atributos `nombre`, `precio` y `stock`, y realiza una validación para asegurarse de que el stock inicial no sea negativo. Los métodos `agregar_stock` y `vender` permiten modificar el stock de manera controlada.
+
+El uso de constructores es fundamental en la programación orientada a objetos, ya que permite inicializar correctamente los objetos y asegurar que estén en un estado válido desde el momento de su creación.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

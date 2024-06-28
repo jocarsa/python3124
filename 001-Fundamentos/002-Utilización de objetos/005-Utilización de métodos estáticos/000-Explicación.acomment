@@ -1,0 +1,137 @@
+### Utilización de métodos estáticos
+
+#### Utilización de métodos estáticos
+
+Los métodos estáticos en Python son métodos que pertenecen a una clase en lugar de a una instancia de la clase. No tienen acceso a la instancia (`self`) ni a la clase (`cls`) y no pueden modificar el estado de la instancia o la clase. Se utilizan cuando se necesita un método que realice una función pero que no necesite acceder ni modificar los atributos de la instancia o la clase. Los métodos estáticos se definen usando el decorador `@staticmethod`.
+
+#### 1. Definición de métodos estáticos
+
+Para definir un método estático en Python, se utiliza el decorador `@staticmethod` antes de la definición del método. Los métodos estáticos pueden ser llamados directamente en la clase sin necesidad de crear una instancia de la misma.
+
+**Ejemplo:**
+```python
+class Matematica:
+    @staticmethod
+    def sumar(a, b):
+        return a + b
+
+    @staticmethod
+    def restar(a, b):
+        return a - b
+
+# Llamar a los métodos estáticos sin crear una instancia
+resultado_suma = Matematica.sumar(5, 3)  # 8
+resultado_resta = Matematica.restar(5, 3)  # 2
+
+print(resultado_suma)  # Imprime: 8
+print(resultado_resta)  # Imprime: 2
+```
+
+En este ejemplo, los métodos `sumar` y `restar` son métodos estáticos de la clase `Matematica`. Se pueden llamar directamente en la clase sin crear una instancia.
+
+#### 2. Ventajas de los métodos estáticos
+
+Los métodos estáticos son útiles cuando se necesita una función que:
+
+- Realiza una operación que no depende de los datos de la instancia.
+- Debe estar relacionada lógicamente con la clase, pero no necesita acceder ni modificar los atributos de la clase o instancia.
+- Puede proporcionar utilidades y funciones auxiliares para la clase.
+
+**Ejemplo:**
+```python
+class Utilidades:
+    @staticmethod
+    def es_par(numero):
+        return numero % 2 == 0
+
+    @staticmethod
+    def es_impar(numero):
+        return numero % 2 != 0
+
+# Llamar a los métodos estáticos sin crear una instancia
+print(Utilidades.es_par(4))   # Imprime: True
+print(Utilidades.es_impar(5))  # Imprime: True
+```
+
+En este ejemplo, los métodos `es_par` y `es_impar` son métodos estáticos que verifican si un número es par o impar. No necesitan acceder a ninguna instancia para realizar su tarea.
+
+#### 3. Métodos estáticos en combinación con otros métodos
+
+Los métodos estáticos pueden coexistir con otros métodos de instancia y de clase dentro de la misma clase. Cada tipo de método tiene su propósito y utilidad.
+
+**Ejemplo:**
+```python
+class Coche:
+    ruedas = 4
+
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+
+    @classmethod
+    def cambiar_ruedas(cls, nuevas_ruedas):
+        cls.ruedas = nuevas_ruedas
+        print(f"El número de ruedas ahora es {cls.ruedas}")
+
+    @staticmethod
+    def es_coche(vehiculo):
+        return vehiculo.lower() == "coche"
+
+# Crear una instancia de la clase Coche
+mi_coche = Coche("Toyota", "Corolla")
+
+# Utilizar métodos de instancia
+mi_coche.arrancar()
+
+# Utilizar métodos de clase
+Coche.cambiar_ruedas(6)
+
+# Utilizar métodos estáticos
+print(Coche.es_coche("coche"))  # Imprime: True
+print(Coche.es_coche("bicicleta"))  # Imprime: False
+```
+
+En este ejemplo, `arrancar` es un método de instancia, `cambiar_ruedas` es un método de clase, y `es_coche` es un método estático. Cada método tiene un propósito diferente y se utiliza en un contexto adecuado.
+
+#### 4. Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra cómo definir y utilizar métodos estáticos junto con métodos de instancia y métodos de clase.
+
+**Ejemplo:**
+```python
+class Calculadora:
+    @staticmethod
+    def sumar(a, b):
+        return a + b
+
+    @staticmethod
+    def restar(a, b):
+        return a - b
+
+    @staticmethod
+    def multiplicar(a, b):
+        return a * b
+
+    @staticmethod
+    def dividir(a, b):
+        if b != 0:
+            return a / b
+        else:
+            return "División por cero no permitida"
+
+# Llamar a los métodos estáticos sin crear una instancia
+print(Calculadora.sumar(10, 5))        # Imprime: 15
+print(Calculadora.restar(10, 5))       # Imprime: 5
+print(Calculadora.multiplicar(10, 5))  # Imprime: 50
+print(Calculadora.dividir(10, 5))      # Imprime: 2.0
+print(Calculadora.dividir(10, 0))      # Imprime: División por cero no permitida
+```
+
+En este ejemplo, la clase `Calculadora` define varios métodos estáticos para realizar operaciones aritméticas básicas. Estos métodos pueden ser llamados directamente en la clase sin necesidad de crear una instancia.
+
+Los métodos estáticos proporcionan una forma conveniente de definir funciones relacionadas con una clase que no dependen de los datos de una instancia específica. Son útiles para definir utilidades y funciones auxiliares que están conceptualmente relacionadas con la clase, pero que no necesitan acceder ni modificar el estado de la clase o de sus instancias.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

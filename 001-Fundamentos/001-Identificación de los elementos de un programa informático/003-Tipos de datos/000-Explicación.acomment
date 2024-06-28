@@ -1,0 +1,138 @@
+### Tipos de datos
+
+#### Tipos de datos
+
+En Python, los tipos de datos determinan qué tipo de valores pueden almacenar las variables y cómo se pueden manipular estos valores. Python es un lenguaje de tipado dinámico, lo que significa que no es necesario declarar el tipo de una variable al momento de su creación; el tipo se determina en tiempo de ejecución. A continuación, se describen los principales tipos de datos en Python:
+
+#### 1. Tipos numéricos
+
+##### a. Enteros (`int`)
+Los enteros son números sin decimales. Pueden ser positivos, negativos o cero.
+
+**Ejemplo:**
+```python
+edad = 25
+poblacion = 7800000000
+temperatura_negativa = -15
+```
+
+##### b. Flotantes (`float`)
+Los flotantes son números que tienen una parte decimal. Se utilizan para representar números fraccionarios.
+
+**Ejemplo:**
+```python
+pi = 3.14159
+altura = 1.75
+precio = 19.99
+```
+
+##### c. Complejos (`complex`)
+Los números complejos tienen una parte real y una parte imaginaria. Se representan con la notación `a + bj`.
+
+**Ejemplo:**
+```python
+numero_complejo = 2 + 3j
+parte_real = numero_complejo.real  # 2.0
+parte_imaginaria = numero_complejo.imag  # 3.0
+```
+
+#### 2. Secuencias
+
+##### a. Cadenas de caracteres (`str`)
+Las cadenas de caracteres son secuencias de texto encerradas entre comillas simples, dobles o triples. Se utilizan para almacenar texto.
+
+**Ejemplo:**
+```python
+nombre = "Ana"
+saludo = 'Hola, ¿cómo estás?'
+parrafo = """Este es un
+texto en varias líneas."""
+```
+
+##### b. Listas (`list`)
+Las listas son colecciones ordenadas y mutables de elementos. Pueden contener elementos de diferentes tipos de datos.
+
+**Ejemplo:**
+```python
+numeros = [1, 2, 3, 4, 5]
+mixtos = [1, "dos", 3.0, True]
+numeros[0] = 10  # Modifica el primer elemento
+```
+
+##### c. Tuplas (`tuple`)
+Las tuplas son colecciones ordenadas e inmutables de elementos. Una vez creadas, no pueden ser modificadas.
+
+**Ejemplo:**
+```python
+punto = (10, 20)
+colores = ("rojo", "verde", "azul")
+# punto[0] = 15  # Esto daría un error porque las tuplas son inmutables
+```
+
+##### d. Rangos (`range`)
+Los rangos representan una secuencia de números. Se utilizan comúnmente en bucles `for`.
+
+**Ejemplo:**
+```python
+rango = range(5)  # Crea una secuencia de números del 0 al 4
+for i in rango:
+    print(i)
+```
+
+#### 3. Mapeos
+
+##### a. Diccionarios (`dict`)
+Los diccionarios son colecciones desordenadas de pares clave-valor. Las claves deben ser únicas e inmutables.
+
+**Ejemplo:**
+```python
+estudiante = {
+    "nombre": "Carlos",
+    "edad": 21,
+    "curso": "Ingeniería"
+}
+print(estudiante["nombre"])  # Imprime: Carlos
+estudiante["edad"] = 22  # Modifica el valor de la clave "edad"
+```
+
+#### 4. Conjuntos
+
+##### a. Conjuntos (`set`)
+Los conjuntos son colecciones desordenadas de elementos únicos. Se utilizan para operaciones de conjuntos como unión, intersección y diferencia.
+
+**Ejemplo:**
+```python
+numeros = {1, 2, 3, 4, 5}
+numeros.add(6)  # Añade un nuevo elemento al conjunto
+numeros.remove(3)  # Elimina el elemento 3 del conjunto
+```
+
+##### b. Conjuntos inmutables (`frozenset`)
+Los conjuntos inmutables son similares a los conjuntos, pero no pueden ser modificados después de su creación.
+
+**Ejemplo:**
+```python
+numeros = frozenset([1, 2, 3, 4, 5])
+# numeros.add(6)  # Esto daría un error porque los frozenset son inmutables
+```
+
+#### 5. Booleanos (`bool`)
+Los booleanos representan valores de verdad y solo pueden ser `True` o `False`. Se utilizan principalmente en condiciones y bucles.
+
+**Ejemplo:**
+```python
+es_mayor_de_edad = True
+es_menor_de_edad = False
+```
+
+#### 6. Tipo de dato `None`
+El tipo `None` representa la ausencia de valor o un valor nulo. Se utiliza para indicar que una variable no tiene ningún valor asignado.
+
+**Ejemplo:**
+```python
+respuesta = None
+```
+
+Estos son los tipos de datos básicos en Python que permiten almacenar y manipular diferentes tipos de información. Entender y utilizar correctamente estos tipos de datos es fundamental para desarrollar programas eficientes y funcionales.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

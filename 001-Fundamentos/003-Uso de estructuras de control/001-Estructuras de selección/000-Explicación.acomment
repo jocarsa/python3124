@@ -1,0 +1,138 @@
+### Estructuras de selección
+
+#### Estructuras de selección
+
+Las estructuras de selección en Python permiten tomar decisiones y ejecutar diferentes bloques de código en función de ciertas condiciones. Las principales estructuras de selección son `if`, `elif` y `else`. Estas estructuras son fundamentales para el control del flujo de ejecución en un programa.
+
+#### 1. Estructura `if`
+
+La estructura `if` evalúa una condición y, si la condición es verdadera, ejecuta el bloque de código correspondiente.
+
+**Ejemplo:**
+```python
+x = 10
+if x > 0:
+    print("x es positivo")  # Se ejecuta porque x es mayor que 0
+```
+
+En este ejemplo, la condición `x > 0` es verdadera, por lo que se ejecuta el bloque de código que imprime "x es positivo".
+
+#### 2. Estructura `if-else`
+
+La estructura `if-else` evalúa una condición y, si la condición es verdadera, ejecuta el primer bloque de código; de lo contrario, ejecuta el segundo bloque de código.
+
+**Ejemplo:**
+```python
+y = -5
+if y > 0:
+    print("y es positivo")
+else:
+    print("y es negativo")  # Se ejecuta porque y no es mayor que 0
+```
+
+En este ejemplo, la condición `y > 0` es falsa, por lo que se ejecuta el bloque de código en la cláusula `else`, que imprime "y es negativo".
+
+#### 3. Estructura `if-elif-else`
+
+La estructura `if-elif-else` evalúa múltiples condiciones en secuencia. Si una condición es verdadera, ejecuta el bloque de código correspondiente y omite el resto de las condiciones.
+
+**Ejemplo:**
+```python
+z = 0
+if z > 0:
+    print("z es positivo")
+elif z == 0:
+    print("z es cero")  # Se ejecuta porque z es igual a 0
+else:
+    print("z es negativo")
+```
+
+En este ejemplo, la condición `z > 0` es falsa, pero la condición `z == 0` es verdadera, por lo que se ejecuta el bloque de código que imprime "z es cero".
+
+#### 4. Condiciones combinadas
+
+Se pueden combinar múltiples condiciones utilizando operadores lógicos como `and`, `or` y `not`.
+
+**Ejemplo con `and`:**
+```python
+a = 5
+b = 10
+if a > 0 and b > 0:
+    print("a y b son positivos")  # Se ejecuta porque ambas condiciones son verdaderas
+```
+
+**Ejemplo con `or`:**
+```python
+a = -5
+b = 10
+if a > 0 or b > 0:
+    print("Al menos uno de a o b es positivo")  # Se ejecuta porque una de las condiciones es verdadera
+```
+
+**Ejemplo con `not`:**
+```python
+a = -5
+if not a > 0:
+    print("a no es positivo")  # Se ejecuta porque la condición es verdadera
+```
+
+#### 5. Estructuras de selección anidadas
+
+Las estructuras de selección pueden anidarse dentro de otras estructuras de selección para evaluar condiciones más complejas.
+
+**Ejemplo:**
+```python
+x = 5
+y = 10
+if x > 0:
+    if y > 0:
+        print("x y y son positivos")  # Se ejecuta porque ambas condiciones son verdaderas
+    else:
+        print("x es positivo, pero y no lo es")
+else:
+    print("x no es positivo")
+```
+
+En este ejemplo, se anidan dos estructuras `if` para evaluar condiciones complejas.
+
+#### 6. Uso de operadores ternarios
+
+Python soporta una forma compacta de escribir una estructura `if-else` usando el operador ternario. Esta sintaxis es útil para asignaciones condicionales.
+
+**Ejemplo:**
+```python
+a = 5
+b = 10
+mayor = a if a > b else b
+print(mayor)  # Imprime: 10
+```
+
+En este ejemplo, se asigna el valor mayor entre `a` y `b` a la variable `mayor` utilizando el operador ternario.
+
+#### 7. Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra el uso de varias estructuras de selección en un programa.
+
+**Ejemplo:**
+```python
+edad = 20
+ingresos = 30000
+
+if edad < 18:
+    print("Eres menor de edad")
+elif edad >= 18 and edad <= 65:
+    if ingresos < 20000:
+        print("Eres adulto con bajos ingresos")
+    elif ingresos >= 20000 and ingresos <= 50000:
+        print("Eres adulto con ingresos medios")  # Se ejecuta porque ambas condiciones son verdaderas
+    else:
+        print("Eres adulto con altos ingresos")
+else:
+    print("Eres adulto mayor")
+```
+
+En este ejemplo, se utilizan estructuras `if`, `elif` y `else` anidadas para evaluar la edad y los ingresos de una persona y proporcionar un mensaje correspondiente.
+
+Las estructuras de selección son fundamentales para dirigir el flujo de ejecución en Python. Permiten que el programa tome decisiones y ejecute diferentes bloques de código según las condiciones especificadas, lo que resulta esencial para crear aplicaciones dinámicas y funcionales.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

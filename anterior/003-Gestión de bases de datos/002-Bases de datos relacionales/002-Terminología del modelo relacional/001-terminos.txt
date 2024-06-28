@@ -1,5 +1,0 @@
--Base de datos
--Tabla
--Columna
--Longitud de los datos
--Tipo de dato

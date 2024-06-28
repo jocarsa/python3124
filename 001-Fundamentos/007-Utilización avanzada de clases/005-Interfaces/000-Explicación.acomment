@@ -1,0 +1,167 @@
+### Interfaces
+
+#### Concepto de Interfaces
+
+En la programación orientada a objetos, una interfaz define un contrato que las clases deben cumplir. Este contrato establece qué métodos y propiedades deben implementar las clases que adopten la interfaz. Python no tiene interfaces en el mismo sentido que lenguajes como Java o C#, pero el concepto de interfaces se puede implementar utilizando clases abstractas con métodos abstractos.
+
+### Implementación de Interfaces en Python
+
+Para definir interfaces en Python, se utiliza el módulo `abc` (Abstract Base Classes). Las interfaces se pueden implementar mediante clases abstractas que definen métodos sin implementación. Las clases que heredan de estas clases abstractas deben proporcionar implementaciones concretas para los métodos abstractos.
+
+#### Definición de una Interfaz
+
+**Ejemplo de una Interfaz utilizando Clases Abstractas:**
+
+```python
+from abc import ABC, abstractmethod
+
+class Figura(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+    @abstractmethod
+    def perimetro(self):
+        pass
+
+# Clases que implementan la interfaz Figura
+class Rectangulo(Figura):
+    def __init__(self, ancho, alto):
+        self.ancho = ancho
+        self.alto = alto
+
+    def area(self):
+        return self.ancho * self.alto
+
+    def perimetro(self):
+        return 2 * (self.ancho + self.alto)
+
+class Circulo(Figura):
+    def __init__(self, radio):
+        self.radio = radio
+
+    def area(self):
+        return 3.14 * (self.radio ** 2)
+
+    def perimetro(self):
+        return 2 * 3.14 * self.radio
+
+# Crear instancias de Rectangulo y Circulo
+rectangulo = Rectangulo(4, 7)
+circulo = Circulo(5)
+
+# Usar las instancias
+print(f"Área del rectángulo: {rectangulo.area()}")        # Imprime: Área del rectángulo: 28
+print(f"Perímetro del rectángulo: {rectangulo.perimetro()}") # Imprime: Perímetro del rectángulo: 22
+print(f"Área del círculo: {circulo.area()}")              # Imprime: Área del círculo: 78.5
+print(f"Perímetro del círculo: {circulo.perimetro()}")     # Imprime: Perímetro del círculo: 31.400000000000002
+```
+
+En este ejemplo:
+- `Figura` es una clase abstracta que actúa como una interfaz, definiendo los métodos `area` y `perimetro`.
+- `Rectangulo` y `Circulo` son clases concretas que implementan la interfaz `Figura`, proporcionando sus propias implementaciones de los métodos `area` y `perimetro`.
+
+#### Uso de Interfaces para Polimorfismo
+
+Las interfaces permiten el polimorfismo, lo que significa que se pueden utilizar diferentes implementaciones de la interfaz de manera uniforme.
+
+**Ejemplo de Polimorfismo con Interfaces:**
+
+```python
+def describir_figura(figura):
+    print(f"Área: {figura.area()}")
+    print(f"Perímetro: {figura.perimetro()}")
+
+# Crear instancias de Rectangulo y Circulo
+rectangulo = Rectangulo(4, 7)
+circulo = Circulo(5)
+
+# Usar polimorfismo para describir las figuras
+describir_figura(rectangulo)
+describir_figura(circulo)
+```
+
+En este ejemplo:
+- La función `describir_figura` acepta cualquier objeto que implemente la interfaz `Figura` y llama a sus métodos `area` y `perimetro`.
+
+### Ejemplo Completo de Interfaces
+
+A continuación se presenta un ejemplo completo que define una interfaz para diferentes tipos de figuras y demuestra el uso de polimorfismo.
+
+**Ejemplo Completo:**
+
+```python
+from abc import ABC, abstractmethod
+
+class Figura(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+    @abstractmethod
+    def perimetro(self):
+        pass
+
+class Rectangulo(Figura):
+    def __init__(self, ancho, alto):
+        self.ancho = ancho
+        self.alto = alto
+
+    def area(self):
+        return self.ancho * self.alto
+
+    def perimetro(self):
+        return 2 * (self.ancho + self.alto)
+
+class Circulo(Figura):
+    def __init__(self, radio):
+        self.radio = radio
+
+    def area(self):
+        return 3.14 * (self.radio ** 2)
+
+    def perimetro(self):
+        return 2 * 3.14 * self.radio
+
+class Triangulo(Figura):
+    def __init__(self, base, altura, lado1, lado2, lado3):
+        self.base = base
+        self.altura = altura
+        self.lado1 = lado1
+        self.lado2 = lado2
+        self.lado3 = lado3
+
+    def area(self):
+        return 0.5 * self.base * self.altura
+
+    def perimetro(self):
+        return self.lado1 + self.lado2 + self.lado3
+
+def describir_figura(figura):
+    print(f"Área: {figura.area()}")
+    print(f"Perímetro: {figura.perimetro()}")
+
+# Crear instancias de las figuras
+rectangulo = Rectangulo(4, 7)
+circulo = Circulo(5)
+triangulo = Triangulo(3, 4, 3, 4, 5)
+
+# Usar polimorfismo para describir las figuras
+describir_figura(rectangulo)
+describir_figura(circulo)
+describir_figura(triangulo)
+```
+
+En este ejemplo:
+- `Figura` es una interfaz que define los métodos `area` y `perimetro`.
+- `Rectangulo`, `Circulo`, y `Triangulo` son clases que implementan esta interfaz.
+- La función `describir_figura` utiliza polimorfismo para trabajar con cualquier objeto que implemente la interfaz `Figura`.
+
+### Resumen
+
+- **Interfaces**: Definen un contrato que las clases deben cumplir, especificando qué métodos y propiedades deben implementarse.
+- **Clases Abstractas**: En Python, se utilizan para definir interfaces mediante el módulo `abc`.
+- **Métodos Abstractos**: Métodos definidos en una clase abstracta que deben ser implementados por las subclases.
+- **Polimorfismo**: Permite tratar diferentes implementaciones de una interfaz de manera uniforme.
+
+Las interfaces son una herramienta poderosa en la programación orientada a objetos que permiten definir contratos claros y asegurar que las clases implementen ciertos métodos, promoviendo la modularidad y la reutilización del código.
