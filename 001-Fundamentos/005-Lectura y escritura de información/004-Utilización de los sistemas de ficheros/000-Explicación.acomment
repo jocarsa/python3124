@@ -1,0 +1,238 @@
+### Utilización de los sistemas de ficheros
+
+#### Utilización de los sistemas de ficheros
+
+El manejo de los sistemas de ficheros en Python se realiza mediante el módulo `os` y otros módulos como `shutil` y `pathlib`. Estos módulos proporcionan funciones para interactuar con el sistema de archivos, permitiendo crear, eliminar, renombrar y mover archivos y directorios, así como obtener información sobre ellos.
+
+#### 1. El módulo `os`
+
+El módulo `os` proporciona una interfaz para interactuar con el sistema operativo, incluyendo funciones para trabajar con archivos y directorios.
+
+**Ejemplos comunes:**
+
+**Crear un directorio:**
+```python
+import os
+
+# Crear un directorio
+os.mkdir('nuevo_directorio')
+print("Directorio 'nuevo_directorio' creado")
+```
+
+**Renombrar un archivo o directorio:**
+```python
+# Renombrar un directorio
+os.rename('nuevo_directorio', 'directorio_renombrado')
+print("Directorio renombrado a 'directorio_renombrado'")
+```
+
+**Eliminar un archivo:**
+```python
+# Crear un archivo para eliminar
+with open('archivo_para_eliminar.txt', 'w') as archivo:
+    archivo.write('Este archivo será eliminado.')
+
+# Eliminar el archivo
+os.remove('archivo_para_eliminar.txt')
+print("Archivo 'archivo_para_eliminar.txt' eliminado")
+```
+
+**Eliminar un directorio:**
+```python
+# Eliminar un directorio
+os.rmdir('directorio_renombrado')
+print("Directorio 'directorio_renombrado' eliminado")
+```
+
+**Obtener el directorio actual:**
+```python
+# Obtener el directorio actual
+directorio_actual = os.getcwd()
+print(f"Directorio actual: {directorio_actual}")
+```
+
+**Cambiar el directorio actual:**
+```python
+# Cambiar el directorio actual
+os.mkdir('directorio_de_trabajo')
+os.chdir('directorio_de_trabajo')
+print(f"Directorio cambiado a: {os.getcwd()}")
+os.chdir('..')  # Volver al directorio anterior
+```
+
+**Listar archivos en un directorio:**
+```python
+# Listar archivos en el directorio actual
+archivos = os.listdir('.')
+print("Archivos en el directorio actual:")
+for archivo in archivos:
+    print(archivo)
+```
+
+#### 2. El módulo `shutil`
+
+El módulo `shutil` proporciona funciones de alto nivel para copiar, mover y eliminar archivos y directorios.
+
+**Ejemplos comunes:**
+
+**Copiar archivos:**
+```python
+import shutil
+
+# Crear un archivo para copiar
+with open('archivo_original.txt', 'w') as archivo:
+    archivo.write('Este es el contenido original.')
+
+# Copiar el archivo
+shutil.copy('archivo_original.txt', 'archivo_copiado.txt')
+print("Archivo 'archivo_original.txt' copiado a 'archivo_copiado.txt'")
+```
+
+**Mover archivos:**
+```python
+# Mover el archivo
+shutil.move('archivo_copiado.txt', 'archivo_movido.txt')
+print("Archivo 'archivo_copiado.txt' movido a 'archivo_movido.txt'")
+```
+
+**Eliminar un directorio y su contenido:**
+```python
+# Crear un directorio con archivos para eliminar
+os.mkdir('directorio_para_eliminar')
+with open('directorio_para_eliminar/archivo.txt', 'w') as archivo:
+    archivo.write('Contenido del archivo.')
+
+# Eliminar el directorio y su contenido
+shutil.rmtree('directorio_para_eliminar')
+print("Directorio 'directorio_para_eliminar' y su contenido eliminados")
+```
+
+#### 3. El módulo `pathlib`
+
+El módulo `pathlib` proporciona una interfaz orientada a objetos para trabajar con rutas de archivos y directorios.
+
+**Ejemplos comunes:**
+
+**Crear un objeto `Path`:**
+```python
+from pathlib import Path
+
+# Crear un objeto Path
+ruta = Path('nuevo_directorio')
+print(f"Ruta creada: {ruta}")
+```
+
+**Crear un directorio:**
+```python
+# Crear un directorio
+ruta.mkdir()
+print(f"Directorio '{ruta}' creado")
+```
+
+**Comprobar si un archivo o directorio existe:**
+```python
+# Comprobar si el directorio existe
+if ruta.exists():
+    print(f"El directorio '{ruta}' existe")
+else:
+    print(f"El directorio '{ruta}' no existe")
+```
+
+**Eliminar un archivo:**
+```python
+# Crear un archivo para eliminar
+archivo = ruta / 'archivo_para_eliminar.txt'
+archivo.write_text('Este archivo será eliminado.')
+
+# Eliminar el archivo
+archivo.unlink()
+print(f"Archivo '{archivo}' eliminado")
+```
+
+**Eliminar un directorio:**
+```python
+# Eliminar un directorio
+ruta.rmdir()
+print(f"Directorio '{ruta}' eliminado")
+```
+
+**Iterar sobre los archivos en un directorio:**
+```python
+# Crear algunos archivos para listar
+ruta.mkdir()
+for i in range(3):
+    (ruta / f'archivo_{i}.txt').write_text(f'Contenido del archivo {i}')
+
+# Listar archivos en el directorio
+for archivo in ruta.iterdir():
+    print(archivo.name)
+```
+
+### Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra cómo utilizar los módulos `os`, `shutil` y `pathlib` para trabajar con archivos y directorios en Python.
+
+**Ejemplo completo:**
+```python
+import os
+import shutil
+from pathlib import Path
+
+# Crear un directorio
+os.mkdir('directorio_ejemplo')
+print("Directorio 'directorio_ejemplo' creado")
+
+# Cambiar al directorio creado
+os.chdir('directorio_ejemplo')
+print(f"Directorio cambiado a: {os.getcwd()}")
+
+# Crear un archivo de texto
+with open('archivo.txt', 'w') as archivo:
+    archivo.write('Este es un archivo de ejemplo.')
+print("Archivo 'archivo.txt' creado")
+
+# Listar archivos en el directorio actual
+print("Archivos en el directorio actual:")
+for archivo in os.listdir('.'):
+    print(archivo)
+
+# Copiar el archivo de texto
+shutil.copy('archivo.txt', 'archivo_copiado.txt')
+print("Archivo 'archivo.txt' copiado a 'archivo_copiado.txt'")
+
+# Mover el archivo copiado
+shutil.move('archivo_copiado.txt', 'archivo_movido.txt')
+print("Archivo 'archivo_copiado.txt' movido a 'archivo_movido.txt'")
+
+# Crear un directorio con pathlib
+ruta = Path('directorio_pathlib')
+ruta.mkdir()
+print(f"Directorio '{ruta}' creado con pathlib")
+
+# Crear algunos archivos dentro del directorio con pathlib
+for i in range(3):
+    (ruta / f'archivo_{i}.txt').write_text(f'Contenido del archivo {i}')
+print(f"Archivos creados dentro del directorio '{ruta}'")
+
+# Listar archivos en el directorio con pathlib
+print(f"Archivos en el directorio '{ruta}':")
+for archivo in ruta.iterdir():
+    print(archivo.name)
+
+# Eliminar los archivos y el directorio con pathlib
+for archivo in ruta.iterdir():
+    archivo.unlink()
+ruta.rmdir()
+print(f"Archivos y directorio '{ruta}' eliminados")
+
+# Volver al directorio anterior y eliminar el directorio de ejemplo
+os.chdir('..')
+shutil.rmtree('directorio_ejemplo')
+print("Directorio 'directorio_ejemplo' y su contenido eliminados")
+```
+
+En este ejemplo:
+- Se crean y manipulan directorios y archivos utilizando `os`, `shutil` y `pathlib`.
+- Se muestra cómo crear, listar, mover, copiar y eliminar archivos y directorios de manera eficiente.
+
+El manejo adecuado del sistema de ficheros es crucial para muchas aplicaciones, y Python proporciona herramientas poderosas y flexibles para interactuar con el sistema de archivos de manera efectiva y segura.

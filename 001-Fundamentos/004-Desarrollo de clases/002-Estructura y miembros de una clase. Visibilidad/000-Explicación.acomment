@@ -1,0 +1,190 @@
+### Estructura y miembros de una clase. Visibilidad.
+
+#### Estructura y miembros de una clase. Visibilidad
+
+La estructura de una clase en Python incluye atributos y métodos que definen el estado y el comportamiento de los objetos creados a partir de la clase. Además, Python permite controlar la visibilidad de estos miembros, es decir, determinar si pueden ser accedidos desde fuera de la clase.
+
+#### 1. Estructura de una clase
+
+Una clase en Python se define utilizando la palabra clave `class`. Dentro de la clase, se definen los atributos (datos) y métodos (funciones).
+
+**Ejemplo básico:**
+```python
+class Coche:
+    # Atributo de clase
+    ruedas = 4
+
+    def __init__(self, marca, modelo):
+        # Atributos de instancia
+        self.marca = marca
+        self.modelo = modelo
+
+    # Método de instancia
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+```
+
+En este ejemplo:
+- `ruedas` es un atributo de clase.
+- `marca` y `modelo` son atributos de instancia definidos en el método `__init__`.
+- `arrancar` es un método de instancia.
+
+#### 2. Atributos de clase e instancia
+
+**Atributos de clase**: Estos atributos son compartidos por todas las instancias de la clase.
+```python
+class Coche:
+    ruedas = 4  # Atributo de clase
+
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+```
+
+**Atributos de instancia**: Estos atributos son específicos de cada instancia de la clase.
+```python
+coche1 = Coche("Toyota", "Corolla")
+coche2 = Coche("Honda", "Civic")
+print(coche1.marca)  # Imprime: Toyota
+print(coche2.marca)  # Imprime: Honda
+```
+
+#### 3. Métodos de clase e instancia
+
+**Métodos de instancia**: Estos métodos operan sobre instancias de la clase y pueden acceder a los atributos de instancia a través de `self`.
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+```
+
+**Métodos de clase**: Estos métodos operan sobre la clase en sí y se definen utilizando el decorador `@classmethod`. Pueden acceder a los atributos de clase a través de `cls`.
+```python
+class Coche:
+    ruedas = 4
+
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    @classmethod
+    def cambiar_ruedas(cls, nuevas_ruedas):
+        cls.ruedas = nuevas_ruedas
+
+Coche.cambiar_ruedas(6)
+print(Coche.ruedas)  # Imprime: 6
+```
+
+**Métodos estáticos**: Estos métodos no operan sobre instancias ni sobre la clase en sí. Se definen utilizando el decorador `@staticmethod`.
+```python
+class Coche:
+    @staticmethod
+    def es_coche(vehiculo):
+        return vehiculo.lower() == "coche"
+
+print(Coche.es_coche("coche"))  # Imprime: True
+```
+
+#### 4. Visibilidad de los miembros de la clase
+
+Python no tiene un mecanismo de visibilidad como `public`, `protected` y `private` en otros lenguajes, pero se puede controlar el acceso a los miembros de una clase mediante convenciones de nomenclatura.
+
+**Público**: Los miembros públicos son accesibles desde cualquier parte del programa.
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+coche = Coche("Toyota", "Corolla")
+print(coche.marca)  # Imprime: Toyota
+```
+
+**Protegido**: Los miembros protegidos se indican con un guion bajo `_` y se deben tratar como "semi-privados". Por convención, no deben ser accedidos directamente desde fuera de la clase, aunque no es estrictamente prohibido.
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self._marca = marca
+        self._modelo = modelo
+
+coche = Coche("Toyota", "Corolla")
+print(coche._marca)  # Imprime: Toyota (aunque no se recomienda acceder así)
+```
+
+**Privado**: Los miembros privados se indican con dos guiones bajos `__` y Python realiza un name mangling para hacer más difícil acceder a ellos desde fuera de la clase.
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.__marca = marca
+        self.__modelo = modelo
+
+coche = Coche("Toyota", "Corolla")
+# print(coche.__marca)  # Produce un error: AttributeError
+
+# Acceso indirecto a un atributo privado real
+print(coche._Coche__marca)  # Imprime: Toyota (name mangling)
+```
+
+#### Ejemplo completo
+
+A continuación se presenta un ejemplo completo que ilustra la estructura de una clase con atributos de clase e instancia, métodos de instancia y clase, y control de visibilidad.
+
+**Ejemplo:**
+```python
+class Empleado:
+    aumento_salario = 1.05  # Atributo de clase
+
+    def __init__(self, nombre, salario):
+        self.nombre = nombre  # Atributo de instancia público
+        self._salario = salario  # Atributo de instancia protegido
+        self.__seguro_social = "123-45-6789"  # Atributo de instancia privado
+
+    def mostrar_info(self):
+        print(f"Nombre: {self.nombre}, Salario: {self._salario}")
+
+    @classmethod
+    def establecer_aumento(cls, nuevo_aumento):
+        cls.aumento_salario = nuevo_aumento
+
+    @staticmethod
+    def es_trabajador(nombre):
+        return nombre.lower() == "trabajador"
+
+    def mostrar_seguro_social(self):
+        return self.__seguro_social
+
+# Crear una instancia de la clase Empleado
+empleado = Empleado("Ana", 50000)
+
+# Usar métodos de la instancia
+empleado.mostrar_info()  # Imprime: Nombre: Ana, Salario: 50000
+
+# Usar método de clase
+Empleado.establecer_aumento(1.10)
+print(Empleado.aumento_salario)  # Imprime: 1.10
+
+# Usar método estático
+print(Empleado.es_trabajador("trabajador"))  # Imprime: True
+
+# Acceder a atributos privados y protegidos
+print(empleado._salario)  # Imprime: 50000
+print(empleado.mostrar_seguro_social())  # Imprime: 123-45-6789
+```
+
+En este ejemplo:
+- `aumento_salario` es un atributo de clase.
+- `nombre` es un atributo de instancia público.
+- `_salario` es un atributo de instancia protegido.
+- `__seguro_social` es un atributo de instancia privado.
+- `mostrar_info` es un método de instancia.
+- `establecer_aumento` es un método de clase.
+- `es_trabajador` es un método estático.
+- `mostrar_seguro_social` es un método de instancia que accede a un atributo privado.
+
+La estructura y los miembros de una clase, junto con las reglas de visibilidad, permiten organizar y proteger los datos y comportamientos de los objetos en Python de manera eficaz.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

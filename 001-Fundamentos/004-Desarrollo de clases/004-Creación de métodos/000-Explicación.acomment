@@ -1,0 +1,161 @@
+### Creación de métodos
+
+#### Creación de métodos
+
+Los métodos en Python son funciones definidas dentro de una clase que describen los comportamientos de los objetos creados a partir de esa clase. Los métodos permiten que los objetos interactúen con sus propios atributos y realicen acciones específicas. A continuación se explica cómo crear y utilizar métodos en Python.
+
+#### 1. Métodos de instancia
+
+Los métodos de instancia son funciones que operan sobre una instancia específica de una clase. El primer parámetro de estos métodos es siempre `self`, que hace referencia a la instancia del objeto que está llamando al método.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+
+    def detener(self):
+        print(f"El {self.marca} {self.modelo} se ha detenido")
+
+# Crear una instancia de la clase Coche
+mi_coche = Coche("Toyota", "Corolla")
+
+# Llamar a los métodos de instancia
+mi_coche.arrancar()  # Imprime: El Toyota Corolla está arrancando...
+mi_coche.detener()   # Imprime: El Toyota Corolla se ha detenido
+```
+
+En este ejemplo, los métodos `arrancar` y `detener` son métodos de instancia que operan sobre los atributos `marca` y `modelo` de la instancia `mi_coche`.
+
+#### 2. Métodos de clase
+
+Los métodos de clase son funciones que operan sobre la clase en sí, en lugar de sobre instancias individuales. Se definen usando el decorador `@classmethod` y el primer parámetro es `cls`, que hace referencia a la clase.
+
+**Ejemplo:**
+```python
+class Coche:
+    ruedas = 4
+
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    @classmethod
+    def cambiar_ruedas(cls, nuevas_ruedas):
+        cls.ruedas = nuevas_ruedas
+
+# Llamar al método de clase
+Coche.cambiar_ruedas(6)
+print(Coche.ruedas)  # Imprime: 6
+```
+
+En este ejemplo, `cambiar_ruedas` es un método de clase que modifica el atributo de clase `ruedas`.
+
+#### 3. Métodos estáticos
+
+Los métodos estáticos son funciones que no operan ni sobre instancias ni sobre la clase. Se definen usando el decorador `@staticmethod` y no tienen `self` ni `cls` como primer parámetro. Se utilizan para crear funciones relacionadas con la clase pero que no dependen de ningún dato de la instancia o de la clase.
+
+**Ejemplo:**
+```python
+class Coche:
+    @staticmethod
+    def es_coche(vehiculo):
+        return vehiculo.lower() == "coche"
+
+# Llamar al método estático
+print(Coche.es_coche("coche"))  # Imprime: True
+print(Coche.es_coche("bicicleta"))  # Imprime: False
+```
+
+En este ejemplo, `es_coche` es un método estático que verifica si una cadena de texto es "coche".
+
+#### 4. Métodos privados
+
+Los métodos privados son funciones que no deben ser accesibles desde fuera de la clase. Se definen con dos guiones bajos `__` al inicio de su nombre.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):
+        self.__encender_motor()
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+
+    def __encender_motor(self):
+        print("El motor está encendido")
+
+# Crear una instancia de la clase Coche
+mi_coche = Coche("Toyota", "Corolla")
+
+# Llamar al método público
+mi_coche.arrancar()  # Imprime: El motor está encendido y El Toyota Corolla está arrancando...
+
+# Intentar llamar al método privado (genera un error)
+# mi_coche.__encender_motor()  # Produce un error: AttributeError
+
+# Acceso indirecto al método privado
+mi_coche._Coche__encender_motor()  # Imprime: El motor está encendido
+```
+
+En este ejemplo, `__encender_motor` es un método privado que solo debe ser llamado dentro de la clase `Coche`.
+
+#### 5. Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra cómo definir y utilizar diferentes tipos de métodos en una clase.
+
+**Ejemplo:**
+```python
+class Empleado:
+    aumento_salario = 1.05  # Atributo de clase
+
+    def __init__(self, nombre, salario):
+        self.nombre = nombre  # Atributo de instancia
+        self.__salario = salario  # Atributo de instancia privado
+
+    def mostrar_info(self):
+        print(f"Nombre: {self.nombre}, Salario: {self.__salario}")
+
+    def aplicar_aumento(self):
+        self.__salario *= self.aumento_salario
+
+    @classmethod
+    def establecer_aumento(cls, nuevo_aumento):
+        cls.aumento_salario = nuevo_aumento
+
+    @staticmethod
+    def es_trabajador(nombre):
+        return nombre.lower() == "trabajador"
+
+# Crear una instancia de la clase Empleado
+empleado = Empleado("Ana", 50000)
+
+# Usar métodos de instancia
+empleado.mostrar_info()  # Imprime: Nombre: Ana, Salario: 50000
+empleado.aplicar_aumento()
+empleado.mostrar_info()  # Imprime: Nombre: Ana, Salario: 52500
+
+# Usar método de clase
+Empleado.establecer_aumento(1.10)
+empleado.aplicar_aumento()
+empleado.mostrar_info()  # Imprime: Nombre: Ana, Salario: 57750
+
+# Usar método estático
+print(Empleado.es_trabajador("trabajador"))  # Imprime: True
+```
+
+En este ejemplo, la clase `Empleado` incluye:
+- Un método de instancia `mostrar_info` que muestra la información del empleado.
+- Un método de instancia `aplicar_aumento` que aplica un aumento al salario del empleado.
+- Un método de clase `establecer_aumento` que cambia el porcentaje de aumento de salario para todos los empleados.
+- Un método estático `es_trabajador` que verifica si una cadena de texto es "trabajador".
+
+Los métodos en Python permiten definir y controlar el comportamiento de los objetos de una clase, facilitando la implementación de la lógica de negocio en programas orientados a objetos.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

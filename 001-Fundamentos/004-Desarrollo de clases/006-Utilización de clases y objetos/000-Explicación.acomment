@@ -1,0 +1,195 @@
+### Utilización de clases y objetos
+
+#### Utilización de clases y objetos
+
+En la programación orientada a objetos, una clase es una plantilla o un modelo para crear objetos. Los objetos son instancias de clases que contienen datos (atributos) y comportamientos (métodos). Utilizar clases y objetos permite organizar y estructurar el código de manera modular y reutilizable.
+
+#### 1. Definición de una clase
+
+Para definir una clase en Python, se utiliza la palabra clave `class`, seguida del nombre de la clase y dos puntos. Dentro del cuerpo de la clase, se definen los atributos y métodos.
+
+**Ejemplo básico:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+
+    def detener(self):
+        print(f"El {self.marca} {self.modelo} se ha detenido")
+```
+
+En este ejemplo, `Coche` es una clase con un método especial `__init__` (constructor) que inicializa los atributos `marca` y `modelo`, y dos métodos (`arrancar` y `detener`) que definen el comportamiento del coche.
+
+#### 2. Creación de objetos
+
+Para crear un objeto, se llama a la clase como si fuera una función, pasando los argumentos necesarios al constructor `__init__`.
+
+**Ejemplo:**
+```python
+# Crear una instancia de la clase Coche
+mi_coche = Coche("Toyota", "Corolla")
+
+# Acceder a los atributos y métodos del objeto
+print(mi_coche.marca)  # Imprime: Toyota
+print(mi_coche.modelo)  # Imprime: Corolla
+
+mi_coche.arrancar()  # Imprime: El Toyota Corolla está arrancando...
+mi_coche.detener()   # Imprime: El Toyota Corolla se ha detenido
+```
+
+En este ejemplo, `mi_coche` es un objeto de la clase `Coche` con los atributos `marca` y `modelo` inicializados y los métodos `arrancar` y `detener` disponibles para su uso.
+
+#### 3. Atributos de instancia y de clase
+
+**Atributos de instancia**: Son específicos de cada objeto creado a partir de la clase y se definen en el constructor `__init__`.
+
+**Atributos de clase**: Son compartidos por todas las instancias de la clase y se definen directamente dentro del cuerpo de la clase.
+
+**Ejemplo:**
+```python
+class Coche:
+    ruedas = 4  # Atributo de clase
+
+    def __init__(self, marca, modelo):
+        self.marca = marca  # Atributo de instancia
+        self.modelo = modelo  # Atributo de instancia
+
+# Crear dos instancias de la clase Coche
+coche1 = Coche("Toyota", "Corolla")
+coche2 = Coche("Honda", "Civic")
+
+# Acceder a los atributos de instancia y de clase
+print(coche1.marca)  # Imprime: Toyota
+print(coche2.modelo)  # Imprime: Civic
+print(coche1.ruedas)  # Imprime: 4
+print(coche2.ruedas)  # Imprime: 4
+
+# Modificar un atributo de clase
+Coche.ruedas = 6
+print(coche1.ruedas)  # Imprime: 6
+print(coche2.ruedas)  # Imprime: 6
+```
+
+En este ejemplo, `ruedas` es un atributo de clase compartido por todas las instancias, mientras que `marca` y `modelo` son atributos de instancia específicos de cada objeto.
+
+#### 4. Métodos de instancia, de clase y estáticos
+
+**Métodos de instancia**: Operan sobre instancias de la clase y acceden a los atributos de instancia a través de `self`.
+
+**Métodos de clase**: Operan sobre la clase en sí y se definen usando el decorador `@classmethod`. Acceden a los atributos de clase a través de `cls`.
+
+**Métodos estáticos**: No dependen de los atributos de instancia ni de clase. Se definen usando el decorador `@staticmethod`.
+
+**Ejemplo:**
+```python
+class Coche:
+    ruedas = 4
+
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):  # Método de instancia
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+
+    @classmethod
+    def cambiar_ruedas(cls, nuevas_ruedas):  # Método de clase
+        cls.ruedas = nuevas_ruedas
+
+    @staticmethod
+    def es_coche(vehiculo):  # Método estático
+        return vehiculo.lower() == "coche"
+
+# Crear una instancia de la clase Coche
+mi_coche = Coche("Toyota", "Corolla")
+
+# Llamar al método de instancia
+mi_coche.arrancar()  # Imprime: El Toyota Corolla está arrancando...
+
+# Llamar al método de clase
+Coche.cambiar_ruedas(6)
+print(Coche.ruedas)  # Imprime: 6
+
+# Llamar al método estático
+print(Coche.es_coche("bicicleta"))  # Imprime: False
+```
+
+En este ejemplo, `arrancar` es un método de instancia, `cambiar_ruedas` es un método de clase y `es_coche` es un método estático.
+
+#### 5. Herencia
+
+La herencia permite crear nuevas clases basadas en clases existentes, heredando atributos y métodos. La clase base se llama clase padre o superclase, y la clase derivada se llama subclase.
+
+**Ejemplo:**
+```python
+class Animal:
+    def __init__(self, nombre):
+        self.nombre = nombre
+
+    def hacer_sonido(self):
+        pass
+
+class Perro(Animal):
+    def hacer_sonido(self):
+        return "Guau"
+
+class Gato(Animal):
+    def hacer_sonido(self):
+        return "Miau"
+
+# Crear instancias de las clases derivadas
+perro = Perro("Firulais")
+gato = Gato("Mish")
+
+print(perro.nombre)         # Imprime: Firulais
+print(perro.hacer_sonido()) # Imprime: Guau
+print(gato.nombre)          # Imprime: Mish
+print(gato.hacer_sonido())  # Imprime: Miau
+```
+
+En este ejemplo, `Perro` y `Gato` heredan de `Animal` y sobrescriben el método `hacer_sonido`.
+
+#### Ejemplo completo
+
+A continuación se presenta un ejemplo completo que ilustra la creación y utilización de clases y objetos, incluyendo atributos, métodos y herencia.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        print(f"Hola, me llamo {self.nombre} y tengo {self.edad} años")
+
+class Empleado(Persona):
+    def __init__(self, nombre, edad, salario):
+        super().__init__(nombre, edad)
+        self.salario = salario
+
+    def mostrar_info(self):
+        self.saludar()
+        print(f"Mi salario es {self.salario}")
+
+# Crear instancias de las clases
+persona = Persona("Ana", 30)
+empleado = Empleado("Carlos", 40, 50000)
+
+# Usar métodos y atributos
+persona.saludar()          # Imprime: Hola, me llamo Ana y tengo 30 años
+empleado.mostrar_info()    # Imprime: Hola, me llamo Carlos y tengo 40 años
+                           # Imprime: Mi salario es 50000
+```
+
+En este ejemplo:
+- `Persona` es una clase base con un método `saludar`.
+- `Empleado` es una subclase que hereda de `Persona` y añade un nuevo atributo `salario` y un método `mostrar_info` que utiliza el método `saludar` de la clase base.
+
+El uso de clases y objetos en Python permite crear aplicaciones organizadas, modulares y fáciles de mantener. Comprender cómo definir y utilizar clases y objetos es fundamental para aprovechar al máximo la programación orientada a objetos.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

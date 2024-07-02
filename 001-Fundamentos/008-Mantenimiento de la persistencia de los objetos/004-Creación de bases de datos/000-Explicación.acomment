@@ -1,0 +1,158 @@
+### Creación de Bases de Datos
+
+La creación de bases de datos es un paso fundamental para el manejo de la persistencia de datos en cualquier aplicación. En el contexto de bases de datos orientadas a objetos, la creación de bases de datos implica configurar el almacenamiento, definir la estructura de los datos y, en algunos casos, definir esquemas o modelos de objetos que se almacenarán.
+
+En esta guía, utilizaremos ZODB (Zope Object Database) para mostrar cómo crear y gestionar una base de datos orientada a objetos en Python.
+
+### Instalación de ZODB
+
+Antes de crear una base de datos con ZODB, asegúrate de tener ZODB instalado en tu entorno de Python. Si no lo tienes instalado, puedes hacerlo con el siguiente comando:
+
+```bash
+pip install ZODB
+```
+
+### Creación de una Base de Datos con ZODB
+
+#### Paso 1: Configuración del Almacenamiento y la Base de Datos
+
+El primer paso es configurar el almacenamiento y abrir la base de datos. ZODB utiliza un archivo de almacenamiento para guardar los datos.
+
+**Código de Ejemplo:**
+
+```python
+import ZODB, ZODB.FileStorage
+import transaction
+
+# Crear el almacenamiento y la base de datos
+storage = ZODB.FileStorage.FileStorage('mydata.fs')
+db = ZODB.DB(storage)
+connection = db.open()
+root = connection.root()
+```
+
+En este ejemplo:
+- `ZODB.FileStorage.FileStorage('mydata.fs')` crea un archivo de almacenamiento llamado `mydata.fs`.
+- `ZODB.DB(storage)` crea una base de datos utilizando el almacenamiento configurado.
+- `db.open()` abre una conexión a la base de datos.
+- `connection.root()` accede a la raíz de la base de datos, donde se pueden almacenar los objetos.
+
+#### Paso 2: Definición de Clases Persistentes
+
+Las clases que se almacenarán en la base de datos deben heredar de `Persistent`. Esto asegura que los objetos de estas clases puedan ser almacenados y gestionados por ZODB.
+
+**Código de Ejemplo:**
+
+```python
+from persistent import Persistent
+
+class Persona(Persistent):
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+```
+
+En este ejemplo:
+- La clase `Persona` hereda de `Persistent`, lo que permite que sus instancias se almacenen en ZODB.
+
+#### Paso 3: Creación y Almacenamiento de Objetos
+
+Crea instancias de las clases persistentes y almacénalas en la base de datos.
+
+**Código de Ejemplo:**
+
+```python
+# Crear y almacenar objetos
+root['persona1'] = Persona('Ana', 30)
+root['persona2'] = Persona('Luis', 25)
+
+# Confirmar la transacción
+transaction.commit()
+```
+
+En este ejemplo:
+- Se crean dos instancias de `Persona` y se almacenan en la raíz de la base de datos.
+- `transaction.commit()` confirma la transacción, asegurando que los cambios se guarden en el almacenamiento.
+
+#### Paso 4: Recuperación de Objetos
+
+Para recuperar objetos almacenados en la base de datos, simplemente accede a ellos a través de la raíz o cualquier otra estructura de datos persistente que hayas utilizado.
+
+**Código de Ejemplo:**
+
+```python
+# Recuperar objetos
+persona1 = root['persona1']
+persona2 = root['persona2']
+print(f"{persona1.nombre} tiene {persona1.edad} años.")  # Imprime: Ana tiene 30 años.
+print(f"{persona2.nombre} tiene {persona2.edad} años.")  # Imprime: Luis tiene 25 años.
+```
+
+En este ejemplo:
+- Se recuperan las instancias de `Persona` desde la raíz de la base de datos y se imprimen sus atributos.
+
+#### Paso 5: Cierre de Conexión y Base de Datos
+
+Finalmente, es importante cerrar la conexión y la base de datos para asegurarse de que todos los datos se guarden correctamente y liberar los recursos.
+
+**Código de Ejemplo:**
+
+```python
+# Cerrar la conexión y la base de datos
+connection.close()
+db.close()
+```
+
+En este ejemplo:
+- `connection.close()` cierra la conexión a la base de datos.
+- `db.close()` cierra la base de datos y el almacenamiento asociado.
+
+### Ejemplo Completo
+
+Aquí tienes un ejemplo completo que combina todos los pasos anteriores para crear y gestionar una base de datos con ZODB:
+
+```python
+import ZODB, ZODB.FileStorage
+import transaction
+from persistent import Persistent
+
+# Crear el almacenamiento y la base de datos
+storage = ZODB.FileStorage.FileStorage('mydata.fs')
+db = ZODB.DB(storage)
+connection = db.open()
+root = connection.root()
+
+# Definir una clase persistente
+class Persona(Persistent):
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+# Crear y almacenar objetos
+root['persona1'] = Persona('Ana', 30)
+root['persona2'] = Persona('Luis', 25)
+
+# Confirmar la transacción
+transaction.commit()
+
+# Recuperar objetos
+persona1 = root['persona1']
+persona2 = root['persona2']
+print(f"{persona1.nombre} tiene {persona1.edad} años.")  # Imprime: Ana tiene 30 años.
+print(f"{persona2.nombre} tiene {persona2.edad} años.")  # Imprime: Luis tiene 25 años.
+
+# Cerrar la conexión y la base de datos
+connection.close()
+db.close()
+```
+
+### Resumen
+
+- **Instalación de ZODB**: Utiliza `pip install ZODB` para instalar ZODB.
+- **Configuración del Almacenamiento y la Base de Datos**: Configura el almacenamiento y abre la base de datos utilizando `ZODB.FileStorage` y `ZODB.DB`.
+- **Definición de Clases Persistentes**: Las clases que se almacenarán deben heredar de `Persistent`.
+- **Creación y Almacenamiento de Objetos**: Crea instancias de las clases persistentes y almacénalas en la base de datos.
+- **Recuperación de Objetos**: Accede a los objetos almacenados a través de la raíz de la base de datos.
+- **Cierre de Conexión y Base de Datos**: Cierra la conexión y la base de datos para asegurar la persistencia de los datos.
+
+La creación y gestión de bases de datos orientadas a objetos con ZODB permite almacenar y recuperar objetos de manera eficiente, facilitando la persistencia de datos en aplicaciones Python.

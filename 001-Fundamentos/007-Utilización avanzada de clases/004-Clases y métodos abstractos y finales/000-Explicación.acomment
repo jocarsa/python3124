@@ -1,0 +1,141 @@
+### Clases y Métodos Abstractos y Finales
+
+#### Clases y Métodos Abstractos
+
+Las clases y métodos abstractos proporcionan una forma de definir una interfaz en la programación orientada a objetos. Una clase abstracta no puede ser instanciada directamente y está diseñada para ser heredada. Los métodos abstractos son métodos declarados pero no implementados en la clase abstracta; deben ser implementados por las subclases.
+
+**Uso de la Clase Abstracta:**
+
+Para definir clases y métodos abstractos en Python, se utiliza el módulo `abc` (Abstract Base Classes).
+
+**Ejemplo de Clases y Métodos Abstractos:**
+```python
+from abc import ABC, abstractmethod
+
+# Definir una clase abstracta
+class Figura(ABC):
+    @abstractmethod
+    def area(self):
+        pass
+
+    @abstractmethod
+    def perimetro(self):
+        pass
+
+# Definir una subclase que implementa los métodos abstractos
+class Rectangulo(Figura):
+    def __init__(self, ancho, alto):
+        self.ancho = ancho
+        self.alto = alto
+
+    def area(self):
+        return self.ancho * self.alto
+
+    def perimetro(self):
+        return 2 * (self.ancho + self.alto)
+
+# Crear una instancia de Rectangulo
+rectangulo = Rectangulo(4, 7)
+print(f"Área del rectángulo: {rectangulo.area()}")         # Imprime: Área del rectángulo: 28
+print(f"Perímetro del rectángulo: {rectangulo.perimetro()}") # Imprime: Perímetro del rectángulo: 22
+```
+
+En este ejemplo:
+- `Figura` es una clase abstracta que define dos métodos abstractos: `area` y `perimetro`.
+- `Rectangulo` hereda de `Figura` y proporciona implementaciones para los métodos abstractos.
+
+#### Clases y Métodos Finales
+
+Las clases y métodos finales son aquellos que no pueden ser heredados o sobrescritos. Python no tiene soporte nativo para definir clases y métodos finales, pero se pueden emplear algunas técnicas para emular este comportamiento.
+
+**Ejemplo de Emulación de Clases y Métodos Finales:**
+```python
+# Crear un decorador para marcar métodos como finales
+def final(func):
+    func.__is_final__ = True
+    return func
+
+# Definir una clase base que impide la sobrescritura de métodos finales
+class ClaseBase:
+    def metodo(self):
+        return "Método de ClaseBase"
+
+    @final
+    def metodo_final(self):
+        return "Este método no puede ser sobrescrito"
+
+class SubClase(ClaseBase):
+    def metodo(self):
+        return "Método de SubClase"
+
+    # Intentar sobrescribir un método final resultará en una excepción
+    def metodo_final(self):
+        return "Intentando sobrescribir método final"
+
+# Crear una instancia de SubClase
+subclase = SubClase()
+print(subclase.metodo())        # Imprime: Método de SubClase
+print(subclase.metodo_final())  # Imprime: Intentando sobrescribir método final
+```
+
+En este ejemplo:
+- Se crea un decorador `final` para marcar métodos como finales.
+- `ClaseBase` define un método `metodo_final` marcado como final.
+- `SubClase` intenta sobrescribir `metodo_final`, lo que, aunque no se puede impedir directamente en Python, el decorador `final` puede usarse para indicar la intención de no permitir sobrescritura.
+
+### Ejemplo Completo Combinando Clases Abstractas y Métodos Finales
+
+A continuación se presenta un ejemplo que combina clases abstractas y emulación de métodos finales.
+
+**Ejemplo Completo:**
+```python
+from abc import ABC, abstractmethod
+
+# Decorador para marcar métodos como finales
+def final(func):
+    func.__is_final__ = True
+    return func
+
+# Clase abstracta con un método final
+class Animal(ABC):
+    @abstractmethod
+    def sonido(self):
+        pass
+
+    @final
+    def tipo(self):
+        return "Animal"
+
+class Perro(Animal):
+    def sonido(self):
+        return "Guau"
+
+    # Intento de sobrescribir el método final
+    def tipo(self):
+        return "Perro"
+
+# Crear una instancia de Perro
+perro = Perro()
+print(perro.sonido())  # Imprime: Guau
+print(perro.tipo())    # Imprime: Perro (intento de sobrescribir)
+
+# Verificar métodos finales
+if hasattr(Animal.tipo, '__is_final__'):
+    print("El método 'tipo' es final y no debería ser sobrescrito.")
+else:
+    print("El método 'tipo' no es final.")
+```
+
+En este ejemplo:
+- `Animal` es una clase abstracta con un método abstracto `sonido` y un método final `tipo`.
+- `Perro` hereda de `Animal` e implementa `sonido`, pero intenta sobrescribir `tipo`.
+- El decorador `final` se utiliza para indicar que `tipo` no debería ser sobrescrito.
+
+### Resumen
+
+- **Clases Abstractas**: Definen una interfaz que las subclases deben implementar. No pueden ser instanciadas directamente.
+- **Métodos Abstractos**: Métodos declarados en una clase abstracta que deben ser implementados por las subclases.
+- **Clases y Métodos Finales**: Clases y métodos que no pueden ser heredados o sobrescritos. En Python, se pueden emular utilizando técnicas como decoradores.
+- **Aplicaciones Prácticas**: Definir interfaces claras para subclases y proteger métodos críticos de la sobrescritura.
+
+Las clases y métodos abstractos y finales son herramientas poderosas en la programación orientada a objetos que permiten definir interfaces claras y proteger la integridad del diseño del software.

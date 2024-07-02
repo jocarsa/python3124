@@ -1,0 +1,232 @@
+### Creación de propiedades
+
+#### Creación de propiedades
+
+Las propiedades en Python permiten controlar el acceso a los atributos de una clase de manera más elegante y segura. Usando propiedades, se pueden definir métodos para obtener, establecer y eliminar el valor de un atributo, proporcionando una interfaz controlada para acceder y modificar los datos de una clase. Las propiedades se definen usando los decoradores `@property`, `@nombre.setter` y `@nombre.deleter`.
+
+#### 1. Propiedades con `@property`
+
+El decorador `@property` convierte un método en una propiedad, permitiendo que sea accedido como si fuera un atributo. Este método se utiliza para obtener el valor del atributo.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self._marca = marca
+        self._modelo = modelo
+
+    @property
+    def marca(self):
+        return self._marca
+
+    @property
+    def modelo(self):
+        return self._modelo
+
+# Crear una instancia de la clase Coche
+coche = Coche("Toyota", "Corolla")
+
+# Acceder a las propiedades
+print(coche.marca)  # Imprime: Toyota
+print(coche.modelo)  # Imprime: Corolla
+```
+
+En este ejemplo, los métodos `marca` y `modelo` se definen como propiedades, lo que permite acceder a ellos como si fueran atributos.
+
+#### 2. Propiedades con `@setter`
+
+El decorador `@nombre.setter` se utiliza para definir un método que establece el valor de una propiedad. Este método permite controlar y validar los valores asignados a un atributo.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self._marca = marca
+        self._modelo = modelo
+
+    @property
+    def marca(self):
+        return self._marca
+
+    @marca.setter
+    def marca(self, nueva_marca):
+        if nueva_marca:
+            self._marca = nueva_marca
+        else:
+            raise ValueError("La marca no puede estar vacía")
+
+    @property
+    def modelo(self):
+        return self._modelo
+
+    @modelo.setter
+    def modelo(self, nuevo_modelo):
+        if nuevo_modelo:
+            self._modelo = nuevo_modelo
+        else:
+            raise ValueError("El modelo no puede estar vacío")
+
+# Crear una instancia de la clase Coche
+coche = Coche("Toyota", "Corolla")
+
+# Modificar las propiedades
+coche.marca = "Honda"
+print(coche.marca)  # Imprime: Honda
+
+# Intentar asignar un valor vacío (genera un error)
+try:
+    coche.marca = ""
+except ValueError as e:
+    print(e)  # Imprime: La marca no puede estar vacía
+```
+
+En este ejemplo, los métodos `marca` y `modelo` tienen métodos `setter` que permiten validar los valores antes de asignarlos a los atributos.
+
+#### 3. Propiedades con `@deleter`
+
+El decorador `@nombre.deleter` se utiliza para definir un método que elimina una propiedad. Esto puede ser útil para liberar recursos o realizar limpieza adicional cuando un atributo se elimina.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self._marca = marca
+        self._modelo = modelo
+
+    @property
+    def marca(self):
+        return self._marca
+
+    @marca.setter
+    def marca(self, nueva_marca):
+        if nueva_marca:
+            self._marca = nueva_marca
+        else:
+            raise ValueError("La marca no puede estar vacía")
+
+    @marca.deleter
+    def marca(self):
+        del self._marca
+
+    @property
+    def modelo(self):
+        return self._modelo
+
+    @modelo.setter
+    def modelo(self, nuevo_modelo):
+        if nuevo_modelo:
+            self._modelo = nuevo_modelo
+        else:
+            raise ValueError("El modelo no puede estar vacío")
+
+    @modelo.deleter
+    def modelo(self):
+        del self._modelo
+
+# Crear una instancia de la clase Coche
+coche = Coche("Toyota", "Corolla")
+
+# Eliminar propiedades
+del coche.marca
+del coche.modelo
+
+# Intentar acceder a las propiedades eliminadas (genera un error)
+try:
+    print(coche.marca)
+except AttributeError as e:
+    print(e)  # Imprime un error porque la propiedad ha sido eliminada
+
+try:
+    print(coche.modelo)
+except AttributeError as e:
+    print(e)  # Imprime un error porque la propiedad ha sido eliminada
+```
+
+En este ejemplo, los métodos `marca` y `modelo` tienen métodos `deleter` que permiten eliminar los atributos correspondientes.
+
+#### Ejemplo completo
+
+A continuación se presenta un ejemplo completo que ilustra cómo definir y utilizar propiedades con métodos `getter`, `setter` y `deleter`.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self._nombre = nombre
+        self._edad = edad
+
+    @property
+    def nombre(self):
+        return self._nombre
+
+    @nombre.setter
+    def nombre(self, nuevo_nombre):
+        if nuevo_nombre:
+            self._nombre = nuevo_nombre
+        else:
+            raise ValueError("El nombre no puede estar vacío")
+
+    @nombre.deleter
+    def nombre(self):
+        del self._nombre
+
+    @property
+    def edad(self):
+        return self._edad
+
+    @edad.setter
+    def edad(self, nueva_edad):
+        if nueva_edad > 0:
+            self._edad = nueva_edad
+        else:
+            raise ValueError("La edad debe ser positiva")
+
+    @edad.deleter
+    def edad(self):
+        del self._edad
+
+# Crear una instancia de la clase Persona
+persona = Persona("Ana", 30)
+
+# Usar propiedades
+print(persona.nombre)  # Imprime: Ana
+print(persona.edad)    # Imprime: 30
+
+# Modificar propiedades
+persona.nombre = "María"
+persona.edad = 35
+print(persona.nombre)  # Imprime: María
+print(persona.edad)    # Imprime: 35
+
+# Intentar asignar valores inválidos
+try:
+    persona.nombre = ""
+except ValueError as e:
+    print(e)  # Imprime: El nombre no puede estar vacío
+
+try:
+    persona.edad = -5
+except ValueError as e:
+    print(e)  # Imprime: La edad debe ser positiva
+
+# Eliminar propiedades
+del persona.nombre
+del persona.edad
+
+# Intentar acceder a las propiedades eliminadas (genera un error)
+try:
+    print(persona.nombre)
+except AttributeError as e:
+    print(e)  # Imprime un error porque la propiedad ha sido eliminada
+
+try:
+    print(persona.edad)
+except AttributeError as e:
+    print(e)  # Imprime un error porque la propiedad ha sido eliminada
+```
+
+En este ejemplo, la clase `Persona` define propiedades para `nombre` y `edad` con métodos `getter`, `setter` y `deleter`, proporcionando un control completo sobre el acceso y modificación de estos atributos.
+
+El uso de propiedades en Python permite encapsular y proteger los datos de una clase, proporcionando una forma controlada de acceder y modificar los atributos. Esta práctica mejora la robustez y mantenibilidad del código.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

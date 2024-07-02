@@ -1,0 +1,183 @@
+### Concepto de clase
+
+#### Concepto de clase
+
+En la programación orientada a objetos (OOP), una clase es una plantilla o modelo que define un tipo particular de objeto. Una clase encapsula datos y comportamientos relacionados. En Python, las clases se utilizan para crear instancias de objetos que comparten una estructura y un conjunto de comportamientos definidos.
+
+#### 1. Definición de una clase
+
+Una clase se define usando la palabra clave `class`, seguida del nombre de la clase y dos puntos. Dentro del cuerpo de la clase, se definen los atributos y métodos que formarán parte de la clase.
+
+**Ejemplo básico de definición de una clase:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+
+# Crear una instancia de la clase Coche
+mi_coche = Coche("Toyota", "Corolla")
+
+# Usar métodos y atributos de la instancia
+mi_coche.arrancar()  # Imprime: El Toyota Corolla está arrancando...
+```
+
+En este ejemplo, `Coche` es una clase que tiene un método especial `__init__` para inicializar los atributos `marca` y `modelo`, y un método `arrancar` para imprimir un mensaje.
+
+#### 2. Atributos de una clase
+
+Los atributos de una clase pueden ser de instancia o de clase.
+
+- **Atributos de instancia**: Son específicos de cada objeto creado a partir de la clase. Se definen dentro del método `__init__`.
+- **Atributos de clase**: Son compartidos por todas las instancias de la clase y se definen directamente dentro del cuerpo de la clase.
+
+**Ejemplo:**
+```python
+class Coche:
+    ruedas = 4  # Atributo de clase
+
+    def __init__(self, marca, modelo):
+        self.marca = marca  # Atributo de instancia
+        self.modelo = modelo  # Atributo de instancia
+
+# Crear instancias de la clase Coche
+coche1 = Coche("Toyota", "Corolla")
+coche2 = Coche("Honda", "Civic")
+
+# Acceder a los atributos de instancia y de clase
+print(coche1.marca)  # Imprime: Toyota
+print(coche2.modelo)  # Imprime: Civic
+print(coche1.ruedas)  # Imprime: 4
+print(coche2.ruedas)  # Imprime: 4
+```
+
+En este ejemplo, `ruedas` es un atributo de clase compartido por todas las instancias, mientras que `marca` y `modelo` son atributos de instancia específicos de cada objeto.
+
+#### 3. Métodos de una clase
+
+Los métodos son funciones definidas dentro de una clase que describen los comportamientos de los objetos. Los métodos pueden operar sobre los atributos de instancia y de clase.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+
+    def detener(self):
+        print(f"El {self.marca} {self.modelo} se ha detenido")
+
+# Crear una instancia de la clase Coche
+mi_coche = Coche("Toyota", "Corolla")
+
+# Usar métodos de la instancia
+mi_coche.arrancar()  # Imprime: El Toyota Corolla está arrancando...
+mi_coche.detener()   # Imprime: El Toyota Corolla se ha detenido
+```
+
+En este ejemplo, `arrancar` y `detener` son métodos que definen comportamientos para los objetos de la clase `Coche`.
+
+#### 4. Encapsulamiento
+
+El encapsulamiento es una característica de la OOP que permite ocultar los detalles internos de una clase y exponer solo lo necesario. En Python, se puede usar un solo guion bajo `_` para indicar que un atributo o método es privado (convención), y dos guiones bajos `__` para hacer que un atributo sea realmente privado a través del name mangling.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self._marca = marca  # Atributo "privado" por convención
+        self.__modelo = modelo  # Atributo privado real
+
+    def arrancar(self):
+        print(f"El {self._marca} {self.__modelo} está arrancando...")
+
+# Crear una instancia de la clase Coche
+mi_coche = Coche("Toyota", "Corolla")
+
+# Intentar acceder a atributos privados
+print(mi_coche._marca)  # Accesible, pero no recomendado
+# print(mi_coche.__modelo)  # Produce un error: AttributeError
+
+# Acceso indirecto a un atributo privado real
+print(mi_coche._Coche__modelo)  # Imprime: Corolla (name mangling)
+```
+
+En este ejemplo, `__modelo` es un atributo privado real y `_marca` es privado por convención.
+
+#### 5. Herencia
+
+La herencia permite crear nuevas clases basadas en clases existentes. La clase derivada hereda atributos y métodos de la clase base.
+
+**Ejemplo:**
+```python
+class Animal:
+    def __init__(self, nombre):
+        self.nombre = nombre
+
+    def hacer_sonido(self):
+        pass
+
+class Perro(Animal):
+    def hacer_sonido(self):
+        return "Guau"
+
+class Gato(Animal):
+    def hacer_sonido(self):
+        return "Miau"
+
+# Crear instancias de clases derivadas
+perro = Perro("Firulais")
+gato = Gato("Mish")
+
+print(perro.nombre)          # Imprime: Firulais
+print(perro.hacer_sonido())  # Imprime: Guau
+print(gato.nombre)           # Imprime: Mish
+print(gato.hacer_sonido())   # Imprime: Miau
+```
+
+En este ejemplo, `Perro` y `Gato` heredan de `Animal` y sobrescriben el método `hacer_sonido`.
+
+#### Ejemplo completo
+
+A continuación se presenta un ejemplo completo que ilustra el desarrollo de una clase con atributos, métodos, encapsulamiento y herencia.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        print(f"Hola, me llamo {self.nombre} y tengo {self.edad} años")
+
+class Empleado(Persona):
+    def __init__(self, nombre, edad, salario):
+        super().__init__(nombre, edad)
+        self.salario = salario
+
+    def mostrar_info(self):
+        self.saludar()
+        print(f"Mi salario es {self.salario}")
+
+# Crear instancias de las clases
+persona = Persona("Ana", 30)
+empleado = Empleado("Carlos", 40, 50000)
+
+# Usar métodos y atributos
+persona.saludar()          # Imprime: Hola, me llamo Ana y tengo 30 años
+empleado.mostrar_info()    # Imprime: Hola, me llamo Carlos y tengo 40 años
+                           # Imprime: Mi salario es 50000
+```
+
+En este ejemplo, `Empleado` hereda de `Persona` y añade un nuevo atributo `salario` y un método `mostrar_info` que utiliza el método `saludar` de la clase base.
+
+El concepto de clase es fundamental en la programación orientada a objetos. Las clases permiten organizar datos y comportamientos relacionados en una unidad coherente, facilitando la creación de software modular y reutilizable.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

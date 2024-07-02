@@ -1,0 +1,162 @@
+### Estructuras de repetición
+
+#### Estructuras de repetición
+
+Las estructuras de repetición en Python permiten ejecutar un bloque de código múltiples veces. Son esenciales para realizar tareas repetitivas de manera eficiente. Python proporciona dos estructuras principales de repetición: `for` y `while`.
+
+#### 1. Bucle `for`
+
+El bucle `for` se utiliza para iterar sobre una secuencia (como una lista, tupla, diccionario, conjunto o cadena) y ejecutar un bloque de código para cada elemento en la secuencia.
+
+**Ejemplo con lista:**
+```python
+# Lista de números
+numeros = [1, 2, 3, 4, 5]
+
+# Iterar sobre la lista
+for numero in numeros:
+    print(numero)  # Imprime: 1, 2, 3, 4, 5
+```
+
+**Ejemplo con cadena:**
+```python
+# Cadena de texto
+texto = "Hola"
+
+# Iterar sobre la cadena
+for caracter in texto:
+    print(caracter)  # Imprime: H, o, l, a
+```
+
+**Ejemplo con diccionario:**
+```python
+# Diccionario
+estudiante = {"nombre": "Ana", "edad": 21, "curso": "Matemáticas"}
+
+# Iterar sobre las claves del diccionario
+for clave in estudiante:
+    print(clave, estudiante[clave])
+# Imprime:
+# nombre Ana
+# edad 21
+# curso Matemáticas
+```
+
+#### 2. Bucle `while`
+
+El bucle `while` se utiliza para ejecutar un bloque de código mientras una condición sea verdadera. La condición se evalúa antes de cada iteración.
+
+**Ejemplo:**
+```python
+# Inicializar contador
+contador = 0
+
+# Bucle while
+while contador < 5:
+    print(contador)  # Imprime: 0, 1, 2, 3, 4
+    contador += 1
+```
+
+En este ejemplo, el bloque de código se ejecuta mientras `contador` sea menor que 5.
+
+#### 3. Estructuras de salto en bucles
+
+Las estructuras de salto `break`, `continue` y `pass` se pueden utilizar dentro de los bucles para alterar el flujo de control.
+
+**Uso de `break`:**
+```python
+# Bucle for con break
+for i in range(10):
+    if i == 5:
+        break
+    print(i)  # Imprime: 0, 1, 2, 3, 4
+```
+
+**Uso de `continue`:**
+```python
+# Bucle for con continue
+for i in range(10):
+    if i % 2 == 0:
+        continue
+    print(i)  # Imprime: 1, 3, 5, 7, 9
+```
+
+**Uso de `pass`:**
+```python
+# Bucle for con pass
+for i in range(5):
+    if i == 3:
+        pass  # No hace nada, solo un marcador de posición
+    print(i)  # Imprime: 0, 1, 2, 3, 4
+```
+
+#### 4. Bucles anidados
+
+Los bucles pueden anidarse dentro de otros bucles para iterar sobre múltiples niveles de datos.
+
+**Ejemplo:**
+```python
+# Bucle anidado
+for i in range(3):
+    for j in range(2):
+        print(f"i={i}, j={j}")
+# Imprime:
+# i=0, j=0
+# i=0, j=1
+# i=1, j=0
+# i=1, j=1
+# i=2, j=0
+# i=2, j=1
+```
+
+En este ejemplo, el bucle interno se ejecuta completamente por cada iteración del bucle externo.
+
+#### 5. Listas por comprensión
+
+Las listas por comprensión ofrecen una forma compacta de crear listas mediante un bucle `for` y una condición opcional. Son una forma elegante y eficiente de construir listas.
+
+**Ejemplo:**
+```python
+# Lista de números al cuadrado
+numeros = [1, 2, 3, 4, 5]
+cuadrados = [n ** 2 for n in numeros]
+print(cuadrados)  # Imprime: [1, 4, 9, 16, 25]
+
+# Lista de números pares
+pares = [n for n in range(10) if n % 2 == 0]
+print(pares)  # Imprime: [0, 2, 4, 6, 8]
+```
+
+#### 6. Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra el uso de diferentes estructuras de repetición en un programa práctico.
+
+**Ejemplo:**
+```python
+# Lista de estudiantes con sus calificaciones
+estudiantes = [
+    {"nombre": "Ana", "calificacion": 85},
+    {"nombre": "Luis", "calificacion": 90},
+    {"nombre": "Maria", "calificacion": 78},
+    {"nombre": "Juan", "calificacion": 92}
+]
+
+# Calcular el promedio de calificaciones
+total_calificaciones = 0
+for estudiante in estudiantes:
+    total_calificaciones += estudiante["calificacion"]
+promedio = total_calificaciones / len(estudiantes)
+print(f"El promedio de calificaciones es: {promedio}")  # Imprime el promedio
+
+# Encontrar estudiantes con calificaciones superiores al promedio
+print("Estudiantes con calificaciones superiores al promedio:")
+for estudiante in estudiantes:
+    if estudiante["calificacion"] > promedio:
+        print(estudiante["nombre"])  # Imprime los nombres de los estudiantes
+```
+
+En este ejemplo, se utiliza un bucle `for` para calcular el promedio de las calificaciones y otro bucle `for` para encontrar estudiantes con calificaciones superiores al promedio.
+
+Las estructuras de repetición son esenciales para realizar tareas repetitivas y manipular colecciones de datos de manera eficiente. Comprender cómo utilizar `for`, `while` y las estructuras de salto es fundamental para escribir programas efectivos en Python.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

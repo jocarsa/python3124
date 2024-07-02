@@ -1,0 +1,173 @@
+### Características de los objetos
+
+#### Características de los objetos
+
+En Python, los objetos son instancias de clases y tienen características que los definen y diferencian de otros objetos. Estas características incluyen atributos (que representan el estado del objeto) y métodos (que representan el comportamiento del objeto). A continuación, se detallan las características principales de los objetos en Python:
+
+#### 1. Atributos
+
+Los atributos de un objeto son variables que almacenan información sobre el estado del objeto. Los atributos pueden ser de instancia o de clase.
+
+- **Atributos de instancia**: Son variables que pertenecen a una instancia específica de una clase. Se definen en el método `__init__` de la clase y suelen ser diferentes para cada objeto.
+- **Atributos de clase**: Son variables que pertenecen a la clase y son compartidos por todas las instancias de la clase.
+
+**Ejemplo:**
+```python
+class Coche:
+    # Atributo de clase
+    ruedas = 4
+
+    def __init__(self, marca, modelo):
+        # Atributos de instancia
+        self.marca = marca
+        self.modelo = modelo
+
+# Crear instancias de la clase Coche
+coche1 = Coche("Toyota", "Corolla")
+coche2 = Coche("Honda", "Civic")
+
+# Acceder a los atributos
+print(coche1.marca)  # Imprime: Toyota
+print(coche2.modelo)  # Imprime: Civic
+print(Coche.ruedas)   # Imprime: 4
+print(coche1.ruedas)  # Imprime: 4
+```
+
+#### 2. Métodos
+
+Los métodos son funciones definidas dentro de una clase que describen los comportamientos de los objetos. Los métodos pueden operar sobre los atributos de instancia y clase.
+
+- **Métodos de instancia**: Operan sobre una instancia específica de una clase. El primer parámetro es siempre `self`, que hace referencia a la instancia.
+- **Métodos de clase**: Operan sobre la clase en sí. El primer parámetro es `cls`, que hace referencia a la clase.
+- **Métodos estáticos**: No operan sobre instancias ni sobre la clase. No tienen `self` ni `cls` como primer parámetro.
+
+**Ejemplo:**
+```python
+class Coche:
+    ruedas = 4
+
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    # Método de instancia
+    def mostrar_info(self):
+        print(f"Marca: {self.marca}, Modelo: {self.modelo}")
+
+    # Método de clase
+    @classmethod
+    def cambiar_ruedas(cls, nuevas_ruedas):
+        cls.ruedas = nuevas_ruedas
+
+    # Método estático
+    @staticmethod
+    def es_coche(vehiculo):
+        return vehiculo == "coche"
+
+# Crear instancia de la clase Coche
+coche = Coche("Toyota", "Corolla")
+coche.mostrar_info()  # Imprime: Marca: Toyota, Modelo: Corolla
+
+# Llamar al método de clase
+Coche.cambiar_ruedas(6)
+print(Coche.ruedas)  # Imprime: 6
+
+# Llamar al método estático
+print(Coche.es_coche("coche"))  # Imprime: True
+```
+
+#### 3. Encapsulamiento
+
+El encapsulamiento es una característica de la programación orientada a objetos que restringe el acceso directo a los atributos y métodos de un objeto. Esto se hace para proteger el estado interno del objeto y asegurar que los datos sean manipulados de manera controlada.
+
+- **Atributos y métodos públicos**: Son accesibles desde cualquier parte del programa.
+- **Atributos y métodos privados**: Se definen con un prefijo de doble guion bajo `__` y no son accesibles directamente desde fuera de la clase.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre        # Público
+        self.__edad = edad          # Privado
+
+    def mostrar_info(self):
+        print(f"Nombre: {self.nombre}, Edad: {self.__edad}")
+
+    def __metodo_privado(self):
+        print("Esto es un método privado")
+
+# Crear instancia de la clase Persona
+persona = Persona("Ana", 30)
+persona.mostrar_info()  # Imprime: Nombre: Ana, Edad: 30
+
+# Acceso directo al atributo privado (dará un error)
+# print(persona.__edad)  # Error
+
+# Acceso indirecto al método privado (dará un error)
+# persona.__metodo_privado()  # Error
+```
+
+#### 4. Herencia
+
+La herencia es un mecanismo que permite crear una nueva clase a partir de una clase existente. La nueva clase hereda los atributos y métodos de la clase base y puede agregar o modificar su comportamiento.
+
+**Ejemplo:**
+```python
+class Animal:
+    def __init__(self, nombre):
+        self.nombre = nombre
+
+    def hacer_sonido(self):
+        pass
+
+class Perro(Animal):
+    def hacer_sonido(self):
+        return "Guau"
+
+class Gato(Animal):
+    def hacer_sonido(self):
+        return "Miau"
+
+# Crear instancias de las clases derivadas
+perro = Perro("Firulais")
+gato = Gato("Mish")
+
+print(perro.nombre)         # Imprime: Firulais
+print(perro.hacer_sonido()) # Imprime: Guau
+print(gato.nombre)          # Imprime: Mish
+print(gato.hacer_sonido())  # Imprime: Miau
+```
+
+#### 5. Polimorfismo
+
+El polimorfismo permite que diferentes clases tengan métodos con el mismo nombre, pero con comportamientos distintos. Esto facilita el uso de los objetos de diferentes clases de manera intercambiable.
+
+**Ejemplo:**
+```python
+class Animal:
+    def hacer_sonido(self):
+        pass
+
+class Perro(Animal):
+    def hacer_sonido(self):
+        return "Guau"
+
+class Gato(Animal):
+    def hacer_sonido(self):
+        return "Miau"
+
+# Función que usa polimorfismo
+def imprimir_sonido(animal):
+    print(animal.hacer_sonido())
+
+# Crear instancias de las clases derivadas
+perro = Perro()
+gato = Gato()
+
+imprimir_sonido(perro)  # Imprime: Guau
+imprimir_sonido(gato)   # Imprime: Miau
+```
+
+Estas son las características clave de los objetos en Python. Comprender estos conceptos es fundamental para aprovechar al máximo la programación orientada a objetos y escribir código más modular y reutilizable.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

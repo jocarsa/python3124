@@ -1,0 +1,98 @@
+### Composición de Clases
+
+#### Concepto de Composición
+
+La composición es un principio de diseño en programación orientada a objetos en el cual una clase se construye utilizando instancias de otras clases. Este principio permite crear clases más complejas y modulares mediante la combinación de clases más simples. La composición favorece la reutilización del código y la flexibilidad, ya que las clases compuestas pueden incluir instancias de diferentes clases, lo que permite una estructura más rica y adaptable.
+
+#### Ejemplo Básico de Composición
+
+Vamos a ver un ejemplo básico para ilustrar el concepto de composición en Python.
+
+**Ejemplo:**
+```python
+class Motor:
+    def __init__(self, tipo):
+        self.tipo = tipo
+
+    def arrancar(self):
+        print(f"El motor {self.tipo} está arrancando...")
+
+class Coche:
+    def __init__(self, marca, motor):
+        self.marca = marca
+        self.motor = motor  # Composición: el coche tiene un motor
+
+    def encender(self):
+        print(f"Encendiendo el coche {self.marca}")
+        self.motor.arrancar()
+
+# Crear instancias de Motor y Coche
+motor_v8 = Motor("V8")
+mi_coche = Coche("Ford", motor_v8)
+
+# Encender el coche
+mi_coche.encender()
+```
+
+En este ejemplo:
+- La clase `Motor` tiene un método `arrancar`.
+- La clase `Coche` contiene una instancia de `Motor`, demostrando la composición.
+- Cuando se llama al método `encender` del `Coche`, este método a su vez llama al método `arrancar` del `Motor`.
+
+#### Composición en un Contexto más Complejo
+
+A continuación, se presenta un ejemplo más complejo que muestra cómo la composición puede utilizarse para modelar una estructura más detallada.
+
+**Ejemplo:**
+```python
+class Procesador:
+    def __init__(self, marca, nucleos):
+        self.marca = marca
+        self.nucleos = nucleos
+
+    def describir(self):
+        return f"Procesador {self.marca} con {self.nucleos} núcleos"
+
+class Memoria:
+    def __init__(self, capacidad):
+        self.capacidad = capacidad
+
+    def describir(self):
+        return f"Memoria de {self.capacidad}GB"
+
+class Computadora:
+    def __init__(self, marca, procesador, memoria):
+        self.marca = marca
+        self.procesador = procesador
+        self.memoria = memoria
+
+    def describir(self):
+        descripcion_procesador = self.procesador.describir()
+        descripcion_memoria = self.memoria.describir()
+        return f"Computadora {self.marca} con {descripcion_procesador} y {descripcion_memoria}"
+
+# Crear instancias de Procesador y Memoria
+procesador_intel = Procesador("Intel", 8)
+memoria_16gb = Memoria(16)
+
+# Crear una instancia de Computadora usando composición
+mi_computadora = Computadora("Dell", procesador_intel, memoria_16gb)
+
+# Describir la computadora
+print(mi_computadora.describir())
+```
+
+En este ejemplo:
+- La clase `Procesador` representa un procesador con una marca y un número de núcleos.
+- La clase `Memoria` representa un módulo de memoria con una capacidad específica.
+- La clase `Computadora` combina instancias de `Procesador` y `Memoria` para modelar una computadora completa.
+- La descripción de la computadora incluye la descripción de sus componentes, demostrando cómo se puede usar la composición para construir clases complejas a partir de clases más simples.
+
+### Resumen
+
+- **Composición**: Permite crear clases complejas mediante la inclusión de instancias de otras clases.
+- **Modularidad**: Facilita la creación de componentes reutilizables y flexibles.
+- **Ejemplo básico**: Una clase `Coche` que contiene una instancia de `Motor`.
+- **Ejemplo complejo**: Una clase `Computadora` que combina instancias de `Procesador` y `Memoria` para describir una computadora completa.
+
+La composición es un enfoque poderoso para el diseño de sistemas complejos en programación orientada a objetos, proporcionando una manera flexible y reutilizable de estructurar el código.

@@ -1,0 +1,211 @@
+### Tipos de Datos Objeto; Atributos y Métodos
+
+En la programación orientada a objetos, los tipos de datos objeto se refieren a instancias de clases que encapsulan datos y comportamientos. Estos objetos tienen atributos (también llamados propiedades) y métodos (funciones que operan sobre los datos del objeto).
+
+### Tipos de Datos Objeto
+
+Los tipos de datos objeto se definen mediante clases. Una clase es un plano que describe la estructura y el comportamiento de los objetos de ese tipo.
+
+#### Definición de una Clase
+
+**Ejemplo Básico:**
+
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre  # Atributo
+        self.edad = edad      # Atributo
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."  # Método
+```
+
+En este ejemplo:
+- `Persona` es una clase que tiene dos atributos (`nombre` y `edad`) y un método (`saludar`).
+
+### Atributos
+
+Los atributos son variables que almacenan datos asociados a un objeto. Pueden ser de cualquier tipo de datos, incluidos otros objetos.
+
+#### Definición de Atributos
+
+**Ejemplo:**
+
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre  # Atributo
+        self.edad = edad      # Atributo
+```
+
+- `self.nombre` y `self.edad` son atributos de la clase `Persona`.
+
+### Métodos
+
+Los métodos son funciones definidas dentro de una clase que operan sobre los datos del objeto (atributos). Los métodos permiten definir el comportamiento de los objetos.
+
+#### Definición de Métodos
+
+**Ejemplo:**
+
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."
+```
+
+- `saludar` es un método de la clase `Persona`.
+
+### Tipos de Métodos
+
+Existen varios tipos de métodos en una clase: métodos de instancia, métodos de clase y métodos estáticos.
+
+#### Métodos de Instancia
+
+Operan sobre instancias de la clase y pueden acceder y modificar los atributos de la instancia.
+
+**Ejemplo:**
+
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."
+```
+
+#### Métodos de Clase
+
+Operan sobre la clase en sí, no sobre las instancias de la clase. Utilizan el decorador `@classmethod` y reciben `cls` como primer parámetro, que se refiere a la clase misma.
+
+**Ejemplo:**
+
+```python
+class Persona:
+    numero_de_personas = 0
+
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+        Persona.numero_de_personas += 1
+
+    @classmethod
+    def personas_creadas(cls):
+        return cls.numero_de_personas
+
+# Crear instancias
+p1 = Persona("Ana", 30)
+p2 = Persona("Luis", 25)
+
+# Llamar al método de clase
+print(Persona.personas_creadas())  # Imprime: 2
+```
+
+#### Métodos Estáticos
+
+No dependen de la instancia o de la clase. Utilizan el decorador `@staticmethod` y no reciben parámetros `self` o `cls`.
+
+**Ejemplo:**
+
+```python
+class Calculadora:
+    @staticmethod
+    def sumar(a, b):
+        return a + b
+
+# Llamar al método estático
+print(Calculadora.sumar(5, 3))  # Imprime: 8
+```
+
+### Herencia y Polimorfismo
+
+Los objetos pueden heredar atributos y métodos de otras clases, y diferentes clases pueden implementar los mismos métodos de diferentes maneras, permitiendo el polimorfismo.
+
+#### Ejemplo de Herencia
+
+**Ejemplo:**
+
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."
+
+class Empleado(Persona):
+    def __init__(self, nombre, edad, salario):
+        super().__init__(nombre, edad)
+        self.salario = salario
+
+    def saludar(self):
+        return f"{super().saludar()} y gano {self.salario} dólares al año."
+
+# Crear una instancia de Empleado
+empleado = Empleado("Carlos", 40, 50000)
+print(empleado.saludar())  # Imprime: Hola, me llamo Carlos y tengo 40 años. y gano 50000 dólares al año.
+```
+
+En este ejemplo:
+- `Empleado` hereda de `Persona` y sobrescribe el método `saludar`.
+
+### Ejemplo Completo: Atributos y Métodos
+
+A continuación se presenta un ejemplo completo que muestra la definición de atributos y métodos en una clase, así como la creación de instancias y el uso de métodos de instancia, clase y estáticos.
+
+**Ejemplo Completo:**
+
+```python
+class Persona:
+    numero_de_personas = 0
+
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+        Persona.numero_de_personas += 1
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."
+
+    @classmethod
+    def personas_creadas(cls):
+        return cls.numero_de_personas
+
+    @staticmethod
+    def es_mayor_de_edad(edad):
+        return edad >= 18
+
+# Crear instancias de Persona
+p1 = Persona("Ana", 30)
+p2 = Persona("Luis", 25)
+
+# Usar métodos de instancia
+print(p1.saludar())  # Imprime: Hola, me llamo Ana y tengo 30 años.
+print(p2.saludar())  # Imprime: Hola, me llamo Luis y tengo 25 años.
+
+# Usar método de clase
+print(Persona.personas_creadas())  # Imprime: 2
+
+# Usar método estático
+print(Persona.es_mayor_de_edad(20))  # Imprime: True
+print(Persona.es_mayor_de_edad(15))  # Imprime: False
+```
+
+### Resumen
+
+- **Tipos de Datos Objeto**: Se definen mediante clases que encapsulan datos y comportamientos.
+- **Atributos**: Variables que almacenan datos asociados a un objeto.
+- **Métodos**: Funciones definidas dentro de una clase que operan sobre los datos del objeto.
+  - **Métodos de Instancia**: Operan sobre instancias de la clase.
+  - **Métodos de Clase**: Operan sobre la clase en sí.
+  - **Métodos Estáticos**: No dependen de la instancia o de la clase.
+- **Herencia y Polimorfismo**: Permiten que las subclases hereden y sobrescriban atributos y métodos, facilitando el polimorfismo.
+
+Estos conceptos son fundamentales en la programación orientada a objetos y permiten crear estructuras de datos complejas y reutilizables en aplicaciones Python.

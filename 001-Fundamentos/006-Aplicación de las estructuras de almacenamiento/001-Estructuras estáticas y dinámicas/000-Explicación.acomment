@@ -1,0 +1,106 @@
+### Estructuras estáticas y dinámicas
+
+#### Estructuras estáticas
+
+Las estructuras de datos estáticas son aquellas cuyo tamaño y estructura se definen en tiempo de compilación y no pueden cambiar durante la ejecución del programa. En Python, las estructuras de datos estáticas no son tan comunes debido a la naturaleza dinámica del lenguaje, pero podemos utilizar listas y tuplas para ilustrar este concepto en un contexto similar.
+
+**Ejemplo de uso de tuplas (estructura estática):**
+```python
+# Crear una tupla
+coordenadas = (10, 20)
+
+# Acceder a elementos de la tupla
+print(coordenadas[0])  # Imprime: 10
+print(coordenadas[1])  # Imprime: 20
+
+# Las tuplas son inmutables, por lo que no se pueden modificar sus elementos
+# coordenadas[0] = 15  # Esto generaría un error
+```
+
+Las tuplas son inmutables, lo que significa que una vez definidas, no se pueden modificar. Esto las hace útiles para representar datos que no deben cambiar.
+
+#### Estructuras dinámicas
+
+Las estructuras de datos dinámicas son aquellas que pueden crecer y decrecer durante la ejecución del programa. Son más flexibles que las estructuras estáticas y permiten una gestión más eficiente de la memoria. En Python, las listas y los diccionarios son ejemplos comunes de estructuras de datos dinámicas.
+
+**Ejemplo de uso de listas (estructura dinámica):**
+```python
+# Crear una lista
+frutas = ["manzana", "banana", "cereza"]
+
+# Añadir un elemento a la lista
+frutas.append("naranja")
+print(frutas)  # Imprime: ['manzana', 'banana', 'cereza', 'naranja']
+
+# Eliminar un elemento de la lista
+frutas.remove("banana")
+print(frutas)  # Imprime: ['manzana', 'cereza', 'naranja']
+
+# Las listas pueden cambiar de tamaño
+```
+
+**Ejemplo de uso de diccionarios (estructura dinámica):**
+```python
+# Crear un diccionario
+edades = {"Ana": 30, "Luis": 25, "Carlos": 40}
+
+# Añadir un par clave-valor
+edades["Maria"] = 35
+print(edades)  # Imprime: {'Ana': 30, 'Luis': 25, 'Carlos': 40, 'Maria': 35}
+
+# Eliminar un par clave-valor
+del edades["Luis"]
+print(edades)  # Imprime: {'Ana': 30, 'Carlos': 40, 'Maria': 35}
+
+# Los diccionarios pueden cambiar de tamaño y estructura
+```
+
+### Comparación entre estructuras estáticas y dinámicas
+
+- **Tamaño fijo vs. Tamaño variable**: Las estructuras estáticas tienen un tamaño fijo definido en tiempo de compilación, mientras que las estructuras dinámicas pueden cambiar de tamaño durante la ejecución del programa.
+- **Eficiencia en acceso vs. Flexibilidad**: Las estructuras estáticas suelen ser más eficientes en términos de acceso y procesamiento debido a su tamaño fijo, pero carecen de la flexibilidad que ofrecen las estructuras dinámicas para crecer y decrecer según sea necesario.
+- **Uso de memoria**: Las estructuras dinámicas gestionan la memoria de manera más eficiente al poder ajustarse según las necesidades del programa, mientras que las estructuras estáticas pueden desperdiciar memoria si se reserva más espacio del necesario.
+
+### Ejemplo completo combinando estructuras estáticas y dinámicas
+
+A continuación se presenta un ejemplo completo que ilustra el uso combinado de tuplas (estructura estática) y listas y diccionarios (estructuras dinámicas) en un contexto práctico.
+
+**Ejemplo completo:**
+```python
+# Definir una tupla de coordenadas (estática)
+coordenadas = (10, 20)
+
+# Definir una lista de puntos de interés (dinámica)
+puntos_de_interes = ["Museo", "Parque", "Teatro"]
+
+# Añadir un nuevo punto de interés
+puntos_de_interes.append("Cine")
+print("Puntos de interés:", puntos_de_interes)
+
+# Definir un diccionario para almacenar información de cada punto de interés (dinámica)
+informacion_puntos = {
+    "Museo": {"coordenadas": (10, 20), "abierto": True},
+    "Parque": {"coordenadas": (15, 25), "abierto": True},
+    "Teatro": {"coordenadas": (20, 30), "abierto": False},
+}
+
+# Añadir información para el nuevo punto de interés
+informacion_puntos["Cine"] = {"coordenadas": (25, 35), "abierto": True}
+
+# Mostrar la información completa
+for punto, info in informacion_puntos.items():
+    print(f"{punto}: Coordenadas = {info['coordenadas']}, Abierto = {info['abierto']}")
+```
+
+En este ejemplo:
+- Se define una tupla `coordenadas` como una estructura estática.
+- Se utiliza una lista `puntos_de_interes` para almacenar dinámicamente los nombres de los puntos de interés.
+- Se utiliza un diccionario `informacion_puntos` para almacenar dinámicamente información adicional sobre cada punto de interés, incluyendo sus coordenadas y su estado de apertura.
+
+### Resumen
+
+- **Estructuras estáticas**: Tienen un tamaño fijo y no pueden cambiar durante la ejecución del programa. Ejemplo: Tuplas.
+- **Estructuras dinámicas**: Pueden cambiar de tamaño durante la ejecución del programa. Ejemplos: Listas, Diccionarios.
+- **Aplicaciones prácticas**: Las estructuras estáticas son útiles para datos constantes y que no cambian, mientras que las dinámicas son esenciales para datos que necesitan crecer o decrecer según las necesidades del programa.
+
+Las estructuras de almacenamiento en Python permiten gestionar datos de manera eficiente y flexible, adaptándose a diversas necesidades de programación.

@@ -1,0 +1,240 @@
+### Ficheros de datos y registros
+
+#### Ficheros de datos y registros
+
+Los ficheros de datos son archivos que contienen una colección de registros. Cada registro es una colección de campos, que pueden ser de diferentes tipos de datos. Los ficheros de datos se utilizan comúnmente para almacenar y gestionar información estructurada.
+
+En Python, los ficheros de datos y registros pueden ser manejados utilizando varios formatos, siendo los más comunes los ficheros de texto (CSV, JSON) y los ficheros binarios (pickle, shelve).
+
+#### 1. Ficheros de texto (CSV)
+
+Los ficheros CSV (Comma-Separated Values) son un formato común para almacenar datos tabulares en texto plano. Python proporciona el módulo `csv` para leer y escribir archivos CSV.
+
+**Ejemplo:**
+```python
+import csv
+
+# Escribir registros en un archivo CSV
+def escribir_csv(nombre_archivo, datos):
+    with open(nombre_archivo, 'w', newline='') as archivo_csv:
+        escritor = csv.writer(archivo_csv)
+        escritor.writerow(['Nombre', 'Edad', 'Ciudad'])
+        for registro in datos:
+            escritor.writerow(registro)
+
+# Leer registros de un archivo CSV
+def leer_csv(nombre_archivo):
+    with open(nombre_archivo, 'r') as archivo_csv:
+        lector = csv.reader(archivo_csv)
+        for fila in lector:
+            print(fila)
+
+# Datos de ejemplo
+datos = [
+    ['Ana', 30, 'Madrid'],
+    ['Luis', 25, 'Barcelona'],
+    ['Maria', 28, 'Sevilla']
+]
+
+# Escribir los datos en un archivo CSV
+escribir_csv('datos.csv', datos)
+
+# Leer los datos del archivo CSV
+leer_csv('datos.csv')
+```
+
+En este ejemplo, la función `escribir_csv` escribe una lista de registros en un archivo CSV, y la función `leer_csv` lee y muestra los registros del archivo CSV.
+
+#### 2. Ficheros de texto (JSON)
+
+El formato JSON (JavaScript Object Notation) es otro formato común para almacenar y transferir datos estructurados. Python proporciona el módulo `json` para trabajar con archivos JSON.
+
+**Ejemplo:**
+```python
+import json
+
+# Escribir registros en un archivo JSON
+def escribir_json(nombre_archivo, datos):
+    with open(nombre_archivo, 'w') as archivo_json:
+        json.dump(datos, archivo_json)
+
+# Leer registros de un archivo JSON
+def leer_json(nombre_archivo):
+    with open(nombre_archivo, 'r') as archivo_json:
+        datos = json.load(archivo_json)
+        print(datos)
+
+# Datos de ejemplo
+datos = [
+    {"nombre": "Ana", "edad": 30, "ciudad": "Madrid"},
+    {"nombre": "Luis", "edad": 25, "ciudad": "Barcelona"},
+    {"nombre": "Maria", "edad": 28, "ciudad": "Sevilla"}
+]
+
+# Escribir los datos en un archivo JSON
+escribir_json('datos.json', datos)
+
+# Leer los datos del archivo JSON
+leer_json('datos.json')
+```
+
+En este ejemplo, la función `escribir_json` escribe una lista de registros en un archivo JSON, y la función `leer_json` lee y muestra los registros del archivo JSON.
+
+#### 3. Ficheros binarios (pickle)
+
+El módulo `pickle` permite serializar y deserializar objetos de Python, almacenándolos en un formato binario.
+
+**Ejemplo:**
+```python
+import pickle
+
+# Escribir registros en un archivo binario
+def escribir_pickle(nombre_archivo, datos):
+    with open(nombre_archivo, 'wb') as archivo_binario:
+        pickle.dump(datos, archivo_binario)
+
+# Leer registros de un archivo binario
+def leer_pickle(nombre_archivo):
+    with open(nombre_archivo, 'rb') as archivo_binario:
+        datos = pickle.load(archivo_binario)
+        print(datos)
+
+# Datos de ejemplo
+datos = [
+    {"nombre": "Ana", "edad": 30, "ciudad": "Madrid"},
+    {"nombre": "Luis", "edad": 25, "ciudad": "Barcelona"},
+    {"nombre": "Maria", "edad": 28, "ciudad": "Sevilla"}
+]
+
+# Escribir los datos en un archivo binario
+escribir_pickle('datos.pkl', datos)
+
+# Leer los datos del archivo binario
+leer_pickle('datos.pkl')
+```
+
+En este ejemplo, la función `escribir_pickle` escribe una lista de registros en un archivo binario utilizando `pickle`, y la función `leer_pickle` lee y muestra los registros del archivo binario.
+
+#### 4. Ficheros binarios (shelve)
+
+El módulo `shelve` proporciona una forma sencilla de almacenar objetos Python en un formato de almacenamiento persistente similar a un diccionario.
+
+**Ejemplo:**
+```python
+import shelve
+
+# Escribir registros en un archivo shelve
+def escribir_shelve(nombre_archivo, datos):
+    with shelve.open(nombre_archivo) as archivo_shelve:
+        archivo_shelve['datos'] = datos
+
+# Leer registros de un archivo shelve
+def leer_shelve(nombre_archivo):
+    with shelve.open(nombre_archivo) as archivo_shelve:
+        datos = archivo_shelve['datos']
+        print(datos)
+
+# Datos de ejemplo
+datos = [
+    {"nombre": "Ana", "edad": 30, "ciudad": "Madrid"},
+    {"nombre": "Luis", "edad": 25, "ciudad": "Barcelona"},
+    {"nombre": "Maria", "edad": 28, "ciudad": "Sevilla"}
+]
+
+# Escribir los datos en un archivo shelve
+escribir_shelve('datos_shelve.db', datos)
+
+# Leer los datos del archivo shelve
+leer_shelve('datos_shelve.db')
+```
+
+En este ejemplo, la función `escribir_shelve` escribe una lista de registros en un archivo `shelve`, y la función `leer_shelve` lee y muestra los registros del archivo `shelve`.
+
+### Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra cómo manejar diferentes formatos de ficheros de datos y registros.
+
+**Ejemplo completo:**
+```python
+import csv
+import json
+import pickle
+import shelve
+
+# Funciones para CSV
+def escribir_csv(nombre_archivo, datos):
+    with open(nombre_archivo, 'w', newline='') as archivo_csv:
+        escritor = csv.writer(archivo_csv)
+        escritor.writerow(['Nombre', 'Edad', 'Ciudad'])
+        for registro in datos:
+            escritor.writerow(registro)
+
+def leer_csv(nombre_archivo):
+    with open(nombre_archivo, 'r') as archivo_csv:
+        lector = csv.reader(archivo_csv)
+        for fila in lector:
+            print(fila)
+
+# Funciones para JSON
+def escribir_json(nombre_archivo, datos):
+    with open(nombre_archivo, 'w') as archivo_json:
+        json.dump(datos, archivo_json)
+
+def leer_json(nombre_archivo):
+    with open(nombre_archivo, 'r') as archivo_json:
+        datos = json.load(archivo_json)
+        print(datos)
+
+# Funciones para Pickle
+def escribir_pickle(nombre_archivo, datos):
+    with open(nombre_archivo, 'wb') as archivo_binario:
+        pickle.dump(datos, archivo_binario)
+
+def leer_pickle(nombre_archivo):
+    with open(nombre_archivo, 'rb') as archivo_binario:
+        datos = pickle.load(archivo_binario)
+        print(datos)
+
+# Funciones para Shelve
+def escribir_shelve(nombre_archivo, datos):
+    with shelve.open(nombre_archivo) as archivo_shelve:
+        archivo_shelve['datos'] = datos
+
+def leer_shelve(nombre_archivo):
+    with shelve.open(nombre_archivo) as archivo_shelve:
+        datos = archivo_shelve['datos']
+        print(datos)
+
+# Datos de ejemplo
+datos_csv = [
+    ['Ana', 30, 'Madrid'],
+    ['Luis', 25, 'Barcelona'],
+    ['Maria', 28, 'Sevilla']
+]
+
+datos_json_pickle_shelve = [
+    {"nombre": "Ana", "edad": 30, "ciudad": "Madrid"},
+    {"nombre": "Luis", "edad": 25, "ciudad": "Barcelona"},
+    {"nombre": "Maria", "edad": 28, "ciudad": "Sevilla"}
+]
+
+# Escribir y leer CSV
+escribir_csv('datos.csv', datos_csv)
+leer_csv('datos.csv')
+
+# Escribir y leer JSON
+escribir_json('datos.json', datos_json_pickle_shelve)
+leer_json('datos.json')
+
+# Escribir y leer Pickle
+escribir_pickle('datos.pkl', datos_json_pickle_shelve)
+leer_pickle('datos.pkl')
+
+# Escribir y leer Shelve
+escribir_shelve('datos_shelve.db', datos_json_pickle_shelve)
+leer_shelve('datos_shelve.db')
+```
+
+En este ejemplo, se manejan diferentes formatos de ficheros de datos y registros (CSV, JSON, Pickle, Shelve), proporcionando una visión completa de cómo leer y escribir información en estos formatos utilizando Python.
+
+El manejo de ficheros de datos y registros es fundamental para almacenar y recuperar información estructurada de manera eficiente, y Python ofrece diversas herramientas para facilitar esta tarea.

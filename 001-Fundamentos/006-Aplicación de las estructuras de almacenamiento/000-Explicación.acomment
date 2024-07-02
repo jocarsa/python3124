@@ -1,0 +1,203 @@
+### Aplicación de las estructuras de almacenamiento
+
+#### Estructuras de almacenamiento
+
+Las estructuras de almacenamiento son fundamentales para organizar y gestionar datos en una aplicación. Python ofrece diversas estructuras de almacenamiento, incluyendo listas, conjuntos, diccionarios, y matrices. A continuación se explica cómo aplicar estas estructuras de almacenamiento en diferentes contextos, con ejemplos prácticos.
+
+#### 1. Listas
+
+Las listas son colecciones ordenadas y mutables que permiten almacenar elementos de cualquier tipo. Son muy versátiles y se utilizan para una amplia variedad de tareas.
+
+**Ejemplo de uso de listas:**
+```python
+# Crear una lista
+nombres = ["Ana", "Luis", "Carlos"]
+
+# Añadir un elemento a la lista
+nombres.append("Maria")
+print(nombres)  # Imprime: ['Ana', 'Luis', 'Carlos', 'Maria']
+
+# Eliminar un elemento de la lista
+nombres.remove("Luis")
+print(nombres)  # Imprime: ['Ana', 'Carlos', 'Maria']
+
+# Acceder a elementos por índice
+print(nombres[1])  # Imprime: Carlos
+
+# Iterar sobre una lista
+for nombre in nombres:
+    print(nombre)
+```
+
+**Uso de listas para almacenar y procesar datos:**
+```python
+# Lista de números
+numeros = [1, 2, 3, 4, 5]
+
+# Calcular la suma de los números
+suma = sum(numeros)
+print(f"Suma: {suma}")  # Imprime: Suma: 15
+
+# Filtrar números pares
+pares = [num for num in numeros if num % 2 == 0]
+print(f"Números pares: {pares}")  # Imprime: Números pares: [2, 4]
+```
+
+#### 2. Conjuntos
+
+Los conjuntos son colecciones desordenadas de elementos únicos. Son útiles para operaciones de conjunto como unión, intersección y diferencia.
+
+**Ejemplo de uso de conjuntos:**
+```python
+# Crear conjuntos
+conjunto_a = {1, 2, 3, 4}
+conjunto_b = {3, 4, 5, 6}
+
+# Unión de conjuntos
+union = conjunto_a | conjunto_b
+print(f"Unión: {union}")  # Imprime: Unión: {1, 2, 3, 4, 5, 6}
+
+# Intersección de conjuntos
+interseccion = conjunto_a & conjunto_b
+print(f"Intersección: {interseccion}")  # Imprime: Intersección: {3, 4}
+
+# Diferencia de conjuntos
+diferencia = conjunto_a - conjunto_b
+print(f"Diferencia: {diferencia}")  # Imprime: Diferencia: {1, 2}
+```
+
+#### 3. Diccionarios
+
+Los diccionarios son colecciones desordenadas de pares clave-valor. Son extremadamente útiles para asociar datos relacionados.
+
+**Ejemplo de uso de diccionarios:**
+```python
+# Crear un diccionario
+estudiantes = {"Ana": 90, "Luis": 85, "Carlos": 92}
+
+# Añadir un nuevo par clave-valor
+estudiantes["Maria"] = 88
+print(estudiantes)  # Imprime: {'Ana': 90, 'Luis': 85, 'Carlos': 92, 'Maria': 88}
+
+# Acceder a un valor por su clave
+print(estudiantes["Carlos"])  # Imprime: 92
+
+# Iterar sobre un diccionario
+for nombre, nota en estudiantes.items():
+    print(f"{nombre}: {nota}")
+```
+
+**Uso de diccionarios para contar frecuencias:**
+```python
+# Contar la frecuencia de caracteres en una cadena
+texto = "abracadabra"
+frecuencias = {}
+for caracter in texto:
+    if caracter in frecuencias:
+        frecuencias[caracter] += 1
+    else:
+        frecuencias[caracter] = 1
+print(frecuencias)  # Imprime: {'a': 5, 'b': 2, 'r': 2, 'c': 1, 'd': 1}
+```
+
+#### 4. Matrices (arrays) y estructuras multidimensionales
+
+Para trabajar con matrices y estructuras multidimensionales, se suele utilizar la biblioteca `numpy`.
+
+**Ejemplo de uso de numpy para matrices:**
+```python
+import numpy as np
+
+# Crear una matriz
+matriz = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+print(matriz)
+# Imprime:
+# [[1 2 3]
+#  [4 5 6]
+#  [7 8 9]]
+
+# Acceder a un elemento específico
+print(matriz[1, 2])  # Imprime: 6
+
+# Sumar todas las columnas
+suma_columnas = np.sum(matriz, axis=0)
+print(suma_columnas)  # Imprime: [12 15 18]
+
+# Sumar todas las filas
+suma_filas = np.sum(matriz, axis=1)
+print(suma_filas)  # Imprime: [ 6 15 24]
+```
+
+#### 5. Operaciones avanzadas con colecciones
+
+Python también permite realizar operaciones avanzadas en colecciones, como el filtrado, la reducción y la recolección de datos.
+
+**Ejemplo de filtrado, reducción y recolección:**
+```python
+from functools import reduce
+
+# Filtrar números pares de una lista
+numeros = [1, 2, 3, 4, 5, 6]
+pares = list(filter(lambda x: x % 2 == 0, numeros))
+print(f"Números pares: {pares}")  # Imprime: Números pares: [2, 4, 6]
+
+# Reducir para calcular el producto de una lista
+producto = reduce(lambda x, y: x * y, numeros)
+print(f"Producto de los números: {producto}")  # Imprime: Producto de los números: 720
+
+# Recolectar datos en una lista de tuplas
+nombres = ["Ana", "Luis", "Carlos"]
+notas = [90, 85, 92]
+estudiantes = list(zip(nombres, notas))
+print(estudiantes)  # Imprime: [('Ana', 90), ('Luis', 85), ('Carlos', 92)]
+```
+
+### Ejemplo completo
+
+A continuación se presenta un ejemplo completo que combina varias estructuras de almacenamiento para gestionar y procesar datos de manera eficiente.
+
+**Ejemplo completo:**
+```python
+import numpy as np
+from functools import reduce
+
+# Datos de estudiantes con sus calificaciones
+estudiantes = {
+    "Ana": [85, 92, 78],
+    "Luis": [79, 95, 88],
+    "Carlos": [92, 88, 84],
+    "Maria": [70, 80, 85]
+}
+
+# Calcular el promedio de calificaciones de cada estudiante
+promedios = {nombre: np.mean(calificaciones) for nombre, calificaciones in estudiantes.items()}
+print("Promedios de calificaciones:", promedios)
+
+# Filtrar estudiantes con promedio mayor a 85
+estudiantes_destacados = {nombre: promedio for nombre, promedio in promedios.items() if promedio > 85}
+print("Estudiantes con promedio mayor a 85:", estudiantes_destacados)
+
+# Matriz de calificaciones
+matriz_calificaciones = np.array(list(estudiantes.values()))
+print("Matriz de calificaciones:\n", matriz_calificaciones)
+
+# Sumar las calificaciones de todos los estudiantes
+suma_calificaciones = np.sum(matriz_calificaciones)
+print("Suma total de calificaciones:", suma_calificaciones)
+
+# Reducir para encontrar el máximo promedio
+max_promedio = reduce(lambda x, y: x if x > y else y, promedios.values())
+print("Máximo promedio:", max_promedio)
+```
+
+En este ejemplo:
+- Se utiliza un diccionario para almacenar las calificaciones de los estudiantes.
+- Se calcula el promedio de calificaciones de cada estudiante.
+- Se filtran los estudiantes con un promedio mayor a 85.
+- Se convierte el diccionario de calificaciones en una matriz utilizando `numpy`.
+- Se suma el total de calificaciones de todos los estudiantes.
+- Se encuentra el promedio máximo utilizando `reduce`.
+
+### Resumen
+
+Las estructuras de almacenamiento en Python, como listas, conjuntos, diccionarios y matrices, son herramientas poderosas para organizar y gestionar datos. Estas estructuras permiten realizar una variedad de operaciones, desde la manipulación básica de datos hasta operaciones avanzadas de filtrado, reducción y recolección, proporcionando una base sólida para desarrollar aplicaciones eficientes y efectivas.

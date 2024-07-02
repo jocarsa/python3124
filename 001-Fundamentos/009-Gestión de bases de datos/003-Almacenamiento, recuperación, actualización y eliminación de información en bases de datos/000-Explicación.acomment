@@ -1,0 +1,266 @@
+### Almacenamiento, Recuperación, Actualización y Eliminación de Información en Bases de Datos
+
+Las operaciones CRUD (Crear, Leer, Actualizar, Borrar) son fundamentales para interactuar con bases de datos. A continuación, se presentan ejemplos de cómo realizar estas operaciones en diferentes tipos de bases de datos utilizando Python.
+
+### Bases de Datos Relacionales
+
+#### SQLite
+
+**Instalación:**
+
+SQLite está incluido por defecto en Python, por lo que no requiere instalación adicional.
+
+**Conexión a la Base de Datos y Configuración Inicial:**
+
+```python
+import sqlite3
+
+# Conectar a la base de datos SQLite (crea el archivo si no existe)
+conn = sqlite3.connect('mi_base_de_datos.db')
+cursor = conn.cursor()
+
+# Crear una tabla de ejemplo
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS personas (
+    id INTEGER PRIMARY KEY,
+    nombre TEXT NOT NULL,
+    edad INTEGER NOT NULL
+)
+''')
+conn.commit()
+```
+
+**Crear (INSERT):**
+
+```python
+# Insertar un registro
+cursor.execute('''
+INSERT INTO personas (nombre, edad) VALUES (?, ?)
+''', ("Ana", 30))
+conn.commit()
+```
+
+**Leer (SELECT):**
+
+```python
+# Leer registros
+cursor.execute('SELECT * FROM personas')
+personas = cursor.fetchall()
+for persona in personas:
+    print(persona)
+```
+
+**Actualizar (UPDATE):**
+
+```python
+# Actualizar un registro
+cursor.execute('''
+UPDATE personas SET edad = ? WHERE nombre = ?
+''', (31, "Ana"))
+conn.commit()
+```
+
+**Borrar (DELETE):**
+
+```python
+# Borrar un registro
+cursor.execute('''
+DELETE FROM personas WHERE nombre = ?
+''', ("Ana",))
+conn.commit()
+```
+
+**Cerrar la Conexión:**
+
+```python
+# Cerrar la conexión
+conn.close()
+```
+
+#### MySQL
+
+**Instalación:**
+
+```bash
+pip install mysql-connector-python
+```
+
+**Conexión a la Base de Datos y Configuración Inicial:**
+
+```python
+import mysql.connector
+
+# Conectar a la base de datos MySQL
+conn = mysql.connector.connect(
+    host="localhost",
+    user="mi_usuario",
+    password="mi_contraseña",
+    database="mi_base_de_datos"
+)
+cursor = conn.cursor()
+
+# Crear una tabla de ejemplo
+cursor.execute('''
+CREATE TABLE IF NOT EXISTS personas (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    edad INT NOT NULL
+)
+''')
+conn.commit()
+```
+
+**Operaciones CRUD en MySQL:**
+
+El resto de las operaciones (Crear, Leer, Actualizar y Borrar) son similares a las de SQLite, con ligeras variaciones en la sintaxis SQL y el manejo de tipos de datos.
+
+### Bases de Datos Orientadas a Objetos
+
+#### ZODB
+
+**Instalación:**
+
+```bash
+pip install ZODB
+```
+
+**Conexión a la Base de Datos y Configuración Inicial:**
+
+```python
+import ZODB, ZODB.FileStorage
+import transaction
+from persistent import Persistent
+
+# Definir una clase persistente
+class Persona(Persistent):
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+# Crear el almacenamiento y la base de datos
+storage = ZODB.FileStorage.FileStorage('mi_base_de_datos.fs')
+db = ZODB.DB(storage)
+connection = db.open()
+root = connection.root()
+
+# Crear y almacenar objetos
+if 'personas' not in root:
+    root['personas'] = []
+
+root['personas'].append(Persona('Ana', 30))
+transaction.commit()
+```
+
+**Leer (SELECT):**
+
+```python
+# Leer objetos
+for persona in root['personas']:
+    print(f"{persona.nombre} tiene {persona.edad} años.")
+```
+
+**Actualizar (UPDATE):**
+
+```python
+# Actualizar un objeto
+persona_a_actualizar = root['personas'][0]  # Asumiendo que es Ana
+persona_a_actualizar.edad = 31
+transaction.commit()
+```
+
+**Borrar (DELETE):**
+
+```python
+# Borrar un objeto
+persona_a_borrar = root['personas'][0]  # Asumiendo que es Ana
+root['personas'].remove(persona_a_borrar)
+transaction.commit()
+```
+
+**Cerrar la Conexión:**
+
+```python
+# Cerrar la conexión
+connection.close()
+db.close()
+```
+
+### Bases de Datos NoSQL
+
+#### MongoDB
+
+**Instalación:**
+
+```bash
+pip install pymongo
+```
+
+**Conexión a la Base de Datos y Configuración Inicial:**
+
+```python
+from pymongo import MongoClient
+
+# Conectar a MongoDB
+client = MongoClient("mongodb://localhost:27017/")
+
+# Seleccionar la base de datos y la colección
+db = client["mi_base_de_datos"]
+collection = db["personas"]
+```
+
+**Crear (INSERT):**
+
+```python
+# Insertar un documento
+collection.insert_one({"nombre": "Ana", "edad": 30})
+```
+
+**Leer (SELECT):**
+
+```python
+# Leer documentos
+for persona in collection.find():
+    print(persona)
+```
+
+**Actualizar (UPDATE):**
+
+```python
+# Actualizar un documento
+collection.update_one({"nombre": "Ana"}, {"$set": {"edad": 31}})
+```
+
+**Borrar (DELETE):**
+
+```python
+# Borrar un documento
+collection.delete_one({"nombre": "Ana"})
+```
+
+**Cerrar la Conexión:**
+
+```python
+# Cerrar la conexión
+client.close()
+```
+
+### Resumen
+
+- **SQLite**:
+  - Ideal para aplicaciones pequeñas y medianas.
+  - No requiere instalación adicional en Python.
+  - Soporta operaciones CRUD de manera sencilla.
+- **MySQL**:
+  - Popular en aplicaciones web.
+  - Necesita `mysql-connector-python` para conexión en Python.
+  - Opera con SQL estándar.
+- **ZODB**:
+  - Orientado a objetos, ideal para aplicaciones en Python.
+  - Permite almacenar objetos directamente.
+  - Usa transacciones para confirmar cambios.
+- **MongoDB**:
+  - Base de datos NoSQL, orientada a documentos.
+  - Utiliza `pymongo` para conexión en Python.
+  - Maneja datos en formato JSON/BSON.
+
+Estos ejemplos proporcionan una base sólida para realizar operaciones CRUD en diferentes tipos de bases de datos, lo que es fundamental para la gestión eficiente de datos en aplicaciones.

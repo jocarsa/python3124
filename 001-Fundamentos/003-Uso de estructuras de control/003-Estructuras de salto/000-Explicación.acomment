@@ -1,0 +1,110 @@
+### Estructuras de salto
+
+#### Estructuras de salto
+
+Las estructuras de salto en Python permiten alterar el flujo de control dentro de bucles y otras estructuras de control. Las principales estructuras de salto son `break`, `continue` y `pass`. Estas estructuras son útiles para manejar situaciones especiales durante la ejecución de bucles y otras estructuras de control.
+
+#### 1. `break`
+
+La instrucción `break` se utiliza para terminar un bucle prematuramente. Cuando se ejecuta `break` dentro de un bucle, el control del programa sale inmediatamente del bucle y continúa con la siguiente instrucción después del bucle.
+
+**Ejemplo:**
+```python
+# Uso de break en un bucle for
+for i in range(10):
+    if i == 5:
+        break
+    print(i)  # Imprime: 0, 1, 2, 3, 4
+
+# Uso de break en un bucle while
+contador = 0
+while contador < 10:
+    print(contador)  # Imprime: 0, 1, 2, 3, 4
+    if contador == 5:
+        break
+    contador += 1
+```
+
+En estos ejemplos, el bucle se termina cuando se cumple la condición `i == 5` o `contador == 5`.
+
+#### 2. `continue`
+
+La instrucción `continue` se utiliza para saltar a la siguiente iteración de un bucle. Cuando se ejecuta `continue` dentro de un bucle, el control del programa pasa inmediatamente a la siguiente iteración del bucle, omitiendo cualquier código restante en la iteración actual.
+
+**Ejemplo:**
+```python
+# Uso de continue en un bucle for
+for i in range(10):
+    if i % 2 == 0:
+        continue
+    print(i)  # Imprime: 1, 3, 5, 7, 9
+
+# Uso de continue en un bucle while
+contador = 0
+while contador < 10:
+    contador += 1
+    if contador % 2 == 0:
+        continue
+    print(contador)  # Imprime: 1, 3, 5, 7, 9
+```
+
+En estos ejemplos, `continue` hace que se salten las iteraciones cuando `i` o `contador` es par, imprimiendo solo los valores impares.
+
+#### 3. `pass`
+
+La instrucción `pass` se utiliza como un marcador de posición. No realiza ninguna acción y se usa cuando se requiere una instrucción sintácticamente, pero no se necesita ejecutar ningún código. Es útil en situaciones en las que se planea agregar código en el futuro, pero aún no se ha implementado.
+
+**Ejemplo:**
+```python
+# Uso de pass en un bucle for
+for i in range(5):
+    if i == 3:
+        pass  # No hace nada, solo un marcador de posición
+    print(i)  # Imprime: 0, 1, 2, 3, 4
+
+# Uso de pass en una definición de función
+def funcion_a_implementar():
+    pass  # No hace nada por ahora
+
+funcion_a_implementar()  # No produce salida
+```
+
+En estos ejemplos, `pass` no altera el flujo de control del programa y se utiliza para completar la sintaxis.
+
+#### 4. Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra cómo utilizar `break`, `continue` y `pass` en un programa práctico.
+
+**Ejemplo:**
+```python
+# Lista de números
+numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+# Bucle para encontrar el primer número mayor que 5
+for numero in numeros:
+    if numero > 5:
+        print(f"El primer número mayor que 5 es: {numero}")
+        break
+
+# Bucle para imprimir solo los números impares
+print("Números impares:")
+for numero in numeros:
+    if numero % 2 == 0:
+        continue
+    print(numero)
+
+# Bucle con pass como marcador de posición
+for numero in numeros:
+    if numero == 5:
+        pass  # Aquí se puede agregar código en el futuro
+    print(numero)
+```
+
+En este ejemplo:
+- `break` se utiliza para terminar el bucle una vez que se encuentra el primer número mayor que 5.
+- `continue` se utiliza para saltar los números pares y solo imprimir los números impares.
+- `pass` se utiliza como un marcador de posición donde se puede agregar código en el futuro.
+
+Las estructuras de salto son herramientas útiles para controlar el flujo de ejecución de los bucles y manejar condiciones especiales en un programa. Comprender cómo utilizar `break`, `continue` y `pass` es fundamental para escribir código más flexible y eficiente en Python.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

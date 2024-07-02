@@ -1,0 +1,152 @@
+### Genericidad
+
+#### Concepto de Genericidad
+
+La genericidad, o programación genérica, es un paradigma de programación que permite escribir funciones y clases que pueden trabajar con cualquier tipo de datos. Esto proporciona una mayor flexibilidad y reutilización del código, ya que se puede crear una única definición de una función o clase que funcione con diferentes tipos de datos sin necesidad de duplicar el código.
+
+En Python, la genericidad se logra principalmente a través del uso de tipos genéricos en el módulo `typing`, que permite definir funciones y clases que aceptan múltiples tipos de datos.
+
+#### Uso de la Genericidad en Python
+
+Python soporta la genericidad mediante el uso de anotaciones de tipo y el módulo `typing`. Algunas de las características clave incluyen:
+
+- **TypeVar**: Permite definir un tipo genérico.
+- **Generic**: Clase base para crear clases genéricas.
+- **Union**: Permite especificar que una variable puede ser de uno de varios tipos especificados.
+- **List, Dict, Tuple, etc.**: Versiones genéricas de las estructuras de datos incorporadas.
+
+#### Ejemplos de uso de la Genericidad
+
+**1. Funciones genéricas**
+
+Para definir una función genérica, se utiliza `TypeVar` para crear un marcador de posición para un tipo.
+
+**Ejemplo:**
+```python
+from typing import TypeVar, List
+
+# Definir un tipo genérico T
+T = TypeVar('T')
+
+# Definir una función genérica que acepta una lista de cualquier tipo
+def obtener_primero(lista: List[T]) -> T:
+    return lista[0]
+
+# Usar la función genérica con diferentes tipos de datos
+print(obtener_primero([1, 2, 3]))        # Imprime: 1
+print(obtener_primero(['a', 'b', 'c']))  # Imprime: 'a'
+```
+
+**2. Clases genéricas**
+
+Para definir una clase genérica, se utiliza `Generic` junto con `TypeVar`.
+
+**Ejemplo:**
+```python
+from typing import TypeVar, Generic
+
+# Definir un tipo genérico T
+T = TypeVar('T')
+
+# Definir una clase genérica
+class Caja(Generic[T]):
+    def __init__(self, contenido: T):
+        self.contenido = contenido
+
+    def obtener_contenido(self) -> T:
+        return self.contenido
+
+# Usar la clase genérica con diferentes tipos de datos
+caja_int = Caja(123)
+print(caja_int.obtener_contenido())  # Imprime: 123
+
+caja_str = Caja("Hola")
+print(caja_str.obtener_contenido())  # Imprime: Hola
+```
+
+**3. Uso de Union**
+
+`Union` se utiliza para definir variables que pueden aceptar múltiples tipos.
+
+**Ejemplo:**
+```python
+from typing import Union
+
+# Definir una función que acepta un entero o una cadena
+def procesar_dato(dato: Union[int, str]) -> str:
+    if isinstance(dato, int):
+        return f"El dato es un entero: {dato}"
+    elif isinstance(dato, str):
+        return f"El dato es una cadena: {dato}"
+    else:
+        return "Tipo no soportado"
+
+# Usar la función con diferentes tipos de datos
+print(procesar_dato(42))     # Imprime: El dato es un entero: 42
+print(procesar_dato("Hola")) # Imprime: El dato es una cadena: Hola
+```
+
+### Ejemplo completo de uso de Genericidad
+
+A continuación se presenta un ejemplo completo que combina varios aspectos de la genericidad en Python.
+
+**Ejemplo completo:**
+```python
+from typing import TypeVar, Generic, List, Union
+
+# Definir un tipo genérico T
+T = TypeVar('T')
+
+# Definir una clase genérica para una pila (stack)
+class Pila(Generic[T]):
+    def __init__(self):
+        self.items: List[T] = []
+
+    def apilar(self, item: T) -> None:
+        self.items.append(item)
+
+    def desapilar(self) -> T:
+        return self.items.pop()
+
+    def esta_vacia(self) -> bool:
+        return len(self.items) == 0
+
+# Usar la clase genérica Pila con enteros
+pila_int = Pila[int]()
+pila_int.apilar(1)
+pila_int.apilar(2)
+pila_int.apilar(3)
+while not pila_int.esta_vacia():
+    print(pila_int.desapilar())  # Imprime: 3, 2, 1
+
+# Usar la clase genérica Pila con cadenas
+pila_str = Pila[str]()
+pila_str.apilar("a")
+pila_str.apilar("b")
+pila_str.apilar("c")
+while not pila_str.esta_vacia():
+    print(pila_str.desapilar())  # Imprime: c, b, a
+
+# Definir una función genérica que usa Union
+def sumar_o_concatenar(a: Union[int, str], b: Union[int, str]) -> Union[int, str]:
+    return a + b
+
+# Usar la función con diferentes tipos de datos
+print(sumar_o_concatenar(10, 20))    # Imprime: 30
+print(sumar_o_concatenar("Hola, ", "mundo"))  # Imprime: Hola, mundo
+```
+
+En este ejemplo:
+- Se define una clase genérica `Pila` que puede trabajar con cualquier tipo de dato.
+- Se utilizan pilas con enteros y cadenas para demostrar la flexibilidad de la clase genérica.
+- Se define una función genérica `sumar_o_concatenar` que puede sumar números o concatenar cadenas, demostrando el uso de `Union`.
+
+### Resumen
+
+- **Genericidad**: Permite escribir código que puede trabajar con cualquier tipo de datos, aumentando la flexibilidad y reutilización del código.
+- **TypeVar**: Se utiliza para definir tipos genéricos.
+- **Generic**: Clase base para crear clases genéricas.
+- **Union**: Permite especificar que una variable puede ser de uno de varios tipos.
+- **Aplicaciones prácticas**: Definición de funciones y clases que pueden trabajar con múltiples tipos de datos, mejorando la reutilización del código.
+
+La genericidad es una herramienta poderosa en la programación que permite escribir código más flexible y reutilizable. En Python, el uso de tipos genéricos y anotaciones de tipo facilita la implementación de programación genérica de manera efectiva.

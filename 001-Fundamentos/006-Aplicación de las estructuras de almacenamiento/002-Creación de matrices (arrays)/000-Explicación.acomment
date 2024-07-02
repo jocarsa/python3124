@@ -1,0 +1,155 @@
+### Creación de matrices (arrays)
+
+#### Matrices (arrays)
+
+Las matrices, también conocidas como arrays, son estructuras de datos que permiten almacenar elementos de forma ordenada en múltiples dimensiones. En Python, la biblioteca `numpy` es la herramienta más comúnmente utilizada para trabajar con matrices debido a su eficiencia y funcionalidad extendida.
+
+#### Instalación de NumPy
+
+Para utilizar `numpy`, primero necesitas instalar la biblioteca si aún no lo has hecho:
+
+```bash
+pip install numpy
+```
+
+#### Creación de matrices con NumPy
+
+**Importación de NumPy:**
+```python
+import numpy as np
+```
+
+**1. Creación de una matriz unidimensional (vector):**
+```python
+# Crear una matriz unidimensional
+vector = np.array([1, 2, 3, 4, 5])
+print("Vector:", vector)
+```
+
+**2. Creación de una matriz bidimensional:**
+```python
+# Crear una matriz bidimensional
+matriz_2d = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+print("Matriz 2D:\n", matriz_2d)
+```
+
+**3. Creación de una matriz tridimensional:**
+```python
+# Crear una matriz tridimensional
+matriz_3d = np.array([[[1, 2], [3, 4]], [[5, 6], [7, 8]]])
+print("Matriz 3D:\n", matriz_3d)
+```
+
+**4. Creación de matrices usando funciones de NumPy:**
+
+**Matriz de ceros:**
+```python
+# Crear una matriz de ceros
+matriz_ceros = np.zeros((3, 3))
+print("Matriz de ceros:\n", matriz_ceros)
+```
+
+**Matriz de unos:**
+```python
+# Crear una matriz de unos
+matriz_unos = np.ones((2, 4))
+print("Matriz de unos:\n", matriz_unos)
+```
+
+**Matriz identidad:**
+```python
+# Crear una matriz identidad
+matriz_identidad = np.eye(4)
+print("Matriz identidad:\n", matriz_identidad)
+```
+
+**Matriz con valores aleatorios:**
+```python
+# Crear una matriz con valores aleatorios
+matriz_aleatoria = np.random.random((3, 3))
+print("Matriz aleatoria:\n", matriz_aleatoria)
+```
+
+#### Operaciones con matrices
+
+**Acceso a elementos:**
+```python
+# Acceder a un elemento específico
+elemento = matriz_2d[1, 2]
+print("Elemento en (1, 2):", elemento)
+```
+
+**Corte (slicing):**
+```python
+# Realizar un corte en la matriz
+corte = matriz_2d[0:2, 1:3]
+print("Corte de la matriz:\n", corte)
+```
+
+**Operaciones aritméticas:**
+```python
+# Sumar dos matrices
+matriz_suma = matriz_2d + matriz_2d
+print("Suma de matrices:\n", matriz_suma)
+
+# Multiplicar una matriz por un escalar
+matriz_escalar = matriz_2d * 2
+print("Matriz multiplicada por un escalar:\n", matriz_escalar)
+```
+
+**Transposición de matrices:**
+```python
+# Transponer una matriz
+matriz_transpuesta = matriz_2d.T
+print("Matriz transpuesta:\n", matriz_transpuesta)
+```
+
+**Ejemplo de uso completo:**
+```python
+import numpy as np
+
+# Crear una matriz bidimensional
+matriz_2d = np.array([[1, 2, 3], [4, 5, 6], [7, 8, 9]])
+print("Matriz 2D:\n", matriz_2d)
+
+# Acceder a un elemento específico
+elemento = matriz_2d[1, 2]
+print("Elemento en (1, 2):", elemento)
+
+# Realizar un corte en la matriz
+corte = matriz_2d[0:2, 1:3]
+print("Corte de la matriz:\n", corte)
+
+# Sumar dos matrices
+matriz_suma = matriz_2d + matriz_2d
+print("Suma de matrices:\n", matriz_suma)
+
+# Multiplicar una matriz por un escalar
+matriz_escalar = matriz_2d * 2
+print("Matriz multiplicada por un escalar:\n", matriz_escalar)
+
+# Transponer una matriz
+matriz_transpuesta = matriz_2d.T
+print("Matriz transpuesta:\n", matriz_transpuesta)
+
+# Crear una matriz con valores aleatorios
+matriz_aleatoria = np.random.random((3, 3))
+print("Matriz aleatoria:\n", matriz_aleatoria)
+
+# Crear una matriz identidad
+matriz_identidad = np.eye(3)
+print("Matriz identidad:\n", matriz_identidad)
+```
+
+En este ejemplo:
+- Se crean diferentes tipos de matrices (unidimensionales, bidimensionales y tridimensionales).
+- Se muestran varias operaciones básicas con matrices, como acceso a elementos, corte (slicing), operaciones aritméticas, y transposición.
+- Se crean matrices utilizando funciones de NumPy para valores específicos como ceros, unos, valores aleatorios, y la matriz identidad.
+
+### Resumen
+
+- **Matrices (arrays)**: Estructuras de datos que permiten almacenar elementos de forma ordenada en múltiples dimensiones.
+- **NumPy**: Biblioteca de Python que facilita la creación y manipulación de matrices con eficiencia y funcionalidad extendida.
+- **Operaciones básicas**: Incluyen acceso a elementos, corte, operaciones aritméticas, transposición y creación de matrices con funciones específicas.
+
+Las matrices son fundamentales en muchas aplicaciones científicas, matemáticas y de ingeniería, y la biblioteca NumPy en Python proporciona una herramienta poderosa para trabajar con ellas de manera eficiente y efectiva.

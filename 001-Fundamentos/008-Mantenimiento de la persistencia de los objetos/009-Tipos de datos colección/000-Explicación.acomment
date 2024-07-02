@@ -1,0 +1,169 @@
+### Tipos de Datos Colección en Python
+
+Los tipos de datos colección en Python permiten agrupar múltiples valores en una sola entidad. Estos tipos de datos son esenciales para manejar conjuntos de datos y facilitar operaciones como agregar, eliminar, buscar y ordenar elementos. Los tipos de datos colección más comunes en Python son listas, tuplas, conjuntos y diccionarios.
+
+### Listas
+
+Las listas son colecciones ordenadas y mutables que permiten almacenar elementos de cualquier tipo. Las listas son muy versátiles y se utilizan para una amplia variedad de tareas.
+
+#### Creación y Manipulación de Listas
+
+**Ejemplo:**
+```python
+# Crear una lista
+frutas = ["manzana", "banana", "cereza"]
+
+# Añadir un elemento a la lista
+frutas.append("naranja")
+print(frutas)  # Imprime: ['manzana', 'banana', 'cereza', 'naranja']
+
+# Eliminar un elemento de la lista
+frutas.remove("banana")
+print(frutas)  # Imprime: ['manzana', 'cereza', 'naranja']
+
+# Acceder a elementos por índice
+print(frutas[1])  # Imprime: cereza
+
+# Iterar sobre una lista
+for fruta in frutas:
+    print(fruta)
+
+# Slicing (sublistas)
+print(frutas[1:3])  # Imprime: ['cereza', 'naranja']
+```
+
+### Tuplas
+
+Las tuplas son colecciones ordenadas e inmutables que permiten almacenar elementos de cualquier tipo. Las tuplas son útiles para almacenar datos que no deben cambiar.
+
+#### Creación y Manipulación de Tuplas
+
+**Ejemplo:**
+```python
+# Crear una tupla
+colores = ("rojo", "verde", "azul")
+
+# Acceder a elementos por índice
+print(colores[0])  # Imprime: rojo
+
+# Intentar modificar una tupla (esto generará un error)
+# colores[0] = "amarillo"  # TypeError: 'tuple' object does not support item assignment
+
+# Desempaquetar una tupla
+rojo, verde, azul = colores
+print(rojo)   # Imprime: rojo
+print(verde)  # Imprime: verde
+print(azul)   # Imprime: azul
+```
+
+### Conjuntos
+
+Los conjuntos son colecciones desordenadas de elementos únicos. Son útiles para realizar operaciones de conjunto como unión, intersección y diferencia.
+
+#### Creación y Manipulación de Conjuntos
+
+**Ejemplo:**
+```python
+# Crear un conjunto
+numeros = {1, 2, 3, 4, 5}
+
+# Añadir un elemento al conjunto
+numeros.add(6)
+print(numeros)  # Imprime: {1, 2, 3, 4, 5, 6}
+
+# Eliminar un elemento del conjunto
+numeros.remove(3)
+print(numeros)  # Imprime: {1, 2, 4, 5, 6}
+
+# Comprobar si un elemento está en el conjunto
+print(2 in numeros)  # Imprime: True
+
+# Operaciones de conjunto
+a = {1, 2, 3}
+b = {3, 4, 5}
+print(a | b)  # Unión: {1, 2, 3, 4, 5}
+print(a & b)  # Intersección: {3}
+print(a - b)  # Diferencia: {1, 2}
+```
+
+### Diccionarios
+
+Los diccionarios son colecciones desordenadas de pares clave-valor. Son extremadamente útiles para asociar datos relacionados.
+
+#### Creación y Manipulación de Diccionarios
+
+**Ejemplo:**
+```python
+# Crear un diccionario
+estudiante = {"nombre": "Ana", "edad": 22, "carrera": "Ingeniería"}
+
+# Acceder a un valor por su clave
+print(estudiante["nombre"])  # Imprime: Ana
+
+# Añadir un nuevo par clave-valor
+estudiante["promedio"] = 8.5
+print(estudiante)  # Imprime: {'nombre': 'Ana', 'edad': 22, 'carrera': 'Ingeniería', 'promedio': 8.5}
+
+# Eliminar un par clave-valor
+del estudiante["edad"]
+print(estudiante)  # Imprime: {'nombre': 'Ana', 'carrera': 'Ingeniería', 'promedio': 8.5}
+
+# Iterar sobre un diccionario
+for clave, valor in estudiante.items():
+    print(f"{clave}: {valor}")
+```
+
+### Ejemplo Completo: Uso de Diferentes Tipos de Datos Colección
+
+A continuación se presenta un ejemplo completo que combina el uso de listas, tuplas, conjuntos y diccionarios.
+
+**Ejemplo Completo:**
+```python
+# Lista de estudiantes
+estudiantes = ["Ana", "Luis", "Carlos", "Maria"]
+
+# Tupla de asignaturas
+asignaturas = ("Matemáticas", "Física", "Química")
+
+# Conjunto de notas
+notas = {90, 85, 92, 88}
+
+# Diccionario de datos del estudiante
+datos_estudiante = {
+    "nombre": "Ana",
+    "edad": 22,
+    "carrera": "Ingeniería",
+    "notas": [90, 85, 88]
+}
+
+# Añadir una nota al conjunto
+notas.add(95)
+
+# Actualizar el diccionario
+datos_estudiante["notas"].append(95)
+
+# Desempaquetar la tupla de asignaturas
+matematicas, fisica, quimica = asignaturas
+
+# Imprimir los datos del estudiante
+print(f"Estudiante: {datos_estudiante['nombre']}")
+print(f"Edad: {datos_estudiante['edad']}")
+print(f"Carrera: {datos_estudiante['carrera']}")
+print(f"Notas: {datos_estudiante['notas']}")
+
+# Operaciones de conjunto
+print(f"Notas únicas: {notas}")
+
+# Iterar sobre la lista de estudiantes
+for estudiante in estudiantes:
+    print(f"Estudiante: {estudiante}")
+```
+
+### Resumen
+
+- **Listas**: Colecciones ordenadas y mutables. Útiles para almacenar secuencias de elementos.
+- **Tuplas**: Colecciones ordenadas e inmutables. Útiles para almacenar datos que no deben cambiar.
+- **Conjuntos**: Colecciones desordenadas de elementos únicos. Útiles para operaciones de conjunto.
+- **Diccionarios**: Colecciones desordenadas de pares clave-valor. Útiles para asociar datos relacionados.
+
+Estos tipos de datos colección son fundamentales en Python y proporcionan una base sólida para manejar y organizar datos de manera eficiente en diversas aplicaciones.

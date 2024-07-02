@@ -1,0 +1,157 @@
+### Características de las Bases de Datos Orientadas a Objetos
+
+Las bases de datos orientadas a objetos (OODB) se diseñan para trabajar con objetos tal como se utilizan en la programación orientada a objetos. Estas bases de datos ofrecen una serie de características que las hacen adecuadas para ciertos tipos de aplicaciones y problemas de datos complejos.
+
+#### 1. Encapsulación
+
+La encapsulación es una característica fundamental de las bases de datos orientadas a objetos. Los datos y los métodos que operan sobre esos datos se almacenan juntos en un objeto. Esto permite que los objetos controlen cómo se accede y modifica su estado interno.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def actualizar_edad(self, nueva_edad):
+        self.edad = nueva_edad
+
+# Objeto de la clase Persona encapsula los datos y métodos
+persona = Persona('Ana', 30)
+persona.actualizar_edad(31)
+```
+
+#### 2. Herencia
+
+La herencia permite que las subclases hereden propiedades y métodos de sus superclases. Esto facilita la reutilización del código y la creación de jerarquías de objetos que representan relaciones "es-un" (is-a).
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+class Empleado(Persona):
+    def __init__(self, nombre, edad, salario):
+        super().__init__(nombre, edad)
+        self.salario = salario
+```
+
+#### 3. Polimorfismo
+
+El polimorfismo permite que diferentes clases sean tratadas de la misma manera a través de una interfaz común. Esto es crucial para el diseño de sistemas flexibles y extensibles.
+
+**Ejemplo:**
+```python
+class Animal:
+    def hacer_sonido(self):
+        pass
+
+class Perro(Animal):
+    def hacer_sonido(self):
+        return "Guau!"
+
+class Gato(Animal):
+    def hacer_sonido(self):
+        return "Miau!"
+
+# Uso de polimorfismo
+animales = [Perro(), Gato()]
+for animal in animales:
+    print(animal.hacer_sonido())
+```
+
+#### 4. Persistencia de Objetos
+
+La persistencia de objetos permite que los objetos se almacenen de manera persistente en la base de datos y se recuperen más tarde en el mismo estado en que se guardaron. Esto es esencial para aplicaciones que necesitan guardar datos entre ejecuciones.
+
+**Ejemplo usando `pickle` para la persistencia:**
+```python
+import pickle
+
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+# Crear un objeto
+persona = Persona('Luis', 25)
+
+# Serializar el objeto a un archivo
+with open('persona.pkl', 'wb') as f:
+    pickle.dump(persona, f)
+
+# Deserializar el objeto del archivo
+with open('persona.pkl', 'rb') as f:
+    persona_recuperada = pickle.load(f)
+    print(persona_recuperada.nombre, persona_recuperada.edad)  # Imprime: Luis 25
+```
+
+#### 5. Soporte para Estructuras de Datos Complejas
+
+Las OODB pueden manejar estructuras de datos complejas y relaciones entre objetos de manera más natural que las bases de datos relacionales. Esto incluye la capacidad de almacenar objetos anidados y referencias entre objetos.
+
+**Ejemplo:**
+```python
+class Direccion:
+    def __init__(self, calle, ciudad):
+        self.calle = calle
+        self.ciudad = ciudad
+
+class Persona:
+    def __init__(self, nombre, edad, direccion):
+        self.nombre = nombre
+        self.edad = edad
+        self.direccion = direccion
+
+# Crear un objeto Direccion y un objeto Persona
+direccion = Direccion('Calle Falsa 123', 'Springfield')
+persona = Persona('Ana', 30, direccion)
+print(persona.direccion.calle)  # Imprime: Calle Falsa 123
+```
+
+#### 6. Integración con Lenguajes de Programación Orientados a Objetos
+
+Las OODB se integran de manera natural con lenguajes de programación orientados a objetos como Python, Java y C#. Esto elimina el desajuste de impedancia que ocurre cuando se intenta mapear objetos a tablas relacionales.
+
+**Ejemplo usando ZODB en Python:**
+```python
+import ZODB, ZODB.FileStorage
+import transaction
+from persistent import Persistent
+
+class Persona(Persistent):
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+# Crear el almacenamiento y la base de datos
+storage = ZODB.FileStorage.FileStorage('mydata.fs')
+db = ZODB.DB(storage)
+connection = db.open()
+root = connection.root()
+
+# Crear y almacenar objetos
+root['persona'] = Persona('Ana', 30)
+transaction.commit()
+
+# Recuperar objetos
+persona = root['persona']
+print(f"{persona.nombre} tiene {persona.edad} años.")  # Imprime: Ana tiene 30 años.
+
+# Cerrar la conexión y la base de datos
+connection.close()
+db.close()
+```
+
+### Resumen
+
+- **Encapsulación**: Almacena datos y métodos juntos en un objeto, controlando el acceso al estado interno.
+- **Herencia**: Permite que las subclases hereden atributos y métodos de las superclases.
+- **Polimorfismo**: Facilita el tratamiento uniforme de objetos de diferentes clases a través de una interfaz común.
+- **Persistencia de Objetos**: Permite almacenar y recuperar objetos en su estado completo entre ejecuciones.
+- **Soporte para Estructuras de Datos Complejas**: Maneja de forma natural estructuras de datos complejas y relaciones entre objetos.
+- **Integración con Lenguajes Orientados a Objetos**: Elimina el desajuste de impedancia y facilita la integración con lenguajes de programación orientados a objetos.
+
+Las bases de datos orientadas a objetos son ideales para aplicaciones que requieren manejar datos complejos y estructuras de objetos de manera eficiente y coherente con el paradigma de programación orientado a objetos.

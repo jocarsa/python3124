@@ -1,0 +1,225 @@
+### Utilización de propiedades
+
+#### Utilización de propiedades
+
+Las propiedades en Python permiten definir métodos que se comportan como atributos. Esto proporciona una forma controlada de acceder y modificar los atributos de un objeto, permitiendo agregar lógica adicional (como validación o conversión de datos) cuando los atributos se leen o se escriben. Las propiedades se definen utilizando los decoradores `@property`, `@nombre.setter` y `@nombre.deleter`.
+
+#### 1. Definición de propiedades
+
+Para definir una propiedad en Python, se usa el decorador `@property` sobre un método, convirtiéndolo en un atributo que puede ser accedido como una propiedad.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre):
+        self._nombre = nombre
+
+    @property
+    def nombre(self):
+        return self._nombre
+
+# Crear una instancia de la clase Persona
+persona = Persona("Ana")
+
+# Acceder a la propiedad
+print(persona.nombre)  # Imprime: Ana
+```
+
+En este ejemplo, el método `nombre` está decorado con `@property`, lo que permite acceder a `_nombre` como si fuera un atributo.
+
+#### 2. Definición de setters
+
+Para definir un setter (modificador) para una propiedad, se usa el decorador `@nombre.setter` sobre un método. Esto permite definir la lógica para modificar el valor del atributo asociado a la propiedad.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre):
+        self._nombre = nombre
+
+    @property
+    def nombre(self):
+        return self._nombre
+
+    @nombre.setter
+    def nombre(self, nuevo_nombre):
+        if nuevo_nombre:
+            self._nombre = nuevo_nombre
+        else:
+            raise ValueError("El nombre no puede estar vacío")
+
+# Crear una instancia de la clase Persona
+persona = Persona("Ana")
+
+# Acceder a la propiedad
+print(persona.nombre)  # Imprime: Ana
+
+# Modificar la propiedad
+persona.nombre = "María"
+print(persona.nombre)  # Imprime: María
+
+# Intentar asignar un valor inválido
+try:
+    persona.nombre = ""
+except ValueError as e:
+    print(e)  # Imprime: El nombre no puede estar vacío
+```
+
+En este ejemplo, el setter `nombre` asegura que el nuevo nombre no sea vacío.
+
+#### 3. Definición de deleters
+
+Para definir un deleter (eliminador) para una propiedad, se usa el decorador `@nombre.deleter` sobre un método. Esto permite definir la lógica para eliminar un atributo.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre):
+        self._nombre = nombre
+
+    @property
+    def nombre(self):
+        return self._nombre
+
+    @nombre.setter
+    def nombre(self, nuevo_nombre):
+        if nuevo_nombre:
+            self._nombre = nuevo_nombre
+        else:
+            raise ValueError("El nombre no puede estar vacío")
+
+    @nombre.deleter
+    def nombre(self):
+        del self._nombre
+
+# Crear una instancia de la clase Persona
+persona = Persona("Ana")
+
+# Acceder a la propiedad
+print(persona.nombre)  # Imprime: Ana
+
+# Modificar la propiedad
+persona.nombre = "María"
+print(persona.nombre)  # Imprime: María
+
+# Eliminar la propiedad
+del persona.nombre
+
+# Intentar acceder a la propiedad eliminada
+try:
+    print(persona.nombre)
+except AttributeError as e:
+    print(e)  # Imprime un error porque el atributo ha sido eliminado
+```
+
+En este ejemplo, el deleter `nombre` elimina el atributo `_nombre` de la instancia.
+
+#### 4. Propiedades de solo lectura
+
+Para crear propiedades de solo lectura, simplemente se define el método `@property` sin definir un setter.
+
+**Ejemplo:**
+```python
+class Circulo:
+    def __init__(self, radio):
+        self._radio = radio
+
+    @property
+    def radio(self):
+        return self._radio
+
+    @property
+    def area(self):
+        import math
+        return math.pi * (self._radio ** 2)
+
+# Crear una instancia de la clase Circulo
+circulo = Circulo(5)
+
+# Acceder a las propiedades de solo lectura
+print(circulo.radio)  # Imprime: 5
+print(circulo.area)   # Imprime: 78.53981633974483
+
+# Intentar modificar la propiedad de solo lectura
+try:
+    circulo.area = 100
+except AttributeError as e:
+    print(e)  # Imprime un error porque la propiedad es de solo lectura
+```
+
+En este ejemplo, `area` es una propiedad de solo lectura calculada a partir del atributo `_radio`.
+
+#### 5. Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra la utilización de propiedades con getters, setters y deleters.
+
+**Ejemplo:**
+```python
+class Rectangulo:
+    def __init__(self, ancho, alto):
+        self._ancho = ancho
+        self._alto = alto
+
+    @property
+    def ancho(self):
+        return self._ancho
+
+    @ancho.setter
+    def ancho(self, valor):
+        if valor > 0:
+            self._ancho = valor
+        else:
+            raise ValueError("El ancho debe ser mayor que cero")
+
+    @property
+    def alto(self):
+        return self._alto
+
+    @alto.setter
+    def alto(self, valor):
+        if valor > 0:
+            self._alto = valor
+        else:
+            raise ValueError("El alto debe ser mayor que cero")
+
+    @property
+    def area(self):
+        return self._ancho * self._alto
+
+    @property
+    def perimetro(self):
+        return 2 * (self._ancho + self._alto)
+
+    @area.deleter
+    def area(self):
+        del self._ancho
+        del self._alto
+
+# Crear una instancia de la clase Rectangulo
+rectangulo = Rectangulo(4, 5)
+
+# Acceder a las propiedades
+print(rectangulo.ancho)      # Imprime: 4
+print(rectangulo.alto)       # Imprime: 5
+print(rectangulo.area)       # Imprime: 20
+print(rectangulo.perimetro)  # Imprime: 18
+
+# Modificar las propiedades
+rectangulo.ancho = 7
+rectangulo.alto = 8
+print(rectangulo.area)       # Imprime: 56
+print(rectangulo.perimetro)  # Imprime: 30
+
+# Intentar eliminar la propiedad area
+del rectangulo.area
+try:
+    print(rectangulo.area)
+except AttributeError as e:
+    print(e)  # Imprime un error porque los atributos _ancho y _alto han sido eliminados
+```
+
+En este ejemplo, se muestra cómo definir propiedades completas con getters, setters y deleters, y cómo utilizar y manejar estas propiedades en una instancia de la clase.
+
+Las propiedades son una herramienta poderosa para controlar el acceso y la modificación de los atributos de los objetos, proporcionando una interfaz clara y segura para interactuar con los datos del objeto.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

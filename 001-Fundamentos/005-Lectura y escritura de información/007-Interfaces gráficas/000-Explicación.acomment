@@ -1,0 +1,211 @@
+### Interfaces gráficas
+
+#### Interfaces gráficas de usuario (GUI)
+
+Las interfaces gráficas de usuario (GUI) permiten a los usuarios interactuar con aplicaciones a través de elementos visuales como ventanas, botones, campos de texto, menús y otros componentes gráficos. Python ofrece varias bibliotecas para crear GUIs, siendo `tkinter`, `PyQt`, y `wxPython` algunas de las más populares.
+
+#### 1. Tkinter
+
+`tkinter` es la biblioteca estándar de Python para crear interfaces gráficas. Es fácil de usar y viene incluida con la instalación estándar de Python.
+
+**Ejemplo básico con tkinter:**
+
+**Crear una ventana simple con un botón:**
+```python
+import tkinter as tk
+
+def saludar():
+    print("¡Hola, mundo!")
+
+# Crear la ventana principal
+ventana = tk.Tk()
+ventana.title("Mi primera GUI")
+
+# Crear un botón
+boton = tk.Button(ventana, text="Saludar", command=saludar)
+boton.pack()
+
+# Ejecutar el bucle principal
+ventana.mainloop()
+```
+
+En este ejemplo, se crea una ventana con un botón que imprime "¡Hola, mundo!" en la consola cuando se presiona.
+
+**Componentes comunes de tkinter:**
+
+**Etiqueta y campo de entrada:**
+```python
+import tkinter as tk
+
+# Crear la ventana principal
+ventana = tk.Tk()
+ventana.title("Formulario simple")
+
+# Crear una etiqueta
+etiqueta = tk.Label(ventana, text="Introduce tu nombre:")
+etiqueta.pack()
+
+# Crear un campo de entrada
+entrada = tk.Entry(ventana)
+entrada.pack()
+
+# Crear un botón que muestra el nombre introducido
+def mostrar_nombre():
+    nombre = entrada.get()
+    print(f"Hola, {nombre}")
+
+boton = tk.Button(ventana, text="Mostrar nombre", command=mostrar_nombre)
+boton.pack()
+
+# Ejecutar el bucle principal
+ventana.mainloop()
+```
+
+En este ejemplo, se crea una etiqueta, un campo de entrada y un botón. Al presionar el botón, se muestra el nombre introducido en la consola.
+
+#### 2. PyQt
+
+`PyQt` es una biblioteca más avanzada y poderosa para crear GUIs en Python. Es un binding de Python para el framework Qt, que es ampliamente utilizado en el desarrollo de aplicaciones de escritorio.
+
+**Instalación:**
+```bash
+pip install PyQt5
+```
+
+**Ejemplo básico con PyQt:**
+```python
+import sys
+from PyQt5.QtWidgets import QApplication, QWidget, QLabel, QVBoxLayout, QPushButton
+
+def saludar():
+    print("¡Hola, mundo!")
+
+# Crear la aplicación
+app = QApplication(sys.argv)
+
+# Crear la ventana principal
+ventana = QWidget()
+ventana.setWindowTitle("Mi primera GUI con PyQt")
+
+# Crear un layout y agregar widgets
+layout = QVBoxLayout()
+
+etiqueta = QLabel("Etiqueta de ejemplo")
+layout.addWidget(etiqueta)
+
+boton = QPushButton("Saludar")
+boton.clicked.connect(saludar)
+layout.addWidget(boton)
+
+ventana.setLayout(layout)
+
+# Mostrar la ventana
+ventana.show()
+
+# Ejecutar el bucle principal
+sys.exit(app.exec_())
+```
+
+En este ejemplo, se crea una ventana con una etiqueta y un botón usando PyQt. Al presionar el botón, se imprime "¡Hola, mundo!" en la consola.
+
+#### 3. wxPython
+
+`wxPython` es otra biblioteca popular para crear GUIs en Python. Proporciona una interfaz para el toolkit wxWidgets, que es utilizado para crear aplicaciones de escritorio nativas en varias plataformas.
+
+**Instalación:**
+```bash
+pip install wxPython
+```
+
+**Ejemplo básico con wxPython:**
+```python
+import wx
+
+class MiAplicacion(wx.Frame):
+    def __init__(self, *args, **kw):
+        super(MiAplicacion, self).__init__(*args, **kw)
+
+        # Configurar la ventana
+        self.InitUI()
+
+    def InitUI(self):
+        pnl = wx.Panel(self)
+        vbox = wx.BoxSizer(wx.VERTICAL)
+
+        etiqueta = wx.StaticText(pnl, label='Etiqueta de ejemplo')
+        vbox.Add(etiqueta, flag=wx.ALIGN_CENTER | wx.TOP, border=10)
+
+        boton = wx.Button(pnl, label='Saludar')
+        vbox.Add(boton, flag=wx.ALIGN_CENTER | wx.TOP, border=10)
+        boton.Bind(wx.EVT_BUTTON, self.OnSaludar)
+
+        pnl.SetSizer(vbox)
+
+        self.SetTitle('Mi primera GUI con wxPython')
+        self.Centre()
+
+    def OnSaludar(self, event):
+        print("¡Hola, mundo!")
+
+# Ejecutar la aplicación
+def main():
+    app = wx.App()
+    ventana = MiAplicacion(None)
+    ventana.Show()
+    app.MainLoop()
+
+if __name__ == '__main__':
+    main()
+```
+
+En este ejemplo, se crea una ventana con una etiqueta y un botón usando wxPython. Al presionar el botón, se imprime "¡Hola, mundo!" en la consola.
+
+### Ejemplo completo con tkinter
+
+A continuación se presenta un ejemplo completo que muestra cómo crear una aplicación GUI más completa usando `tkinter`.
+
+**Ejemplo completo:**
+```python
+import tkinter as tk
+from tkinter import messagebox
+
+def mostrar_info():
+    nombre = entrada_nombre.get()
+    edad = entrada_edad.get()
+    ciudad = entrada_ciudad.get()
+    mensaje = f"Nombre: {nombre}\nEdad: {edad}\nCiudad: {ciudad}"
+    messagebox.showinfo("Información del usuario", mensaje)
+
+# Crear la ventana principal
+ventana = tk.Tk()
+ventana.title("Formulario de usuario")
+
+# Crear y colocar los widgets
+tk.Label(ventana, text="Nombre:").grid(row=0, column=0, padx=10, pady=10)
+entrada_nombre = tk.Entry(ventana)
+entrada_nombre.grid(row=0, column=1, padx=10, pady=10)
+
+tk.Label(ventana, text="Edad:").grid(row=1, column=0, padx=10, pady=10)
+entrada_edad = tk.Entry(ventana)
+entrada_edad.grid(row=1, column=1, padx=10, pady=10)
+
+tk.Label(ventana, text="Ciudad:").grid(row=2, column=0, padx=10, pady=10)
+entrada_ciudad = tk.Entry(ventana)
+entrada_ciudad.grid(row=2, column=1, padx=10, pady=10)
+
+boton_mostrar = tk.Button(ventana, text="Mostrar información", command=mostrar_info)
+boton_mostrar.grid(row=3, columnspan=2, pady=10)
+
+# Ejecutar el bucle principal
+ventana.mainloop()
+```
+
+En este ejemplo, se crea un formulario GUI simple con `tkinter` que permite al usuario ingresar su nombre, edad y ciudad. Al presionar el botón, se muestra un mensaje con la información ingresada.
+
+### Resumen
+
+- **tkinter**: Es la biblioteca estándar de Python para crear GUIs, fácil de usar y ampliamente soportada.
+- **PyQt**: Es una biblioteca más avanzada y poderosa que proporciona una amplia gama de componentes gráficos y es adecuada para aplicaciones complejas.
+- **wxPython**: Proporciona una interfaz para el toolkit wxWidgets y es ideal para crear aplicaciones de escritorio nativas en múltiples plataformas.
+
+Estas herramientas permiten crear aplicaciones gráficas interactivas en Python, mejorando la experiencia del usuario y proporcionando interfaces intuitivas y visuales.

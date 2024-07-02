@@ -1,0 +1,127 @@
+### Aserciones
+
+#### Aserciones
+
+Las aserciones en Python son una herramienta utilizada para pruebas y depuración, permitiendo verificar que ciertas condiciones se cumplan durante la ejecución del programa. Una aserción es una declaración que una condición es verdadera. Si la condición es falsa, se genera una excepción `AssertionError` y el programa se detiene. Las aserciones son útiles para detectar errores de lógica en el código durante el desarrollo.
+
+#### 1. Sintaxis de una aserción
+
+La sintaxis básica de una aserción en Python es:
+
+```python
+assert condición, mensaje
+```
+
+- **condición**: Una expresión que se espera que sea verdadera.
+- **mensaje** (opcional): Un mensaje de error que se muestra si la condición es falsa.
+
+**Ejemplo básico:**
+```python
+x = 10
+assert x > 0, "x debe ser positivo"  # No produce error porque x > 0 es verdadero
+
+y = -5
+assert y > 0, "y debe ser positivo"  # Produce AssertionError: y debe ser positivo
+```
+
+#### 2. Uso de aserciones en funciones
+
+Las aserciones se pueden utilizar dentro de funciones para verificar que los parámetros de entrada cumplen con ciertas condiciones antes de ejecutar el resto del código de la función.
+
+**Ejemplo:**
+```python
+def calcular_raiz_cuadrada(x):
+    assert x >= 0, "El valor debe ser no negativo"
+    return x ** 0.5
+
+print(calcular_raiz_cuadrada(9))   # Imprime: 3.0
+print(calcular_raiz_cuadrada(-1))  # Produce AssertionError: El valor debe ser no negativo
+```
+
+En este ejemplo, la función `calcular_raiz_cuadrada` utiliza una aserción para asegurar que el argumento `x` es no negativo antes de calcular la raíz cuadrada.
+
+#### 3. Aserciones para verificar invariantes
+
+Las aserciones también se utilizan para verificar invariantes, es decir, condiciones que deben ser verdaderas en ciertos puntos del programa. Esto es útil para detectar errores de lógica y asegurar la consistencia del estado del programa.
+
+**Ejemplo:**
+```python
+def incrementar_contador(contador):
+    contador += 1
+    assert contador > 0, "El contador debe ser positivo"
+    return contador
+
+contador = 0
+contador = incrementar_contador(contador)
+print(contador)  # Imprime: 1
+```
+
+En este ejemplo, la aserción verifica que el valor de `contador` siempre sea positivo después de incrementarlo.
+
+#### 4. Aserciones y depuración
+
+Durante el desarrollo y la depuración, las aserciones ayudan a identificar rápidamente los errores de lógica en el código. Sin embargo, las aserciones no deben usarse para manejar errores que podrían ocurrir en producción, sino para detectar problemas durante el desarrollo.
+
+**Ejemplo:**
+```python
+def dividir(a, b):
+    assert b != 0, "El divisor no debe ser cero"
+    return a / b
+
+print(dividir(10, 2))  # Imprime: 5.0
+print(dividir(10, 0))  # Produce AssertionError: El divisor no debe ser cero
+```
+
+#### 5. Desactivar aserciones en producción
+
+Las aserciones se pueden desactivar en un entorno de producción utilizando la opción `-O` (optimize) al ejecutar el script de Python. Esto puede ser útil para evitar la sobrecarga de las aserciones en un entorno en el que ya se ha verificado que el código es correcto.
+
+**Ejemplo de desactivación de aserciones:**
+```bash
+python -O mi_script.py
+```
+
+Cuando se ejecuta un script con la opción `-O`, las aserciones no se evalúan y se omiten del código ejecutado.
+
+#### 6. Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra cómo utilizar aserciones en una clase para verificar las condiciones en varios métodos.
+
+**Ejemplo:**
+```python
+class Rectangulo:
+    def __init__(self, ancho, alto):
+        assert ancho > 0, "El ancho debe ser positivo"
+        assert alto > 0, "El alto debe ser positivo"
+        self.ancho = ancho
+        self.alto = alto
+
+    def calcular_area(self):
+        return self.ancho * self.alto
+
+    def cambiar_dimensiones(self, nuevo_ancho, nuevo_alto):
+        assert nuevo_ancho > 0, "El nuevo ancho debe ser positivo"
+        assert nuevo_alto > 0, "El nuevo alto debe ser positivo"
+        self.ancho = nuevo_ancho
+        self.alto = nuevo_alto
+
+# Crear una instancia de la clase Rectangulo
+rectangulo = Rectangulo(10, 5)
+print(rectangulo.calcular_area())  # Imprime: 50
+
+# Cambiar dimensiones con valores válidos
+rectangulo.cambiar_dimensiones(20, 10)
+print(rectangulo.calcular_area())  # Imprime: 200
+
+# Intentar cambiar dimensiones con valores inválidos
+try:
+    rectangulo.cambiar_dimensiones(-5, 10)
+except AssertionError as e:
+    print(e)  # Imprime: El nuevo ancho debe ser positivo
+```
+
+En este ejemplo, se utilizan aserciones para asegurar que las dimensiones del rectángulo siempre sean positivas al crear una instancia y al cambiar las dimensiones. Esto ayuda a mantener la integridad de los datos y detectar errores de lógica durante el desarrollo.
+
+Las aserciones son una herramienta poderosa para la depuración y pruebas de código en Python. Permiten verificar condiciones y detectar problemas de lógica de manera temprana, asegurando que el código se comporte según lo esperado.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

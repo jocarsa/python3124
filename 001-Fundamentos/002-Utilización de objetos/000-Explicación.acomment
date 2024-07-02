@@ -1,0 +1,158 @@
+### Utilización de objetos
+
+#### Utilización de objetos
+
+Python es un lenguaje de programación orientado a objetos (OOP), lo que significa que permite la creación y manipulación de objetos. Un objeto es una instancia de una clase, que es una plantilla o un "molde" para crear objetos. A continuación, se describen los conceptos clave relacionados con la utilización de objetos en Python.
+
+#### 1. Características de los objetos
+
+Los objetos en Python tienen dos características principales:
+
+- **Estado (Atributos)**: Representan los datos del objeto. Los atributos se definen en la clase y se instancian en los objetos.
+- **Comportamiento (Métodos)**: Representan las funciones que los objetos pueden realizar. Los métodos se definen en la clase y se pueden invocar en los objetos.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre  # Atributo
+        self.edad = edad      # Atributo
+
+    def saludar(self):
+        print(f"Hola, me llamo {self.nombre} y tengo {self.edad} años")  # Método
+
+# Crear un objeto de la clase Persona
+persona1 = Persona("Ana", 30)
+persona1.saludar()  # Imprime: Hola, me llamo Ana y tengo 30 años
+```
+
+#### 2. Instanciación de objetos
+
+La instanciación de un objeto se realiza llamando a la clase como si fuera una función, pasando los argumentos necesarios para inicializar el objeto.
+
+**Ejemplo:**
+```python
+class Perro:
+    def __init__(self, nombre, raza):
+        self.nombre = nombre
+        self.raza = raza
+
+# Instanciar objetos de la clase Perro
+perro1 = Perro("Firulais", "Labrador")
+perro2 = Perro("Rex", "Pastor Alemán")
+
+print(perro1.nombre)  # Imprime: Firulais
+print(perro2.raza)    # Imprime: Pastor Alemán
+```
+
+#### 3. Utilización de métodos. Parámetros.
+
+Los métodos son funciones definidas dentro de una clase y se utilizan para realizar operaciones utilizando los atributos del objeto. Los métodos pueden aceptar parámetros y devolver valores.
+
+**Ejemplo:**
+```python
+class Coche:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def mostrar_info(self):
+        print(f"Marca: {self.marca}, Modelo: {self.modelo}")
+
+    def arrancar(self):
+        print(f"El {self.marca} {self.modelo} está arrancando...")
+
+# Instanciar un objeto de la clase Coche y usar sus métodos
+mi_coche = Coche("Toyota", "Corolla")
+mi_coche.mostrar_info()  # Imprime: Marca: Toyota, Modelo: Corolla
+mi_coche.arrancar()      # Imprime: El Toyota Corolla está arrancando...
+```
+
+#### 4. Utilización de propiedades
+
+Las propiedades en Python permiten definir métodos que se comportan como atributos. Se utilizan para controlar el acceso a los atributos del objeto, proporcionando una interfaz más flexible y controlada.
+
+**Ejemplo:**
+```python
+class Persona:
+    def __init__(self, nombre):
+        self._nombre = nombre
+
+    @property
+    def nombre(self):
+        return self._nombre
+
+    @nombre.setter
+    def nombre(self, nuevo_nombre):
+        if nuevo_nombre:
+            self._nombre = nuevo_nombre
+        else:
+            raise ValueError("El nombre no puede estar vacío")
+
+# Instanciar un objeto y usar propiedades
+persona = Persona("Ana")
+print(persona.nombre)  # Imprime: Ana
+persona.nombre = "María"
+print(persona.nombre)  # Imprime: María
+```
+
+#### 5. Utilización de métodos estáticos
+
+Los métodos estáticos son métodos que pertenecen a la clase en lugar de a una instancia específica. Se definen usando el decorador `@staticmethod` y no tienen acceso a `self` o `cls`.
+
+**Ejemplo:**
+```python
+class Matematica:
+    @staticmethod
+    def sumar(a, b):
+        return a + b
+
+# Llamar a un método estático
+resultado = Matematica.sumar(5, 7)
+print(resultado)  # Imprime: 12
+```
+
+#### 6. Constructores
+
+El constructor es un método especial que se llama automáticamente cuando se crea un objeto de una clase. En Python, el constructor se define con el método `__init__`.
+
+**Ejemplo:**
+```python
+class Gato:
+    def __init__(self, nombre, color):
+        self.nombre = nombre
+        self.color = color
+
+# Instanciar un objeto de la clase Gato
+gato1 = Gato("Mish", "Negro")
+print(gato1.nombre)  # Imprime: Mish
+print(gato1.color)   # Imprime: Negro
+```
+
+#### 7. Destrucción de objetos y liberación de memoria
+
+La destrucción de objetos en Python se maneja mediante el recolector de basura, que libera la memoria automáticamente cuando los objetos ya no son necesarios. Sin embargo, se puede definir un método especial `__del__` para realizar tareas de limpieza específicas cuando un objeto es destruido.
+
+**Ejemplo:**
+```python
+class Archivo:
+    def __init__(self, nombre):
+        self.nombre = nombre
+        self.archivo = open(nombre, 'w')
+
+    def escribir(self, texto):
+        self.archivo.write(texto)
+
+    def __del__(self):
+        self.archivo.close()
+        print(f"Archivo {self.nombre} cerrado")
+
+# Instanciar y destruir un objeto de la clase Archivo
+archivo1 = Archivo("mi_archivo.txt")
+archivo1.escribir("Hola, mundo")
+del archivo1  # Imprime: Archivo mi_archivo.txt cerrado
+```
+
+Estos conceptos y ejemplos cubren las bases para la utilización de objetos en Python. Entender cómo crear, manipular y destruir objetos es fundamental para escribir programas orientados a objetos eficaces y bien organizados.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

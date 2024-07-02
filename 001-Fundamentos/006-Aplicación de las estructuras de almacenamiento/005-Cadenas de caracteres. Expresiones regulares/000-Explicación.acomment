@@ -1,0 +1,160 @@
+### Cadenas de caracteres y expresiones regulares
+
+#### Cadenas de caracteres
+
+Las cadenas de caracteres son secuencias de caracteres utilizadas para almacenar y manipular texto en Python. Las cadenas son inmutables, lo que significa que no se pueden cambiar una vez creadas.
+
+**Ejemplos básicos de manipulación de cadenas:**
+
+**1. Creación y manipulación de cadenas:**
+```python
+# Crear una cadena
+cadena = "Hola, mundo!"
+
+# Acceder a elementos de la cadena
+print(cadena[0])  # Imprime: H
+
+# Subcadenas (slicing)
+print(cadena[0:4])  # Imprime: Hola
+
+# Longitud de una cadena
+print(len(cadena))  # Imprime: 12
+
+# Concatenación de cadenas
+saludo = "Hola"
+nombre = "Ana"
+mensaje = saludo + ", " + nombre + "!"
+print(mensaje)  # Imprime: Hola, Ana!
+
+# Repetición de cadenas
+repetir = "Hola " * 3
+print(repetir)  # Imprime: Hola Hola Hola
+```
+
+**2. Métodos comunes de cadenas:**
+```python
+cadena = "   Hola, mundo!   "
+
+# Eliminar espacios en blanco
+print(cadena.strip())  # Imprime: Hola, mundo!
+
+# Convertir a mayúsculas
+print(cadena.upper())  # Imprime:    HOLA, MUNDO!   
+
+# Convertir a minúsculas
+print(cadena.lower())  # Imprime:    hola, mundo!   
+
+# Reemplazar subcadenas
+print(cadena.replace("Hola", "Adiós"))  # Imprime:    Adiós, mundo!   
+
+# Dividir cadenas
+print(cadena.split(','))  # Imprime: ['   Hola', ' mundo!   ']
+
+# Comprobar prefijos y sufijos
+print(cadena.startswith("Hola"))  # Imprime: False
+print(cadena.endswith("!"))  # Imprime: True
+```
+
+#### Expresiones regulares
+
+Las expresiones regulares (regex) son patrones utilizados para buscar y manipular cadenas de texto. Python proporciona el módulo `re` para trabajar con expresiones regulares.
+
+**Importación del módulo `re`:**
+```python
+import re
+```
+
+**1. Búsqueda y coincidencia:**
+
+**Buscar una cadena en un texto:**
+```python
+texto = "El rápido zorro marrón salta sobre el perro perezoso"
+patron = "zorro"
+resultado = re.search(patron, texto)
+if resultado:
+    print("Patrón encontrado:", resultado.group())  # Imprime: Patrón encontrado: zorro
+else:
+    print("Patrón no encontrado")
+```
+
+**Buscar todas las ocurrencias de un patrón:**
+```python
+texto = "El rápido zorro marrón salta sobre el perro perezoso"
+patron = "o"
+resultados = re.findall(patron, texto)
+print("Ocurrencias encontradas:", resultados)  # Imprime: Ocurrencias encontradas: ['o', 'o', 'o', 'o']
+```
+
+**2. Sustitución y división:**
+
+**Sustituir subcadenas:**
+```python
+texto = "El rápido zorro marrón salta sobre el perro perezoso"
+patron = "zorro"
+nuevo_texto = re.sub(patron, "gato", texto)
+print(nuevo_texto)  # Imprime: El rápido gato marrón salta sobre el perro perezoso
+```
+
+**Dividir una cadena usando un patrón:**
+```python
+texto = "El rápido zorro marrón salta sobre el perro perezoso"
+patron = "\s"
+partes = re.split(patron, texto)
+print(partes)  # Imprime: ['El', 'rápido', 'zorro', 'marrón', 'salta', 'sobre', 'el', 'perro', 'perezoso']
+```
+
+**3. Grupos y patrones complejos:**
+
+**Usar grupos en expresiones regulares:**
+```python
+texto = "Mi correo es ejemplo@dominio.com"
+patron = r"(\w+)@(\w+)\.(\w+)"
+resultado = re.search(patron, texto)
+if resultado:
+    print("Usuario:", resultado.group(1))  # Imprime: Usuario: ejemplo
+    print("Dominio:", resultado.group(2))  # Imprime: Dominio: dominio
+    print("TLD:", resultado.group(3))      # Imprime: TLD: com
+```
+
+**Ejemplo completo de uso de cadenas y expresiones regulares:**
+```python
+import re
+
+# Texto de ejemplo
+texto = "Mi nombre es Ana y mi correo es ana@example.com. También puedes contactarme en ana.trabajo@example.org."
+
+# 1. Buscar direcciones de correo electrónico
+patron_email = r"\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,}\b"
+emails = re.findall(patron_email, texto)
+print("Correos electrónicos encontrados:", emails)
+# Imprime: Correos electrónicos encontrados: ['ana@example.com', 'ana.trabajo@example.org']
+
+# 2. Sustituir los correos electrónicos por [correo oculto]
+texto_oculto = re.sub(patron_email, "[correo oculto]", texto)
+print("Texto con correos ocultos:", texto_oculto)
+# Imprime: Texto con correos ocultos: Mi nombre es Ana y mi correo es [correo oculto]. También puedes contactarme en [correo oculto].
+
+# 3. Dividir el texto en palabras
+palabras = re.split(r"\s+", texto)
+print("Palabras en el texto:", palabras)
+# Imprime: Palabras en el texto: ['Mi', 'nombre', 'es', 'Ana', 'y', 'mi', 'correo', 'es', 'ana@example.com.', 'También', 'puedes', 'contactarme', 'en', 'ana.trabajo@example.org.']
+
+# 4. Validar un patrón de fecha (dd-mm-aaaa)
+fecha = "31-12-2021"
+patron_fecha = r"\b(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\d{4}\b"
+if re.match(patron_fecha, fecha):
+    print("Fecha válida:", fecha)
+else:
+    print("Fecha no válida")
+# Imprime: Fecha válida: 31-12-2021
+```
+
+### Resumen
+
+- **Cadenas de caracteres**: Son secuencias de caracteres utilizadas para almacenar y manipular texto. Las cadenas en Python son inmutables y se pueden manipular utilizando diversos métodos y operaciones.
+- **Expresiones regulares**: Son patrones utilizados para buscar y manipular texto. Python proporciona el módulo `re` para trabajar con expresiones regulares.
+  - **Búsqueda y coincidencia**: `re.search()`, `re.findall()`
+  - **Sustitución y división**: `re.sub()`, `re.split()`
+  - **Grupos y patrones complejos**: Uso de paréntesis para agrupar partes del patrón y acceder a los subgrupos.
+
+Las cadenas de caracteres y las expresiones regulares son herramientas fundamentales en la manipulación de texto en Python, permitiendo realizar operaciones complejas de búsqueda, sustitución y validación de patrones en textos de manera eficiente y flexible.

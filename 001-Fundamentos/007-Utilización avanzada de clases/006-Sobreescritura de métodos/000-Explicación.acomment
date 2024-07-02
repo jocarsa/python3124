@@ -1,0 +1,129 @@
+### Sobreescritura de Métodos
+
+#### Concepto de Sobreescritura de Métodos
+
+La sobrescritura de métodos es un mecanismo en la programación orientada a objetos que permite que una subclase proporcione una implementación específica de un método que ya está definido en su superclase. Este mecanismo es fundamental para el polimorfismo, ya que permite que las subclases modifiquen el comportamiento de los métodos heredados.
+
+### Ejemplo de Sobreescritura de Métodos
+
+**Ejemplo Básico:**
+```python
+class Animal:
+    def hacer_sonido(self):
+        return "Algún sonido genérico"
+
+class Perro(Animal):
+    def hacer_sonido(self):
+        return "Guau!"
+
+class Gato(Animal):
+    def hacer_sonido(self):
+        return "Miau!"
+
+# Crear instancias de Perro y Gato
+perro = Perro()
+gato = Gato()
+
+# Llamar al método sobrescrito
+print(perro.hacer_sonido())  # Imprime: Guau!
+print(gato.hacer_sonido())   # Imprime: Miau!
+```
+
+En este ejemplo:
+- `Animal` define el método `hacer_sonido`.
+- `Perro` y `Gato` sobrescriben `hacer_sonido` para proporcionar sus propias implementaciones.
+
+### Uso de `super()` en Sobreescritura de Métodos
+
+El uso de `super()` permite llamar al método de la superclase desde la subclase, lo que es útil cuando se desea extender el comportamiento de un método en lugar de reemplazarlo por completo.
+
+**Ejemplo con `super()`:**
+```python
+class Persona:
+    def __init__(self, nombre, edad):
+        self.nombre = nombre
+        self.edad = edad
+
+    def saludar(self):
+        return f"Hola, me llamo {self.nombre} y tengo {self.edad} años."
+
+class Empleado(Persona):
+    def __init__(self, nombre, edad, salario):
+        super().__init__(nombre, edad)
+        self.salario = salario
+
+    def saludar(self):
+        saludo_base = super().saludar()
+        return f"{saludo_base} y gano {self.salario} dólares al año."
+
+# Crear una instancia de Empleado
+empleado = Empleado("Luis", 30, 50000)
+print(empleado.saludar())  # Imprime: Hola, me llamo Luis y tengo 30 años. y gano 50000 dólares al año.
+```
+
+En este ejemplo:
+- `Empleado` sobrescribe el método `saludar` de `Persona`.
+- `super().saludar()` se utiliza para llamar al método `saludar` de la superclase `Persona` y luego extender su comportamiento.
+
+### Ejemplo Completo con Sobreescritura de Métodos
+
+A continuación se presenta un ejemplo más completo que muestra cómo la sobrescritura de métodos puede ser utilizada en una jerarquía de clases.
+
+**Ejemplo Completo:**
+```python
+class Vehiculo:
+    def __init__(self, marca, modelo):
+        self.marca = marca
+        self.modelo = modelo
+
+    def descripcion(self):
+        return f"Vehículo de marca {self.marca}, modelo {self.modelo}"
+
+    def encender(self):
+        return "El vehículo está encendido"
+
+class Coche(Vehiculo):
+    def __init__(self, marca, modelo, tipo_motor):
+        super().__init__(marca, modelo)
+        self.tipo_motor = tipo_motor
+
+    def descripcion(self):
+        descripcion_base = super().descripcion()
+        return f"{descripcion_base} con un motor {self.tipo_motor}"
+
+    def encender(self):
+        return "El coche está encendido"
+
+class Moto(Vehiculo):
+    def encender(self):
+        return "La moto está encendida"
+
+# Crear instancias de Coche y Moto
+coche = Coche("Toyota", "Corolla", "V6")
+moto = Moto("Honda", "CBR")
+
+# Llamar a los métodos sobrescritos
+print(coche.descripcion())  # Imprime: Vehículo de marca Toyota, modelo Corolla con un motor V6
+print(coche.encender())     # Imprime: El coche está encendido
+print(moto.descripcion())   # Imprime: Vehículo de marca Honda, modelo CBR
+print(moto.encender())      # Imprime: La moto está encendida
+```
+
+En este ejemplo:
+- `Vehiculo` define los métodos `descripcion` y `encender`.
+- `Coche` sobrescribe ambos métodos para proporcionar una descripción específica y un comportamiento de encendido.
+- `Moto` sobrescribe solo el método `encender`.
+
+### Ventajas de la Sobreescritura de Métodos
+
+1. **Personalización del Comportamiento**: Permite que las subclases personalicen o extiendan el comportamiento de los métodos heredados.
+2. **Polimorfismo**: Facilita el polimorfismo, donde una misma interfaz puede ser utilizada para diferentes tipos de objetos.
+3. **Reutilización del Código**: Permite reutilizar el código de la superclase, evitando la duplicación y facilitando el mantenimiento.
+
+### Resumen
+
+- **Sobreescritura de Métodos**: Permite que una subclase proporcione una implementación específica de un método definido en su superclase.
+- **Uso de `super()`**: Permite llamar a métodos de la superclase desde la subclase, facilitando la extensión del comportamiento de los métodos.
+- **Aplicaciones Prácticas**: Personalización del comportamiento, soporte para polimorfismo y reutilización del código.
+
+La sobrescritura de métodos es una característica esencial de la programación orientada a objetos que permite diseñar sistemas flexibles y reutilizables, adaptando y extendiendo el comportamiento de las clases de manera efectiva.

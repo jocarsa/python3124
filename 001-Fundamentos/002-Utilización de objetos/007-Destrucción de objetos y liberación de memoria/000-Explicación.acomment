@@ -1,0 +1,137 @@
+### Destrucción de objetos y liberación de memoria
+
+#### Destrucción de objetos y liberación de memoria
+
+En Python, la gestión de la memoria y la destrucción de objetos se realiza automáticamente a través de un proceso llamado recolección de basura (garbage collection). La recolección de basura se encarga de liberar la memoria ocupada por los objetos que ya no son referenciados en el programa. Sin embargo, Python permite a los programadores definir un método especial para limpiar recursos cuando un objeto es destruido.
+
+#### 1. El método `__del__`
+
+El método `__del__` es un destructor que se llama cuando un objeto está a punto de ser destruido. Este método permite realizar tareas de limpieza como cerrar archivos, liberar recursos o imprimir mensajes de depuración.
+
+**Ejemplo:**
+```python
+class Archivo:
+    def __init__(self, nombre):
+        self.nombre = nombre
+        self.archivo = open(nombre, 'w')
+
+    def escribir(self, texto):
+        self.archivo.write(texto)
+
+    def __del__(self):
+        self.archivo.close()
+        print(f"Archivo {self.nombre} cerrado")
+
+# Crear y destruir un objeto de la clase Archivo
+archivo = Archivo("mi_archivo.txt")
+archivo.escribir("Hola, mundo")
+del archivo  # Llama al método __del__ e imprime: Archivo mi_archivo.txt cerrado
+```
+
+En este ejemplo, el método `__del__` cierra el archivo cuando el objeto `archivo` es destruido, asegurando que los recursos se liberen adecuadamente.
+
+#### 2. Recolección de basura
+
+Python utiliza un recolector de basura automático que sigue el algoritmo de conteo de referencias para gestionar la memoria. Cada objeto en Python tiene un contador de referencias que se incrementa cuando una nueva referencia al objeto es creada y se decrementa cuando una referencia es eliminada. Cuando el contador de referencias de un objeto llega a cero, el recolector de basura libera la memoria ocupada por el objeto.
+
+**Ejemplo:**
+```python
+import gc
+
+class Prueba:
+    def __init__(self, nombre):
+        self.nombre = nombre
+        print(f"Objeto {self.nombre} creado")
+
+    def __del__(self):
+        print(f"Objeto {self.nombre} destruido")
+
+# Crear objetos
+obj1 = Prueba("obj1")
+obj2 = Prueba("obj2")
+
+# Eliminar referencias
+del obj1
+del obj2
+
+# Forzar recolección de basura
+gc.collect()
+```
+
+En este ejemplo, los objetos `obj1` y `obj2` son creados y luego eliminados, lo que reduce sus contadores de referencias a cero. La llamada a `gc.collect()` fuerza la recolección de basura y se imprimen mensajes indicando que los objetos han sido destruidos.
+
+#### 3. Ciclos de referencia
+
+Los ciclos de referencia ocurren cuando dos o más objetos se referencian entre sí, creando un ciclo que impide que sus contadores de referencias lleguen a cero. Python's garbage collector incluye un algoritmo para detectar y manejar estos ciclos.
+
+**Ejemplo:**
+```python
+class Nodo:
+    def __init__(self, valor):
+        self.valor = valor
+        self.siguiente = None
+
+# Crear ciclo de referencia
+nodo1 = Nodo(1)
+nodo2 = Nodo(2)
+nodo1.siguiente = nodo2
+nodo2.siguiente = nodo1
+
+# Eliminar referencias externas
+del nodo1
+del nodo2
+
+# Forzar recolección de basura
+import gc
+gc.collect()
+```
+
+En este ejemplo, `nodo1` y `nodo2` se referencian entre sí, creando un ciclo de referencia. La llamada a `gc.collect()` permite al recolector de basura detectar y manejar el ciclo, liberando la memoria ocupada por los nodos.
+
+#### 4. Gestión manual de recursos
+
+Aunque Python gestiona automáticamente la memoria, es una buena práctica liberar manualmente los recursos en casos específicos, como el manejo de archivos o conexiones a bases de datos. El uso de context managers (`with` statement) facilita esta tarea.
+
+**Ejemplo:**
+```python
+# Uso de with para manejar archivos
+with open("mi_archivo.txt", 'w') as archivo:
+    archivo.write("Hola, mundo")
+
+# El archivo se cierra automáticamente al salir del bloque with
+```
+
+En este ejemplo, el archivo se abre y se escribe dentro de un bloque `with`, asegurando que el archivo se cierre automáticamente al salir del bloque, incluso si ocurre una excepción.
+
+#### 5. Ejemplo completo
+
+A continuación se presenta un ejemplo completo que muestra la destrucción de objetos y la liberación de memoria en un contexto práctico.
+
+**Ejemplo:**
+```python
+class ConexionBaseDatos:
+    def __init__(self, db_nombre):
+        self.db_nombre = db_nombre
+        print(f"Conexión a la base de datos {self.db_nombre} establecida")
+
+    def consultar(self, query):
+        print(f"Ejecutando consulta: {query}")
+
+    def __del__(self):
+        print(f"Conexión a la base de datos {self.db_nombre} cerrada")
+
+# Crear y destruir una conexión a la base de datos
+conexion = ConexionBaseDatos("mi_base_de_datos")
+conexion.consultar("SELECT * FROM usuarios")
+del conexion  # Llama al método __del__ e imprime: Conexión a la base de datos mi_base_de_datos cerrada
+
+# Forzar recolección de basura
+import gc
+gc.collect()
+```
+
+En este ejemplo, el método `__del__` asegura que la conexión a la base de datos se cierre cuando el objeto `conexion` es destruido, liberando los recursos de manera adecuada.
+
+La destrucción de objetos y la liberación de memoria son aspectos importantes de la gestión de recursos en Python. Aunque Python maneja automáticamente gran parte de esta tarea, es crucial comprender cómo funciona para asegurar que los recursos se liberen de manera eficiente y adecuada en aplicaciones complejas.
+
+¿Te gustaría que continúe con otro apartado? Si es así, indícame cuál es el siguiente.

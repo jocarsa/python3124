@@ -1,0 +1,159 @@
+### Entrada desde teclado. Salida a pantalla. Formatos de visualización
+
+#### Entrada desde teclado
+
+Python proporciona la función `input()` para leer datos introducidos por el usuario desde el teclado. Esta función siempre devuelve los datos como una cadena de texto.
+
+**Ejemplo básico:**
+```python
+# Leer entrada desde el teclado
+nombre = input("Introduce tu nombre: ")
+print(f"Hola, {nombre}!")
+```
+
+En este ejemplo, el usuario introduce su nombre, que se guarda en la variable `nombre`, y luego se imprime un saludo personalizado en la pantalla.
+
+**Conversión de tipos:**
+Dado que `input()` devuelve una cadena, a menudo es necesario convertir esta cadena a otro tipo de dato.
+
+**Ejemplo:**
+```python
+# Leer un número entero desde el teclado
+edad = int(input("Introduce tu edad: "))
+print(f"Tienes {edad} años.")
+```
+
+#### Salida a pantalla
+
+La función `print()` se utiliza para mostrar información en la pantalla. Esta función puede tomar múltiples argumentos y los imprime separados por espacios.
+
+**Ejemplo básico:**
+```python
+# Mostrar un mensaje en la pantalla
+print("Hola, mundo!")
+```
+
+**Imprimir múltiples elementos:**
+```python
+# Imprimir múltiples elementos
+nombre = "Ana"
+edad = 30
+print("Nombre:", nombre, "Edad:", edad)
+```
+
+**Separadores y terminadores personalizados:**
+Se pueden personalizar los separadores y terminadores utilizando los parámetros `sep` y `end`.
+
+**Ejemplo:**
+```python
+# Usar un separador personalizado
+print("Ana", "Luis", "Maria", sep=", ")
+
+# Usar un terminador personalizado
+print("Este es el primer mensaje.", end=" ")
+print("Este es el segundo mensaje.")
+```
+
+#### Formatos de visualización
+
+Python ofrece varias formas de formatear cadenas para controlar cómo se muestran los datos.
+
+**1. Operador `%`:**
+El operador `%` se utiliza para formatear cadenas de forma similar al lenguaje C.
+
+**Ejemplo:**
+```python
+nombre = "Ana"
+edad = 30
+print("Nombre: %s, Edad: %d" % (nombre, edad))
+```
+
+**2. Método `str.format()`:**
+El método `str.format()` proporciona una forma flexible de formatear cadenas.
+
+**Ejemplo:**
+```python
+nombre = "Ana"
+edad = 30
+print("Nombre: {}, Edad: {}".format(nombre, edad))
+```
+
+**3. F-strings (formato literal de cadena):**
+Introducidos en Python 3.6, los f-strings ofrecen una forma concisa y legible de formatear cadenas.
+
+**Ejemplo:**
+```python
+nombre = "Ana"
+edad = 30
+print(f"Nombre: {nombre}, Edad: {edad}")
+```
+
+#### Ejemplo completo
+
+A continuación se presenta un ejemplo completo que combina la entrada desde el teclado, la salida a la pantalla y el uso de diferentes formatos de visualización.
+
+**Ejemplo completo:**
+```python
+# Leer datos desde el teclado
+nombre = input("Introduce tu nombre: ")
+edad = int(input("Introduce tu edad: "))
+ciudad = input("Introduce tu ciudad: ")
+
+# Mostrar los datos usando diferentes formatos de visualización
+
+# Usar el operador %
+print("Usando el operador %%:")
+print("Nombre: %s, Edad: %d, Ciudad: %s" % (nombre, edad, ciudad))
+
+# Usar el método str.format()
+print("\nUsando el método str.format():")
+print("Nombre: {}, Edad: {}, Ciudad: {}".format(nombre, edad, ciudad))
+
+# Usar f-strings
+print("\nUsando f-strings:")
+print(f"Nombre: {nombre}, Edad: {edad}, Ciudad: {ciudad}")
+
+# Mostrar múltiples elementos con separadores personalizados
+print("\nUsando separadores personalizados:")
+print(nombre, edad, ciudad, sep=" | ")
+
+# Usar terminadores personalizados
+print("\nUsando terminadores personalizados:")
+print("Este es el primer mensaje.", end=" >>> ")
+print("Este es el segundo mensaje.")
+```
+
+En este ejemplo:
+- Se leen datos desde el teclado y se almacenan en variables.
+- Se muestra cómo formatear y presentar estos datos usando el operador `%`, el método `str.format()`, y los f-strings.
+- Se demuestra el uso de separadores y terminadores personalizados con la función `print()`.
+
+#### Detalles adicionales sobre la función `print()`
+
+La función `print()` en Python tiene varios parámetros opcionales que permiten personalizar la salida:
+
+- `sep`: Define el separador entre los elementos. Por defecto, es un espacio.
+- `end`: Define el terminador que se añade al final de la salida. Por defecto, es una nueva línea (`\n`).
+- `file`: Define el archivo donde se escribirá la salida. Por defecto, es `sys.stdout`.
+
+**Ejemplo:**
+```python
+# Usar el parámetro 'sep' para cambiar el separador
+print("Python", "es", "genial", sep="-")
+
+# Usar el parámetro 'end' para cambiar el terminador
+print("Este es el primer mensaje.", end=" ")
+print("Este es el segundo mensaje.")
+
+# Usar el parámetro 'file' para escribir en un archivo
+with open('salida.txt', 'w', encoding='utf-8') as archivo:
+    print("Este mensaje se escribe en un archivo.", file=archivo)
+```
+
+#### Resumen
+
+- **Entrada desde teclado**: Se realiza con la función `input()`, que devuelve una cadena de texto. Es posible convertir esta cadena a otros tipos de datos según sea necesario.
+- **Salida a pantalla**: Se realiza con la función `print()`, que puede imprimir múltiples elementos, usar separadores personalizados, terminadores personalizados, y escribir en archivos.
+- **Formatos de visualización**: Python ofrece varias técnicas para formatear cadenas, incluyendo el operador `%`, el método `str.format()`, y los f-strings.
+
+Estas herramientas permiten interactuar de manera efectiva con el usuario, mostrar información de forma clara y organizada, y manejar la entrada y salida de datos en las aplicaciones Python.
