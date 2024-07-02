@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="297mm"
+   height="210mm"
+   viewBox="0 0 297 210"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.2.2 (732a01da63, 2022-12-09)"
+   sodipodi:docname="001-cabecera.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="0.78127806"
+     inkscape:cx="513.26157"
+     inkscape:cy="440.30419"
+     inkscape:window-width="1920"
+     inkscape:window-height="1057"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2" />
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#4d4d4d;fill-opacity:1;stroke:none;stroke-width:1.57956;stroke-linecap:round;stroke-linejoin:round"
+       id="rect1514"
+       width="297.67731"
+       height="21.673885"
+       x="0"
+       y="0"
+       ry="0" />
+    <text
+       xml:space="preserve"
+       style="font-weight:bold;font-size:8.15135px;font-family:monospace;-inkscape-font-specification:'monospace Bold';fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:4.53395;stroke-linecap:round;stroke-linejoin:round"
+       x="7.2414317"
+       y="13.528042"
+       id="text1780"><tspan
+         sodipodi:role="line"
+         id="tspan1778"
+         style="stroke-width:4.53395;fill:#ffffff"
+         x="7.2414317"
+         y="13.528042">MiCRM</tspan></text>
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.766;stroke-linecap:round;stroke-linejoin:round"
+       id="rect3340"
+       width="81.277077"
+       height="9.4823265"
+       x="104.30559"
+       y="6.0957808" />
+    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.766;stroke-linecap:round;stroke-linejoin:round"
+       id="path4120"
+       cx="242.13797"
+       cy="11.514253"
+       r="4.4025083" />
+    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.766;stroke-linecap:round;stroke-linejoin:round"
+       id="circle4122"
+       cx="256.36145"
+       cy="11.514253"
+       r="4.4025083" />
+    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.766;stroke-linecap:round;stroke-linejoin:round"
+       id="circle4124"
+       cx="271.93958"
+       cy="11.514253"
+       r="4.4025083" />
+    <circle
+       style="fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.766;stroke-linecap:round;stroke-linejoin:round"
+       id="circle4126"
+       cx="286.16306"
+       cy="11.514253"
+       r="4.4025083" />
+  </g>
+</svg>

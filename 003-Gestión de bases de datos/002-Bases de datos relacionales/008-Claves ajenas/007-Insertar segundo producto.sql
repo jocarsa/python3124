@@ -1,0 +1,1 @@
+INSERT INTO `productos` (`Identificador`, `nombre`, `descripcion`, `precio`) VALUES (NULL, 'Botella de agua de 0.33L', 'Botella de agua de un tercio de litro', '0.3');
