@@ -1,3 +1,4 @@
+CREATE VIEW listadopedidos AS
 SELECT 
 pedidos.fecha AS 'fecha del pedido',
 pedidos.idpedido AS 'Numero del pedido',
