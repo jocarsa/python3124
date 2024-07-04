@@ -1,0 +1,8 @@
+0.-Documentación en docstring
+1.-Importaciones
+2.-Creamos variables globales
+3.-Definimos funciones
+4.-Creamos el método principal (el punto de entrada de la ejecución)
+    4.1.-Leemos datos de partida
+    4.2.-Realizamos operaciones con los datos
+    4.3.-Devolvemos resultados
